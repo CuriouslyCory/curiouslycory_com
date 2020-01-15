@@ -2,11 +2,14 @@ import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
 
+import CuriouslyCoryLogo from '../images/curiously_cory_logo_white.png';
+
 const Header = ({ siteTitle }) => (
   <header
     style={{
-      background: `rebeccapurple`,
+      background: `#606161`,
       marginBottom: `1.45rem`,
+      borderBottom: `3px solid #7396ae`,
     }}
   >
     <div
@@ -24,7 +27,10 @@ const Header = ({ siteTitle }) => (
             textDecoration: `none`,
           }}
         >
-          {siteTitle}
+          <img src={CuriouslyCoryLogo} style={{
+            height: `80px`,
+            marginBottom: `0px`,
+          }}/>
         </Link>
       </h1>
     </div>
