@@ -1,11 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.scss';
+import Favicon from 'react-favicon';
+import favicon from './assets/images/favicon_032.png';
 import App from './Root/App';
 import reportWebVitals from './reportWebVitals';
+import './index.scss';
 
 ReactDOM.render(
-  <App></App>,
+  <div>
+    <Favicon url={favicon} />
+    <App></App>
+  </div>,
   document.getElementById('root')
 );
 
