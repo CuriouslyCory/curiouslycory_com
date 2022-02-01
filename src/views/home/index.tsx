@@ -3,6 +3,7 @@ import "./index.scss";
 import me from "../../assets/images/me.jpg";
 
 const links: Array<any> = [
+  { title: 'Schedule a Consultation', url: 'https://calendly.com/curiouslycory' },
   { title: 'Twitter', url: 'https://www.twitter.com/CuriouslyCory' },
   { title: 'YouTube', url: 'https://www.youtube.com/channel/UCASQA6u80u7Py_UHIGFYqVA?view_as=subscriber' },
   { title: 'LinkedIn', url: 'https://www.linkedin.com/in/corysougstad/' },
