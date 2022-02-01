@@ -3,12 +3,13 @@ import "./index.scss";
 import me from "../../assets/images/me.jpg";
 
 const links: Array<any> = [
-  {title: 'Twitter', url: 'https://www.twitter.com/CuriouslyCory'},
-  {title: 'YouTube', url: 'https://www.youtube.com/channel/UCASQA6u80u7Py_UHIGFYqVA?view_as=subscriber'},
-  {title: 'LinkedIn', url: 'https://www.linkedin.com/in/corysougstad/'},
-  {title: 'My Blog', url: 'https://blog.hau.me'},
-  {title: 'Outdated Resume Site', url: 'https://cory.hau.me'},
-  {title: 'e-Mail', url: 'mailto:cory@curiouslycory.com'},
+  { title: 'Twitter', url: 'https://www.twitter.com/CuriouslyCory' },
+  { title: 'YouTube', url: 'https://www.youtube.com/channel/UCASQA6u80u7Py_UHIGFYqVA?view_as=subscriber' },
+  { title: 'LinkedIn', url: 'https://www.linkedin.com/in/corysougstad/' },
+  { title: 'Dev Blog', url: 'https://mirror.xyz/curiouslycory.eth' },
+  { title: 'Maker Blog', url: 'https://blog.hau.me' },
+  { title: 'Outdated Resume Site', url: 'https://cory.hau.me' },
+  { title: 'e-Mail', url: 'mailto:cory@curiouslycory.com' },
 ];
 
 const renderLink = (link: any, index: number) => {
