@@ -1,0 +1,23 @@
+@import "./assets/styles/fonts.scss";
+@import "./assets/styles/colors.scss";
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Montserrat Light', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  h1, h2, h3 {
+    color: $primaryText;
+  }
+
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+  
+}
+
+
+
