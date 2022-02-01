@@ -1,3 +1,4 @@
+import { Col, Container, Row } from "react-bootstrap";
 import "./index.scss";
 
 const links: Array<any> = [
@@ -17,11 +18,17 @@ const renderLink = (link: any) => {
 
 export default function Home() {
     return (
-      <div style={{ padding: "1rem 0" }}>
-        <h2>Look for me on...</h2>
-        <ul>
-          {links.map((link) => renderLink(link))}
-        </ul>
-      </div>
+      <Container>
+        <Row>
+          <Col></Col>
+          <Col md={9} className="link-wrapper">
+            <h2>Look for me on...</h2>
+            <ul>
+              {links.map((link) => renderLink(link))}
+            </ul>
+          </Col>
+          <Col></Col>
+        </Row>
+      </Container>
     );
   }

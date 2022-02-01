@@ -4,12 +4,18 @@
 html, body {
   height: 100%;
   margin: 0;
-  font-family: 'Montserrat Light', 'Helvetica Neue', sans-serif;
+  font-family: 'Oswald', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f0ece7;
 
   h1, h2, h3 {
     color: $primaryText;
+    font-family: 'Oswald Medium', 'Helvetica Neue', sans-serif;
+  }
+
+  p {
+    font-family: 'Oswald Light', 'Helvetica Neue', sans-serif;
   }
 
   code {
