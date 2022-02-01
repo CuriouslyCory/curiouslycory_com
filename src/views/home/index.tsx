@@ -21,6 +21,11 @@ export default function Home() {
     return (
       <Container>
         <Row>
+          <Col className="d-flex justify-content-center d-sm-none">
+            <img className="profile-pic-sm" src={me} alt="picture of Cory"/>
+          </Col>
+        </Row>
+        <Row>
           <Col></Col>
           <Col md={9} className="link-wrapper">
             <div className="profile-pic-wrapper d-none d-sm-flex">
