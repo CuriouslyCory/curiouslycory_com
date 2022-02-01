@@ -11,9 +11,9 @@ const links: Array<any> = [
   {title: 'e-Mail', url: 'mailto:cory@curiouslycory.com'},
 ];
 
-const renderLink = (link: any) => {
+const renderLink = (link: any, index: number) => {
   return (
-    <li><a href={link.url}>{link.title}</a></li>
+    <li key={index}><a href={link.url}>{link.title}</a></li>
   )
 }
 
@@ -33,7 +33,7 @@ export default function Home() {
             </div>
             <h2>Look for me on...</h2>
             <ul>
-              {links.map((link) => renderLink(link))}
+              {links.map((link, index) => renderLink(link, index))}
             </ul>
           </Col>
           <Col></Col>
