@@ -1,0 +1,9 @@
+@import '../../assets/styles/colors.scss';
+
+.about-wrapper {
+    background: rgb(93,92,97);
+    background: linear-gradient(45deg, rgba(93, 92, 97, 0.425) 0%, rgba(115, 150, 174, 0.493) 100%);
+    padding: 1em;
+    border-radius: 6px;
+    margin: 20px 0;
+}
