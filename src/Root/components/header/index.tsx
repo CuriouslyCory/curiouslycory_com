@@ -1,6 +1,6 @@
 import './index.scss';
 import logo from '../../../assets/images/cc-logo.svg';
-import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { Container, Nav, Navbar } from 'react-bootstrap';
 
 export default function Header() {
   return (
