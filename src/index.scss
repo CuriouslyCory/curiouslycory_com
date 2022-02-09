@@ -11,7 +11,7 @@ html, body {
   font-family: 'Raleway', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #f0ece7;
+  background-color: #f7f5f2;
 
   h1, h2, h3 {
     color: $primaryText;
@@ -20,6 +20,11 @@ html, body {
 
   p {
     font-family: 'Raleway', 'Helvetica Neue', sans-serif;
+  }
+
+  a {
+    color: $primaryLink;
+    text-decoration: none;
   }
 
   code {

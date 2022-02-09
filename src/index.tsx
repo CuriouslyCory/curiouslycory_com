@@ -5,12 +5,11 @@ import favicon from './assets/images/favicon_032.png';
 import App from './Root/App';
 import { Container, Row } from 'react-bootstrap';
 import reportWebVitals from './reportWebVitals';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.scss';
 
 ReactDOM.render(
   <Container fluid>
-    <Row className="mx-0">
+    <Row>
       <Favicon url={favicon} />
       <App></App>
     </Row>
