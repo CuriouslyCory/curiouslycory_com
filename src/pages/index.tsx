@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import { NextSeo } from "next-seo";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,10 +10,20 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <Head>
-        <title>CuriouslyCory Web Application Engineer</title>
-        <meta name="description" content="CuriouslyCory Web Engineering" />
-      </Head>
+      <NextSeo
+        title="CuriouslyCory Web Development"
+        description="CuriouslyCory Web Engineering"
+        canonical="https://www.curiouslycory.com/"
+        openGraph={{
+          url: "https://www.curiouslycory.com/",
+          site_name: "SiteName",
+        }}
+        twitter={{
+          handle: "@CuriouslyCory",
+          site: "@CuriouslyCory",
+          cardType: "summary_large_image",
+        }}
+      />
 
       <main className="flex flex-col justify-center items-center">
         <div className="hidden md:block fixed inset-x-0 top-0 -z-10">
