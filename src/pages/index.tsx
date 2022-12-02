@@ -1,8 +1,6 @@
 import type { NextPage } from "next";
 import { NextSeo } from "next-seo";
-import Head from "next/head";
 import Image from "next/image";
-import Link from "next/link";
 //import { trpc } from "../utils/trpc";
 
 const Home: NextPage = () => {
