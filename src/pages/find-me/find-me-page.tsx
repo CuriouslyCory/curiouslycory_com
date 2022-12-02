@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
+import { DiscordChat } from "../../components/discord-chat";
 
 export const FindMePage = (): JSX.Element => {
   return (
@@ -46,6 +47,9 @@ export const FindMePage = (): JSX.Element => {
                 </Link>
               </li>
               <li>
+                <Link href="https://discord.gg/r4D9XpDGXN">Discord</Link>
+              </li>
+              <li>
                 <Link href="https://mirror.xyz/curiouslycory.eth">
                   Dev Blog
                 </Link>
@@ -63,6 +67,9 @@ export const FindMePage = (): JSX.Element => {
           <a href="https://calendly.com/curiouslycory">
             <button className="btn">Schedule a Consultation</button>
           </a>
+        </section>
+        <section className="w-full px-10 mt-5">
+          <DiscordChat channelId="1048328033087541312" />
         </section>
       </main>
     </>
