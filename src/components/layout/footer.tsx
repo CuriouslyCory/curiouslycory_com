@@ -31,7 +31,7 @@ const Footer = () => {
             </Link>
           </li>
           <li className="mr-3">
-            <Link href="/find-me">
+            <Link href="/contact-us">
               <button className="inline-block text-gray-600 hover:text-white">
                 Contact Us
               </button>

@@ -2,7 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { DiscordChat } from "../../components/discord-chat";
 
-export const FindMePage = (): JSX.Element => {
+export const ContactUsPage = (): JSX.Element => {
   return (
     <>
       <Head>
@@ -76,4 +76,4 @@ export const FindMePage = (): JSX.Element => {
   );
 };
 
-export default FindMePage;
+export default ContactUsPage;
