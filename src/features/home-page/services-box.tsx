@@ -6,7 +6,7 @@ import { IoIosPeople } from "react-icons/io";
 
 const ServicesBox = () => {
   return (
-    <section className="mt-20 mx-10">
+    <section className="mt-32 mx-10">
       <h2 className="text-4xl mb-10 text-center">Full Stack and More</h2>
       <div className="grid grid-rows-4 md:grid-rows-none grid-cols-none md:grid-cols-4 justify-between items-center gap-5">
         <div className="w-full flex flex-col justify-center items-center text-center px-4 py-6 bg-slate-700 p-10 bg-opacity-10 shadow-md">
