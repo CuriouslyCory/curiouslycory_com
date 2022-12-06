@@ -6,7 +6,7 @@ import { IoIosPeople } from "react-icons/io";
 
 const ServicesBox = () => {
   return (
-    <section className="mt-32 mx-10">
+    <section className="mt-32 mx-20">
       <h2 className="text-4xl mb-10 text-center hl-underline">
         Full Stack and More
       </h2>
@@ -47,7 +47,7 @@ const ServicesBox = () => {
             Consulting Services
           </h3>
           <p className="text-sm text-gray-700">
-            Don&apos;t know where to start? Our team can help you identify your
+            Don&apos;t know where to start? Our team can identify your
             project&apos;s needs and create a plan to achieve your goals.
           </p>
         </div>
