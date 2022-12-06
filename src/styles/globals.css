@@ -27,7 +27,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @layer components {
-    .hl-underline {
+    .hero-underline {
         @apply decoration-orange-500 underline underline-offset-4 decoration-2 decoration-double;
+    }
+    .hl-underline {
+        @apply decoration-orange-500 underline underline-offset-4 decoration-2;
+    }
+    .nav-active {
+        @apply decoration-orange-500 underline underline-offset-4 decoration-2;
     }
 }

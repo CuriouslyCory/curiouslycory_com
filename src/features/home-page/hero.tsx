@@ -6,7 +6,7 @@ export const HomeHero = (): JSX.Element => {
       <div className="container flex flex-col-reverse md:flex-row justify-between items-center mt-10 md:mt-20 mb-20 mx-2 md:mx-10">
         <div className="mb-20 bg-[#f7f5f2]/80 p-5 shadow-lg">
           <h1 className="text-5xl pb-5">
-            Web Development <span className="hl-underline">Simplified</span>
+            Web Development <span className="hero-underline">Simplified</span>
           </h1>
           <p>
             Stand out from the competition with a stunning website crafted by
