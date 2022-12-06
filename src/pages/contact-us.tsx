@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
-import { DiscordChat } from "../../components/discord-chat";
+import { DiscordChat } from "../components/discord-chat";
 
 export const ContactUsPage = (): JSX.Element => {
   return (
