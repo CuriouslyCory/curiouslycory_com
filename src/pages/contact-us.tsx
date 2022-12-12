@@ -1,8 +1,12 @@
+import clsx from "clsx";
 import Head from "next/head";
-import Link from "next/link";
+import { useState } from "react";
 import { DiscordChat } from "../components/discord-chat";
+import { SocialLink } from "../components/social-link";
+import { socialLinks } from "../constants/socials";
 
 export const ContactUsPage = (): JSX.Element => {
+  const [showDiscord, setShowDiscord] = useState(false);
   return (
     <>
       <Head>
@@ -31,35 +35,9 @@ export const ContactUsPage = (): JSX.Element => {
           <div className="container flex-col justify-center">
             <h1 className="text-4xl mb-5">Look for me on...</h1>
             <ul>
-              <li>
-                <Link href="https://www.twitter.com/CuriouslyCory">
-                  Twitter
-                </Link>
-              </li>
-              <li>
-                <Link href="https://www.youtube.com/channel/UCASQA6u80u7Py_UHIGFYqVA?view_as=subscriber">
-                  YouTube
-                </Link>
-              </li>
-              <li>
-                <Link href="https://www.linkedin.com/in/corysougstad/">
-                  LinkedIn
-                </Link>
-              </li>
-              <li>
-                <Link href="https://discord.gg/r4D9XpDGXN">Discord</Link>
-              </li>
-              <li>
-                <Link href="https://mirror.xyz/curiouslycory.eth">
-                  Dev Blog
-                </Link>
-              </li>
-              <li>
-                <Link href="https://blog.hau.me/">Maker Blog</Link>
-              </li>
-              <li>
-                <Link href="mailto:cory@curiouslycory.com">Email</Link>
-              </li>
+              {socialLinks.map((link) => (
+                <SocialLink key={`social-link-${link.title}`} {...link} />
+              ))}
             </ul>
           </div>
         </section>
@@ -68,8 +46,16 @@ export const ContactUsPage = (): JSX.Element => {
             <button className="btn">Schedule a Consultation</button>
           </a>
         </section>
-        <section className="w-full px-10 mt-5">
-          <DiscordChat channelId="1048328033087541312" />
+        <section className="w-full px-10 mt-5 flex justify-center">
+          <div>
+            <button
+              onClick={() => setShowDiscord(!showDiscord)}
+              className={clsx("btn", { hidden: showDiscord })}
+            >
+              {!showDiscord ? "Open" : "Close"} Live Chat
+            </button>
+          </div>
+          <DiscordChat channelId="1048328033087541312" isOpen={showDiscord} />
         </section>
       </main>
     </>
