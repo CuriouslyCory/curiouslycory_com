@@ -26,6 +26,11 @@ h1, h2, h3, h4, h5, h6 {
     background-image: url('/images/hero-bg.webp');
 }
 
+.services-hero-bg {
+    @apply bg-cover bg-center bg-no-repeat;
+    background-image: url('/images/services-hero-bg.webp');
+}
+
 @layer components {
     .hero-underline {
         @apply decoration-orange-500 underline underline-offset-4 decoration-2 decoration-double;
