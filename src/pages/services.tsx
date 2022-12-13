@@ -6,6 +6,7 @@ import {
   FaRegClock,
   FaRegImage,
 } from "react-icons/fa";
+import { CalendlyLink } from "../components/calendly-link";
 import SvgServiceNow from "../components/custom-icons/service-now";
 import { SectionTitle } from "../components/section-title";
 import { WindowBox } from "../components/window-box";
@@ -38,10 +39,13 @@ export const ServicesPage = (): JSX.Element => {
               <h3 className="text-xl font-semibold text-gray-800 mb-4">
                 Hourly Services
               </h3>
-              <ul>
+              <ul className="mb-auto mt-auto">
                 <li>Hourly Development: $130</li>
                 <li>Consultation and Coaching: $150</li>
               </ul>
+              <CalendlyLink>
+                <button className="btn mt-5">Let&amp;s Chat</button>
+              </CalendlyLink>
             </WindowBox>
             <WindowBox>
               <FaRegImage size={64} className="mb-4 text-gray-600" />
@@ -57,6 +61,9 @@ export const ServicesPage = (): JSX.Element => {
               <span className="text-sm mt-5">
                 * Does not include contract network deployment fees.
               </span>
+              <CalendlyLink>
+                <button className="btn mt-5">Get Started</button>
+              </CalendlyLink>
             </WindowBox>
             <WindowBox>
               <FaEthereum size={64} className="mb-4 text-gray-600" />
@@ -72,6 +79,9 @@ export const ServicesPage = (): JSX.Element => {
               <span className="text-sm mt-5">
                 * Does not include contract network deployment fees.
               </span>
+              <CalendlyLink>
+                <button className="btn mt-5">Get Started</button>
+              </CalendlyLink>
             </WindowBox>
           </div>
         </section>
@@ -86,6 +96,9 @@ export const ServicesPage = (): JSX.Element => {
                 Cross platform mobile apps developed using React Native for a
                 native UI feeling with half the development time.
               </p>
+              <CalendlyLink>
+                <button className="btn mt-5">Learn More</button>
+              </CalendlyLink>
             </WindowBox>
             <WindowBox>
               <SvgServiceNow className="mb-4 text-gray-600 text-6xl" />
@@ -96,6 +109,9 @@ export const ServicesPage = (): JSX.Element => {
                 Service Portals, service Catalogs, custom applications, enhance
                 your existing tools, or even a brand new deployment.
               </p>
+              <CalendlyLink>
+                <button className="btn mt-5">Get a Quote</button>
+              </CalendlyLink>
             </WindowBox>
           </div>
         </section>
