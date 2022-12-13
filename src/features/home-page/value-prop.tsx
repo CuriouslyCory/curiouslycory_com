@@ -3,7 +3,7 @@ import { CalendlyLink } from "../../components/calendly-link";
 export const ValueProp = (): JSX.Element => {
   return (
     <section className="w-full mt-16 md:mt-32 bg-slate-700 p-10 bg-opacity-10 flex justify-center">
-      <div className="container flex flex-col md:flex-row items-center">
+      <div className="mx-2 md:mx-20 flex flex-col md:flex-row items-center">
         <div className="">
           <h1 className="text-5xl pb-5 hl-underline">
             What can we do for you?
