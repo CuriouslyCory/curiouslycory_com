@@ -2,19 +2,15 @@ import { Entry } from "contentful";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect } from "react";
-import { WindowBox } from "../../components/window-box";
-import { BlogPost } from "./types";
+import { WindowBox } from "../../../components/window-box";
+import { BlogPost } from "../types/contentful";
 
 type BlogPostPreviewProps = { blogPost: Entry<BlogPost> };
 
 export const BlogPostPreview = ({ blogPost }: BlogPostPreviewProps) => {
-  useEffect(() => {
-    console.log(blogPost);
-  }, [blogPost]);
-
   return (
     <WindowBox>
-      <Link href={`/blog/${blogPost.fields?.slug}`}>
+      <Link href={`/blog/${blogPost.sys.id}`}>
         <h1 className="text-4xl mb-2 ">{blogPost.fields.title}</h1>
       </Link>
       <div>

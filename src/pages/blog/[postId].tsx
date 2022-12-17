@@ -1,11 +1,15 @@
+import { useRouter } from "next/router";
 import { SectionTitle } from "../../components/section-title";
-import { BlogPostFull } from "../../features/blog/blog-post-full";
-import { useBlogPosts } from "../../features/blog/use-blog-posts";
+import { BlogPostFull } from "../../features/blog/components/blog-post-full";
+import { trpc } from "../../utils/trpc";
 
 export const BlogPostPage = (): JSX.Element => {
-  const { posts } = useBlogPosts();
+  const router = useRouter();
+  const { postId } = router.query;
+  if (typeof postId !== "string") return <div>Loading...</div>;
+  const { data: post } = trpc.contentful.getBlogPost.useQuery({ postId });
 
-  if (!posts?.[0]) return <div>Loading...</div>;
+  if (!post) return <div>Loading...</div>;
 
   return (
     <main className="flex flex-col justify-center items-center">
@@ -13,12 +17,9 @@ export const BlogPostPage = (): JSX.Element => {
         <h1 className="text-[400px] text-gray-50">Blog</h1>
       </div>
       <section className="md:flex-row justify-between items-center mt-10 md:mt-20 mx-2 md:mx-20">
-        <SectionTitle size="4xl">{posts[0].fields.title}</SectionTitle>
+        <SectionTitle size="4xl">{post.fields.title}</SectionTitle>
         <div className="grid grid-rows-3 md:grid-rows-none grid-cols-none md:grid-cols-3 justify-between items-center gap-5">
-          <BlogPostFull
-            key={`post-${posts[0].fields.title}`}
-            blogPost={posts[0]}
-          />
+          <BlogPostFull key={`post-${post.fields.title}`} blogPost={post} />
         </div>
       </section>
     </main>

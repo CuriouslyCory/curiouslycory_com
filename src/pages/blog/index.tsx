@@ -1,10 +1,9 @@
-import { useEffect } from "react";
 import { SectionTitle } from "../../components/section-title";
-import { BlogPostPreview } from "../../features/blog/blog-post-preview";
-import { useBlogPosts } from "../../features/blog/use-blog-posts";
+import { BlogPostPreview } from "../../features/blog/components/blog-post-preview";
+import { trpc } from "../../utils/trpc";
 
 export const BlogPage = (): JSX.Element => {
-  const { posts } = useBlogPosts();
+  const { data: posts } = trpc.contentful.getBlogPosts.useQuery();
 
   return (
     <main className="flex flex-col justify-center items-center">
