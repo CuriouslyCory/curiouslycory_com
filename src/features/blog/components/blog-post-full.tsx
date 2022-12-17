@@ -55,9 +55,8 @@ const Hero = ({ imageUrl, title }: HeroProps) => (
       layout="fill"
       objectFit="cover"
       objectPosition="center"
-      className="-z-10"
     />
-    <div className="bg-[#f7f5f2]/80 p-5 shadow-lg mx-2 md:mx-20">
+    <div className="bg-[#f7f5f2]/80 p-5 shadow-lg mx-2 md:mx-20 z-10">
       <h1 className="text-5xl pb-5">
         {title.split(" ").slice(0, -1).join(" ")}{" "}
         <span className="hero-underline">{title.split(" ").pop()}</span>
