@@ -2,6 +2,7 @@ import {
   FaDiscord,
   FaGithub,
   FaLinkedin,
+  FaTwitch,
   FaTwitter,
   FaWordpress,
   FaYoutube,
@@ -16,6 +17,16 @@ export const socialLinks = [
     Icon: FaGithub,
   },
   {
+    title: "LinkedIn",
+    href: "https://www.linkedin.com/in/corysougstad/",
+    Icon: FaLinkedin,
+  },
+  {
+    title: "Twitch",
+    href: "https://twitch.tv/CuriouslyCory",
+    Icon: FaTwitch,
+  },
+  {
     title: "Twitter",
     href: "https://www.twitter.com/CuriouslyCory",
     Icon: FaTwitter,
@@ -24,11 +35,6 @@ export const socialLinks = [
     title: "YouTube",
     href: "https://www.youtube.com/@curiouslycory",
     Icon: FaYoutube,
-  },
-  {
-    title: "LinkedIn",
-    href: "https://www.linkedin.com/in/corysougstad/",
-    Icon: FaLinkedin,
   },
   {
     title: "Discord",
