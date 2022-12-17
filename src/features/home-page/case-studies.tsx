@@ -1,15 +1,16 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export const CaseStudies = () => {
   return (
     <section className="w-full mt-32 bg-slate-700 py-10 bg-opacity-10">
       <div className="grid grid-rows-2 md:grid-rows-none grid-cols-none md:grid-cols-2 mx-2 md:mx-20 gap-5 md:gap-10">
         <div className="w-full flex items-center">
-          <div className="h-full w-full relative border-2 border-slate-300">
+          <div className="h-full w-full relative">
             <Image
-              src="/images/liqd-2.jpg"
+              src="/images/liqd-perspective.png"
               layout="fill"
-              objectFit="cover"
+              objectFit="contain"
               objectPosition="center"
               alt="screenshot from lqidnft.com"
             />
@@ -17,7 +18,7 @@ export const CaseStudies = () => {
         </div>
         <div className="p-10 glass">
           <h3 className="text-3xl mb-5">
-            Case Study: LiqdNft.com - A NFT Marketplace and Lending Platform
+            Case Study: <Link href="https://liqdnft.com">LiqdNft.com</Link> - A NFT Marketplace and Lending Platform
           </h3>
           <p className="mb-5">
             LiqdNft.com approached our web development company with the goal of
@@ -34,9 +35,9 @@ export const CaseStudies = () => {
             the platform.
           </p>
           <p className="mb-5">
-            Next, we worked closely with the designers and product owners to
-            define all the user stories and ensure that the platform would meet
-            the needs of our users. We also worked with the stakeholders to
+            We worked closely with the designers and product owners to define
+            all the user stories and ensure that the platform would meet the
+            needs of our users. We also worked with the stakeholders to
             establish clear goals and timelines for the project.
           </p>
           <p className="mb-5">
@@ -52,6 +53,7 @@ export const CaseStudies = () => {
             selling, and lending NFTs, thanks in part to the strong foundation
             we helped build.
           </p>
+          <Link href="https://liqdnft.com">https://liqdnft.com</Link>
         </div>
       </div>
     </section>
