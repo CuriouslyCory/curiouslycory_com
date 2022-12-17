@@ -6,7 +6,7 @@ import { BlogPost } from "./types";
 export const useBlogPosts = () => {
   const client = createClient({
     space: "r5b2emceg285",
-    accessToken: "nEz8-OHLXlkIXIQmTfRCogcnAuNdhRKkLNUjUx2uqQQ",
+    accessToken: process.env.CONTENTFUL_ACCESS_TOKEN ?? "",
   });
 
   const getBlogPosts = () =>
