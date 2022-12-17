@@ -16,8 +16,7 @@ export const BlogPostPage = (): JSX.Element => {
       <div className="hidden md:block fixed inset-x-0 top-0 -z-10">
         <h1 className="text-[400px] text-gray-50">Blog</h1>
       </div>
-      <section className="md:flex-row justify-between items-center mt-10 md:mt-20 mx-2 md:mx-20">
-        <SectionTitle size="6xl">{post.fields.title}</SectionTitle>
+      <section className="md:flex-row justify-between items-center mt-10 md:mt-20">
         <BlogPostFull key={`post-${post.fields.title}`} blogPost={post} />
       </section>
     </main>
