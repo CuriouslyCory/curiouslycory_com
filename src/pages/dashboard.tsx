@@ -32,20 +32,14 @@ export const DashboardPage = () => {
   }, []);
 
   useEffect(() => {
-    console.log("to", to);
-    console.log("from", from);
-  }, [to, from]);
-
-  useEffect(() => {
-    console.log("data", data);
     if (data?.results.length) {
       const seconds = data.results.reduce((acc, curr) => {
         return acc + curr.timeSpentSeconds;
       }, 0);
       setSecondsWorked(seconds);
-      setHoursWorked(secondsWorked / 60 / 60);
+      setHoursWorked(seconds / 60 / 60);
     }
-  }, [data]);
+  }, [data, setSecondsWorked, setHoursWorked]);
 
   return (
     <section className="max-w-xl flex flex-col justify-center items-center">
