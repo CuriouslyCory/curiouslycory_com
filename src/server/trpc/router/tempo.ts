@@ -7,7 +7,6 @@ export const tempoRouter = router({
   getWorklogs: publicProcedure
     .input(z.object({ to: z.date(), from: z.date() }))
     .query(async ({ input }) => {
-      console.log(input);
       return fetchWorklogs(input.from, input.to);
     }),
 });
@@ -23,7 +22,6 @@ const fetchWorklogs = (from: Date, to: Date) => {
   return fetch(`https://api.tempo.io/4/worklogs?${queryParams.toString()}`, {
     headers,
   }).then((response) => {
-    console.log(response);
     return response.json() as Promise<FetchWorklogsResponse>;
   });
 };

@@ -3,13 +3,14 @@ import { useState, useEffect } from "react";
 type UseWorkingDaysParams = {
   year: number;
   month: number;
+  day: number;
 };
 
-export const useWorkingDays = ({ year, month }: UseWorkingDaysParams) => {
+export const useWorkingDays = ({ year, month, day }: UseWorkingDaysParams) => {
   const [weekdays, setWeekdays] = useState(0);
 
   useEffect(() => {
-    const firstDay = new Date(year, month, 1);
+    const firstDay = new Date(year, month, day);
     const lastDay = new Date(year, month + 1, 0);
 
     let numWeekdays = 0;
