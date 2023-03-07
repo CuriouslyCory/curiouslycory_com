@@ -9,8 +9,7 @@ export const HomeHero = (): JSX.Element => {
             Web Development <span className="hero-underline">Simplified</span>
           </h1>
           <p>
-            Stand out from the competition with a stunning website crafted by
-            experts.
+            Web applications developed with nearly two decades of experience.
           </p>
         </div>
       </div>

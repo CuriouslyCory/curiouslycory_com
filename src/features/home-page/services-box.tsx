@@ -17,8 +17,8 @@ const ServicesBox = () => {
             Web Development
           </h3>
           <p className="text-sm text-gray-700">
-            Our experienced developers can help you build a custom website that
-            is tailored to your business needs.
+            A full stack of skills available to build custom websites that are
+            tailored to your business needs.
           </p>
         </div>
         <div className="w-full h-full flex flex-col justify-center items-center text-center px-4 py-6 bg-slate-700 p-10 bg-opacity-10 shadow-md">
@@ -27,8 +27,8 @@ const ServicesBox = () => {
             Web 3 and Blockchain
           </h3>
           <p className="text-sm text-gray-700">
-            Our skilled web 3 artisans can help you create take your business
-            into the blockchain.
+            Looking to enter web3? I can create the tools you need to take your
+            business into the blockchain.
           </p>
         </div>
         <div className="w-full h-full flex flex-col justify-center items-center text-center px-4 py-6 bg-slate-700 p-10 bg-opacity-10 shadow-md">
@@ -37,8 +37,8 @@ const ServicesBox = () => {
             Mobile App Development
           </h3>
           <p className="text-sm text-gray-700">
-            Our team can help you create a cross-platform mobile app to improve
-            your business&apos;s reach and engagement.
+            Cross-platform mobile applications to improve your business&apos;s
+            reach and engagement.
           </p>
         </div>
         <div className="w-full h-full flex flex-col justify-center items-center text-center px-4 py-6 bg-slate-700 p-10 bg-opacity-10 shadow-md">
@@ -47,8 +47,8 @@ const ServicesBox = () => {
             Consulting Services
           </h3>
           <p className="text-sm text-gray-700">
-            Don&apos;t know where to start? Our team can identify your
-            project&apos;s needs and create a plan to achieve your goals.
+            Don&apos;t know where to start? Let me identify your project&apos;s
+            needs and create a plan to achieve your goals.
           </p>
         </div>
       </div>

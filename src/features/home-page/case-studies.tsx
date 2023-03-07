@@ -22,37 +22,26 @@ export const CaseStudies = () => {
             NFT Marketplace and Lending Platform
           </h3>
           <p className="mb-5">
-            LiqdNft.com approached our web development company with the goal of
-            creating a one-stop-shop for all things NFT (non-fungible tokens).
-            The platform needed to serve as both a marketplace for buying and
-            selling NFTs and a lending platform for users to borrow and lend
-            their NFTs to others.
+            I have worked with LiqdNft.com with the goal of creating a
+            one-stop-shop for all things NFT (non-fungible tokens). The platform
+            needed to serve as both a marketplace for buying and selling NFTs
+            and a lending platform for users to borrow and lend their NFTs to
+            others.
           </p>
           <p className="mb-5">
-            To ensure the success of the project, we began by carefully planning
+            To ensure the success of the project, I began by carefully planning
             the data models and researching the best framework for the
-            application. After thorough analysis, we determined that the Laravel
-            framework would provide the necessary scalability and security for
-            the platform.
-          </p>
-          <p className="mb-5">
-            We worked closely with the designers and product owners to define
-            all the user stories and ensure that the platform would meet the
-            needs of our users. We also worked with the stakeholders to
-            establish clear goals and timelines for the project.
-          </p>
-          <p className="mb-5">
-            With all of these pieces in place, we were able to begin the
-            development process. We implemented best practices in the code base
-            and worked efficiently to deliver a high-quality product on
-            schedule.
+            application. Working closely with the designers and product owners I
+            helped define all the user stories and ensure that the platform
+            would meet the needs of our users. I also worked with the
+            stakeholders to establish clear goals and timelines for the project.
           </p>
           <p className="mb-5">
             The end result was a sleek and user-friendly platform that met all
-            of the requirements and exceeded the expectations of our client.
-            LiqdNft.com has since become a leading destination for buying,
-            selling, and lending NFTs, thanks in part to the strong foundation
-            we helped build.
+            of the requirements and exceeded the expectations of the LiqdNFT
+            team. LiqdNft.com has since become a leading destination for buying,
+            selling, and lending NFTs, thanks in part to the strong foundation I
+            helped build.
           </p>
           <Link href="https://liqdnft.com">https://liqdnft.com</Link>
         </div>
