@@ -1,4 +1,5 @@
 import React from "react"
+import { Helmet } from "react-helmet"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -8,6 +9,9 @@ import './index.css'
 
 const IndexPage = () => (
   <Layout>
+    <Helmet>
+      <meta name="p:domain_verify" content="a512db5c931d790d6ae06495b8eff984"/>
+    </Helmet>
     <SEO title="Home" />
     <h1>Look for me on...</h1>
     <ul>
