@@ -1,0 +1,18 @@
+@import '../../assets/styles/colors.scss';
+
+ul {
+    list-style-image: none;
+    padding: 0 0 0 5px;
+    margin: 5px 0;
+
+    li {
+        list-style-type: none;
+        padding-left: 0;
+        margin-bottom: 3px;
+        a {
+            text-decoration: none;
+            color: $primaryLink;
+            font-size: 1.25em;
+        }
+    }
+}
