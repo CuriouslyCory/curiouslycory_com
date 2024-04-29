@@ -1,9 +1,10 @@
 @import '../../assets/styles/colors.scss';
 
 .link-wrapper{
-    background-color: #5d5c6152;
+    background: rgb(93,92,97);
+    background: linear-gradient(45deg, rgba(93, 92, 97, 0.425) 0%, rgba(115, 150, 174, 0.493) 100%);
     padding: 2em;
-    border-radius: 12px;
+    border-radius: 6px;
     ul {
         list-style-image: none;
         padding: 0 0 0 5px;
