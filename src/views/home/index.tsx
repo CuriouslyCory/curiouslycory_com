@@ -1,5 +1,6 @@
 import { Col, Container, Row } from "react-bootstrap";
 import "./index.scss";
+import me from "../../assets/images/me.jpg";
 
 const links: Array<any> = [
   {title: 'Twitter', url: 'https://www.twitter.com/CuriouslyCory'},
@@ -22,6 +23,9 @@ export default function Home() {
         <Row>
           <Col></Col>
           <Col md={9} className="link-wrapper">
+            <div className="profile-pic-wrapper d-none d-sm-flex">
+              <img className="profile-pic" src={me} alt="picture of Cory"/>
+            </div>
             <h2>Look for me on...</h2>
             <ul>
               {links.map((link) => renderLink(link))}
