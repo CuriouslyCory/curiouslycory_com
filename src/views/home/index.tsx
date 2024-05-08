@@ -30,7 +30,7 @@ export default function Home() {
                 <li>Consultation</li>
                 <li>Project Managment</li>
               </ul>
-              <Button href="https://calendly.com/curiouslycory">Schedule a Consultation Now</Button>
+              <Button variant="primary" href="https://calendly.com/curiouslycory">Schedule a Consultation Now</Button>
             </div>
           </Col>
           <Col></Col>

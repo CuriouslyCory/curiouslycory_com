@@ -1,4 +1,4 @@
-import { Button, Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import "./index.scss";
 import me from "../../assets/images/me.jpg";
 
@@ -37,7 +37,7 @@ export default function FindMe() {
               <ul>
                 {links.map((link, index) => renderLink(link, index))}
               </ul>
-              <Button href="https://calendly.com/curiouslycory">Schedule a Consultation</Button>
+              You can also <a href="https://calendly.com/curiouslycory">Schedule a Consultation</a>
             </div>
           </Col>
           <Col></Col>
