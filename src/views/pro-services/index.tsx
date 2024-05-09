@@ -1,4 +1,4 @@
-import { Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 
 export default function ProServices() {
     return (
@@ -29,6 +29,7 @@ export default function ProServices() {
                 <li>Contract Deployment</li>
               </ul>
             </ul>
+            <Button variant="primary" href="https://calendly.com/curiouslycory">Schedule a Consultation Now</Button>
           </Col>
         </Row>
       </Container>
