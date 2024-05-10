@@ -9,7 +9,7 @@ function App() {
   return (
     <div className="view-root">
       <Header></Header>
-      <Container className="content-wrapper">
+      <Container fluid className="content-wrapper">
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />

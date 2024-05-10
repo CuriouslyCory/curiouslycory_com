@@ -5,7 +5,7 @@ import { Container, Nav, Navbar } from 'react-bootstrap';
 export default function Header() {
   return (
     <Navbar expand="lg">
-      <Container>
+      <Container fluid>
         <Navbar.Brand href="#home">
           <div className="header-wrapper">
             <div className="logo-wrapper">
