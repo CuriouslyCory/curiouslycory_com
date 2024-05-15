@@ -8,13 +8,14 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Create T3 App</title>
+        <title>CuriouslyCory Web Application Engineer</title>
         <meta name="description" content="CuriouslyCory Web Engineering" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.ico" key="icon" />
       </Head>
 
-      <main className="">
-        <h1>Hello World</h1>
+      <main>
+        <h1 className="text-5xl">Hello World</h1>
+        <p>Content test</p>
       </main>
     </>
   );
