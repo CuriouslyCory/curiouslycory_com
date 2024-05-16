@@ -14,8 +14,13 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <h1 className="text-5xl">Hello World</h1>
-        <p>Content test</p>
+        <section className="hero">
+          <h1 className="text-5xl">Hi, I&apos;m CuriouslyCory!</h1>
+          <p>
+            I&apos;ve been making ideas come to life on the web since 2005.
+            Schedule a consultation now and let&apos;s start working on yours!
+          </p>
+        </section>
       </main>
     </>
   );
