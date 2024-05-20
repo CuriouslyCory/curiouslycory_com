@@ -25,30 +25,34 @@ export const ServicesPage = (): JSX.Element => {
           <div className="mb-10 md:mb-0">&nbsp;</div>
         </section>
         <section className="w-full mt-10 md:mt-20 bg-slate-700 p-10 bg-opacity-10 flex justify-center">
-          <h1>Standard Rates</h1>
-          <ul>
-            <li>Hourly Development: $130</li>
-            <li>Consultation and Coaching: $150</li>
-          </ul>
+          <div className="container flex gap-x-5">
+            <h1>Standard Rates</h1>
+            <ul>
+              <li>Hourly Development: $130</li>
+              <li>Consultation and Coaching: $150</li>
+            </ul>
+          </div>
         </section>
         <section className="w-full bg-slate-700 p-10 bg-opacity-10 flex justify-center">
-          <h1>Packages</h1>
-          <ul>
-            <li>Basic NFT Pack - $350 (plus contract deployment fees)</li>
+          <div className="container flex gap-x-5">
+            <h1>Packages</h1>
             <ul>
-              <li>Minting Site</li>
-              <li>Github configuration</li>
-              <li>Hosting up to 100GB/mo</li>
-              <li>Contract Deployment</li>
+              <li>Basic NFT Pack - $350 (plus contract deployment fees)</li>
+              <ul>
+                <li>Minting Site</li>
+                <li>Github configuration</li>
+                <li>Hosting up to 100GB/mo</li>
+                <li>Contract Deployment</li>
+              </ul>
+              <li>Basic Token - $250 (plus contract deployment fees)</li>
+              <ul>
+                <li>Token Site</li>
+                <li>Github configuration</li>
+                <li>Hosting up to 100GB/mo</li>
+                <li>Contract Deployment</li>
+              </ul>
             </ul>
-            <li>Basic Token - $250 (plus contract deployment fees)</li>
-            <ul>
-              <li>Token Site</li>
-              <li>Github configuration</li>
-              <li>Hosting up to 100GB/mo</li>
-              <li>Contract Deployment</li>
-            </ul>
-          </ul>
+          </div>
         </section>
         <section className="w-full bg-slate-700 p-10 bg-opacity-10 flex justify-center">
           <a href="https://calendly.com/curiouslycory">
