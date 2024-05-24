@@ -68,3 +68,5 @@ export const FindMePage = (): JSX.Element => {
     </>
   );
 };
+
+export default FindMePage;

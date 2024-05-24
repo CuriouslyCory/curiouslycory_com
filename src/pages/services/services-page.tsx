@@ -63,3 +63,5 @@ export const ServicesPage = (): JSX.Element => {
     </>
   );
 };
+
+export default ServicesPage;

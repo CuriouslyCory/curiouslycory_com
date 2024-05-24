@@ -129,3 +129,5 @@ export const AboutPage = (): JSX.Element => {
     </>
   );
 };
+
+export default AboutPage;
