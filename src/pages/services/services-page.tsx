@@ -11,8 +11,8 @@ export const ServicesPage = (): JSX.Element => {
         />
       </Head>
       <main className="flex flex-col justify-center items-center">
-        <div className="hidden md:block absolute inset-x-0 top-0 -z-10">
-          <h1 className="text-[400px] text-gray-50">SERVICES</h1>
+        <div className="hidden md:block fixed inset-x-0 top-0 -z-10 whitespace-nowrap">
+          <h1 className="text-[400px] text-gray-50">Services</h1>
         </div>
         <section className="container flex flex-col-reverse md:flex-row justify-between items-center mt-10 md:mt-20">
           <div>
