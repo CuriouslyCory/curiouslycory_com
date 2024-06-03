@@ -9,6 +9,7 @@ import type { AppRouter } from "../server/router";
 import type { Session } from "next-auth";
 import "../styles/globals.css";
 import Header from "../components/layout/header";
+import Footer from "../components/layout/footer";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -18,6 +19,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
     <SessionProvider session={session}>
       <Header />
       <Component {...pageProps} />
+      <Footer />
     </SessionProvider>
   );
 };
