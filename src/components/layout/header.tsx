@@ -50,8 +50,8 @@ export const Header = (): JSX.Element => {
               </Link>
             </li>
             <li>
-              <Link href="/find-me" className={styles.navLink}>
-                <span className={styles.navLink}>Find Me At...</span>
+              <Link href="/contact-us" className={styles.navLink}>
+                <span className={styles.navLink}>Contact Us</span>
               </Link>
             </li>
           </ul>
