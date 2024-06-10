@@ -2,9 +2,9 @@ import type { NextPage } from "next";
 import { NextSeo } from "next-seo";
 import Image from "next/image";
 import { CalendlyLink } from "../../components/calendly-link";
-import { HomeHero } from "../../features/home-page/hero";
-import { Services } from "../../features/home-page/services";
-import { ValueProp } from "../../features/home-page/value-prop";
+import { HomeHero } from "./hero";
+import { Services } from "./services";
+import { ValueProp } from "./value-prop";
 //import { trpc } from "../utils/trpc";
 
 export const HomePage: NextPage = () => {
