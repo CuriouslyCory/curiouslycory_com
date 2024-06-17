@@ -10,9 +10,8 @@ export const ValueProp = (): JSX.Element => {
             My team and I are dedicated to helping businesses like yours succeed
             online. We offer a range of web development services, including
             custom website design, e-commerce solutions, and mobile app
-            development. Our team of experienced developers and designers work
-            closely with you to understand your unique needs and create a
-            website that is tailored to your business.
+            development. Our team will work closely with you to understand your
+            unique needs and create a website that is tailored to your business.
           </p>
           <p className="mb-5">
             With our help, you can improve your online presence, increase your
