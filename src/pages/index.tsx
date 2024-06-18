@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import { NextSeo } from "next-seo";
 import { HomeHero } from "../features/home-page/hero";
 import { Services } from "../features/home-page/services";
+import ServicesBox from "../features/home-page/services-box";
 import { ValueProp } from "../features/home-page/value-prop";
 //import { trpc } from "../utils/trpc";
 
@@ -30,6 +31,7 @@ export const HomePage: NextPage = () => {
           <h1 className="text-[400px] text-gray-50">CuriouslyCory</h1>
         </div>
         <HomeHero />
+        <ServicesBox />
         <ValueProp />
         <Services />
       </main>

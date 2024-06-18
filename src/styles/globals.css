@@ -20,3 +20,8 @@ h1, h2, h3, h4, h5, h6 {
 .btn { 
     @apply bg-cyan-600 rounded-md px-10 py-2 font-semibold text-white;
 }
+
+.hero-bg {
+    @apply bg-cover bg-center bg-no-repeat;
+    background-image: url('/images/hero-bg.webp');
+}

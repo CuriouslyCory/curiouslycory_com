@@ -2,10 +2,10 @@ import { CalendlyLink } from "../../components/calendly-link";
 
 export const ValueProp = (): JSX.Element => {
   return (
-    <section className="w-full mt-10 md:mt-20 bg-slate-700 p-10 bg-opacity-10 flex justify-center">
+    <section className="w-full mt-10 md:mt-40 bg-slate-700 p-10 bg-opacity-10 flex justify-center">
       <div className="container flex flex-col md:flex-row items-center">
         <div className="">
-          <h1 className="text-5xl pb-5">What can I do for you?</h1>
+          <h1 className="text-5xl pb-5">What can we do for you?</h1>
           <p className="mb-5">
             My team and I are dedicated to helping businesses like yours succeed
             online. We offer a range of web development services, including
