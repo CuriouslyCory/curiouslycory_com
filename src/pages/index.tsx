@@ -5,10 +5,10 @@ import { HomeHero } from "../features/home-page/hero";
 import { Services } from "../features/home-page/services";
 import ServicesBox from "../features/home-page/services-box";
 import { ValueProp } from "../features/home-page/value-prop";
-//import { trpc } from "../utils/trpc";
+import { trpc } from "../utils/trpc";
 
 export const HomePage: NextPage = () => {
-  //const hello = trpc.useQuery(["example.hello", { text: "from tRPC" }]);
+  const hello = trpc.example.hello.useQuery({ text: "from tRPC" });
 
   return (
     <>
@@ -28,6 +28,7 @@ export const HomePage: NextPage = () => {
       />
 
       <main className="flex flex-col justify-center items-center">
+        <h1>{hello.data?.greeting}</h1>
         <div className="hidden md:block fixed inset-x-0 top-0 -z-10">
           <h1 className="text-[400px] text-gray-50">CuriouslyCory</h1>
         </div>
