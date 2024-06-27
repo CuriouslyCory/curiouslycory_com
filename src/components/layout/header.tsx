@@ -11,8 +11,8 @@ export const Header = (): JSX.Element => {
   const router = useRouter();
 
   return (
-    <div id="header-wrapper" className="px-2 sm:px-4 py-2.5">
-      <div className="container flex flex-wrap justify-between items-center mx-2 md:mx-20">
+    <div id="header-wrapper" className="py-2.5 mx-2 md:mx-20">
+      <div className="container flex flex-wrap justify-between items-center">
         <Link href="/" className="flex items-center">
           <Image
             src="/images/cc-logo.svg"
