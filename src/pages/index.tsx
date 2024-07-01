@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import { NextSeo } from "next-seo";
 import { ConsultationButton } from "../components/consultation-button";
+import { FavoriteTech } from "../features/home-page/favorite-tech";
 import { HomeHero } from "../features/home-page/hero";
 import { Services } from "../features/home-page/services";
 import ServicesBox from "../features/home-page/services-box";
@@ -37,6 +38,7 @@ export const HomePage: NextPage = () => {
           <ConsultationButton title="Request a free quote" />
         </section>
         <ValueProp />
+        <FavoriteTech />
         <Services />
       </main>
     </>
