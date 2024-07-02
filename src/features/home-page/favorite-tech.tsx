@@ -6,17 +6,20 @@ import {
   FaHardHat,
   FaHtml5,
   FaJira,
+  FaNodeJs,
   FaReact,
 } from "react-icons/fa";
-import { SiMysql, SiPostgresql } from "react-icons/si";
+import { SiMysql, SiNextdotjs, SiPostgresql } from "react-icons/si";
 import SvgServiceNow from "../../components/custom-icons/service-now";
 
 export const FavoriteTech = (): JSX.Element => {
   const tech = [
+    { title: "NextJs", icon: SiNextdotjs },
     { title: "React", icon: FaReact },
     { title: "Angular", icon: FaAngular },
     { title: "HTML", icon: FaHtml5 },
     { title: "CSS", icon: FaCss3 },
+    { title: "NodeJs", icon: FaNodeJs },
     { title: "Solidity", icon: FaEthereum },
     { title: "Hardhat", icon: FaHardHat },
     { title: "Android", icon: FaAndroid },
