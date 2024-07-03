@@ -19,6 +19,7 @@ export const Header = (): JSX.Element => {
             width="100"
             height="120"
             alt="CuriouslyCory Logo"
+            className="cursor-pointer"
           />
         </Link>
         <button
