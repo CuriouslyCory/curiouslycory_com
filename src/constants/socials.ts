@@ -1,5 +1,6 @@
 import {
   FaDiscord,
+  FaGithub,
   FaLinkedin,
   FaTwitter,
   FaWordpress,
@@ -9,6 +10,11 @@ import { GiMirrorMirror } from "react-icons/gi";
 import { MdEmail } from "react-icons/md";
 
 export const socialLinks = [
+  {
+    title: "Github",
+    href: "https://github.com/CuriouslyCory",
+    Icon: FaGithub,
+  },
   {
     title: "Twitter",
     href: "https://www.twitter.com/CuriouslyCory",
