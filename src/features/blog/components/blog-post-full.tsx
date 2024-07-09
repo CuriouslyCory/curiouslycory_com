@@ -3,7 +3,7 @@ import { Block, BLOCKS, Inline, INLINES } from "@contentful/rich-text-types";
 import { Entry } from "contentful";
 import Image from "next/image";
 import { ReactChild, ReactFragment, ReactPortal } from "react";
-import { BlogPost } from "./types";
+import { BlogPost } from "../types/contentful";
 
 const options = {
   renderText: (text: string) => {
