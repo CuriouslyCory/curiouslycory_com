@@ -17,10 +17,8 @@ export const BlogPostPage = (): JSX.Element => {
         <h1 className="text-[400px] text-gray-50">Blog</h1>
       </div>
       <section className="md:flex-row justify-between items-center mt-10 md:mt-20 mx-2 md:mx-20">
-        <SectionTitle size="4xl">{post.fields.title}</SectionTitle>
-        <div className="grid grid-rows-3 md:grid-rows-none grid-cols-none md:grid-cols-3 justify-between items-center gap-5">
-          <BlogPostFull key={`post-${post.fields.title}`} blogPost={post} />
-        </div>
+        <SectionTitle size="6xl">{post.fields.title}</SectionTitle>
+        <BlogPostFull key={`post-${post.fields.title}`} blogPost={post} />
       </section>
     </main>
   );
