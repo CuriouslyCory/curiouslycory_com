@@ -1,7 +1,6 @@
 import { Entry } from "contentful";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
 import { WindowBox } from "../../../components/window-box";
 import { BlogPost } from "../types/contentful";
 
