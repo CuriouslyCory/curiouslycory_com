@@ -10,6 +10,29 @@ export const Header = (): JSX.Element => {
   const [navOpen, setNavOpen] = useState(false);
   const router = useRouter();
 
+  const routes = [
+    {
+      title: "Home",
+      path: "/",
+    },
+    {
+      title: "Services",
+      path: "/services",
+    },
+    {
+      title: "About",
+      path: "/about",
+    },
+    {
+      title: "Blog",
+      path: "/blog",
+    },
+    {
+      title: "Contact Us",
+      path: "/contact-us",
+    },
+  ];
+
   return (
     <div id="header-wrapper" className="py-2.5 mx-2 md:mx-20">
       <div className="container flex flex-wrap justify-between items-center">
@@ -42,50 +65,19 @@ export const Header = (): JSX.Element => {
           id="navbar-default"
         >
           <ul className="flex flex-col p-4 mt-4 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0">
-            <li>
-              <Link href="/">
-                <span
-                  className={clsx(styles.navLink, {
-                    "nav-active": router.asPath === "/",
-                  })}
-                >
-                  Home
-                </span>
-              </Link>
-            </li>
-            <li>
-              <Link href="/services" className={styles.navLink}>
-                <span
-                  className={clsx(styles.navLink, {
-                    "nav-active": router.asPath === "/services",
-                  })}
-                >
-                  Services
-                </span>
-              </Link>
-            </li>
-            <li>
-              <Link href="/about" className={styles.navLink}>
-                <span
-                  className={clsx(styles.navLink, {
-                    "nav-active": router.asPath === "/about",
-                  })}
-                >
-                  About
-                </span>
-              </Link>
-            </li>
-            <li>
-              <Link href="/contact-us" className={styles.navLink}>
-                <span
-                  className={clsx(styles.navLink, {
-                    "nav-active": router.asPath === "/contact-us",
-                  })}
-                >
-                  Contact Us
-                </span>
-              </Link>
-            </li>
+            {routes.map((route) => (
+              <li key={`route-${route.title}`}>
+                <Link href={route.path}>
+                  <span
+                    className={clsx(styles.navLink, {
+                      "nav-active": router.asPath === route.path,
+                    })}
+                  >
+                    {route.title}
+                  </span>
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
