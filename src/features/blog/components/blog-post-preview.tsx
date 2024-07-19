@@ -8,33 +8,28 @@ type BlogPostPreviewProps = { blogPost: Entry<BlogPost> };
 
 export const BlogPostPreview = ({ blogPost }: BlogPostPreviewProps) => {
   return (
-    <WindowBox>
-      <Link href={`/blog/${blogPost.sys.id}`}>
-        <h1 className="text-4xl mb-4 cursor-pointer">
-          {blogPost.fields.title}
-        </h1>
-      </Link>
-      <div className="w-full h-64">
-        {blogPost.fields.featuredImage &&
-          blogPost.fields.featuredImage?.fields?.file?.url && (
-            <Link href={`/blog/${blogPost.sys.id}`}>
-              <Image
-                src={`https:${blogPost.fields.featuredImage?.fields?.file?.url}`}
-                alt={blogPost.fields.featuredImage?.fields?.title}
-                className="w-full cursor-pointer"
-                height={
-                  blogPost.fields.featuredImage?.fields?.file.details.image
-                    .height ?? 100
-                }
-                width={
-                  blogPost.fields.featuredImage?.fields?.file.details.image
-                    .width ?? 100
-                }
-              />
-            </Link>
-          )}
+    <Link href={`/blog/${blogPost.sys.id}`}>
+      <div className="card bg-base-100 shadow-xl glass h-full">
+        <figure>
+          <Image
+            src={`https:${blogPost.fields.featuredImage?.fields?.file?.url}`}
+            alt={blogPost.fields.featuredImage?.fields?.title}
+            className="w-full cursor-pointer"
+            height={
+              blogPost.fields.featuredImage?.fields?.file.details.image
+                .height ?? 100
+            }
+            width={
+              blogPost.fields.featuredImage?.fields?.file.details.image.width ??
+              100
+            }
+          />
+        </figure>
+        <div className="card-body">
+          <h2 className="card-title">{blogPost.fields.title}</h2>
+          <p>{blogPost.fields.description}</p>
+        </div>
       </div>
-      <p className="mt-4">{blogPost.fields.description}</p>
-    </WindowBox>
+    </Link>
   );
 };
