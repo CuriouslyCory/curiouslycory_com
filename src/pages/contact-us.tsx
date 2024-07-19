@@ -2,6 +2,7 @@ import clsx from "clsx";
 import Head from "next/head";
 import { useState } from "react";
 import { DiscordChat } from "../components/discord-chat";
+import { SectionTitle } from "../components/section-title";
 import { SocialLink } from "../components/social-link";
 import { socialLinks } from "../constants/socials";
 
@@ -16,23 +17,23 @@ export const ContactUsPage = (): JSX.Element => {
           content="CuriouslyCory Web Engineering Links page"
         />
       </Head>
-      <main className="flex flex-col justify-center items-center">
+      <main className="w-full">
         <div className="hidden md:block fixed inset-x-0 top-0 -z-10 whitespace-nowrap">
           <h1 className="text-[400px] text-gray-50">Find Me</h1>
         </div>
-        <section className="container flex flex-col-reverse md:flex-row justify-between items-center mt-10 md:mt-20">
-          <div>
-            <h1 className="text-5xl pb-5">
+        <section className="w-full flex justify-left">
+          <div className="mx-2 md:mx-20 mt-10 md:mt-20">
+            <SectionTitle size="5xl">
               Looking to get in touch or follow along?
-            </h1>
+            </SectionTitle>
             <p>
               Here are many of the places you can find me around the internet.
             </p>
           </div>
           <div className="mb-10 md:mb-0">&nbsp;</div>
         </section>
-        <section className="w-full mt-10 md:mt-20 bg-slate-700 p-10 bg-opacity-10 flex justify-center">
-          <div className="container flex-col justify-center">
+        <section className="w-full bg-slate-700 bg-opacity-10">
+          <div className="mx-2 md:mx-20 mt-5 md:mt-10 pt-10 w-fit">
             <h1 className="text-4xl mb-5">Look for me on...</h1>
             <ul>
               {socialLinks.map((link) => (
@@ -41,12 +42,12 @@ export const ContactUsPage = (): JSX.Element => {
             </ul>
           </div>
         </section>
-        <section className="w-full bg-slate-700 p-10 bg-opacity-10 flex justify-center">
+        <section className="bg-slate-700 p-10 bg-opacity-10 flex justify-center">
           <a href="https://calendly.com/curiouslycory">
             <button className="btn">Schedule a Consultation</button>
           </a>
         </section>
-        <section className="w-full px-10 mt-5 flex justify-center">
+        <section className="px-10 mt-5 flex justify-center">
           <div>
             <button
               onClick={() => setShowDiscord(!showDiscord)}
