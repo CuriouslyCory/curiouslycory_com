@@ -4,34 +4,12 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { IoMenu } from "react-icons/io5";
+import { routes } from "../../constants/routes";
 import styles from "./header.module.css";
 
 export const Header = (): JSX.Element => {
   const [navOpen, setNavOpen] = useState(false);
   const router = useRouter();
-
-  const routes = [
-    {
-      title: "Home",
-      path: "/",
-    },
-    {
-      title: "Services",
-      path: "/services",
-    },
-    {
-      title: "About",
-      path: "/about",
-    },
-    {
-      title: "Blog",
-      path: "/blog",
-    },
-    {
-      title: "Contact Us",
-      path: "/contact-us",
-    },
-  ];
 
   return (
     <div id="header-wrapper" className="py-2.5 mx-2 md:mx-20">
