@@ -18,7 +18,8 @@ export const CaseStudies = () => {
         </div>
         <div className="p-10 glass">
           <h3 className="text-3xl mb-5">
-            Case Study: <Link href="https://liqdnft.com">LiqdNft.com</Link> - A NFT Marketplace and Lending Platform
+            Case Study: <Link href="https://liqdnft.com">LiqdNft.com</Link> - A
+            NFT Marketplace and Lending Platform
           </h3>
           <p className="mb-5">
             LiqdNft.com approached our web development company with the goal of
