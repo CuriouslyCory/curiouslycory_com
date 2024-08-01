@@ -15,13 +15,15 @@ export const Header = (): JSX.Element => {
     <div id="header-wrapper" className="py-2.5 mx-2 md:mx-20">
       <div className="container flex flex-wrap justify-between items-center">
         <Link href="/" className="flex items-center">
-          <Image
-            src="/images/cc-logo.svg"
-            width="100"
-            height="120"
-            alt="CuriouslyCory Logo"
-            className="cursor-pointer"
-          />
+          <div>
+            <Image
+              src="/images/cc-logo.svg"
+              width="100"
+              height="120"
+              alt="CuriouslyCory Logo"
+              className="cursor-pointer"
+            />
+          </div>
         </Link>
         <button
           onClick={() => setNavOpen(!navOpen)}
