@@ -12,7 +12,6 @@ export const tempoRouter = router({
 });
 
 const fetchWorklogs = (from: Date, to: Date) => {
-  console.log("fetchWorklogs", from, to);
   const queryParams = new URLSearchParams();
   queryParams.set("from", getStandardDate(from) ?? "");
   queryParams.set("to", getStandardDate(to) ?? "");
@@ -21,7 +20,12 @@ const fetchWorklogs = (from: Date, to: Date) => {
   headers.append("accept", "application/json");
   return fetch(`https://api.tempo.io/4/worklogs?${queryParams.toString()}`, {
     headers,
-  }).then((response) => {
-    return response.json() as Promise<FetchWorklogsResponse>;
-  });
+  })
+    .then((response) => {
+      return response.json() as Promise<FetchWorklogsResponse>;
+    })
+    .catch((error) => {
+      console.error("Error fetching worklogs", error);
+      return Promise.reject(error);
+    });
 };
