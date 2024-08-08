@@ -6,7 +6,7 @@ export const Services = (): JSX.Element => {
       <div className="mx-2 md:mx-20 container flex flex-col md:flex-row items-center">
         <div className="flex-none">
           <h2 className="text-5xl pb-5 hl-underline">
-            Some of the services we provide
+            Some of the services I provide
           </h2>
           <ul>
             <li>React Development</li>
