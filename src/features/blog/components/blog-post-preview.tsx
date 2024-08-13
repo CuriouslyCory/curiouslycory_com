@@ -12,7 +12,7 @@ export const BlogPostPreview = ({ blogPost }: BlogPostPreviewProps) => {
         <figure>
           <Image
             src={`https:${blogPost.fields.featuredImage?.fields?.file?.url}`}
-            alt={blogPost.fields.featuredImage?.fields?.title}
+            alt={blogPost.fields.featuredImage?.fields?.title ?? ""}
             className="w-full cursor-pointer"
             height={
               blogPost.fields.featuredImage?.fields?.file.details.image

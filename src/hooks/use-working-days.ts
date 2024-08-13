@@ -20,7 +20,7 @@ export const useWorkingDays = ({ year, month, day }: UseWorkingDaysParams) => {
       }
     }
     setWeekdays(numWeekdays);
-  }, [year, month]);
+  }, [year, month, day]);
 
   return weekdays;
 };
