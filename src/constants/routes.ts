@@ -12,7 +12,7 @@ export const routes = [
     path: "/about",
   } as const,
   {
-    title: "Contact Us",
+    title: "Contact",
     path: "/contact-us",
   } as const,
 ] as const;

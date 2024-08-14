@@ -6,7 +6,7 @@ import { SectionTitle } from "../components/section-title";
 import { SocialLink } from "../components/social-link";
 import { socialLinks } from "../constants/socials";
 
-export const ContactUsPage = (): JSX.Element => {
+export const ContactPage = (): JSX.Element => {
   const [showDiscord, setShowDiscord] = useState(false);
   return (
     <>
@@ -63,4 +63,4 @@ export const ContactUsPage = (): JSX.Element => {
   );
 };
 
-export default ContactUsPage;
+export default ContactPage;
