@@ -1,0 +1,101 @@
+@media print {
+  /* Hide navigation and footer when printing */
+  nav,
+  footer {
+    display: none !important;
+  }
+
+  /* Remove default margins and padding */
+  body {
+    padding: 0;
+    margin: 0;
+  }
+
+  /* Ensure the resume content fills the page nicely */
+  main {
+    padding: 0 !important;
+  }
+
+  /* Force light mode for printing */
+  :root {
+    color-scheme: light !important;
+  }
+
+  html {
+    background-color: white !important;
+  }
+
+  body {
+    background-color: white !important;
+    color: black !important;
+  }
+
+  /* Override dark mode classes */
+  .dark {
+    --background: 0 0% 100% !important;
+    --foreground: 240 10% 3.9% !important;
+    --card: 0 0% 100% !important;
+    --card-foreground: 240 10% 3.9% !important;
+    --popover: 0 0% 100% !important;
+    --popover-foreground: 240 10% 3.9% !important;
+    --primary: 240 5.9% 10% !important;
+    --primary-foreground: 0 0% 98% !important;
+    --secondary: 240 4.8% 95.9% !important;
+    --secondary-foreground: 240 5.9% 10% !important;
+    --muted: 240 4.8% 95.9% !important;
+    --muted-foreground: 240 3.8% 46.1% !important;
+    --accent: 240 4.8% 95.9% !important;
+    --accent-foreground: 240 5.9% 10% !important;
+    --destructive: 0 84.2% 60.2% !important;
+    --destructive-foreground: 0 0% 98% !important;
+    --border: 240 5.9% 90% !important;
+    --input: 240 5.9% 90% !important;
+    --ring: 240 5.9% 10% !important;
+  }
+
+  /* Force dark text for most elements, but allow specific color exceptions */
+  * {
+    border-color: #ddd !important;
+    -webkit-print-color-adjust: exact !important;
+    color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Default text color */
+  p,
+  div,
+  span:not(.text-orange-600):not(.font-oswald),
+  li {
+    color: black !important;
+  }
+
+  /* Ensure links are visible but not blue */
+  a {
+    color: #000 !important;
+    text-decoration: underline !important;
+  }
+
+  /* Make sure headings are dark */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: black !important;
+  }
+
+  /* Ensure specific text elements are properly colored */
+  .text-gray-600,
+  .dark\:text-gray-300 {
+    color: #4b5563 !important;
+  }
+
+  /* Preserve orange elements with a print-friendly orange shade */
+  .text-orange-600,
+  .font-oswald.font-semibold.text-orange-600,
+  span.font-oswald.font-semibold.text-orange-600 {
+    color: #c25000 !important; /* Darker orange that prints better */
+    font-weight: bold !important;
+  }
+}
