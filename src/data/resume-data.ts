@@ -242,8 +242,177 @@ export const seniorFullStackEngineerResume: Resume = {
   ],
 } as const;
 
+export const web3BlockchainSpecialistResume: Resume = {
+  id: "web3-blockchain-specialist",
+  ...contactData,
+  title: "Senior Blockchain Software Engineer",
+  titles: ["Senior Software Engineer", "Web3 & Blockchain Specialist"],
+  highlightedTitle:
+    "Experienced Software Engineer | Web3 & Blockchain Specialist",
+  summary:
+    "Experienced Software Engineer with deep expertise in building scalable, user-centric blockchain and Web3 solutions. With over 20 years in software development and hands-on experience in TypeScript, React, Next.js, Solidity, and serverless architectures, I have successfully delivered complex projects across multiple domains. Passionate about leveraging blockchain technologies to drive innovation and deliver impactful user experiences.",
+  experience: [
+    {
+      title: "Principal Full Stack Engineer | Blockchain Development Lead",
+      company: "Sudorandom",
+      period: "March 2022 - Present",
+      accomplishments: [
+        "Designed and implemented scalable Web3 applications, enhancing reliability and user engagement.",
+        "Optimized performance through reduced API calls, enhanced error handling, and streamlined serverless architectures.",
+        "Established robust CI/CD pipelines, significantly improving developer productivity and application stability.",
+      ],
+      techStack:
+        "TypeScript, React, Next.js, Solidity, Serverless Architectures, AWS, GCP, Ethers.js, Web3.js, Viem, Wagmi, Tailwind",
+    },
+    {
+      title: "Owner/Operator | Blockchain & Web3 Specialist",
+      company: "CuriouslyCory Corp",
+      period: "Feb 2021 - March 2022",
+      accomplishments: [
+        "Developed scalable serverless solutions for complex NFT processing for MechaChaotic Forge.",
+        "Crafted interactive Web3 experiences, including smart contract integration and user-friendly front-ends for Cozy Express.",
+        "Built robust, scalable NFT marketplace and lending platform for LiqdNFT.com.",
+      ],
+      techStack:
+        "TypeScript, React, Next.js, Solidity, Smart Contract Development, Web3.js, Hardhat, Tailwind, Wagmi, Viem",
+    },
+    {
+      title: "Senior Systems Engineer",
+      company: "Lighthouse Global Inc.",
+      period: "Nov 2020 - Feb 2022",
+      accomplishments: [
+        "Architected and implemented scalable solutions for enterprise applications, emphasizing performance and usability.",
+        "Mentored and guided teams in adopting best practices for agile development and code quality.",
+      ],
+      techStack: "ServiceNow, AngularJS",
+    },
+  ],
+  skills: [
+    [
+      "Web3 & Blockchain",
+      "Ethereum",
+      "Solidity",
+      "Web3.js",
+      "NFTs",
+      "Smart Contract Development",
+    ],
+    [
+      "Frontend",
+      "React",
+      "Next.js",
+      "Angular",
+      "TypeScript",
+      "Tailwind CSS",
+      "Redux",
+      "Jest",
+    ],
+    [
+      "Backend & Infrastructure",
+      "Node.js",
+      "Serverless Architectures",
+      "AWS",
+      "GCP",
+      "API Development",
+    ],
+    ["Databases", "PostgreSQL", "Redis", "MongoDB"],
+    ["CI/CD & DevOps", "GitHub Actions", "Jenkins", "Docker", "Kubernetes"],
+  ],
+  keyAchievements: [
+    "Successfully delivered multiple complex Web3 and blockchain projects from architecture to deployment.",
+    "Transitioned critical backend systems to serverless architectures, significantly improving scalability and reliability.",
+    "Implemented comprehensive testing and CI/CD strategies, streamlining deployment processes and enhancing product stability.",
+  ],
+  education: [
+    "Ongoing professional training and self-directed learning in blockchain technology, Web3 innovation, and software engineering best practices.",
+  ],
+} as const;
+
+export const aiMachineLearningSpecialistResume: Resume = {
+  id: "ai-machine-learning-specialist",
+  ...contactData,
+  title: "AI & Machine Learning Specialist",
+  titles: ["Senior Software Engineer", "AI & Machine Learning Specialist"],
+  highlightedTitle:
+    "Seasoned Software Engineer | AI & Machine Learning Specialist",
+  summary:
+    "Seasoned Software Engineer with over 20 years of experience, specializing in AI-driven solutions and scalable web applications. Skilled in integrating advanced machine learning techniques, generative AI, and intelligent automation to enhance user experiences and business outcomes. Passionate about leveraging cutting-edge AI technologies to solve complex problems and drive innovation.",
+  experience: [
+    {
+      title: "Principal Full Stack Engineer",
+      company: "Sudorandom",
+      period: "March 2022 - Present",
+      accomplishments: [
+        "Implemented AI-driven solutions and optimized web performance using generative AI and intelligent context management.",
+        "Developed automated data processing and analytical systems to enhance user experiences.",
+        "Established robust CI/CD pipelines, significantly improving developer productivity and application stability.",
+      ],
+      techStack:
+        "Generative AI, Gemini, Python, TypeScript, React, Next.js, Serverless Architectures, AWS, GCP",
+    },
+    {
+      title: "Owner/Operator",
+      company: "CuriouslyCory Corp",
+      period: "Feb 2021 - March 2022",
+      accomplishments: [
+        "Developed interactive experiences powered by generative AI for dynamic, context-aware storytelling.",
+        "Engineered sophisticated personal assistant leveraging LLMs, advanced context management, and memory systems.",
+      ],
+      techStack:
+        "Generative AI, Large Language Models (LLMs), Context & Memory Management, Python, TypeScript, React, Next.js, Serverless Architectures, AWS, GCP",
+    },
+    {
+      title: "Senior Systems Engineer",
+      company: "Lighthouse Global Inc.",
+      period: "Nov 2020 - Feb 2022",
+      accomplishments: [
+        "Architected scalable systems integrating machine learning and AI, significantly improving product performance and usability.",
+        "Mentored engineering teams in adopting AI best practices and agile methodologies.",
+      ],
+      techStack: "Machine Learning, AI",
+    },
+  ],
+  skills: [
+    [
+      "AI & Machine Learning",
+      "Generative AI",
+      "Large Language Models (LLMs)",
+      "Context & Memory Management",
+      "Vector Databases",
+      "Embeddings",
+    ],
+    [
+      "Programming & Frameworks",
+      "Python",
+      "TypeScript",
+      "React",
+      "Next.js",
+      "Node.js",
+    ],
+    [
+      "Cloud & Infrastructure",
+      "AWS",
+      "GCP",
+      "Serverless Architectures",
+      "Kubernetes",
+      "Docker",
+    ],
+    ["Databases & Data Management", "PostgreSQL", "Redis", "MongoDB", "SQL"],
+    ["CI/CD & DevOps", "GitHub Actions", "Jenkins", "Automated Testing"],
+  ],
+  keyAchievements: [
+    "Successfully built and deployed sophisticated AI-driven applications, significantly enhancing user engagement and operational efficiency.",
+    "Developed robust and scalable AI infrastructure, enabling advanced data processing and intelligent automation.",
+    "Fostered a culture of continuous innovation, mentoring teams to effectively integrate cutting-edge AI solutions into product development cycles.",
+  ],
+  education: [
+    "Continuous self-directed learning in AI technologies, generative models, machine learning frameworks, and software engineering best practices.",
+  ],
+} as const;
+
 export const resumes: Resume[] = [
   seniorFullStackEngineerResume,
   engineeringManagerResume,
   leadUIDeveloperResume,
+  aiMachineLearningSpecialistResume,
+  web3BlockchainSpecialistResume,
 ] as const;
