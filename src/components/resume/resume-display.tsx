@@ -21,9 +21,9 @@ function ResumeContent({ defaultResume }: ResumeDisplayProps) {
     : defaultResume;
 
   return (
-    <div className="space-y-10">
+    <div className="resume-content space-y-10">
       {/* Header */}
-      <div className="flex flex-col justify-between md:flex-row">
+      <div className="resume-section header-section flex flex-col justify-between md:flex-row">
         <div>
           <h1 className="resume-section-title text-4xl font-bold">
             {selectedResume.name}
@@ -55,7 +55,7 @@ function ResumeContent({ defaultResume }: ResumeDisplayProps) {
       </div>
 
       {/* Professional Summary */}
-      <div>
+      <div className="resume-section summary-section">
         <h2 className="resume-section-title">Professional Summary</h2>
         <div className="space-y-2">
           <p>
@@ -68,15 +68,14 @@ function ResumeContent({ defaultResume }: ResumeDisplayProps) {
       </div>
 
       {/* Work Experience */}
-      <div className="space-y-8">
-        {selectedResume.experience.map((job, index) => (
-          <JobSection key={index} job={job} />
-        ))}
-      </div>
+
+      {selectedResume.experience.map((job, index) => (
+        <JobSection key={index} job={job} />
+      ))}
 
       {/* Skills Section - Optional */}
       {selectedResume.skills && (
-        <div>
+        <div className="resume-section skills-section">
           <h2 className="resume-section-title">Skills</h2>
           <div className="space-y-3">
             {selectedResume.skills.map((skillCategory, index) => (
@@ -97,7 +96,7 @@ function ResumeContent({ defaultResume }: ResumeDisplayProps) {
 
       {/* Education & Continuous Learning - Optional */}
       {selectedResume.education && (
-        <div>
+        <div className="resume-section education-section">
           <h2 className="resume-section-title">
             Education & Continuous Learning
           </h2>
@@ -114,7 +113,7 @@ function ResumeContent({ defaultResume }: ResumeDisplayProps) {
 
       {/* Key Achievements - Optional */}
       {selectedResume.keyAchievements && (
-        <div>
+        <div className="resume-section achievements-section">
           <h2 className="resume-section-title">Key Achievements</h2>
           <ul className="space-y-3">
             {selectedResume.keyAchievements.map((achievement, index) => (
@@ -155,7 +154,7 @@ function ResumeLoading({ defaultResume }: ResumeDisplayProps) {
 
 function JobSection({ job }: { job: Job }) {
   return (
-    <div>
+    <div className="job-section resume-section break-inside-avoid">
       <h2 className="resume-section-title">{job.title}</h2>
       <div className="flex flex-col justify-between sm:flex-row">
         <div className="font-semibold">{job.company}</div>

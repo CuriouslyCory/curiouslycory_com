@@ -53,47 +53,112 @@ function ResumeSelectorComponent({
       const resumeTitle = "Cory Sougstad-" + (currentResume?.title ?? "Resume");
       const filename = `${resumeTitle.replace(/\s+/g, "_")}.pdf`;
 
-      // Create canvas from the resume element
-      const canvas = await html2canvas(resumeElement, {
-        scale: 2, // Higher scale for better quality
-        useCORS: true, // Enable CORS for images
-        logging: false,
-        backgroundColor: resolvedTheme === "dark" ? "#17171c" : "#f7f5f2", // Ensure white background
-      });
-
-      // Calculate dimensions for PDF (A4 format)
-      const imgWidth = 210; // A4 width in mm
-      const pageHeight = 297; // A4 height in mm
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
-      // Create PDF
+      // Create PDF (A4 format)
       const pdf = new jsPDF("p", "mm", "a4");
+      const pageWidth = 210; // A4 width in mm
+      const pageHeight = 297; // A4 height in mm
+      const margin = 10; // Margin in mm
+      const contentWidth = pageWidth - 2 * margin;
 
-      // Add image to PDF
-      let position = 0;
-      pdf.addImage(
-        canvas.toDataURL("image/jpeg", 1.0),
-        "JPEG",
-        0,
-        position,
-        imgWidth,
-        imgHeight,
-      );
+      // Always use white background for PDF regardless of theme
+      const backgroundColor = "#ffffff";
 
-      // If the resume is longer than one page, add additional pages
-      let heightLeft = imgHeight - pageHeight;
-      while (heightLeft > 0) {
-        position = heightLeft - imgHeight;
-        pdf.addPage();
+      // Prepare the resume for PDF generation by adding temporary classes
+      const sections = resumeElement.querySelectorAll(".resume-content > div");
+      if (!sections || sections.length === 0) {
+        throw new Error("Resume sections not found");
+      }
+
+      // Track our position on the page
+      let yPosition = margin;
+      let currentPage = 1;
+
+      // Process each section
+      for (const section of Array.from(sections)) {
+        const sectionElement = section as HTMLElement;
+
+        // Create a clone of the section to avoid modifying the original
+        const sectionClone = sectionElement.cloneNode(true) as HTMLElement;
+
+        // Force all text to be black for PDF except for specific elements
+        const allTextElements = sectionClone.querySelectorAll(
+          "p, span, div, h1, h2, h3, h4, h5, h6",
+        );
+        allTextElements.forEach((el) => {
+          if (el instanceof HTMLElement) {
+            // Preserve orange elements but make everything else black
+            if (
+              !el.classList.contains("text-orange-600") &&
+              !(
+                el.classList.contains("font-oswald") &&
+                el.classList.contains("font-semibold")
+              )
+            ) {
+              el.style.color = "#000000";
+            } else {
+              el.style.color = "#c25000"; // Use print-friendly orange
+            }
+          }
+        });
+
+        // Style links for PDF
+        const links = sectionClone.querySelectorAll("a");
+        links.forEach((link) => {
+          if (link instanceof HTMLElement) {
+            link.style.color = "#000000";
+          }
+        });
+
+        // Create a temporary container with the same styling as the resume
+        const tempContainer = document.createElement("div");
+        tempContainer.style.width = `${contentWidth}mm`;
+        tempContainer.style.backgroundColor = backgroundColor;
+        tempContainer.style.color = "#000000"; // Force black text color
+        tempContainer.style.position = "absolute";
+        tempContainer.style.left = "-9999px";
+        tempContainer.style.padding = "10px";
+        tempContainer.style.fontFamily =
+          window.getComputedStyle(sectionElement).fontFamily;
+        tempContainer.style.fontSize =
+          window.getComputedStyle(sectionElement).fontSize;
+        tempContainer.appendChild(sectionClone);
+        document.body.appendChild(tempContainer);
+
+        // Capture this section as canvas
+        const canvas = await html2canvas(tempContainer, {
+          scale: 2, // Higher scale for better quality
+          useCORS: true,
+          logging: false,
+          backgroundColor: backgroundColor,
+        });
+
+        // Remove the temporary container
+        document.body.removeChild(tempContainer);
+
+        // Calculate dimensions for this section
+        const imgWidth = contentWidth;
+        const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+        // Check if this section fits on the current page
+        if (yPosition + imgHeight > pageHeight - margin) {
+          // This section doesn't fit, add a new page
+          pdf.addPage();
+          currentPage++;
+          yPosition = margin;
+        }
+
+        // Add the section to the PDF
         pdf.addImage(
           canvas.toDataURL("image/jpeg", 1.0),
           "JPEG",
-          0,
-          position,
+          margin,
+          yPosition,
           imgWidth,
           imgHeight,
         );
-        heightLeft -= pageHeight;
+
+        // Update position for next section
+        yPosition += imgHeight; // Add more spacing between sections
       }
 
       // Save the PDF

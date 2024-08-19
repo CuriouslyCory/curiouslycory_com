@@ -118,12 +118,41 @@
   /* Ensure page breaks don't occur in the middle of job sections */
   .resume-section-title {
     page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  /* Prevent page breaks inside job sections */
+  .space-y-8 > div {
+    page-break-inside: avoid;
+    break-inside: avoid;
   }
 
   /* Ensure links are visible in print */
   a {
     text-decoration: underline;
   }
+}
+
+/* Styles for PDF generation */
+#resume-container {
+  /* Remove the fixed white background that breaks dark mode */
+  /* background-color: white; */
+}
+
+/* Add data attributes to help with PDF section identification */
+.resume-content > div {
+  break-inside: avoid;
+}
+
+/* Ensure job sections don't break across pages */
+.job-section {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.break-inside-avoid {
+  break-inside: avoid;
+  page-break-inside: avoid;
 }
 
 /* Ensure proper spacing in the PDF */
