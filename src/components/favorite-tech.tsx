@@ -32,7 +32,7 @@ export const FavoriteTech = (): ReactNode => {
   ];
 
   return (
-    <Card>
+    <Card className="p-2 md:p-6">
       <CardHeader>
         <h2 className="h-underline text-center text-2xl font-bold md:text-left">
           My Main Toolbox
@@ -43,7 +43,7 @@ export const FavoriteTech = (): ReactNode => {
           {tech.map((tech) => (
             <div
               key={`fav-tech-${tech.title}`}
-              className="flex w-48 flex-col items-center"
+              className="flex w-32 flex-col items-center"
             >
               <tech.icon className="text-6xl" />
               <h3 className="text-4xl">{tech.title}</h3>
