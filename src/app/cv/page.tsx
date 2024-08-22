@@ -5,8 +5,30 @@ import { resumes } from "~/data/resume-data";
 import "./print-styles.css";
 
 export const metadata: Metadata = {
-  title: "CV | Developer Portfolio",
-  description: "Professional resume and work experience",
+  title: "CV | CuriouslyCory",
+  description: "Professional resume and work experience of CuriouslyCory",
+  openGraph: {
+    title: "CV | CuriouslyCory",
+    description: "Professional resume and work experience of CuriouslyCory",
+    url: "https://curiouslycory.com/cv",
+    siteName: "CuriouslyCory.com",
+    images: [
+      {
+        url: "/images/cv-og-image.png", // You'll need to create this image
+        width: 1200,
+        height: 630,
+        alt: "CuriouslyCory's Resume/CV",
+      },
+    ],
+    locale: "en_US",
+    type: "profile",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "CV | CuriouslyCory",
+    description: "Professional resume and work experience of CuriouslyCory",
+    images: ["/images/cv-og-image.png"], // Same image as OG
+  },
 };
 
 export default function CVPage() {
