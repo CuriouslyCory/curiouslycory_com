@@ -1,4 +1,4 @@
-import { Oswald, Oxygen_Mono, Raleway } from "next/font/google";
+import { Oswald, Oxygen_Mono, Raleway, Roboto_Serif } from "next/font/google";
 import { type Metadata } from "next";
 import { TRPCReactProvider } from "~/trpc/react";
 
@@ -29,6 +29,12 @@ const oswald = Oswald({
   variable: "--font-oswald",
 });
 
+const robotoSerif = Roboto_Serif({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-roboto-serif",
+});
+
 export const metadata: Metadata = {
   title: "CuriouslyCory.com",
   description: "CuriouslyCory's Curious Corner",
@@ -46,6 +52,7 @@ export default function RootLayout({
           raleway.variable,
           oxygenMono.variable,
           oswald.variable,
+          robotoSerif.variable,
         )}
       >
         <TRPCReactProvider>

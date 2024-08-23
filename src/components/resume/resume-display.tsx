@@ -25,16 +25,18 @@ function ResumeContent({ defaultResume }: ResumeDisplayProps) {
       {/* Header */}
       <div className="resume-section header-section flex flex-col justify-between md:flex-row">
         <div>
-          <h1 className="resume-section-title text-4xl font-bold">
+          <h1 className="resume-section-title text-3xl">
             {selectedResume.name}
           </h1>
           <div className="mt-1 text-gray-600 dark:text-gray-300">
             {selectedResume.titles.map((title, index) => (
-              <div key={index}>{title}</div>
+              <div key={index} className="font-serif italic">
+                {title}
+              </div>
             ))}
           </div>
         </div>
-        <div className="mt-4 md:mt-0 md:text-right">
+        <div className="mt-4 self-end md:mt-0 md:text-right">
           <div className="text-gray-600 dark:text-gray-300">
             {selectedResume.email}
           </div>
@@ -44,11 +46,11 @@ function ResumeContent({ defaultResume }: ResumeDisplayProps) {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="break-all text-blue-500 hover:underline"
+                className="break-all text-orange-500 hover:underline"
               >
                 {link.text}
               </a>
-              <ExternalLink className="h-3 w-3 flex-shrink-0 text-blue-500" />
+              <ExternalLink className="ext-link-icon h-3 w-3 flex-shrink-0 text-orange-500 print:hidden" />
             </div>
           ))}
         </div>
@@ -77,7 +79,7 @@ function ResumeContent({ defaultResume }: ResumeDisplayProps) {
       {selectedResume.skills && (
         <div className="resume-section skills-section">
           <h2 className="resume-section-title">Skills</h2>
-          <div className="space-y-3">
+          <div className="space-y-1">
             {selectedResume.skills.map((skillCategory, index) => (
               <div key={index}>
                 {skillCategory.length > 0 && (
@@ -100,7 +102,7 @@ function ResumeContent({ defaultResume }: ResumeDisplayProps) {
           <h2 className="resume-section-title">
             Education & Continuous Learning
           </h2>
-          <ul className="space-y-3">
+          <ul className="">
             {selectedResume.education.map((item, index) => (
               <li key={index} className="flex">
                 <span className="mr-2">→</span>
@@ -115,7 +117,7 @@ function ResumeContent({ defaultResume }: ResumeDisplayProps) {
       {selectedResume.keyAchievements && (
         <div className="resume-section achievements-section">
           <h2 className="resume-section-title">Key Achievements</h2>
-          <ul className="space-y-3">
+          <ul className="">
             {selectedResume.keyAchievements.map((achievement, index) => (
               <li key={index} className="flex">
                 <span className="mr-2">→</span>
@@ -163,7 +165,7 @@ function JobSection({ job }: { job: Job }) {
       <div className="mb-3 font-oswald font-semibold text-orange-600">
         Responsibilities and Accomplishments
       </div>
-      <ul className="mb-4 space-y-1">
+      <ul className="mb-4">
         {job.accomplishments.map((item, index) => (
           <li key={index} className="flex">
             <span className="mr-2">→</span>
