@@ -236,7 +236,7 @@ export const seniorFullStackWeb3EngineerResume: Resume = {
     {
       title: "Owner/Operator | Blockchain & Web3 Specialist",
       company: "CuriouslyCory Corp",
-      period: "Feb 2021 - March 2022",
+      period: "July 2021 - April 2023",
       accomplishments: [
         "Developed scalable serverless solutions for complex NFT processing (MechaChaotic Forge).",
         "Crafted interactive Web3 experiences with smart contract integration (Cozy Express).",
@@ -304,7 +304,7 @@ export const seniorFullStackAiMlEngineerResume: Resume = {
     {
       title: "Owner/Operator | AI & Machine Learning Specialist",
       company: "CuriouslyCory Corp",
-      period: "Feb 2021 - March 2022",
+      period: "July 2021 - April 2023",
       accomplishments: [
         "Developed interactive storytelling experiences powered by generative AI.",
         "Engineered a sophisticated personal assistant leveraging LLMs, advanced context management, and memory systems.",
@@ -315,7 +315,7 @@ export const seniorFullStackAiMlEngineerResume: Resume = {
     {
       title: "Senior Systems Engineer",
       company: "Lighthouse Global Inc.",
-      period: "Nov 2020 - Feb 2022",
+      period: "Nov 2020 - March 2022",
       accomplishments: [
         "Architected scalable systems integrating machine learning and AI to improve product performance and usability.",
       ],
@@ -376,7 +376,7 @@ export const aiWeb3FullStackEngineerResume: Resume = {
     {
       title: "Owner/Operator | AI & Web3 Specialist",
       company: "CuriouslyCory Corp",
-      period: "Feb 2021 - March 2022",
+      period: "July 2021 - April 2023",
       accomplishments: [
         "Developed scalable serverless solutions for complex NFT processing with integrated AI-driven content generation.",
         "Crafted interactive Web3 experiences with smart contract integration, enhanced by personalized user experiences via AI/ML.",
@@ -388,7 +388,7 @@ export const aiWeb3FullStackEngineerResume: Resume = {
     {
       title: "Senior Systems Engineer",
       company: "Lighthouse Global Inc.",
-      period: "Nov 2020 - Feb 2022",
+      period: "Nov 2020 - March 2022",
       accomplishments: [
         "Architected scalable systems integrating machine learning and AI to improve product performance, usability, and blockchain security.",
       ],
