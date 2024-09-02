@@ -139,7 +139,7 @@ export const engineeringManagerCtoResume: Resume = {
   titles: ["Engineering Manager", "CTO", "Technical Leader"],
   highlightedTitle: "Experienced Engineering Leader with Strategic Vision",
   summary:
-    "Results-oriented Engineering Manager with 20+ years of experience leading and mentoring high-performing engineering teams. Proven ability to define technical vision, drive strategic roadmaps, and foster collaborative environments focused on delivering scalable and innovative software solutions. Deep understanding of modern web technologies and cloud infrastructure.",
+    "Results-oriented Engineering Manager with 20+ years of full stack experience and 5 years of leading and mentoring high-performing engineering teams. Proven ability to define technical vision, drive strategic roadmaps, and foster collaborative environments focused on delivering scalable and innovative software solutions. Deep understanding of modern web technologies and cloud infrastructure.",
   experience: [
     {
       title: "Principal Full Stack Engineer (Frontend Lead)",
