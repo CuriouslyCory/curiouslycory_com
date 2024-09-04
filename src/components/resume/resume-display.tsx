@@ -3,11 +3,30 @@
 import { useSearchParams } from "next/navigation";
 import { resumes } from "~/data/resume-data";
 import type { Resume, Job } from "~/types/resume";
-import { ExternalLink } from "lucide-react";
-import { Suspense } from "react";
+import { ExternalLink, Download, Printer, Loader2 } from "lucide-react";
+import { Suspense, useState } from "react";
+import { Button } from "~/components/ui/button";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
+import { useTheme } from "next-themes";
+import { DownloadButton } from "./export";
 
 interface ResumeDisplayProps {
   defaultResume: Resume;
+}
+
+function PrintButton() {
+  return (
+    <Button
+      variant="ghost"
+      size="icon"
+      onClick={() => window.print()}
+      className="print:hidden"
+      title="Print Resume"
+    >
+      <Printer className="h-4 w-4" />
+    </Button>
+  );
 }
 
 // Create a client component that uses the search params
@@ -21,110 +40,121 @@ function ResumeContent({ defaultResume }: ResumeDisplayProps) {
     : defaultResume;
 
   return (
-    <div className="resume-content space-y-10">
-      {/* Header */}
-      <div className="resume-section header-section flex flex-col justify-between md:flex-row">
-        <div>
-          <h1 className="resume-section-title text-3xl">
-            {selectedResume.name}
-          </h1>
-          <div className="mt-1 text-gray-600 dark:text-gray-300">
-            {selectedResume.titles.map((title, index) => (
-              <div key={index} className="font-serif italic">
-                {title}
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="mt-4 self-end md:mt-0 md:text-right">
-          <div className="text-gray-600 dark:text-gray-300">
-            {selectedResume.email}
-          </div>
-          {selectedResume.links.map((link, index) => (
-            <div key={index} className="flex items-center gap-1 md:justify-end">
-              <a
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="break-all text-orange-500 hover:underline"
-              >
-                {link.text}
-              </a>
-              <ExternalLink className="ext-link-icon h-3 w-3 flex-shrink-0 text-orange-500 print:hidden" />
+    <div className="relative">
+      {/* Action Buttons */}
+      <div className="absolute -top-8 right-0 flex gap-2 md:-top-12 print:hidden">
+        <PrintButton />
+        <DownloadButton selectedResume={selectedResume} />
+      </div>
+
+      <div className="resume-content space-y-10">
+        {/* Header */}
+        <div className="resume-section header-section flex flex-col justify-between md:flex-row">
+          <div>
+            <h1 className="resume-section-title text-3xl">
+              {selectedResume.name}
+            </h1>
+            <div className="mt-1 text-gray-600 dark:text-gray-300">
+              {selectedResume.titles.map((title, index) => (
+                <div key={index} className="font-serif italic">
+                  {title}
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Professional Summary */}
-      <div className="resume-section summary-section">
-        <h2 className="resume-section-title">Professional Summary</h2>
-        <p className="">
-          <span className="oswald-align relative top-[1px] align-baseline font-oswald font-semibold text-orange-600">
-            {selectedResume.highlightedTitle}
-          </span>
-          {" " + selectedResume.summary}
-        </p>
-      </div>
-
-      {/* Work Experience */}
-
-      {selectedResume.experience.map((job, index) => (
-        <JobSection key={index} job={job} />
-      ))}
-
-      {/* Skills Section - Optional */}
-      {selectedResume.skills && (
-        <div className="resume-section skills-section">
-          <h2 className="resume-section-title">Skills</h2>
-          <div className="space-y-1">
-            {selectedResume.skills.map((skillCategory, index) => (
-              <div key={index}>
-                {skillCategory.length > 0 && (
-                  <div className="">
-                    <span className="oswald-align relative mr-2 align-baseline font-oswald font-semibold text-orange-600">
-                      {skillCategory[0]}:
-                    </span>
-                    <span>{skillCategory.slice(1).join(", ")}</span>
-                  </div>
-                )}
+          </div>
+          <div className="mt-4 md:mt-0 md:text-right">
+            <div className="text-gray-600 dark:text-gray-300">
+              {selectedResume.email}
+            </div>
+            {selectedResume.links.map((link, index) => (
+              <div
+                key={index}
+                className="flex items-center gap-1 md:justify-end"
+              >
+                <a
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="break-all text-orange-500 hover:underline"
+                >
+                  {link.text}
+                </a>
+                <ExternalLink className="ext-link-icon h-3 w-3 flex-shrink-0 text-orange-500 print:hidden" />
               </div>
             ))}
           </div>
         </div>
-      )}
 
-      {/* Education & Continuous Learning - Optional */}
-      {selectedResume.education && (
-        <div className="resume-section education-section">
-          <h2 className="resume-section-title">
-            Education & Continuous Learning
-          </h2>
-          <ul className="">
-            {selectedResume.education.map((item, index) => (
-              <li key={index} className="flex">
-                <span className="mr-2">→</span>
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
+        {/* Professional Summary */}
+        <div className="resume-section summary-section">
+          <h2 className="resume-section-title">Professional Summary</h2>
+          <p className="">
+            <span className="oswald-align relative top-[1px] align-baseline font-oswald font-semibold text-orange-600">
+              {selectedResume.highlightedTitle}
+            </span>
+            {" " + selectedResume.summary}
+          </p>
         </div>
-      )}
 
-      {/* Key Achievements - Optional */}
-      {selectedResume.keyAchievements && (
-        <div className="resume-section achievements-section">
-          <h2 className="resume-section-title">Key Achievements</h2>
-          <ul className="">
-            {selectedResume.keyAchievements.map((achievement, index) => (
-              <li key={index} className="flex">
-                <span className="mr-2">→</span>
-                <span>{achievement}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+        {/* Work Experience */}
+
+        {selectedResume.experience.map((job, index) => (
+          <JobSection key={index} job={job} />
+        ))}
+
+        {/* Skills Section - Optional */}
+        {selectedResume.skills && (
+          <div className="resume-section skills-section">
+            <h2 className="resume-section-title">Skills</h2>
+            <div className="space-y-1">
+              {selectedResume.skills.map((skillCategory, index) => (
+                <div key={index}>
+                  {skillCategory.length > 0 && (
+                    <div className="">
+                      <span className="oswald-align relative mr-2 align-baseline font-oswald font-semibold text-orange-600">
+                        {skillCategory[0]}:
+                      </span>
+                      <span>{skillCategory.slice(1).join(", ")}</span>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Education & Continuous Learning - Optional */}
+        {selectedResume.education && (
+          <div className="resume-section education-section">
+            <h2 className="resume-section-title">
+              Education & Continuous Learning
+            </h2>
+            <ul className="">
+              {selectedResume.education.map((item, index) => (
+                <li key={index} className="flex">
+                  <span className="mr-2">→</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {/* Key Achievements - Optional */}
+        {selectedResume.keyAchievements && (
+          <div className="resume-section achievements-section">
+            <h2 className="resume-section-title">Key Achievements</h2>
+            <ul className="">
+              {selectedResume.keyAchievements.map((achievement, index) => (
+                <li key={index} className="flex">
+                  <span className="mr-2">→</span>
+                  <span>{achievement}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
