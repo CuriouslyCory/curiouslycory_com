@@ -130,7 +130,7 @@ export default function Home() {
             </div>
           </section>
         </div>
-        <section className="mx-2 max-w-3xl md:mx-auto">
+        <section className="mx-2 max-w-4xl md:mx-auto">
           <FavoriteTech />
         </section>
 

@@ -10,7 +10,13 @@ import {
   FaNodeJs,
   FaReact,
 } from "react-icons/fa";
-import { SiMysql, SiNextdotjs, SiPostgresql } from "react-icons/si";
+import {
+  SiClaude,
+  SiMysql,
+  SiNextdotjs,
+  SiOpenai,
+  SiPostgresql,
+} from "react-icons/si";
 import SvgServiceNow from "~/components/custom-icons/service-now";
 import { Card, CardContent, CardHeader } from "./ui/card";
 
@@ -29,6 +35,8 @@ export const FavoriteTech = (): ReactNode => {
     { title: "MySql", icon: SiMysql },
     { title: "ServiceNow", icon: SvgServiceNow },
     { title: "Github", icon: FaGithub },
+    { title: "OpenAI", icon: SiOpenai },
+    { title: "Claude", icon: SiClaude },
   ];
 
   return (
