@@ -56,8 +56,9 @@ export default function Home() {
       <section className="mx-2 max-w-3xl md:mx-auto">
         <Card className="p-2 md:p-6">
           <CardHeader>
-            <CardTitle className="h-underline text-center text-2xl font-bold md:text-left">
+            <CardTitle className="mb-2 text-3xl font-bold">
               A little about me
+              <div className="h-1 w-20 bg-orange-500"></div>
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -66,37 +67,21 @@ export default function Home() {
               solutions using TypeScript and modern frameworks like Next.js,
               React, and Angular. Currently, I&apos;m proudly part of the
               talented team at{" "}
-              <Link
-                href="https://sudoswap.xyz"
-                target="top"
-                className="underline hover:text-blue-500"
-              >
+              <a href="#" className="text-orange-500 hover:underline">
                 Sudorandom Labs
-              </Link>
+              </a>
               , and I&apos;ve previously enjoyed roles at{" "}
-              <Link
-                href="https://lighthouseglobal.com"
-                target="top"
-                className="underline"
-              >
+              <a href="#" className="text-orange-500 hover:underline">
                 Lighthouse Global
-              </Link>
+              </a>
               ,{" "}
-              <Link
-                href="https://www.insight.com/"
-                target="top"
-                className="underline"
-              >
+              <a href="#" className="text-orange-500 hover:underline">
                 Insight Enterprises
-              </Link>
+              </a>
               , and{" "}
-              <Link
-                href="https://www.responsivedata.com/"
-                target="top"
-                className="underline"
-              >
+              <a href="#" className="text-orange-500 hover:underline">
                 Responsive Data
-              </Link>
+              </a>
               .
             </p>
             <p>
@@ -108,6 +93,20 @@ export default function Home() {
             </p>
           </CardContent>
         </Card>
+      </section>
+      <section className="mt-24 flex justify-center gap-x-4">
+        <Link
+          href="/cv"
+          className="rounded-lg bg-orange-500 px-6 py-3 font-bold text-white transition-all hover:scale-105 hover:text-white"
+        >
+          View My Resume
+        </Link>
+        <Link
+          href="#"
+          className="cursor-not-allowed rounded-lg border border-gray-300 px-6 py-3 transition-colors hover:bg-gray-100 dark:border-gray-700 dark:hover:bg-gray-800"
+        >
+          Read My Blog (back soon)
+        </Link>
       </section>
       <div className="mt-24 flex flex-col gap-y-24">
         <div className="mb-10 w-full bg-foreground pb-10 pt-8 text-background dark:bg-gray-100/10 dark:text-foreground">
