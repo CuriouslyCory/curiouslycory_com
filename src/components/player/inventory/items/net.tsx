@@ -31,14 +31,14 @@ const SvgComponent = (
         <ellipse
           cx={79.5}
           cy={82}
-          className="fill-none stroke-black stroke-[7]"
+          className="fill-none stroke-black stroke-7"
           rx={27.5}
           ry={70}
           transform="rotate(-45 79.496 82.002)"
         />
         <path
           d="M128.5 131.5 217 220"
-          className="fill-none stroke-black stroke-[7]"
+          className="fill-none stroke-black stroke-7"
         />
         <path
           d="M128.5 131.5c0 13.82-32.2 25-72 25"
@@ -69,7 +69,7 @@ const SvgComponent = (
         <ellipse
           cx={185.57}
           cy={188.07}
-          className="fill-none stroke-black stroke-[7]"
+          className="fill-none stroke-black stroke-7"
           rx={5.3}
           ry={57.76}
           transform="rotate(-45 185.569 188.065)"
