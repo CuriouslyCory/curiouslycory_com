@@ -57,20 +57,21 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.0",
-    "@types/eslint": "^8.56.12",
-    "@types/node": "^20.17.30",
-    "@types/react": "19.0.10",
+    "@types/eslint": "^9.6.1",
+    "@types/node": "^22.13.17",
+    "@types/react": "19.0.12",
     "@types/react-dom": "19.0.4",
     "@typescript-eslint/eslint-plugin": "^8.29.0",
     "@typescript-eslint/parser": "^8.29.0",
-    "eslint": "^8.57.1",
+    "eslint": "^9.23.0",
     "eslint-config-next": "^15.2.4",
     "postcss": "^8.5.3",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.11",
     "prisma": "^5.22.0",
     "tailwindcss": "^4.1.0",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "typescript-eslint": "^8.29.0"
   },
   "ct3aMetadata": {
     "initVersion": "7.37.0"
