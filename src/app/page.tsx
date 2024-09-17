@@ -1,11 +1,12 @@
 import Link from "next/link";
+import { ScrollText } from "lucide-react";
+import { type Metadata } from "next";
+
 import { Astronaut } from "~/components/astronaut";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { ChatBubble } from "~/components/ui/chat-bubble";
-import { SOCIALS } from "~/constants/socials";
-import { ScrollText } from "lucide-react";
 import { FavoriteTech } from "~/components/favorite-tech";
-import { type Metadata } from "next";
+import { SOCIALS } from "~/data/socials";
 
 export const metadata: Metadata = {
   title: "CuriouslyCory | Web Developer",
@@ -109,7 +110,7 @@ export default function Home() {
         </Link>
       </section>
       <div className="mt-24 flex flex-col gap-y-24">
-        <div className="mb-10 w-full bg-foreground pb-10 pt-8 text-background dark:bg-gray-100/10 dark:text-foreground">
+        <div className="bg-foreground text-background dark:text-foreground mb-10 w-full pt-8 pb-10 dark:bg-gray-100/10">
           <section className="container mx-2 flex flex-col gap-y-4 md:mx-auto">
             <h2 className="mb-2 text-center text-3xl font-bold">My Links</h2>
             <div className="grid grid-cols-2 gap-4 md:grid-cols-6 lg:grid-cols-8">
