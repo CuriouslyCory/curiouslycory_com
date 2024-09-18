@@ -7,7 +7,7 @@ import { Button } from "~/components/ui/button";
 ---
 title: Hello World - My First Custom Blog Post
 excerpt: An example of how to create custom blog posts with rich features while still having them indexed.
-coverImage: /images/blog/hello-world.jpg
+coverImage: /images/blog/hello-world.png
 publishedAt: 2025-04-02
 featured: true
 tags: nextjs,typescript,tutorial
@@ -17,7 +17,7 @@ tags: nextjs,typescript,tutorial
 
 export default async function HelloWorldPost() {
   // Get the post metadata from the database (indexed at build time)
-  const post = await api.blog.getBySlug({ slug: "hello-world" });
+  // const post = await api.blog.getBySlug({ slug: "hello-world" });
 
   return (
     <div className="mx-auto max-w-3xl">
@@ -90,7 +90,7 @@ export default async function HelloWorldPost() {
         </div>
       </div>
 
-      {/* Display tags from the indexed metadata */}
+      {/* Display tags from the indexed metadata
       {post?.tags && post.tags.length > 0 && (
         <div className="mt-8">
           <h3 className="mb-4 text-lg font-medium">Tags:</h3>
@@ -102,7 +102,7 @@ export default async function HelloWorldPost() {
             ))}
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 }
