@@ -1,12 +1,11 @@
 import Link from "next/link";
-import { ScrollText } from "lucide-react";
 import { type Metadata } from "next";
 
 import { Astronaut } from "~/components/astronaut";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { ChatBubble } from "~/components/ui/chat-bubble";
 import { FavoriteTech } from "~/components/favorite-tech";
-import { SOCIALS } from "~/data/socials";
+import { MyLinks } from "~/components/my-links";
 
 export const metadata: Metadata = {
   title: "CuriouslyCory | Web Developer",
@@ -18,7 +17,7 @@ export const metadata: Metadata = {
     siteName: "CuriouslyCory.com",
     images: [
       {
-        url: "/images/og-image.png", // You'll need to create this image
+        url: "/images/og-image.png",
         width: 1200,
         height: 630,
         alt: "CuriouslyCory - Web Developer",
@@ -110,27 +109,7 @@ export default function Home() {
         </Link>
       </section>
       <div className="mt-24 flex flex-col gap-y-24">
-        <div className="bg-foreground text-background dark:text-foreground mb-10 w-full pt-8 pb-10 dark:bg-gray-100/10">
-          <section className="container mx-2 flex flex-col gap-y-4 md:mx-auto">
-            <h2 className="mb-2 text-center text-3xl font-bold">My Links</h2>
-            <div className="grid grid-cols-2 gap-4 md:grid-cols-6 lg:grid-cols-8">
-              <Link href="/cv">
-                <div className="flex flex-col items-center gap-2 transition-all hover:scale-105 hover:text-orange-500">
-                  <ScrollText className="h-12 w-12" />
-                  <span>Resume/CV</span>
-                </div>
-              </Link>
-              {SOCIALS.map((link) => (
-                <Link href={link.url} key={link.url} target="top">
-                  <div className="flex flex-col items-center gap-2 transition-colors hover:scale-105 hover:text-orange-500">
-                    <link.icon className="h-12 w-12" />
-                    <span className="text-center">{link.title}</span>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </section>
-        </div>
+        <MyLinks />
         <section className="mx-2 max-w-4xl md:mx-auto">
           <FavoriteTech />
         </section>
