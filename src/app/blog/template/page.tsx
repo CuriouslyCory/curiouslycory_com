@@ -1,15 +1,16 @@
+import { api } from "~/trpc/server";
+import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 
-/* 
+/*
 ---bm
 title: Hello World - My First Custom Blog Post
 excerpt: An example of how to create custom blog posts with rich features while still having them indexed.
 coverImage: /images/blog/hello-world.png
 publishedAt: 2025-04-02
 featured: true
-published: true
 tags: nextjs,typescript,tutorial
----
+--- 
 */
 
 export default async function HelloWorldPost() {

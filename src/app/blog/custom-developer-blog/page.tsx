@@ -2,14 +2,14 @@ import { Button } from "~/components/ui/button";
 
 /* 
 ---bm
-title: Hello World - My First Custom Blog Post
+title: Custom Developer Blog
 excerpt: An example of how to create custom blog posts with rich features while still having them indexed.
-coverImage: /images/blog/hello-world.png
+coverImage: /images/blog/default.png
 publishedAt: 2025-04-02
 featured: true
 published: true
 tags: nextjs,typescript,tutorial
----
+--- 
 */
 
 export default async function HelloWorldPost() {

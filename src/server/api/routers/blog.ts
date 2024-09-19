@@ -11,7 +11,7 @@ export const blogRouter = createTRPCRouter({
   getAll: publicProcedure
     .input(postSearchParamsSchema)
     .query(async ({ ctx, input }) => {
-      const { q, tag, featured, page, perPage } = input;
+      const { q, tag, featured, year, month, page, perPage } = input;
       const skip = (page - 1) * perPage;
 
       // Query builder
@@ -36,6 +36,14 @@ export const blogRouter = createTRPCRouter({
                     },
                   },
                 ],
+              }
+            : {}),
+          ...(year
+            ? {
+                publishedAt: {
+                  gte: new Date(year, month ?? 0, 1),
+                  lt: new Date(year, month ?? 12, month ? 32 : 1),
+                },
               }
             : {}),
         },
@@ -70,6 +78,66 @@ export const blogRouter = createTRPCRouter({
         },
       };
     }),
+
+  getDateAggregations: publicProcedure.query(async ({ ctx }) => {
+    // Get all posts with valid publishedAt dates
+    const posts = await ctx.db.post.findMany({
+      where: {
+        published: true,
+        publishedAt: { not: null },
+      },
+      select: {
+        publishedAt: true,
+      },
+      orderBy: {
+        publishedAt: "desc",
+      },
+    });
+
+    // Group posts by year and month
+    const dateAggregations = posts.reduce(
+      (acc, post) => {
+        const date = post.publishedAt!;
+        const year = date.getFullYear();
+        const month = date.getMonth(); // JavaScript months are 0-based
+
+        // Find or create year entry
+        let yearEntry = acc.find((entry) => entry.year === year);
+        if (!yearEntry) {
+          yearEntry = { year, months: [], count: 0 };
+          acc.push(yearEntry);
+        }
+
+        // Find or create month entry
+        let monthEntry = yearEntry.months.find(
+          (entry) => entry.month === month,
+        );
+        if (!monthEntry) {
+          monthEntry = { month, count: 0 };
+          yearEntry.months.push(monthEntry);
+        }
+
+        // Increment counts
+        monthEntry.count++;
+        yearEntry.count++;
+
+        return acc;
+      },
+      [] as Array<{
+        year: number;
+        months: Array<{ month: number; count: number }>;
+        count: number;
+      }>,
+    );
+
+    // Sort years descending and months ascending
+    dateAggregations.sort((a, b) => b.year - a.year);
+    dateAggregations.forEach((year) => {
+      year.months.sort((a, b) => a.month - b.month);
+    });
+
+    return dateAggregations;
+  }),
 
   getBySlug: publicProcedure
     .input(z.object({ slug: z.string() }))

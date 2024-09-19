@@ -16,7 +16,7 @@ const PostMetadataSchema = z.object({
     z.string(),
     z.date()
   ]).optional().transform(val => val ? new Date(val) : new Date()),
-  published: z.boolean().optional().default(true),
+  published: z.boolean().optional().default(false),
   featured: z.boolean().optional().default(false),
   authorId: z.string().optional(),
   tags: z.string().optional().transform(val => 
@@ -97,8 +97,8 @@ export async function indexBlogPosts() {
       
       // Extract metadata from frontmatter-style comments in the page file
       // Format:
-      // {/* 
-      //   ---
+      // /* 
+      //   ---bm
       //   title: Post Title
       //   excerpt: Short description
       //   coverImage: /images/post.jpg
@@ -106,8 +106,8 @@ export async function indexBlogPosts() {
       //   featured: true
       //   tags: tag1,tag2,tag3
       //   --- 
-      // */}
-      const metadataRegex = /{\s*\/\*\s*---\s*([\s\S]*?)\s*---\s*\*\/\s*}/;
+      // */
+      const metadataRegex = /---bm\s*([\s\S]*?)\s*---/;
       const match = metadataRegex.exec(fileContent);
       
       if (!match?.[1]) {
