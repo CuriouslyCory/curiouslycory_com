@@ -102,10 +102,10 @@ export default function Home() {
           View My Resume
         </Link>
         <Link
-          href="#"
-          className="cursor-not-allowed rounded-lg border border-gray-300 px-6 py-3 transition-colors hover:bg-gray-100 dark:border-gray-700 dark:hover:bg-gray-800"
+          href="/blog "
+          className="rounded-lg border border-gray-300 px-6 py-3 transition-colors hover:bg-gray-100 dark:border-gray-700 dark:hover:bg-gray-800"
         >
-          Read My Blog (back soon)
+          Read My Blog
         </Link>
       </section>
       <div className="mt-24 flex flex-col gap-y-24">
