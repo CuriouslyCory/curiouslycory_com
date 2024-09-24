@@ -6,8 +6,16 @@ import {
   FaLinkedin,
 } from "react-icons/fa";
 import { FaBluesky } from "react-icons/fa6";
+import { type IconType } from "react-icons/lib";
 
-export const SOCIALS = [
+type Social = {
+  title: string;
+  url: string;
+  icon: IconType;
+  isLive?: boolean;
+};
+
+export const SOCIALS: Social[] = [
   { title: "GitHub", url: "https://github.com/CuriouslyCory", icon: FaGithub },
   {
     title: "LinkedIn",
