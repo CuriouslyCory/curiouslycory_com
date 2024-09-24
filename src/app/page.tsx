@@ -53,7 +53,7 @@ export default function Home() {
           <Astronaut className="translate-y-1" />
         </div>
       </section>
-      <section className="mx-2 max-w-3xl md:mx-auto">
+      <section className="max-w-3xl px-2 md:mx-auto">
         <Card className="p-2 md:p-6">
           <CardHeader>
             <CardTitle className="mb-2 text-3xl font-bold">
@@ -108,29 +108,12 @@ export default function Home() {
           Read My Blog
         </Link>
       </section>
-      <div className="mt-24 flex flex-col gap-y-24">
+      <section className="mt-24 flex flex-col gap-y-24">
         <MyLinks />
-        <section className="mx-2 max-w-4xl md:mx-auto">
-          <FavoriteTech />
-        </section>
-
-        {/* <section>
-        <BskyFeed />
-      </section> */}
-        {/* <BlogPostBats /> */}
-        {/* <section className="mx-auto mt-20 px-2 md:px-6">
-        <h2 className="mb-4 text-3xl font-bold">Links</h2>
-        <div className="flex flex-wrap gap-6">
-          {SOCIALS.map((link) => (
-            <Card key={link.url} className="max-w-md">
-              <CardHeader>
-                <CardTitle>{link.title}</CardTitle>
-              </CardHeader>
-            </Card>
-          ))}
-        </div>
-      </section> */}
-      </div>
+      </section>
+      <section className="mt-24 max-w-4xl px-2 md:mx-auto">
+        <FavoriteTech />
+      </section>
     </>
   );
 }
