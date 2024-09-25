@@ -8,10 +8,29 @@ title: Hello World - My First Custom Blog Post
 excerpt: An example of how to create custom blog posts with rich features while still having them indexed.
 coverImage: /images/blog/hello-world.png
 publishedAt: 2025-04-02
-featured: true
+featured: false
 tags: nextjs,typescript,tutorial
 --- 
 */
+
+export const metadata = {
+  title: "Hello World - My First Custom Blog Post",
+  description:
+    "An example of how to create custom blog posts with rich features while still having them indexed.",
+  openGraph: {
+    images: [
+      {
+        url: "/images/blog/hello-world.png",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Hello World - My First Custom Blog Post",
+    description:
+      "An example of how to create custom blog posts with rich features while still having them indexed.",
+  },
+};
 
 export default async function HelloWorldPost() {
   // Get the post metadata from the database (indexed at build time)
