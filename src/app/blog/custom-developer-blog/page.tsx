@@ -43,7 +43,7 @@ export default async function CustomDeveloperBlog() {
     <article className="mx-4 flex max-w-3xl flex-col gap-6 md:mx-auto">
       {/* Header */}
       <Image
-        src="/images/blog/default.png"
+        src="/images/blog/the-best-of-both-worlds.png"
         alt="Image of an astronaut space suit holding a string attached to the helmet that is floating like a helium balloon. The space suit is empty, floating in space, overlooking the earth below."
         width={1000}
         height={1000}
