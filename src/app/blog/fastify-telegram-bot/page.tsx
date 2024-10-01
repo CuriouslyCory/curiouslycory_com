@@ -180,10 +180,18 @@ export default async function FastifyTelegramBot() {
 
         <Tabs defaultValue="server" className="my-6">
           <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="server">Server</TabsTrigger>
-            <TabsTrigger value="ai">AI Integration</TabsTrigger>
-            <TabsTrigger value="db">Database</TabsTrigger>
-            <TabsTrigger value="tools">MCP Tools</TabsTrigger>
+            <TabsTrigger className="cursor-pointer" value="server">
+              Server
+            </TabsTrigger>
+            <TabsTrigger className="cursor-pointer" value="ai">
+              AI Integration
+            </TabsTrigger>
+            <TabsTrigger className="cursor-pointer" value="db">
+              Database
+            </TabsTrigger>
+            <TabsTrigger className="cursor-pointer" value="tools">
+              MCP Tools
+            </TabsTrigger>
           </TabsList>
           <TabsContent value="server" className="py-4">
             <h3 className="mb-2 text-xl font-medium">Fastify Backend</h3>
