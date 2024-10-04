@@ -203,33 +203,42 @@ export default async function FastifyTelegramBot() {
             </p>
             <CodeBlock language="typescript">
               {`// src/index.ts
-import Fastify from 'fastify';
-import { bot } from './bot';
+// ESM
+import Fastify from "fastify";
+import { registerPlugins } from "./plugins";
+import { setupServices } from "./services";
+import log from "electron-log";
+import { env } from "./utils/loadEnv";
 
-const server = Fastify({
-  logger: true,
-});
-
-// Register webhook handler for Telegram
-server.post('/webhook', async (request, reply) => {
-  const update = request.body as TelegramUpdate;
-  
-  // Process the incoming message
-  await bot.handleUpdate(update);
-  
-  return { ok: true };
-});
-
-// Start the server
+/**
+ * Run the server!
+ */
 const start = async () => {
+  const app = Fastify({
+    logger: {
+      level: "info",
+      transport: {
+        target: "pino-pretty",
+        options: {
+          colorize: true,
+          translateTime: "HH:MM:ss.l",
+        },
+      },
+    },
+    trustProxy: true,
+  });
+
   try {
-    await server.listen({ port: process.env.PORT || 3000 });
+    await registerPlugins(app);
+    // registerRoutes(app);
+    await setupServices(app);
+
+    await app.listen({ host: "127.0.0.1", port: Number(env.PORT ?? 3200) });
   } catch (err) {
-    server.log.error(err);
+    log.error(err);
     process.exit(1);
   }
 };
-
 start();`}
             </CodeBlock>
           </TabsContent>
@@ -254,26 +263,18 @@ import { tools } from "./tools";
 const model = new ChatGoogleGenerativeAI({
   apiKey: process.env.GEMINI_API_KEY!,
   modelName: "gemini-pro",
-  maxOutputTokens: 2048,
 });
 
 // Create the agent with tools
-const agent = createToolCallingAgent({
-  llm: model,
-  tools,
-  systemPrompt: [
-    "You are a helpful telegram assistant.",
-    "Limit your message responses to 4000 characters.",
-    "Format your replies in plain text.",
-  ].join("\\n"),
-});
-
-// Create an executor to run the agent
-export const agentExecutor = AgentExecutor.fromAgentAndTools({
-  agent,
-  tools,
-  verbose: true,
-});`}
+  const telegramAgent = createReactAgent({
+    llm: selectedModel,
+    tools: [
+      stringLengthTool,
+      ...tools,
+    ],
+    checkpointSaver: pgCheckpointSaver,
+    stateModifier: new SystemMessage(systemPrompt),
+  });`}
             </CodeBlock>
           </TabsContent>
 
@@ -312,19 +313,7 @@ model Message {
   user      User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
 }
-
-// Example usage in code:
-// src/db/user.ts
-export async function getOrCreateUser(telegramId: number, name?: string) {
-  return await prisma.user.upsert({
-    where: { telegramId: BigInt(telegramId) },
-    update: { name },
-    create: { 
-      telegramId: BigInt(telegramId),
-      name 
-    },
-  });
-}`}
+`}
             </CodeBlock>
           </TabsContent>
 
