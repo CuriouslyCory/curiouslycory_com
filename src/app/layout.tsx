@@ -1,4 +1,4 @@
-import { Raleway } from "next/font/google";
+import { Oxygen_Mono, Raleway } from "next/font/google";
 import { type Metadata } from "next";
 import { TRPCReactProvider } from "~/trpc/react";
 
@@ -13,6 +13,13 @@ const raleway = Raleway({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-raleway",
+});
+
+const oxygenMono = Oxygen_Mono({
+  weight: ["400"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-oxygen-mono",
 });
 
 export const metadata: Metadata = {
@@ -30,6 +37,7 @@ export default function RootLayout({
         className={cn(
           "bg-background font-sans text-foreground antialiased",
           raleway.variable,
+          oxygenMono.variable,
         )}
       >
         <TRPCReactProvider>
@@ -42,7 +50,7 @@ export default function RootLayout({
             <div className="flex min-h-screen flex-col">
               <Navigation />
               <main className="mx-auto">{children}</main>
-              <footer className="bg-secondary py-4">
+              <footer className="mt-auto bg-secondary py-4">
                 <div className="container mx-auto text-center text-sm">
                   © {new Date().getFullYear()} CuriouslyCory. All rights
                   reserved.

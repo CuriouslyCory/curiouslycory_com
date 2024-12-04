@@ -2,7 +2,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "~/lib/utils";
 
 const chatBubbleVariants = cva(
-  "relative inline-block p-4 bg-white text-black rounded-2xl max-w-xs",
+  "relative inline-block p-4 bg-white text-black rounded-2xl max-w-xs font-mono",
   {
     variants: {
       variant: {
