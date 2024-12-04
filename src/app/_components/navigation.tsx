@@ -18,7 +18,7 @@ export function Navigation() {
   const pathname = usePathname();
 
   return (
-    <nav className="bg-primary text-primary-foreground">
+    <nav className="overflow-x-scroll bg-primary text-primary-foreground">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="text-xl font-bold">

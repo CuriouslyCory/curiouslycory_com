@@ -30,7 +30,7 @@
     --radius: 0.5rem;
   }
   .dark {
-    --background: 23, 6%, 24%;
+    --background: 240, 10%, 10%;
     --foreground: 36, 24%, 96%;
     --card: 0 0% 4.9%;
     --card-foreground: 0 0% 98%;
@@ -56,11 +56,57 @@
     --chart-5: 340 75% 55%;
   }
 }
+
 @layer base {
   * {
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  @property --rotation {
+    syntax: "<angle>";
+    initial-value: 0turn;
+    inherits: false;
+  }
+
+  @keyframes hue-rotation {
+    from {
+      --rotation: 0turn;
+    }
+    to {
+      --rotation: 1turn;
+    }
+  }
+
+  .astronaut-sun-bg {
+    background-image: conic-gradient(
+      from var(--rotation, 0turn) at center bottom,
+      rgb(255, 68, 0),
+      orange,
+      yellow,
+      #fffd8f,
+      orange,
+      rgb(255, 68, 0)
+    );
+    animation: 20s hue-rotation infinite linear;
+    mask-image: radial-gradient(circle at bottom, black 50%, transparent 70%);
+    background-position: center bottom;
+  }
+
+  @keyframes twinkle {
+    0% {
+      opacity: 0.8;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .astronaut-moon-bg {
+    background: radial-gradient(circle, white 20%, transparent 20%) center/15%
+      15% no-repeat;
+    animation: twinkle 1.5s infinite alternate;
   }
 }
