@@ -4,30 +4,23 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { ThemeModeToggle } from "./theme-mode-toggle";
-import Image from "next/image";
+import { CcLogo } from "~/components/ui/cc-logo";
 
 const navItems = [
   { name: "Home", href: "/" },
   { name: "Projects", href: "/projects" },
   { name: "Blog", href: "/blog" },
-  { name: "Resume", href: "/resume" },
-  { name: "Contact", href: "/contact" },
 ];
 
 export function Navigation() {
   const pathname = usePathname();
 
   return (
-    <nav className="overflow-x-scroll bg-primary text-primary-foreground">
+    <nav className="bg-foreground text-background">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="text-xl font-bold">
-            <Image
-              src="/images/cc-logo.svg"
-              alt="CuriouslyCory"
-              width={64}
-              height={32}
-            />
+            <CcLogo />
           </Link>
           <div className="flex space-x-4">
             {navItems.map((item) => (

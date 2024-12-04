@@ -2,14 +2,14 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "~/lib/utils";
 
 const chatBubbleVariants = cva(
-  "relative inline-block p-4 bg-white/90 text-black rounded-2xl max-w-xs",
+  "relative inline-block p-4 bg-white text-black rounded-2xl max-w-xs",
   {
     variants: {
       variant: {
-        speech: "border-2 border-solid border-black",
-        whisper: "border-2 border-dashed border-black",
-        thought: "border-2 border-solid border-black",
-        scream: "border-4 border-solid border-black font-bold",
+        speech: "border-2 border-solid ",
+        whisper: "border-2 border-dashed ",
+        thought: "border-2 border-solid ",
+        scream: "border-4 border-solid font-bold",
       },
       direction: {
         left: "",
@@ -35,7 +35,7 @@ const tailVariants = cva("absolute w-4 h-4 bg-white", {
       bottomLeft: "-bottom-2 left-2 -rotate-45 border-l-2 border-b-2",
       right:
         "-right-2 top-1/2 -translate-y-1/2 -rotate-45 border-r-2 border-b-2",
-      rightBottom: "-right-2 bottom-2 -rotate-45 border-r-2 border-b-2",
+      rightBottom: "-right-2 bottom-3 -rotate-45 border-r-2 border-b-2",
       bottomRight: "-bottom-2 right-2 rotate-45 border-r-2 border-b-2",
       top: "top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 rotate-45 border-t-2 border-r-2",
       bottom:

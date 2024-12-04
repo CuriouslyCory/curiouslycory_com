@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Astronaut } from "~/components/astronaut";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { ChatBubble } from "~/components/ui/chat-bubble";
@@ -5,37 +6,40 @@ import { ChatBubble } from "~/components/ui/chat-bubble";
 export default function Home() {
   return (
     <>
-      <section className="text-center">
+      <section className="pt-6 text-center">
         <ChatBubble
-          text="Hi, I'm CuriouslyCory. I like to build things."
+          text="Hi, I'm CuriouslyCory, and I like to build things."
           direction="bottom"
           className="inline-block md:hidden"
         />
         <ChatBubble
-          text="Hi, I'm CuriouslyCory. I like to build things."
+          text="Hi, I'm CuriouslyCory, and I like to build things."
           direction="rightBottom"
           className="hidden md:inline-block"
         />
 
-        <div className="inline-block w-72 align-top">
+        <div className="inline-block w-72 overflow-hidden align-top">
           <Astronaut />
         </div>
       </section>
 
-      <section>
+      <section className="mx-auto max-w-3xl">
         <Card>
           <CardHeader>
             <CardTitle>About Me</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="space-y-4">
             <p>
               I&apos;m a coding enthusiast who loves building web applications
               for teams big and small. One of my most exciting adventures was
-              diving into the blockchain with sudoswap.xyz, an NFT marketplace
-              that made some waves. I&apos;m pretty handy with TypeScript and
-              frameworks like Next.js, React, and Angular. I&apos;ve also tried
-              my hand at Golang, Python, PHP, and even tackled the complexities
-              of ServiceNow.
+              diving into the blockchain with{" "}
+              <Link href="https://sudoswap.xyz" target="top">
+                sudoswap.xyz
+              </Link>
+              , an NFT marketplace that made some waves. I&apos;m pretty handy
+              with TypeScript and frameworks like Next.js, React, and Angular.
+              I&apos;ve also tried my hand at Golang, Python, PHP, and even
+              tackled the complexities of ServiceNow.
             </p>
             <p>
               When I bump into a tricky technical problem, I might scratch my

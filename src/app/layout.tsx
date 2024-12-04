@@ -26,7 +26,12 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn("font-sans antialiased", raleway.variable)}>
+      <body
+        className={cn(
+          "bg-background font-sans text-foreground antialiased",
+          raleway.variable,
+        )}
+      >
         <TRPCReactProvider>
           <ThemeProvider
             attribute="class"
@@ -36,12 +41,11 @@ export default function RootLayout({
           >
             <div className="flex min-h-screen flex-col">
               <Navigation />
-              <main className="container mx-auto flex-grow px-4 py-8">
-                {children}
-              </main>
+              <main className="mx-auto">{children}</main>
               <footer className="bg-secondary py-4">
                 <div className="container mx-auto text-center text-sm">
-                  © {new Date().getFullYear()} Your Name. All rights reserved.
+                  © {new Date().getFullYear()} CuriouslyCory. All rights
+                  reserved.
                 </div>
               </footer>
             </div>

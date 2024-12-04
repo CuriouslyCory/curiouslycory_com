@@ -61,9 +61,6 @@
   * {
     @apply border-border;
   }
-  body {
-    @apply bg-background text-foreground;
-  }
 
   @property --rotation {
     syntax: "<angle>";
@@ -93,20 +90,5 @@
     animation: 20s hue-rotation infinite linear;
     mask-image: radial-gradient(circle at bottom, black 50%, transparent 70%);
     background-position: center bottom;
-  }
-
-  @keyframes twinkle {
-    0% {
-      opacity: 0.8;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-  .astronaut-moon-bg {
-    background: radial-gradient(circle, white 20%, transparent 20%) center/15%
-      15% no-repeat;
-    animation: twinkle 1.5s infinite alternate;
   }
 }
