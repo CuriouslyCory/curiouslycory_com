@@ -1,57 +1,62 @@
-import Image from "next/image";
-import { Button } from "~/components/ui/button";
+import Link from "next/link";
+import { Astronaut } from "~/components/astronaut";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
+import { ChatBubble } from "~/components/ui/chat-bubble";
 
 export default function Home() {
   return (
-    <div className="space-y-8">
-      <section className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Curiosity Unleashed</h1>
-        <p className="mb-6 text-xl">
-          Hi, I&apos;m CuriouslyCory. I like to build things.
-        </p>
-        <Image
-          src="/images/headshot.webp"
-          alt="Your Name"
-          width={200}
-          height={200}
-          className="mx-auto mb-6 rounded-full"
+    <>
+      <section className="pt-6 text-center">
+        <ChatBubble
+          text="Hi, I'm CuriouslyCory, and I like to build things."
+          direction="bottom"
+          className="inline-block md:hidden"
         />
-        <Button asChild>
-          <a href="/contact">Get in Touch</a>
-        </Button>
+        <ChatBubble
+          text="Hi, I'm CuriouslyCory, and I like to build things."
+          direction="rightBottom"
+          className="hidden md:inline-block"
+        />
+
+        <div className="inline-block w-72 overflow-hidden align-top">
+          <Astronaut />
+        </div>
       </section>
 
-      <section>
+      <section className="mx-auto max-w-3xl">
         <Card>
           <CardHeader>
             <CardTitle>About Me</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="space-y-4">
             <p>
-              Cory is a renegade in the world of code, a digital craftsman
-              who&apos;s built web applications for everyone from Fortune 100
-              powerhouses to scrappy two-person teams. His crowning achievement?
-              A wild venture into the uncharted waters of blockchain with
-              &quot;sudoswap.xyz,&quot; an NFT marketplace that turned heads and
-              ruffled feathers. Comfortable with Typescript and frameworks like
-              NextJs, React, and Angular, Cory&apos;s toolkit extends far beyond
-              the usual suspects—he&apos;s also dabbled in Golang, Python, PHP,
-              and the ever-complex ServiceNow. When faced with a technical
-              nightmare, his first instinct might be to metaphorically smash his
-              head against the wall, but soon enough he&apos;s diving into deep
-              research, stitching together the best solutions like a mad
-              scientist. His obsession with tech started in the fourth grade
-              when a clunky Apple IIe whispered promises of a world he
-              couldn&apos;t resist. Off the clock, he scales rock walls, tinkers
-              with 3D printers, and tackles creative projects like he&apos;s got
-              something to prove. And if you think sourdough is just another
-              quarantine cliché, Cory was perfecting his loaf game long before
-              lockdowns made it cool.
+              I&apos;m a coding enthusiast who loves building web applications
+              for teams big and small. One of my most exciting adventures was
+              diving into the blockchain with{" "}
+              <Link href="https://sudoswap.xyz" target="top">
+                sudoswap.xyz
+              </Link>
+              , an NFT marketplace that made some waves. I&apos;m pretty handy
+              with TypeScript and frameworks like Next.js, React, and Angular.
+              I&apos;ve also tried my hand at Golang, Python, PHP, and even
+              tackled the complexities of ServiceNow.
+            </p>
+            <p>
+              When I bump into a tricky technical problem, I might scratch my
+              head at first, but soon I&apos;m diving deep, piecing together
+              solutions like a tech detective. My journey into technology
+              started way back in fourth grade with a chunky Apple IIe that
+              sparked my curiosity.
+            </p>
+            <p>
+              When I&apos;m not coding, you&apos;ll find me scaling rock walls,
+              tinkering with 3D printers, or jumping into creative projects just
+              for fun. Oh, and I was baking sourdough bread long before it
+              became the cool thing to do during quarantine!
             </p>
           </CardContent>
         </Card>
       </section>
-    </div>
+    </>
   );
 }
