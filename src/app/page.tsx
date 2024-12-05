@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Astronaut } from "~/components/astronaut";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { ChatBubble } from "~/components/ui/chat-bubble";
+import { SOCIALS } from "~/constants/socials";
 
 export default function Home() {
   return (
@@ -68,10 +69,16 @@ export default function Home() {
               I&apos;m also pretty handy with Golang, Python, PHP, and even
               tackled the complexities of ServiceNow.
             </p>
+            <p>
+              When I&apos;m not coding, you&apos;ll find me scaling rock walls,
+              tinkering with 3D printers, or jumping into creative projects just
+              for fun. Oh, and I was baking sourdough bread long before it
+              became the cool thing to do during quarantine!
+            </p>
           </CardContent>
         </Card>
       </section>
-      <section className="mx-auto mt-10 px-2 md:px-6">
+      <section className="mx-auto mt-20 px-2 md:px-6">
         <h2 className="mb-4 text-3xl font-bold">Latest Blog Posts</h2>
         <div className="flex flex-wrap gap-6">
           <Card className="max-w-md">
@@ -110,6 +117,18 @@ export default function Home() {
               </p>
             </CardContent>
           </Card>
+        </div>
+      </section>
+      <section className="mx-auto mt-20 px-2 md:px-6">
+        <h2 className="mb-4 text-3xl font-bold">Links</h2>
+        <div className="flex flex-wrap gap-6">
+          {SOCIALS.map((link) => (
+            <Card key={link.url} className="max-w-md">
+              <CardHeader>
+                <CardTitle>{link.title}</CardTitle>
+              </CardHeader>
+            </Card>
+          ))}
         </div>
       </section>
     </>
