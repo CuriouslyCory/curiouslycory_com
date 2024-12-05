@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Astronaut } from "~/components/astronaut";
+import BskyFeed from "~/components/bsky-feed";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { ChatBubble } from "~/components/ui/chat-bubble";
 import { SOCIALS } from "~/constants/socials";
@@ -79,6 +80,9 @@ export default function Home() {
             </p>
           </CardContent>
         </Card>
+      </section>
+      <section>
+        <BskyFeed />
       </section>
       <section className="mx-auto mt-20 px-2 md:px-6">
         <h2 className="mb-4 text-3xl font-bold">Latest Blog Posts</h2>
