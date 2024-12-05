@@ -260,7 +260,7 @@ const SvgComponent = (props: SVGProps<SVGSVGElement>) => {
   } else {
     return (
       <>
-        <div className="absolute -z-10 h-72 w-72 scale-125">
+        <div className="astronaut-sun-bg-parent absolute -z-10 h-72 w-72 scale-125">
           <div className="astronaut-sun-bg absolute bottom-0 h-1/2 w-full"></div>
         </div>
         <svg

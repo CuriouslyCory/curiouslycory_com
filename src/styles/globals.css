@@ -68,12 +68,27 @@
     inherits: false;
   }
 
+  @property --reverse-rotation {
+    syntax: "<angle>";
+    initial-value: 0turn;
+    inherits: false;
+  }
+
   @keyframes hue-rotation {
     from {
       --rotation: 0turn;
     }
     to {
       --rotation: 1turn;
+    }
+  }
+
+  @keyframes reverse-hue-rotation {
+    from {
+      --reverse-rotation: 1turn;
+    }
+    to {
+      --reverse-rotation: 0turn;
     }
   }
 
@@ -87,8 +102,30 @@
       orange,
       rgb(255, 68, 0)
     );
-    animation: 20s hue-rotation infinite linear;
-    mask-image: radial-gradient(circle at bottom, black 50%, transparent 70%);
+    animation:
+      15s hue-rotation infinite linear,
+      10s reverse-hue-rotation infinite linear;
+    mask-image: conic-gradient(
+      from var(--reverse-rotation, 0turn) at center bottom,
+      transparent,
+      black,
+      transparent,
+      black,
+      transparent,
+      black,
+      transparent,
+      black,
+      transparent,
+      black,
+      transparent,
+      black,
+      transparent
+    );
     background-position: center bottom;
+  }
+
+  .astronaut-sun-bg-parent {
+    background: orange;
+    mask-image: radial-gradient(circle at bottom, black 25%, transparent 45%);
   }
 }

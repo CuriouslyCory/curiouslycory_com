@@ -20,14 +20,16 @@ export default function Home() {
         />
 
         <div className="inline-block w-72 overflow-hidden align-top">
-          <Astronaut />
+          <Astronaut className="translate-y-1" />
         </div>
       </section>
 
       <section className="mx-auto max-w-3xl">
-        <Card>
+        <Card className="p-6">
           <CardHeader>
-            <CardTitle>About Me</CardTitle>
+            <CardTitle className="text-2xl font-bold">
+              A little about me
+            </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <p>
