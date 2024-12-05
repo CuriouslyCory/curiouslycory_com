@@ -2,9 +2,11 @@
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { type SVGProps, memo } from "react";
+import { cn } from "~/lib/utils";
 const SvgComponent = (props: SVGProps<SVGSVGElement>) => {
   const { resolvedTheme, setTheme } = useTheme();
   const [isMounted, setIsMounted] = useState(false);
+  const { className, ...svgProps } = props;
 
   useEffect(() => {
     setIsMounted(true);
@@ -32,8 +34,8 @@ const SvgComponent = (props: SVGProps<SVGSVGElement>) => {
           data-name="Layer 2"
           viewBox="0 0 806.18 821.5"
           onClick={() => setTheme("light")}
-          className="cursor-pointer"
-          {...props}
+          className={cn("cursor-pointer", className)}
+          {...svgProps}
         >
           <defs>
             <style>
@@ -269,8 +271,8 @@ const SvgComponent = (props: SVGProps<SVGSVGElement>) => {
           data-name="Layer 2"
           viewBox="0 0 806.18 821.5"
           onClick={() => setTheme("dark")}
-          className="cursor-pointer"
-          {...props}
+          className={cn("cursor-pointer", className)}
+          {...svgProps}
         >
           <defs>
             <style>

@@ -25,7 +25,7 @@ export default function Home() {
       </section>
 
       <section className="mx-auto max-w-3xl">
-        <Card className="p-6">
+        <Card className="p-2 md:p-6">
           <CardHeader>
             <CardTitle className="text-2xl font-bold">
               A little about me
