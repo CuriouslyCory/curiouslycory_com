@@ -11,7 +11,7 @@ function BskyFeed() {
       {data?.map((fvPost) => (
         <BskyPost key={fvPost.post.uri} fvPost={fvPost} />
       ))}
-      <pre>{JSON.stringify(data)}</pre>
+      {/* <pre>{JSON.stringify(data)}</pre> */}
     </div>
   );
 }

@@ -9,6 +9,7 @@ export const bskyRouter = createTRPCRouter({
     const feedResponse = await agent.getAuthorFeed({
       actor: "curiouslycory.com",
       limit: 10,
+      filter: "posts_no_replies",
     });
 
     return feedResponse.data.feed;
