@@ -1,27 +1,46 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion"; // Corrected the import
 import { toast } from "sonner";
 import { BatWings as BatWingSvg } from "~/components/bat-wings";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 
 export default function BlogPostBats() {
-  const [isPaused, setIsPaused] = useState(false);
+  const [isPaused, setIsPaused] = useState(true);
+  const [endCount, setEndCount] = useState(0);
   const [positions, setPositions] = useState<Record<number, number>>({
-    1: -100, // Start positions
-    2: -100,
-    3: -100,
+    1: 0, // Start positions
+    2: 0,
+    3: 0,
   });
-
-  useEffect(() => {
-    const startDialog = setTimeout(() => {
-      toast("Um... This is kind of embarrassing...");
-    }, 1000);
-    return () => clearTimeout(startDialog);
-  }, []);
 
   const handleMouseEnter = () => setIsPaused(true);
   const handleMouseLeave = () => setIsPaused(false);
+
+  const resetBats = () => {
+    // Reset positions to starting points
+    setPositions({
+      1: 0,
+      2: 0,
+      3: 0,
+    });
+    // Reset end count
+    setEndCount(0);
+    // Force a re-render of the animations by removing and re-adding elements
+    setIsPaused(true);
+  };
+
+  useEffect(() => {
+    console.log(endCount);
+    if (endCount >= 3) {
+      toast.error("Can you help me out?", {
+        action: {
+          label: "Um. Okay.",
+          onClick: resetBats,
+        },
+      });
+    }
+  }, [endCount]);
 
   return (
     <section
@@ -33,38 +52,43 @@ export default function BlogPostBats() {
         Latest Blog Posts
       </h2>
 
-      <AnimatePresence>
-        {[1, 2, 3].map((key) => (
-          <motion.div
-            key={key}
-            initial={{ x: -1000 }}
-            animate={
-              isPaused
-                ? { x: positions[key] }
-                : {
-                    x: "100vw",
-                    transition: { delay: key - 1, duration: 5, ease: "linear" },
-                  }
-            }
-            onUpdate={(latest) => {
-              if (!isPaused) {
-                setPositions((prev) => ({
-                  ...prev,
-                  [key]: latest.x as number, // Save the current position when animation is running
-                }));
+      <div className="flex flex-nowrap">
+        <AnimatePresence>
+          {[1, 2, 3].map((key) => (
+            <motion.div
+              key={key}
+              animate={
+                isPaused
+                  ? { x: positions[key] }
+                  : {
+                      x: "100vw",
+                      transition: {
+                        delay: key - 1,
+                        duration: 5,
+                        ease: "linear",
+                      },
+                    }
               }
-            }}
-            className="absolute"
-          >
-            <BatWings>
-              <BlogPostCard
-                title={getBlogPostData(key).title}
-                description={getBlogPostData(key).description}
-              />
-            </BatWings>
-          </motion.div>
-        ))}
-      </AnimatePresence>
+              onUpdate={(latest) => {
+                if (!isPaused) {
+                  setPositions((prev) => ({
+                    ...prev,
+                    [key]: latest.x as number, // Save the current position when animation is running
+                  }));
+                }
+              }}
+              onViewportLeave={() => setEndCount((prev) => prev + 1)}
+            >
+              <BatWings>
+                <BlogPostCard
+                  title={getBlogPostData(key).title}
+                  description={getBlogPostData(key).description}
+                />
+              </BatWings>
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </div>
     </section>
   );
 }

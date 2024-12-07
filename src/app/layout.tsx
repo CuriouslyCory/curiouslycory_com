@@ -3,11 +3,11 @@ import { type Metadata } from "next";
 import { TRPCReactProvider } from "~/trpc/react";
 
 import { Navigation } from "./_components/navigation";
-import { Toaster } from "~/components/ui/toaster";
 import { ThemeProvider } from "./_components/theme-provider";
 
 import "~/styles/globals.css";
 import { cn } from "~/lib/utils";
+import { Toaster } from "~/components/ui/sonner";
 
 const raleway = Raleway({
   subsets: ["latin"],
@@ -48,6 +48,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <div className="flex min-h-screen flex-col">
+              <Toaster position="bottom-right" richColors />
               <Navigation />
               <main className="">{children}</main>
               <footer className="mt-auto bg-secondary py-4">
@@ -57,7 +58,6 @@ export default function RootLayout({
                 </div>
               </footer>
             </div>
-            <Toaster />
           </ThemeProvider>
         </TRPCReactProvider>
       </body>
