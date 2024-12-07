@@ -4,6 +4,7 @@ import { TRPCReactProvider } from "~/trpc/react";
 
 import { Navigation } from "./_components/navigation";
 import { ThemeProvider } from "./_components/theme-provider";
+import { PlayerProvider } from "./_components/player-provider";
 
 import "~/styles/globals.css";
 import { cn } from "~/lib/utils";
@@ -47,17 +48,19 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <div className="flex min-h-screen flex-col">
-              <Toaster position="bottom-right" richColors />
-              <Navigation />
-              <main className="">{children}</main>
-              <footer className="mt-auto bg-secondary py-4">
-                <div className="container mx-auto text-center text-sm">
-                  © {new Date().getFullYear()} CuriouslyCory. All rights
-                  reserved.
-                </div>
-              </footer>
-            </div>
+            <PlayerProvider>
+              <div className="flex min-h-screen flex-col">
+                <Toaster position="bottom-right" richColors />
+                <Navigation />
+                <main className="">{children}</main>
+                <footer className="mt-auto bg-secondary py-4">
+                  <div className="container mx-auto text-center text-sm">
+                    © {new Date().getFullYear()} CuriouslyCory. All rights
+                    reserved.
+                  </div>
+                </footer>
+              </div>
+            </PlayerProvider>
           </ThemeProvider>
         </TRPCReactProvider>
       </body>
