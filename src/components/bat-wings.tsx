@@ -14,8 +14,8 @@ const SvgComponent = ({ direction = "left", ...props }: BatWingsProps) => (
     {...props}
     className={cn(
       {
-        "animate-mirror-rotate-15 origin-left": direction === "right",
-        "animate-rotate-15 origin-right": direction === "left",
+        "origin-left animate-mirror-rotate-15": direction === "right",
+        "origin-right animate-rotate-15": direction === "left",
       },
       props.className,
     )}

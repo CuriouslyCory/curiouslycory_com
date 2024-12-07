@@ -49,7 +49,7 @@ export default function RootLayout({
           >
             <div className="flex min-h-screen flex-col">
               <Navigation />
-              <main className="mx-auto">{children}</main>
+              <main className="">{children}</main>
               <footer className="mt-auto bg-secondary py-4">
                 <div className="container mx-auto text-center text-sm">
                   © {new Date().getFullYear()} CuriouslyCory. All rights
