@@ -33,12 +33,20 @@ export default function BlogPostBats() {
   useEffect(() => {
     console.log(endCount);
     if (endCount >= 3) {
-      toast.error("Can you help me out?", {
-        action: {
-          label: "Um. Okay.",
-          onClick: resetBats,
+      toast.error(
+        "Erm... This is awkward but... Did you see where the bat posts went?",
+        {
+          action: {
+            label: "Maybe?",
+            onClick: resetBats,
+          },
+          cancel: {
+            label: "Bat what now?",
+            onClick: () => {},
+          },
+          duration: Infinity,
         },
-      });
+      );
     }
   }, [endCount]);
 
@@ -48,11 +56,9 @@ export default function BlogPostBats() {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <h2 className="mx-2 mb-4 text-3xl font-bold md:mx-6">
-        Latest Blog Posts
-      </h2>
+      <h2 className="mx-2 mb-4 text-3xl font-bold md:mx-6">Latest Posts</h2>
 
-      <div className="flex flex-nowrap">
+      <div className="flex w-full flex-nowrap justify-center">
         <AnimatePresence>
           {[1, 2, 3].map((key) => (
             <motion.div
