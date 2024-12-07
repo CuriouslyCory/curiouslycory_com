@@ -8,6 +8,8 @@ export default {
     extend: {
       animation: {
         float: "float 3s ease-in-out infinite",
+        "rotate-15": "rotate-15 0.25s ease-in-out infinite",
+        "mirror-rotate-15": "mirror-rotate-15 0.25s ease-in-out infinite",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -65,6 +67,16 @@ export default {
         float: {
           "0%, 100%": { transform: "translateY(3%)" },
           "50%": { transform: "translateY(0)" },
+        },
+        "rotate-15": {
+          "0%": { transform: "rotate(0deg) scaleX(1)" },
+          "50%": { transform: "rotate(15deg) scaleX(0.9)" },
+          "100%": { transform: "rotate(0deg) scaleX(1)" },
+        },
+        "mirror-rotate-15": {
+          "0%": { transform: "rotate(0deg) scaleX(-1) translateX(-4rem)" },
+          "50%": { transform: "rotate(15deg) scaleX(-0.9) translateX(-4rem)" },
+          "100%": { transform: "rotate(0deg) scaleX(-1) translateX(-4rem)" },
         },
       },
     },

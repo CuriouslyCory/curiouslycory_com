@@ -2,12 +2,13 @@ import Link from "next/link";
 import {
   AppBskyEmbedImages,
   AppBskyEmbedRecord,
+  AppBskyEmbedRecordWithMedia,
   type AppBskyFeedDefs,
   AppBskyFeedPost,
   AppBskyRichtextFacet,
   RichText,
 } from "@atproto/api";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 import {
   Card,
@@ -16,15 +17,14 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
+import { cn } from "~/lib/utils";
+import { Button } from "./ui/button";
 
 function BskyPost({ fvPost }: { fvPost: AppBskyFeedDefs.FeedViewPost }) {
   const { post } = fvPost;
   // extract the record from the post
   const record = useMemo(() => {
-    if (
-      AppBskyFeedPost.isRecord(post?.record) &&
-      AppBskyFeedPost.validateRecord(post.record).success
-    ) {
+    if (AppBskyFeedPost.isRecord(post?.record)) {
       return post.record;
     }
     return null;
@@ -53,7 +53,7 @@ function BskyPost({ fvPost }: { fvPost: AppBskyFeedDefs.FeedViewPost }) {
 
   // render the rich text
   const els = [];
-  if (!!facets) {
+  if (facets && facets.length > 0) {
     let key = 0;
     for (const segment of richText.segments()) {
       const link = segment.link;
@@ -86,13 +86,15 @@ function BskyPost({ fvPost }: { fvPost: AppBskyFeedDefs.FeedViewPost }) {
     // if this has embed, determine the type and render it
     // known types: record, recordWithMedia, image, video, defs, external,
 
-    // Embedded record (ideally a post)
-    if (
-      record &&
-      AppBskyEmbedRecord.isMain(record.embed) &&
-      AppBskyEmbedRecord.validateMain(record.embed).success
-    ) {
+    // Embedded record (probably a repost)
+    if (record && AppBskyEmbedRecord.isMain(record.embed)) {
       return <div className="grid grid-cols-2 gap-4">Embedded post</div>;
+    }
+
+    if (record && AppBskyEmbedRecordWithMedia.isMain(record.embed)) {
+      return (
+        <div className="grid grid-cols-2 gap-4">Embedded post with media</div>
+      );
     }
 
     // Embedded image
@@ -106,13 +108,21 @@ function BskyPost({ fvPost }: { fvPost: AppBskyFeedDefs.FeedViewPost }) {
       return (
         <div className="grid grid-cols-2 gap-4">
           {images.map((image) => (
-            <img src={image.thumb} alt={image.alt} key={image.thumb} />
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={image.thumb}
+              alt={image.alt}
+              key={image.thumb}
+              className="max-h-32 max-w-32"
+            />
           ))}
         </div>
       );
     }
     return null;
   }, [post, record]);
+
+  const [showPre, setShowPre] = useState(false);
 
   return (
     <article>
@@ -123,13 +133,18 @@ function BskyPost({ fvPost }: { fvPost: AppBskyFeedDefs.FeedViewPost }) {
             <CardDescription>{post?.author.handle}</CardDescription>
           </CardHeader>
           <CardContent>
-            {!facets && <p>{text}</p>}
-            {!!facets && els}
+            {/* Render the text */}
+            {els.length > 0 && els}
+            {els.length < 1 && <p>{record?.text}</p>}
+            {/* Render the embed */}
             {embed}
           </CardContent>
         </Card>
       </Link>
-      <pre>{JSON.stringify(fvPost, null, 2)}</pre>
+      <Button onClick={() => setShowPre(!showPre)}>(debug)</Button>
+      <pre className={cn(showPre ? "block" : "hidden")}>
+        {JSON.stringify(fvPost, null, 2)}
+      </pre>
     </article>
   );
 }

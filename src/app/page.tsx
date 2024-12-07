@@ -1,9 +1,12 @@
 import Link from "next/link";
+import { AnimatePresence, motion } from "motion/react";
 import { Astronaut } from "~/components/astronaut";
+import { BatWings } from "~/components/bat-wings";
 import BskyFeed from "~/components/bsky-feed";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { ChatBubble } from "~/components/ui/chat-bubble";
 import { SOCIALS } from "~/constants/socials";
+import BlogPostBats from "./_components/blog-post-bats";
 
 export default function Home() {
   return (
@@ -81,50 +84,10 @@ export default function Home() {
           </CardContent>
         </Card>
       </section>
-      <section>
+      {/* <section>
         <BskyFeed />
-      </section>
-      <section className="mx-auto mt-20 px-2 md:px-6">
-        <h2 className="mb-4 text-3xl font-bold">Latest Blog Posts</h2>
-        <div className="flex flex-wrap gap-6">
-          <Card className="max-w-md">
-            <CardHeader>
-              <CardTitle>Local Photo and File Storage With Nextcloud</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>
-                Join me as I build a local photo and file storage solution with
-                Nextcloud. Including fulltext search, deuping content, and
-                remote backups to backblaze.
-              </p>
-            </CardContent>
-          </Card>
-          <Card className="max-w-md">
-            <CardHeader>
-              <CardTitle>Image Converter With NextJs and Vercel</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>
-                I built a simple image converter with NextJs and Vercel. It
-                allows you to upload an image and convert it to a different
-                format.
-              </p>
-            </CardContent>
-          </Card>
-          <Card className="max-w-md">
-            <CardHeader>
-              <CardTitle>Hand Writing Practice Game Made With NextJs</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>
-                Join me as I build a local photo and file storage solution with
-                Nextcloud. Including fulltext search, deuping content, and
-                remote backups to backblaze.
-              </p>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
+      </section> */}
+      <BlogPostBats />
       <section className="mx-auto mt-20 px-2 md:px-6">
         <h2 className="mb-4 text-3xl font-bold">Links</h2>
         <div className="flex flex-wrap gap-6">
