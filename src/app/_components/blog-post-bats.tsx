@@ -42,7 +42,9 @@ export default function BlogPostBats() {
           },
           cancel: {
             label: "Bat what now?",
-            onClick: () => {},
+            onClick: () => {
+              // Do something
+            },
           },
           duration: Infinity,
         },
@@ -128,7 +130,7 @@ function BatWings({ children }: { children: React.ReactNode }) {
       {children}
       <BatWingSvg
         direction="right"
-        className="relative -z-10 inline-block h-12"
+        className="relative right-6 -z-10 inline-block h-12"
       />
     </div>
   );
