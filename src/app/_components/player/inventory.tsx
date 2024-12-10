@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { usePlayer } from "./player-provider";
+import { cn } from "~/lib/utils";
 
 export default function Inventory() {
   const { inventory } = usePlayer();
@@ -15,7 +16,10 @@ export default function Inventory() {
         {inventory.map((item) => (
           <div
             key={item.name}
-            className="flex cursor-pointer items-center justify-between rounded-lg border p-4"
+            className={cn(
+              "flex cursor-pointer items-center justify-between rounded-lg border p-4",
+              activeItem === item.name && "bg-slate-600/10",
+            )}
             onClick={() => setActiveItem(item.name)}
           >
             <div>
