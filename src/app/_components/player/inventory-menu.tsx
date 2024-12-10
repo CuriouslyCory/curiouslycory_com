@@ -3,14 +3,17 @@
 import { usePlayer } from "./player-provider";
 import { cn } from "~/lib/utils";
 import CursorFollower from "../cursor-follower";
+import { useMemo } from "react";
 
 export default function InventoryMenu() {
   const { inventory, activateInventoryItem } = usePlayer();
 
-  if (inventory.length === 0) return null;
+  const activeItem = useMemo(
+    () => inventory.find((item) => item.active),
+    [inventory],
+  );
 
-  const activeItem = inventory.find((item) => item.active);
-  console.log(activeItem);
+  if (inventory.length === 0) return null;
 
   return (
     <>

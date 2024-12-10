@@ -75,24 +75,46 @@ const WildBatPost = memo(
     const randomKey = useMemo(() => Math.floor(Math.random() * 3) + 1, []);
     const windowSize = useWindowSize();
 
-    const [position, setPosition] = useState(() => {
+    // Wait for window size to be available
+    const [positions, setPositions] = useState<{
+      start?: Position;
+      current?: Position;
+    }>({});
+
+    // Initialize positions when window size is available
+    useEffect(() => {
+      if (!windowSize.width || !windowSize.height) return;
+
       const edge = getRandomEdge();
-      return getEdgePosition(edge, windowSize);
-    });
+      const start = getEdgePosition(edge, windowSize);
+
+      if (start) {
+        const nextEdge = getRandomEdge(getCurrentEdge(start, windowSize));
+        const current = getEdgePosition(nextEdge, windowSize);
+
+        setPositions({ start, current });
+      }
+    }, [windowSize]);
 
     const getNextPosition = useCallback(() => {
-      if (!position || !windowSize.width || !windowSize.height) return;
-      const currentEdge = getCurrentEdge(position, windowSize);
+      if (!positions.current || !windowSize.width || !windowSize.height) return;
+
+      const currentEdge = getCurrentEdge(positions.current, windowSize);
       const nextEdge = getRandomEdge(currentEdge);
       return getEdgePosition(nextEdge, windowSize);
-    }, [position, windowSize]);
+    }, [positions, windowSize]);
+
+    if (!positions.start || !positions.current) return null;
 
     return (
       <motion.div
-        animate={position}
-        initial={position}
+        initial={positions.start}
+        animate={positions.current}
         transition={{ duration: ANIMATION_DURATION, ease: "linear" }}
-        onAnimationComplete={() => setPosition(getNextPosition())}
+        onAnimationComplete={() => {
+          const next = getNextPosition();
+          if (next) setPositions((prev) => ({ ...prev, current: next }));
+        }}
         onClick={onCatch}
         {...props}
       >
@@ -107,7 +129,6 @@ WildBatPost.displayName = "WildBatPost";
 
 // Main component
 export default function BlogPostBats() {
-  const windowSize = useWindowSize();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 1 });
   const [isPaused, setIsPaused] = useState(true);
@@ -138,14 +159,17 @@ export default function BlogPostBats() {
     } else if (batQuest.progress > 0) {
       toast.info(`Found ${batQuest.progress}% of the bats!`);
     }
-  }, [batQuest?.progress, addInventoryItem]);
+  }, [batQuest?.progress]);
 
   // Wild bats spawning
   useEffect(() => {
+    console.log(activeInventoryItem, wildBats.length);
     if (activeInventoryItem?.name !== "net" || wildBats.length >= MAX_WILD_BATS)
       return;
 
+    console.log("starting bat tick");
     const batTick = setInterval(() => {
+      console.log("spawning bat");
       setWildBats((prev) => [...prev, { id: Math.random().toString() }]);
     }, SPAWN_INTERVAL);
 
@@ -204,7 +228,7 @@ export default function BlogPostBats() {
     <>
       <div
         className={cn(
-          "pointer-events-none absolute left-0 top-0 h-full w-full",
+          "pointer-events-none fixed left-0 top-0 h-screen w-screen",
           activeInventoryItem?.name === "net" && "cursor-none",
         )}
       >
@@ -214,7 +238,7 @@ export default function BlogPostBats() {
             onCatch={() =>
               setWildBats((prev) => prev.filter((b) => b.id !== bat.id))
             }
-            className="pointer-events-auto"
+            className="pointer-events-auto absolute inline-block w-fit"
           />
         ))}
       </div>
