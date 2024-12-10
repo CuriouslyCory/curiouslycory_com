@@ -1,14 +1,17 @@
 "use client";
-import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion"; // Corrected the import
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, useInView } from "framer-motion"; // Corrected the import
 import { toast } from "sonner";
 import { BatWings as BatWingSvg } from "~/components/bat-wings";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
+import { cn } from "~/lib/utils";
 
 export default function BlogPostBats() {
   const [isPaused, setIsPaused] = useState(true);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.5 });
   const [endCount, setEndCount] = useState(0);
-  const [positions, setPositions] = useState<Record<number, number>>({
+  const [positions, setPositions] = useState<Record<number, string | number>>({
     1: 0, // Start positions
     2: 0,
     3: 0,
@@ -30,8 +33,15 @@ export default function BlogPostBats() {
     setIsPaused(true);
   };
 
+  // Start the bats when the section is in view
   useEffect(() => {
-    console.log(endCount);
+    console.log(isInView);
+    if (isInView) {
+      setIsPaused(false);
+    }
+  }, [isInView]);
+
+  useEffect(() => {
     if (endCount >= 3) {
       toast.error(
         "Erm... This is awkward but... Did you see where the bat posts went?",
@@ -53,14 +63,13 @@ export default function BlogPostBats() {
   }, [endCount]);
 
   return (
-    <section
-      className="relative mb-20 mt-20 h-72 w-full overflow-hidden"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      <h2 className="mx-2 mb-4 text-3xl font-bold md:mx-6">Latest Posts</h2>
+    <section className="relative my-20 h-fit w-full overflow-hidden pb-8">
+      <h2 className="mx-2 mb-10 text-3xl font-bold md:mx-6">Latest Posts</h2>
 
-      <div className="flex w-full flex-nowrap justify-center">
+      <div
+        className="flex w-full flex-col flex-nowrap justify-center gap-y-6 md:flex-row"
+        ref={ref}
+      >
         <AnimatePresence>
           {[1, 2, 3].map((key) => (
             <motion.div
@@ -81,11 +90,15 @@ export default function BlogPostBats() {
                 if (!isPaused) {
                   setPositions((prev) => ({
                     ...prev,
-                    [key]: latest.x as number, // Save the current position when animation is running
+                    [key]: latest.x ?? 0, // Save the current position when animation is running
                   }));
+                  if (latest.x === "100vw") {
+                    setEndCount((prev) => prev + 1);
+                  }
                 }
               }}
-              onViewportLeave={() => setEndCount((prev) => prev + 1)}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
             >
               <BatWings>
                 <BlogPostCard
@@ -124,13 +137,29 @@ function getBlogPostData(key: number) {
 }
 
 function BatWings({ children }: { children: React.ReactNode }) {
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    if (isPaused) {
+      setTimeout(() => {
+        setIsPaused(false);
+      }, 1000);
+    }
+  }, [isPaused]);
+
   return (
-    <div className="flex animate-rotate-15 items-center justify-center overflow-hidden align-top hover:animate-none">
-      <BatWingSvg className="relative left-1 -z-10 inline-block h-12" />
+    <div
+      className={cn(
+        "flex animate-rotate-15 items-center justify-center overflow-hidden align-top hover:animate-none",
+        isPaused && "animate-none",
+      )}
+      onClick={() => setIsPaused(!isPaused)}
+    >
+      <BatWingSvg className="relative left-1 -z-10 inline-block h-12 w-12" />
       {children}
       <BatWingSvg
         direction="right"
-        className="relative right-6 -z-10 inline-block h-12"
+        className="relative right-4 -z-10 inline-block h-12 w-12"
       />
     </div>
   );
@@ -144,7 +173,7 @@ function BlogPostCard({
   description: string;
 }) {
   return (
-    <Card className="max-w-sm">
+    <Card className="max-w-xs">
       <CardHeader>
         <CardTitle>{title}</CardTitle>
       </CardHeader>
