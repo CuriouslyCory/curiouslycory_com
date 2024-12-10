@@ -1,15 +1,16 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useInView } from "framer-motion"; // Corrected the import
 import { toast } from "sonner";
 import { BatWings as BatWingSvg } from "~/components/bat-wings";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { cn } from "~/lib/utils";
+import { usePlayer } from "./player/player-provider";
 
 export default function BlogPostBats() {
   const [isPaused, setIsPaused] = useState(true);
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.5 });
+  const isInView = useInView(ref, { once: true, amount: 1 });
   const [endCount, setEndCount] = useState(0);
   const [positions, setPositions] = useState<Record<number, string | number>>({
     1: 0, // Start positions
@@ -33,34 +34,82 @@ export default function BlogPostBats() {
     setIsPaused(true);
   };
 
-  // Start the bats when the section is in view
+  // Once in view, trigger the bats after 1 second
   useEffect(() => {
-    console.log(isInView);
     if (isInView) {
-      setIsPaused(false);
+      setTimeout(() => {
+        setIsPaused(false);
+      }, 1000);
     }
   }, [isInView]);
 
+  const { startQuest, quests, addInventoryItem } = usePlayer();
+  const batQuest = quests.find((quest) => quest.id === "bat-quest");
+
+  // Add a useEffect to watch the quest progress
+  // Refactored BlogPostBats Component
+  useEffect(() => {
+    console.log("batQuest", batQuest);
+    const updateProgress = (progress: number) => {
+      if (progress === 0) {
+        addInventoryItem("net", 1);
+      } else if (progress === 100) {
+        toast.success("You found all the bats!");
+      } else if (progress > 0) {
+        toast.info(`Found ${progress}% of the bats!`);
+      }
+    };
+
+    if (batQuest?.progress !== undefined) {
+      updateProgress(batQuest.progress);
+    }
+  }, [batQuest?.progress]);
+
+  const startBatQuest = useCallback(() => {
+    startQuest({
+      id: "bat-quest",
+      progress: 0,
+    });
+  }, [startQuest]);
+
+  const promptBatQuest = useCallback(() => {
+    toast(
+      "... If my boss finds out those bats are gone, I'm going to be in big trouble. Can you help me find them?",
+      {
+        action: {
+          label: "Sure, I'll help you.",
+          onClick: startBatQuest,
+        },
+        cancel: {
+          label: "Get Lost.",
+          onClick: () => {
+            // Do something
+          },
+        },
+        duration: Infinity,
+      },
+    );
+  }, [startBatQuest]);
+
   useEffect(() => {
     if (endCount >= 3) {
+      setEndCount(0);
       toast.error(
         "Erm... This is awkward but... Did you see where the bat posts went?",
         {
           action: {
             label: "Maybe?",
-            onClick: resetBats,
+            onClick: promptBatQuest,
           },
           cancel: {
             label: "Bat what now?",
-            onClick: () => {
-              // Do something
-            },
+            onClick: promptBatQuest,
           },
           duration: Infinity,
         },
       );
     }
-  }, [endCount]);
+  }, [endCount, promptBatQuest]);
 
   return (
     <section className="relative my-20 h-fit w-full overflow-hidden pb-8">

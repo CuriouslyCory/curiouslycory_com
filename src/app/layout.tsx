@@ -4,7 +4,7 @@ import { TRPCReactProvider } from "~/trpc/react";
 
 import { Navigation } from "./_components/navigation";
 import { ThemeProvider } from "./_components/theme-provider";
-import { PlayerProvider } from "./_components/player-provider";
+import { PlayerProvider } from "./_components/player/player-provider";
 
 import "~/styles/globals.css";
 import { cn } from "~/lib/utils";
