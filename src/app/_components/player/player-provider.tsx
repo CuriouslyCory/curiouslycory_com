@@ -7,6 +7,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { Net } from "./inventory/net";
 
 // Define types
 export type InventoryItem = {
@@ -14,8 +15,9 @@ export type InventoryItem = {
   type: string;
   description: string;
   quantity: number;
-  icon?: string;
-  asset?: string;
+  icon?: ReactNode;
+  asset?: ReactNode;
+  active?: boolean;
 };
 
 export type Quest = {
@@ -36,7 +38,8 @@ type PlayerContextType = {
   quests: Quest[];
   events: PlayerEvent[];
   addInventoryItem: (item: InventoryItemId, quantity: number) => void;
-  removeInventoryItem: (itemName: string) => void;
+  removeInventoryItem: (itemName: InventoryItemId) => void;
+  activateInventoryItem: (itemName: InventoryItemId) => void;
   updateQuestProgress: (questId: string, progress: number) => void;
   addEvent: (event: PlayerEvent) => void;
   startQuest: (quest: Omit<Quest, "title" | "description">) => void;
@@ -88,6 +91,25 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
     });
   };
 
+  const activateInventoryItem = (itemName: InventoryItemId) => {
+    console.log(itemName);
+    setInventory((prev) => {
+      const newMap = new Map(prev);
+      const existingItem = newMap.get(itemName);
+      console.log(existingItem);
+      if (existingItem) {
+        newMap.set(itemName, {
+          ...existingItem,
+          active: !existingItem?.active,
+        });
+        console.log(existingItem);
+      } else {
+        console.error(`Item ${itemName} not found in inventory items.`);
+      }
+      return newMap;
+    });
+  };
+
   const startQuest = (quest: Omit<Quest, "title" | "description">) => {
     const questData = QUESTS.get(quest.id);
     if (questData) {
@@ -125,6 +147,7 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
         events,
         addInventoryItem,
         removeInventoryItem,
+        activateInventoryItem,
         updateQuestProgress,
         addEvent,
         startQuest,
@@ -172,7 +195,12 @@ const inventoryItems = [
     name: "net",
     type: "tool",
     description: "A large net.",
-    icon: "net",
+    icon: <Net />,
+    asset: (
+      <div className="h-24 w-24 rounded-full bg-yellow-100/5">
+        <Net hideWrapper />
+      </div>
+    ),
   } as const,
   {
     name: "tuna",
