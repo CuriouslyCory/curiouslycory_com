@@ -1,11 +1,11 @@
 "use client";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   AnimatePresence,
   type HTMLMotionProps,
   motion,
   useInView,
-} from "framer-motion"; // Corrected the import
+} from "framer-motion";
 import { toast } from "sonner";
 import { BatWings as BatWingSvg } from "~/components/bat-wings";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
@@ -13,71 +13,166 @@ import { cn } from "~/lib/utils";
 import { usePlayer } from "./player/player-provider";
 import useWindowSize from "~/hooks/use-window-size";
 
+// Types
+type Edge = 0 | 1 | 2 | 3; // Top, Right, Bottom, Left
+type Position = { x: number; y: number };
+
+// Constants
+const SPAWN_INTERVAL = 1000;
+const MAX_WILD_BATS = 3;
+const EDGE_OFFSET = 0;
+const ANIMATION_DURATION = 2;
+
+// Utility functions
+const getRandomEdge = (excludeEdge?: Edge): Edge => {
+  let edge: Edge;
+  do {
+    edge = Math.floor(Math.random() * 4) as Edge;
+  } while (edge === excludeEdge);
+  return edge;
+};
+
+const getEdgePosition = (
+  edge: Edge,
+  windowSize: { width?: number; height?: number },
+): Position | undefined => {
+  if (!windowSize.width || !windowSize.height) return;
+
+  switch (edge) {
+    case 0: // Top
+      return { x: Math.random() * windowSize.width, y: -EDGE_OFFSET };
+    case 1: // Right
+      return {
+        x: windowSize.width + EDGE_OFFSET,
+        y: Math.random() * windowSize.height,
+      };
+    case 2: // Bottom
+      return {
+        x: Math.random() * windowSize.width,
+        y: windowSize.height + EDGE_OFFSET,
+      };
+    case 3: // Left
+      return { x: -EDGE_OFFSET, y: Math.random() * windowSize.height };
+  }
+};
+
+const getCurrentEdge = (
+  position: Position,
+  windowSize: { width?: number },
+): Edge => {
+  if (position.x <= 0) return 3;
+  if (position.x >= (windowSize.width ?? 0)) return 1;
+  if (position.y <= 0) return 0;
+  return 2;
+};
+
+// Components
+const WildBatPost = memo(
+  ({
+    onCatch,
+    ...props
+  }: HTMLMotionProps<"div"> & { onCatch?: () => void }) => {
+    const randomKey = useMemo(() => Math.floor(Math.random() * 3) + 1, []);
+    const windowSize = useWindowSize();
+
+    const [position, setPosition] = useState(() => {
+      const edge = getRandomEdge();
+      return getEdgePosition(edge, windowSize);
+    });
+
+    const getNextPosition = useCallback(() => {
+      if (!position || !windowSize.width || !windowSize.height) return;
+      const currentEdge = getCurrentEdge(position, windowSize);
+      const nextEdge = getRandomEdge(currentEdge);
+      return getEdgePosition(nextEdge, windowSize);
+    }, [position, windowSize]);
+
+    return (
+      <motion.div
+        animate={position}
+        initial={position}
+        transition={{ duration: ANIMATION_DURATION, ease: "linear" }}
+        onAnimationComplete={() => setPosition(getNextPosition())}
+        onClick={onCatch}
+        {...props}
+      >
+        <BatWings>
+          <BlogPostCard {...getBlogPostData(randomKey)} />
+        </BatWings>
+      </motion.div>
+    );
+  },
+);
+WildBatPost.displayName = "WildBatPost";
+
+// Main component
 export default function BlogPostBats() {
   const windowSize = useWindowSize();
-  const [isPaused, setIsPaused] = useState(true);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 1 });
+  const [isPaused, setIsPaused] = useState(true);
   const [endCount, setEndCount] = useState(0);
   const [positions, setPositions] = useState<Record<number, string | number>>({
-    1: 0, // Start positions
+    1: 0,
     2: 0,
     3: 0,
   });
 
-  const handleMouseEnter = () => setIsPaused(true);
-  const handleMouseLeave = () => setIsPaused(false);
-
-  // Once in view, trigger the bats after 1 second
-  useEffect(() => {
-    if (isInView) {
-      setTimeout(() => {
-        setIsPaused(false);
-      }, 1000);
-    }
-  }, [isInView]);
-
   const { startQuest, quests, addInventoryItem, inventory } = usePlayer();
   const batQuest = quests.find((quest) => quest.id === "bat-quest");
+  const activeInventoryItem = useMemo(
+    () => inventory.find((item) => item.active),
+    [inventory],
+  );
 
-  // Add a useEffect to watch the quest progress
-  // Refactored BlogPostBats Component
+  const [wildBats, setWildBats] = useState<{ id: string }[]>([]);
+
+  // Quest progress handling
   useEffect(() => {
-    console.log("batQuest", batQuest);
-    const updateProgress = (progress: number) => {
-      if (progress === 0) {
-        addInventoryItem("net", 1);
-      } else if (progress === 100) {
-        toast.success("You found all the bats!");
-      } else if (progress > 0) {
-        toast.info(`Found ${progress}% of the bats!`);
-      }
-    };
+    if (batQuest?.progress === undefined) return;
 
-    if (batQuest?.progress !== undefined) {
-      updateProgress(batQuest.progress);
+    if (batQuest.progress === 0) {
+      addInventoryItem("net", 1);
+    } else if (batQuest.progress === 100) {
+      toast.success("You found all the bats!");
+    } else if (batQuest.progress > 0) {
+      toast.info(`Found ${batQuest.progress}% of the bats!`);
     }
-  }, [batQuest?.progress]);
+  }, [batQuest?.progress, addInventoryItem]);
 
+  // Wild bats spawning
+  useEffect(() => {
+    if (activeInventoryItem?.name !== "net" || wildBats.length >= MAX_WILD_BATS)
+      return;
+
+    const batTick = setInterval(() => {
+      setWildBats((prev) => [...prev, { id: Math.random().toString() }]);
+    }, SPAWN_INTERVAL);
+
+    return () => clearInterval(batTick);
+  }, [activeInventoryItem, wildBats.length]);
+
+  // Initial animation trigger
+  useEffect(() => {
+    if (!isInView) return;
+    const timer = setTimeout(() => setIsPaused(false), 1000);
+    return () => clearTimeout(timer);
+  }, [isInView]);
+
+  // Quest prompt handling
   const startBatQuest = useCallback(() => {
-    startQuest({
-      id: "bat-quest",
-      progress: 0,
-    });
+    startQuest({ id: "bat-quest", progress: 0 });
   }, [startQuest]);
 
   const promptBatQuest = useCallback(() => {
     toast(
       "... If my boss finds out those bats are gone, I'm going to be in big trouble. Can you help me find them?",
       {
-        action: {
-          label: "Sure, I'll help you.",
-          onClick: startBatQuest,
-        },
+        action: { label: "Sure, I'll help you.", onClick: startBatQuest },
         cancel: {
           label: "Get Lost.",
           onClick: () => {
-            // Do something
+            // do something
           },
         },
         duration: Infinity,
@@ -105,21 +200,6 @@ export default function BlogPostBats() {
     }
   }, [endCount, promptBatQuest]);
 
-  const activeInventoryItem = useMemo(
-    () => inventory.find((item) => item.active),
-    [inventory],
-  );
-
-  const [wildBats, setWildBats] = useState<{ id: string }[]>([]);
-  useEffect(() => {
-    if (activeInventoryItem?.name === "net" && wildBats.length < 4) {
-      const batTick = setInterval(() => {
-        setWildBats((prev) => [...prev, { id: Math.random().toString() }]);
-      }, 1000);
-      return () => clearInterval(batTick);
-    }
-  }, [activeInventoryItem, wildBats.length]);
-
   return (
     <>
       <div
@@ -131,7 +211,7 @@ export default function BlogPostBats() {
         {wildBats.map((bat) => (
           <WildBatPost
             key={bat.id}
-            onClick={() =>
+            onCatch={() =>
               setWildBats((prev) => prev.filter((b) => b.id !== bat.id))
             }
             className="pointer-events-auto"
@@ -172,8 +252,8 @@ export default function BlogPostBats() {
                     }
                   }
                 }}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
+                onMouseEnter={() => setIsPaused(true)}
+                onMouseLeave={() => setIsPaused(false)}
               >
                 <BatWings>
                   <BlogPostCard
@@ -189,90 +269,6 @@ export default function BlogPostBats() {
     </>
   );
 }
-
-const WildBatPost = (props: HTMLMotionProps<"div">) => {
-  const randomKey = Math.floor(Math.random() * 3) + 1;
-  const windowSize = useWindowSize();
-
-  const [position, setPosition] = useState(() => {
-    if (!windowSize.width || !windowSize.height) return;
-    // Pick random edge to start from
-    const edge = Math.floor(Math.random() * 4);
-    switch (edge) {
-      case 0: // Top
-        return { x: Math.random() * windowSize.width, y: -200 };
-      case 1: // Right
-        return {
-          x: windowSize.width + 200,
-          y: Math.random() * windowSize.height,
-        };
-      case 2: // Bottom
-        return {
-          x: Math.random() * windowSize.width,
-          y: windowSize.height + 200,
-        };
-      default: // Left
-        return { x: -200, y: Math.random() * windowSize.height };
-    }
-  });
-
-  const getNextPosition = useCallback(() => {
-    if (!position || !windowSize.width || !windowSize.height) return;
-    // Pick a random point on a different edge
-    const currentEdge =
-      position.x <= 0
-        ? 3 // Left
-        : position.x >= windowSize.width
-          ? 1 // Right
-          : position.y <= 0
-            ? 0 // Top
-            : 2; // Bottom
-
-    let nextEdge;
-    do {
-      nextEdge = Math.floor(Math.random() * 4);
-    } while (nextEdge === currentEdge);
-
-    switch (nextEdge) {
-      case 0: // Top
-        return { x: Math.random() * windowSize.width, y: -200 };
-      case 1: // Right
-        return {
-          x: windowSize.width + 200,
-          y: Math.random() * windowSize.height,
-        };
-      case 2: // Bottom
-        return {
-          x: Math.random() * windowSize.width,
-          y: windowSize.height + 200,
-        };
-      default: // Left
-        return { x: -200, y: Math.random() * windowSize.height };
-    }
-  }, [position, windowSize]);
-
-  return (
-    <motion.div
-      animate={position}
-      initial={position}
-      transition={{
-        duration: 2,
-        ease: "linear",
-      }}
-      onAnimationComplete={() => {
-        setPosition(getNextPosition());
-      }}
-      {...props}
-    >
-      <BatWings>
-        <BlogPostCard
-          title={getBlogPostData(randomKey).title}
-          description={getBlogPostData(randomKey).description}
-        />
-      </BatWings>
-    </motion.div>
-  );
-};
 
 // Helper function to get blog post data
 function getBlogPostData(key: number) {
