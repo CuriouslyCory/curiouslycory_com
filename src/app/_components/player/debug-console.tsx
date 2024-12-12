@@ -77,11 +77,7 @@ export function DebugConsole() {
               {/* Start Quest Section */}
               <div className="space-y-2">
                 <h3 className="text-sm font-medium">Start Quest</h3>
-                <Select
-                  onValueChange={(value: QuestId) =>
-                    startQuest({ id: value, progress: 0 })
-                  }
-                >
+                <Select onValueChange={(value: QuestId) => startQuest(value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Select quest" />
                   </SelectTrigger>

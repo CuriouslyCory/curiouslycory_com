@@ -139,15 +139,8 @@ export default function BlogPostBats() {
     3: 0,
   });
 
-  const {
-    startQuest,
-    quests,
-    addInventoryItem,
-    inventory,
-    updateQuestProgress,
-  } = usePlayer();
+  const { startQuest, inventory, updateQuestProgress } = usePlayer();
 
-  const batQuest = quests.find((quest) => quest.id === "bat-quest");
   const activeInventoryItem = useMemo(
     () => inventory.find((item) => item.active),
     [inventory],
@@ -156,36 +149,20 @@ export default function BlogPostBats() {
   const [wildBats, setWildBats] = useState<{ id: string }[]>([]);
   const [batsCaught, setBatsCaught] = useState(0);
 
-  // Quest progress handling
-  useEffect(() => {
-    if (batQuest?.progress === undefined) return;
-
-    if (batQuest.progress === 0) {
-      addInventoryItem("net", 1);
-    } else if (batQuest.progress === 3) {
-      toast.success("You found all the bats!");
-    } else if (batQuest.progress > 0) {
-      toast.info(`Found ${batsCaught} of the bats!`);
-    }
-  }, [batQuest?.progress]);
-
   // Wild bats spawning
   useEffect(() => {
-    console.log(activeInventoryItem, wildBats.length);
     if (
       activeInventoryItem?.name !== "net" ||
       wildBats.length >= MAX_WILD_BATS - batsCaught
     )
       return;
 
-    console.log("starting bat tick");
     const batTick = setInterval(() => {
-      console.log("spawning bat");
       setWildBats((prev) => [...prev, { id: Math.random().toString() }]);
     }, SPAWN_INTERVAL);
 
     return () => clearInterval(batTick);
-  }, [activeInventoryItem, wildBats.length]);
+  }, [activeInventoryItem, wildBats.length, batsCaught]);
 
   // Initial animation trigger
   useEffect(() => {
@@ -196,7 +173,7 @@ export default function BlogPostBats() {
 
   // Quest prompt handling
   const startBatQuest = useCallback(() => {
-    startQuest({ id: "bat-quest", progress: 0 });
+    startQuest("bat-quest");
   }, [startQuest]);
 
   const promptBatQuest = useCallback(() => {
@@ -235,6 +212,22 @@ export default function BlogPostBats() {
     }
   }, [endCount, promptBatQuest]);
 
+  const caughtBat = useCallback((batId: string) => {
+    // remove bat from wildBats
+    setWildBats((prev) => prev.filter((b) => b.id !== batId));
+
+    // update batsCaught counter
+    setBatsCaught((prev) => {
+      const newBatsCaught = prev + 1;
+      return newBatsCaught;
+    });
+  }, []);
+
+  useEffect(() => {
+    updateQuestProgress("bat-quest", batsCaught);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [batsCaught]);
+
   return (
     <>
       {wildBats.length > 0 && (
@@ -246,11 +239,7 @@ export default function BlogPostBats() {
           {wildBats.map((bat) => (
             <WildBatPost
               key={bat.id}
-              onCatch={() => {
-                setWildBats((prev) => prev.filter((b) => b.id !== bat.id));
-                setBatsCaught((prev) => prev + 1);
-                updateQuestProgress("bat-quest", batsCaught);
-              }}
+              onCatch={() => caughtBat(bat.id)}
               className="pointer-events-auto absolute inline-block w-fit"
             />
           ))}
