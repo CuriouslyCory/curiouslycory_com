@@ -7,7 +7,11 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { Net } from "./inventory/net";
+import { Net } from "./inventory/items/net";
+import { InventoryItemDialog } from "./inventory/inventory-item-dialog";
+import PlayerMenu from "./player-menu";
+import { DebugConsole } from "./debug-console";
+import { Tuna } from "./inventory/items/tuna";
 
 // Define types
 export type InventoryItem = {
@@ -37,6 +41,7 @@ type PlayerContextType = {
   inventory: InventoryItem[];
   quests: Quest[];
   events: PlayerEvent[];
+  newItem: InventoryItem | null;
   addInventoryItem: (item: InventoryItemId, quantity: number) => void;
   removeInventoryItem: (itemName: InventoryItemId) => void;
   activateInventoryItem: (itemName: InventoryItemId) => void;
@@ -55,23 +60,28 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
   );
   const [quests, setQuests] = useState<Map<string, Quest>>(new Map());
   const [events, setEvents] = useState<PlayerEvent[]>([]);
+  const [newItem, setNewItem] = useState<InventoryItem | null>(null);
 
   const addInventoryItem = (item: InventoryItemId, quantity: number) => {
     setInventory((prev) => {
       const newMap = new Map(prev);
       const existingItem = newMap.get(item);
+      const itemData = INVENTORY_ITEMS.get(item);
+
       if (existingItem) {
-        existingItem.quantity += quantity;
-      } else {
-        const itemData = INVENTORY_ITEMS.get(item);
-        if (itemData) {
-          newMap.set(item, {
-            ...itemData,
-            quantity,
-          });
-        } else {
-          console.error(`Item ${item} not found in inventory items.`);
-        }
+        const updatedItem = {
+          ...existingItem,
+          quantity: existingItem.quantity + quantity,
+        };
+        newMap.set(item, updatedItem);
+        setNewItem(updatedItem);
+      } else if (itemData) {
+        const newInventoryItem = {
+          ...itemData,
+          quantity,
+        };
+        newMap.set(item, newInventoryItem);
+        setNewItem(newInventoryItem);
       }
       return newMap;
     });
@@ -145,6 +155,7 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
         inventory: Array.from(inventory.values()),
         quests: Array.from(quests.values()),
         events,
+        newItem,
         addInventoryItem,
         removeInventoryItem,
         activateInventoryItem,
@@ -154,6 +165,9 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
       }}
     >
       {children}
+      <InventoryItemDialog item={newItem} />
+      <PlayerMenu />
+      <DebugConsole />
     </PlayerContext.Provider>
   );
 }
@@ -197,7 +211,7 @@ const inventoryItems = [
     description: "A large net.",
     icon: <Net />,
     asset: (
-      <div className="h-24 w-24 rounded-full bg-yellow-100/5">
+      <div className="bg-gradient-radial h-24 w-24 rounded-full from-yellow-500/20 to-transparent">
         <Net hideWrapper />
       </div>
     ),
@@ -206,7 +220,8 @@ const inventoryItems = [
     name: "tuna",
     type: "food",
     description: "A can of tuna.",
-    icon: "tuna",
+    icon: <Tuna />,
+    asset: <Tuna />,
   } as const,
 ] as const;
 

@@ -1,4 +1,4 @@
-import InventoryMenu from "./inventory-menu";
+import InventoryMenu from "./inventory/inventory-menu";
 import QuestLog from "./quest-log";
 
 export default function PlayerMenu() {

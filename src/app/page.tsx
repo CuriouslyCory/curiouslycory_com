@@ -4,12 +4,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { ChatBubble } from "~/components/ui/chat-bubble";
 import { SOCIALS } from "~/constants/socials";
 import BlogPostBats from "./_components/blog-post-bats";
-import PlayerMenu from "./_components/player/player-menu";
 
 export default function Home() {
   return (
     <>
-      <PlayerMenu />
       <section className="pt-10 text-center md:pt-16">
         <ChatBubble
           text="Hi, I'm CuriouslyCory, and I like to build things."

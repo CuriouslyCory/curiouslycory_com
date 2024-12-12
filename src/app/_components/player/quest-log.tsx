@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Quest, usePlayer } from "./player-provider";
+import { type Quest, usePlayer } from "./player-provider";
 import {
   Dialog,
   DialogContent,

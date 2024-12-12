@@ -139,7 +139,14 @@ export default function BlogPostBats() {
     3: 0,
   });
 
-  const { startQuest, quests, addInventoryItem, inventory } = usePlayer();
+  const {
+    startQuest,
+    quests,
+    addInventoryItem,
+    inventory,
+    updateQuestProgress,
+  } = usePlayer();
+
   const batQuest = quests.find((quest) => quest.id === "bat-quest");
   const activeInventoryItem = useMemo(
     () => inventory.find((item) => item.active),
@@ -147,6 +154,7 @@ export default function BlogPostBats() {
   );
 
   const [wildBats, setWildBats] = useState<{ id: string }[]>([]);
+  const [batsCaught, setBatsCaught] = useState(0);
 
   // Quest progress handling
   useEffect(() => {
@@ -154,17 +162,20 @@ export default function BlogPostBats() {
 
     if (batQuest.progress === 0) {
       addInventoryItem("net", 1);
-    } else if (batQuest.progress === 100) {
+    } else if (batQuest.progress === 3) {
       toast.success("You found all the bats!");
     } else if (batQuest.progress > 0) {
-      toast.info(`Found ${batQuest.progress}% of the bats!`);
+      toast.info(`Found ${batsCaught} of the bats!`);
     }
   }, [batQuest?.progress]);
 
   // Wild bats spawning
   useEffect(() => {
     console.log(activeInventoryItem, wildBats.length);
-    if (activeInventoryItem?.name !== "net" || wildBats.length >= MAX_WILD_BATS)
+    if (
+      activeInventoryItem?.name !== "net" ||
+      wildBats.length >= MAX_WILD_BATS - batsCaught
+    )
       return;
 
     console.log("starting bat tick");
@@ -190,7 +201,7 @@ export default function BlogPostBats() {
 
   const promptBatQuest = useCallback(() => {
     toast(
-      "... If my boss finds out those bats are gone, I'm going to be in big trouble. Can you help me find them?",
+      "If the big guy finds out those bats are gone, I'm going to be in big trouble. Can you help me find them?",
       {
         action: { label: "Sure, I'll help you.", onClick: startBatQuest },
         cancel: {
@@ -226,23 +237,26 @@ export default function BlogPostBats() {
 
   return (
     <>
-      <div
-        className={cn(
-          "pointer-events-none fixed left-0 top-0 h-screen w-screen",
-          activeInventoryItem?.name === "net" && "cursor-none",
-        )}
-      >
-        {wildBats.map((bat) => (
-          <WildBatPost
-            key={bat.id}
-            onCatch={() =>
-              setWildBats((prev) => prev.filter((b) => b.id !== bat.id))
-            }
-            className="pointer-events-auto absolute inline-block w-fit"
-          />
-        ))}
-      </div>
-      <section className="relative my-20 h-fit w-full overflow-hidden pb-8">
+      {wildBats.length > 0 && (
+        <div
+          className={cn("fixed left-0 top-0 h-screen w-screen", {
+            "cursor-none": activeInventoryItem?.name === "net",
+          })}
+        >
+          {wildBats.map((bat) => (
+            <WildBatPost
+              key={bat.id}
+              onCatch={() => {
+                setWildBats((prev) => prev.filter((b) => b.id !== bat.id));
+                setBatsCaught((prev) => prev + 1);
+                updateQuestProgress("bat-quest", batsCaught);
+              }}
+              className="pointer-events-auto absolute inline-block w-fit"
+            />
+          ))}
+        </div>
+      )}
+      <section className="relative -z-10 my-20 h-fit w-full overflow-hidden pb-8">
         <h2 className="mx-2 mb-10 text-3xl font-bold md:mx-6">Latest Posts</h2>
 
         <div

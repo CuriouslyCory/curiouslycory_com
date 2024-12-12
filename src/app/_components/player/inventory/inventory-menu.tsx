@@ -1,8 +1,8 @@
 "use client";
 
-import { usePlayer } from "./player-provider";
+import { usePlayer } from "../player-provider";
 import { cn } from "~/lib/utils";
-import CursorFollower from "../cursor-follower";
+import CursorFollower from "../../cursor-follower";
 import { useMemo } from "react";
 
 export default function InventoryMenu() {

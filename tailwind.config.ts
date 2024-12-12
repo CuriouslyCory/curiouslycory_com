@@ -11,6 +11,9 @@ export default {
         "rotate-15": "rotate-15 0.25s ease-in-out infinite",
         "mirror-rotate-15": "mirror-rotate-15 0.25s ease-in-out infinite",
       },
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--gradient-color-stops))",
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
