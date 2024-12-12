@@ -17,12 +17,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "~/components/ui/select";
-import {
-  usePlayer,
-  type InventoryItemId,
-  type QuestId,
-} from "./player-provider";
+import { usePlayer } from "./player-provider";
 import { Input } from "~/components/ui/input";
+import { type InventoryItemId } from "./inventory/items";
+import { type QuestId } from "./quests";
 
 export function DebugConsole() {
   const [isLocal, setIsLocal] = useState(false);

@@ -7,42 +7,15 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { Net } from "./inventory/items/net";
 import { InventoryItemDialog } from "./inventory/inventory-item-dialog";
 import PlayerMenu from "./player-menu";
 import { DebugConsole } from "./debug-console";
-import { Tuna } from "./inventory/items/tuna";
-import { toast } from "sonner";
-
-// Define types
-export type InventoryItem = {
-  name: InventoryItemId;
-  type: string;
-  description: string;
-  quantity: number;
-  icon?: ReactNode;
-  asset?: ReactNode;
-  active?: boolean;
-};
-
-type QuestStepFuncs = {
-  addInventoryItem: (item: InventoryItemId, quantity: number) => void;
-  activateInventoryItem: (item: InventoryItemId) => void;
-};
-
-export type QuestStep = {
-  progress: number;
-  description: string;
-  onComplete?: (funcs: QuestStepFuncs) => void;
-};
-
-export type Quest = {
-  id: QuestId;
-  progress: number;
-  title: string;
-  description: string;
-  steps: QuestStep[];
-};
+import { type Quest, type QuestId, QUESTS } from "./quests";
+import {
+  INVENTORY_ITEMS,
+  type InventoryItem,
+  type InventoryItemId,
+} from "./inventory/items";
 
 export type PlayerEvent = {
   id: string;
@@ -235,100 +208,3 @@ export function usePlayer() {
   }
   return context;
 }
-
-const quests = [
-  {
-    id: "bat-quest",
-    progress: 0,
-    title: "Find the Bats",
-    description:
-      "The bats have gone missing. I need you to find them and bring them back to me.",
-    steps: [
-      {
-        progress: 0,
-        description: "Get a net to catch bats",
-        onComplete: (funcs: QuestStepFuncs) => {
-          toast.success("You got a net! Now you can catch bats.");
-          funcs.addInventoryItem("net", 1);
-        },
-      },
-      {
-        progress: 1,
-        description: "Catch your first bat",
-        onComplete: () => {
-          toast.success("You caught your first bat!");
-        },
-      },
-      {
-        progress: 3,
-        description: "Find all the bats",
-        onComplete: (funcs: QuestStepFuncs) => {
-          toast.success("You found all the bats! Quest complete!");
-          funcs.activateInventoryItem("net"); // deactivate net as a courtesy
-        },
-      },
-    ],
-  } as const,
-  {
-    id: "pet-the-cat",
-    progress: 0,
-    title: "Pet the Cat",
-    description:
-      "The cat is lonely. I need you to pet it and bring it back to me.",
-    steps: [
-      {
-        progress: 0,
-        description: "Find the cat",
-      },
-      {
-        progress: 100,
-        description: "Pet the cat",
-        onComplete: () => {
-          toast.success("The cat purrs happily!");
-        },
-      },
-    ],
-  } as const,
-] as const;
-
-const QUESTS = new Map(
-  Object.entries(quests).map(([_, value]) => [
-    value.id,
-    {
-      ...value,
-      steps: [...value.steps],
-    } as Quest,
-  ]),
-);
-
-export type QuestId = (typeof quests)[number]["id"];
-
-const inventoryItems = [
-  {
-    name: "net",
-    type: "tool",
-    description: "A large net.",
-    icon: <Net />,
-    asset: (
-      <div className="bg-gradient-radial h-24 w-24 rounded-full from-yellow-500/20 to-transparent">
-        <Net hideWrapper />
-      </div>
-    ),
-  } as const,
-  {
-    name: "tuna",
-    type: "food",
-    description: "A can of tuna.",
-    icon: <Tuna />,
-    asset: <Tuna />,
-  } as const,
-] as const;
-
-const INVENTORY_ITEMS = new Map(
-  Object.entries(inventoryItems).map(([_, value]) => [
-    value.name,
-    value as Omit<InventoryItem, "quantity">,
-  ]),
-);
-
-export type InventoryItemId = (typeof inventoryItems)[number]["name"];

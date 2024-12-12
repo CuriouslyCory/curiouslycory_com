@@ -7,7 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "~/components/ui/dialog";
-import type { InventoryItem } from "../player-provider";
+import { type InventoryItem } from "./items";
 
 export function InventoryItemDialog({ item }: { item: InventoryItem | null }) {
   const [isOpen, setIsOpen] = useState(false);
