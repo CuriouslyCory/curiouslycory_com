@@ -137,7 +137,8 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
 
   const updateQuestProgress = (questId: QuestId, progress: number) => {
     setQuests((prev) => {
-      if (prev.has(questId) && prev.get(questId)?.progress === progress)
+      // if the quest has not started or is already at the desired progress, do nothing
+      if (!prev.has(questId) || prev.get(questId)?.progress === progress)
         return prev;
 
       const existingQuest = prev.get(questId);
