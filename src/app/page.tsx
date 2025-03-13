@@ -3,7 +3,6 @@ import { Astronaut } from "~/components/astronaut";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { ChatBubble } from "~/components/ui/chat-bubble";
 import { SOCIALS } from "~/constants/socials";
-import BlogPostBats from "~/components/blog-post-bats";
 import { Button } from "~/components/ui/button";
 import { ScrollText } from "lucide-react";
 

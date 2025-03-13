@@ -10,7 +10,7 @@ import {
   DialogTrigger,
 } from "~/components/ui/dialog";
 import { Button } from "~/components/ui/button";
-import { Quest } from "./quests";
+import { type Quest } from "./quests";
 
 export default function QuestLog() {
   const { quests } = usePlayer();

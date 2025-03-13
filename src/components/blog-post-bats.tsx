@@ -115,7 +115,7 @@ const WildBatPost = memo(
           const next = getNextPosition();
           if (next) setPositions((prev) => ({ ...prev, current: next }));
         }}
-        // onClick={onCatch}
+        onClick={onCatch}
         {...props}
       >
         <BatWings>

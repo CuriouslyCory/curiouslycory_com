@@ -1,12 +1,13 @@
 import { ImageResponse } from "next/og";
-import { type NextRequest } from "next/server";
+// import { type NextRequest } from "next/server";
 import React from "react";
 import { highlight } from "sugar-high";
 
 export const runtime = "edge";
 
-export async function GET(req: NextRequest) {
-  const { searchParams } = new URL(req.url);
+// export async function GET(req: NextRequest) {
+export async function GET() {
+  // const { searchParams } = new URL(req.url);
   // const id = searchParams.get("id");
 
   // if (!id) {

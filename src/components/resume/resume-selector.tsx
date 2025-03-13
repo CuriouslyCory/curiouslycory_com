@@ -10,13 +10,14 @@ import {
 import { Button } from "~/components/ui/button";
 import { Download, Printer } from "lucide-react";
 import type { Resume } from "~/types/resume";
+import { Suspense } from "react";
 
 interface ResumeSelectorProps {
   resumes: Resume[];
   defaultResumeId: string;
 }
 
-export default function ResumeSelector({
+function ResumeSelectorComponent({
   resumes,
   defaultResumeId,
 }: ResumeSelectorProps) {
@@ -64,5 +65,19 @@ export default function ResumeSelector({
         </Button>
       </div>
     </div>
+  );
+}
+
+export default function ResumeSelector({
+  resumes,
+  defaultResumeId,
+}: ResumeSelectorProps) {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ResumeSelectorComponent
+        resumes={resumes}
+        defaultResumeId={defaultResumeId}
+      />
+    </Suspense>
   );
 }
