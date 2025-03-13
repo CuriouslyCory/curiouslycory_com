@@ -4,12 +4,14 @@ import { useSearchParams } from "next/navigation";
 import { resumes } from "~/data/resume-data";
 import type { Resume, Job } from "~/types/resume";
 import { ExternalLink } from "lucide-react";
+import { Suspense } from "react";
 
 interface ResumeDisplayProps {
   defaultResume: Resume;
 }
 
-export default function ResumeDisplay({ defaultResume }: ResumeDisplayProps) {
+// Create a client component that uses the search params
+function ResumeContent({ defaultResume }: ResumeDisplayProps) {
   const searchParams = useSearchParams();
   const resumeId = searchParams.get("id");
 
@@ -128,11 +130,43 @@ export default function ResumeDisplay({ defaultResume }: ResumeDisplayProps) {
   );
 }
 
+// Main component that wraps the client component with Suspense
+export default function ResumeDisplay({ defaultResume }: ResumeDisplayProps) {
+  return (
+    <Suspense fallback={<ResumeLoading defaultResume={defaultResume} />}>
+      <ResumeContent defaultResume={defaultResume} />
+    </Suspense>
+  );
+}
+
+// Simple loading state that shows the default resume while loading
+function ResumeLoading({ defaultResume }: ResumeDisplayProps) {
+  return (
+    <div className="space-y-10">
+      {/* Header */}
+      <div className="flex flex-col justify-between md:flex-row">
+        <div>
+          <h1 className="resume-section-title text-4xl font-bold">
+            {defaultResume.name}
+          </h1>
+          <div className="mt-1 text-gray-600 dark:text-gray-300">
+            {defaultResume.titles.map((title, index) => (
+              <div key={index}>{title}</div>
+            ))}
+          </div>
+        </div>
+        {/* Simplified loading state */}
+      </div>
+      <div className="text-center text-gray-500">Loading resume...</div>
+    </div>
+  );
+}
+
 function JobSection({ job }: { job: Job }) {
   return (
     <div>
       <h2 className="resume-section-title">{job.title}</h2>
-      <div className="mb-2 flex flex-col justify-between sm:flex-row">
+      <div className="flex flex-col justify-between sm:flex-row">
         <div className="font-semibold">{job.company}</div>
         <div className="text-gray-600 dark:text-gray-300">{job.period}</div>
       </div>
