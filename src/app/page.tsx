@@ -47,7 +47,7 @@ export default function Home() {
               <Link
                 href="https://lighthouseglobal.com"
                 target="top"
-                className="underline hover:text-blue-500"
+                className="underline"
               >
                 Lighthouse Global
               </Link>
@@ -55,7 +55,7 @@ export default function Home() {
               <Link
                 href="https://www.insight.com/"
                 target="top"
-                className="underline hover:text-blue-500"
+                className="underline"
               >
                 Insight Enterprises
               </Link>
@@ -63,7 +63,7 @@ export default function Home() {
               <Link
                 href="https://www.responsivedata.com/"
                 target="top"
-                className="underline hover:text-blue-500"
+                className="underline"
               >
                 Responsive Data
               </Link>{" "}

@@ -62,6 +62,10 @@
     @apply border-border;
   }
 
+  a {
+    @apply hover:text-orange-500;
+  }
+
   @property --rotation {
     syntax: "<angle>";
     initial-value: 0turn;
