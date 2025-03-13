@@ -9,6 +9,10 @@ const contactData = {
       url: "https://curiouslycory.com",
     },
     {
+      text: "https://github.com/curiouslycory",
+      url: "https://github.com/curiouslycory",
+    },
+    {
       text: "https://www.linkedin.com/in/corysougstad",
       url: "https://www.linkedin.com/in/corysougstad",
     },
@@ -35,7 +39,7 @@ export const leadUIDeveloperResume: Resume = {
         "Refactored front-end codebases using best practices in TypeScript, React, and Next.js, enhancing maintainability and developer productivity.",
       ],
       techStack:
-        "Angular, TypeScript, React/Next.js, Solidity, Tailwind, SQLite, Vercel, GCP",
+        "Angular, TypeScript, React/Next.js, Solidity, Tailwind, SQLite, PostgreSQL, Vercel, GCP, Python, IPFS",
     },
     {
       title: "Senior Application Engineer",
@@ -58,8 +62,7 @@ export const leadUIDeveloperResume: Resume = {
         "Developed custom UI solutions for blockchain applications, including advanced responsive platforms such as MechaChaotic Forge, Cozy Express, and LiqdNFT.com.",
         "Provided strategic consultation and implementation guidance to ensure seamless and robust user experiences.",
       ],
-      techStack:
-        "TypeScript, React, Solidity, Next.js, tRPC, Tailwind, IPFS, PostgreSQL, IPFS",
+      techStack: "ServiceNow, AngularJS, Tailwind, MSSQL",
     },
   ],
 } as const;
@@ -105,7 +108,7 @@ export const engineeringManagerResume: Resume = {
         "Architected and maintained scalable, distributed SaaS solutions used globally.",
         "Provided leadership in agile methodologies and engineering best practices, improving collaboration and developer satisfaction.",
       ],
-      techStack: "ServiceNow, AngularJS, Tailwind, IPFS, MSSQL",
+      techStack: "ServiceNow, AngularJS, Tailwind, MSSQL",
     },
   ],
   skills: [
@@ -242,8 +245,94 @@ export const seniorFullStackEngineerResume: Resume = {
   ],
 } as const;
 
+export const web3BlockchainSpecialistResume: Resume = {
+  id: "web3-blockchain-specialist",
+  ...contactData,
+  title: "Senior Blockchain Software Engineer",
+  titles: ["Senior Software Engineer", "Web3 & Blockchain Specialist"],
+  highlightedTitle:
+    "Experienced Software Engineer | Web3 & Blockchain Specialist",
+  summary:
+    "Experienced Software Engineer with deep expertise in building scalable, user-centric blockchain and Web3 solutions. With over 20 years in software development and hands-on experience in TypeScript, React, Next.js, Solidity, and serverless architectures, I have successfully delivered complex projects across multiple domains. Passionate about leveraging blockchain technologies to drive innovation and deliver impactful user experiences.",
+  experience: [
+    {
+      title: "Principal Full Stack Engineer | Blockchain Development Lead",
+      company: "Sudorandom",
+      period: "March 2022 - Present",
+      accomplishments: [
+        "Designed and implemented scalable Web3 applications, enhancing reliability and user engagement.",
+        "Optimized performance through reduced API calls, enhanced error handling, and streamlined serverless architectures.",
+        "Established robust CI/CD pipelines, significantly improving developer productivity and application stability.",
+      ],
+      techStack:
+        "TypeScript, React, Next.js, Solidity, Serverless Architectures, AWS, GCP, Ethers.js, Web3.js, Viem, Wagmi, Tailwind",
+    },
+    {
+      title: "Owner/Operator | Blockchain & Web3 Specialist",
+      company: "CuriouslyCory Corp",
+      period: "Feb 2021 - March 2022",
+      accomplishments: [
+        "Developed scalable serverless solutions for complex NFT processing for MechaChaotic Forge.",
+        "Crafted interactive Web3 experiences, including smart contract integration and user-friendly front-ends for Cozy Express.",
+        "Built robust, scalable NFT marketplace and lending platform for LiqdNFT.com.",
+      ],
+      techStack:
+        "TypeScript, React, Next.js, Solidity, Smart Contract Development, Web3.js, Hardhat, Tailwind, Wagmi, Viem",
+    },
+    {
+      title: "Senior Systems Engineer",
+      company: "Lighthouse Global Inc.",
+      period: "Nov 2020 - Feb 2022",
+      accomplishments: [
+        "Architected and implemented scalable solutions for enterprise applications, emphasizing performance and usability.",
+        "Mentored and guided teams in adopting best practices for agile development and code quality.",
+      ],
+      techStack: "ServiceNow, AngularJS",
+    },
+  ],
+  skills: [
+    [
+      "Web3 & Blockchain",
+      "Ethereum",
+      "Solidity",
+      "Web3.js",
+      "NFTs",
+      "Smart Contract Development",
+    ],
+    [
+      "Frontend",
+      "React",
+      "Next.js",
+      "Angular",
+      "TypeScript",
+      "Tailwind CSS",
+      "Redux",
+      "Jest",
+    ],
+    [
+      "Backend & Infrastructure",
+      "Node.js",
+      "Serverless Architectures",
+      "AWS",
+      "GCP",
+      "API Development",
+    ],
+    ["Databases", "PostgreSQL", "Redis", "MongoDB"],
+    ["CI/CD & DevOps", "GitHub Actions", "Jenkins", "Docker", "Kubernetes"],
+  ],
+  keyAchievements: [
+    "Successfully delivered multiple complex Web3 and blockchain projects from architecture to deployment.",
+    "Transitioned critical backend systems to serverless architectures, significantly improving scalability and reliability.",
+    "Implemented comprehensive testing and CI/CD strategies, streamlining deployment processes and enhancing product stability.",
+  ],
+  education: [
+    "Ongoing professional training and self-directed learning in blockchain technology, Web3 innovation, and software engineering best practices.",
+  ],
+} as const;
+
 export const resumes: Resume[] = [
   seniorFullStackEngineerResume,
   engineeringManagerResume,
   leadUIDeveloperResume,
+  web3BlockchainSpecialistResume,
 ] as const;

@@ -25,7 +25,7 @@ function ResumeContent({ defaultResume }: ResumeDisplayProps) {
       {/* Header */}
       <div className="flex flex-col justify-between md:flex-row">
         <div>
-          <h1 className="resume-section-title text-4xl font-bold">
+          <h1 className="resume-section-title text-4xl">
             {selectedResume.name}
           </h1>
           <div className="mt-1 text-gray-600 dark:text-gray-300">

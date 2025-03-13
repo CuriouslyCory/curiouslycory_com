@@ -19,7 +19,7 @@ export default function CVPage() {
         <ResumeSelector resumes={resumes} defaultResumeId={defaultResume.id} />
       </div>
       <div className="mx-auto max-w-4xl rounded-lg p-8 shadow-lg dark:border dark:shadow-none lg:p-16 print:border-none print:p-0 print:shadow-none">
-        <ResumeDisplay defaultResume={defaultResume} />s
+        <ResumeDisplay defaultResume={defaultResume} />
       </div>
     </main>
   );
