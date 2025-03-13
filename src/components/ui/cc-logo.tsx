@@ -1,6 +1,7 @@
 import * as React from "react";
 import { type SVGProps, memo } from "react";
 import { cn } from "~/lib/utils";
+
 const SvgComponent = ({
   height,
   width,
@@ -44,5 +45,7 @@ const SvgComponent = ({
     </div>
   );
 };
+
 const Memo = memo(SvgComponent);
+
 export { Memo as CcLogo };

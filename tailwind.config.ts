@@ -65,6 +65,7 @@ export default {
       fontFamily: {
         sans: ["var(--font-raleway)", ...fontFamily.sans],
         mono: ["var(--font-oxygen-mono)", ...fontFamily.mono],
+        oswald: ["var(--font-oswald)", ...fontFamily.sans],
       },
       keyframes: {
         float: {

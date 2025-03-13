@@ -1,10 +1,10 @@
-import { Oxygen_Mono, Raleway } from "next/font/google";
+import { Oswald, Oxygen_Mono, Raleway } from "next/font/google";
 import { type Metadata } from "next";
 import { TRPCReactProvider } from "~/trpc/react";
 
-import { Navigation } from "./_components/navigation";
-import { ThemeProvider } from "./_components/theme-provider";
-import { PlayerProvider } from "./_components/player/player-provider";
+import { Navigation } from "~/components/navigation";
+import { ThemeProvider } from "~/components/theme-provider";
+import { PlayerProvider } from "~/components/player/player-provider";
 
 import "~/styles/globals.css";
 import { cn } from "~/lib/utils";
@@ -23,9 +23,15 @@ const oxygenMono = Oxygen_Mono({
   variable: "--font-oxygen-mono",
 });
 
+const oswald = Oswald({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-oswald",
+});
+
 export const metadata: Metadata = {
-  title: "CuriouslyCory's Personal Website",
-  description: "The developer and personal website of CuriouslyCory",
+  title: "CuriouslyCory.com",
+  description: "CuriouslyCory's Curious Corner",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
@@ -39,6 +45,7 @@ export default function RootLayout({
           "bg-background font-sans text-foreground antialiased",
           raleway.variable,
           oxygenMono.variable,
+          oswald.variable,
         )}
       >
         <TRPCReactProvider>

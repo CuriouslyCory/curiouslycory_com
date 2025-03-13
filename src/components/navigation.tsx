@@ -4,12 +4,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { ThemeModeToggle } from "./theme-mode-toggle";
-import { CcLogo } from "~/components/ui/cc-logo";
+import { CcLogo } from "~/ui/cc-logo";
 
 const navItems = [
   { name: "Home", href: "/" },
-  { name: "Projects", href: "/projects" },
-  { name: "Blog", href: "/blog" },
+  { name: "CV", href: "/cv" },
+  { name: "Links", href: "/links" },
 ];
 
 export function Navigation() {

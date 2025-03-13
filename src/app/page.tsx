@@ -3,7 +3,7 @@ import { Astronaut } from "~/components/astronaut";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { ChatBubble } from "~/components/ui/chat-bubble";
 import { SOCIALS } from "~/constants/socials";
-import BlogPostBats from "./_components/blog-post-bats";
+import BlogPostBats from "~/components/blog-post-bats";
 
 export default function Home() {
   return (
