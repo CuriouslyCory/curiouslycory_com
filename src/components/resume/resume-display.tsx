@@ -83,7 +83,7 @@ function ResumeContent({ defaultResume }: ResumeDisplayProps) {
               <div key={index}>
                 {skillCategory.length > 0 && (
                   <div className="">
-                    <span className="font-oswald mr-2 font-semibold text-orange-600">
+                    <span className="mr-2 font-oswald font-semibold text-orange-600">
                       {skillCategory[0]}:
                     </span>
                     <span>{skillCategory.slice(1).join(", ")}</span>
@@ -130,15 +130,6 @@ function ResumeContent({ defaultResume }: ResumeDisplayProps) {
   );
 }
 
-// Main component that wraps the client component with Suspense
-export default function ResumeDisplay({ defaultResume }: ResumeDisplayProps) {
-  return (
-    <Suspense fallback={<ResumeLoading defaultResume={defaultResume} />}>
-      <ResumeContent defaultResume={defaultResume} />
-    </Suspense>
-  );
-}
-
 // Simple loading state that shows the default resume while loading
 function ResumeLoading({ defaultResume }: ResumeDisplayProps) {
   return (
@@ -170,7 +161,7 @@ function JobSection({ job }: { job: Job }) {
         <div className="font-semibold">{job.company}</div>
         <div className="text-gray-600 dark:text-gray-300">{job.period}</div>
       </div>
-      <div className="font-oswald mb-3 font-semibold text-orange-600">
+      <div className="mb-3 font-oswald font-semibold text-orange-600">
         Responsibilities and Accomplishments
       </div>
       <ul className="mb-4 space-y-1">
@@ -188,5 +179,14 @@ function JobSection({ job }: { job: Job }) {
         <span>{job.techStack}</span>
       </div>
     </div>
+  );
+}
+
+// Main component that wraps the client component with Suspense
+export default function ResumeDisplay({ defaultResume }: ResumeDisplayProps) {
+  return (
+    <Suspense fallback={<ResumeLoading defaultResume={defaultResume} />}>
+      <ResumeContent defaultResume={defaultResume} />
+    </Suspense>
   );
 }

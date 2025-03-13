@@ -71,7 +71,7 @@ const WildBatPost = memo(
   ({
     onCatch,
     ...props
-  }: HTMLMotionProps<"div"> & { onCatch?: () => void }) => {
+  }: { onCatch?: () => void } & HTMLMotionProps<"div">) => {
     const randomKey = useMemo(() => Math.floor(Math.random() * 3) + 1, []);
     const windowSize = useWindowSize();
 
@@ -115,7 +115,7 @@ const WildBatPost = memo(
           const next = getNextPosition();
           if (next) setPositions((prev) => ({ ...prev, current: next }));
         }}
-        onClick={onCatch}
+        // onClick={onCatch}
         {...props}
       >
         <BatWings>
@@ -129,8 +129,11 @@ WildBatPost.displayName = "WildBatPost";
 
 // Main component
 export default function BlogPostBats() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 1 });
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref as React.RefObject<Element>, {
+    once: true,
+    amount: 1,
+  });
   const [isPaused, setIsPaused] = useState(true);
   const [endCount, setEndCount] = useState(0);
   const [positions, setPositions] = useState<Record<number, string | number>>({
@@ -279,8 +282,9 @@ export default function BlogPostBats() {
                     }
                   }
                 }}
-                onMouseEnter={() => setIsPaused(true)}
-                onMouseLeave={() => setIsPaused(false)}
+                whileHover={{ scale: 1.05 }}
+                onHoverStart={() => setIsPaused(true)}
+                onHoverEnd={() => setIsPaused(false)}
               >
                 <BatWings>
                   <BlogPostCard
