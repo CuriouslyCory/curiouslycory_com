@@ -4,6 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { ChatBubble } from "~/components/ui/chat-bubble";
 import { SOCIALS } from "~/constants/socials";
 import BlogPostBats from "~/components/blog-post-bats";
+import { Button } from "~/components/ui/button";
+import { ScrollText } from "lucide-react";
 
 export default function Home() {
   return (
@@ -25,7 +27,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-3xl">
+      <section className="mx-2 max-w-3xl md:mx-auto">
         <Card className="p-2 md:p-6">
           <CardHeader>
             <CardTitle className="text-2xl font-bold">
@@ -81,11 +83,36 @@ export default function Home() {
           </CardContent>
         </Card>
       </section>
+      <section className="mx-2 mt-16 max-w-3xl md:mx-auto">
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold">
+              Want to know more?
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-wrap gap-4">
+              <Link href="/cv">
+                <Button className="flex items-center gap-2">
+                  <ScrollText /> Resume/CV
+                </Button>
+              </Link>
+              {SOCIALS.map((link) => (
+                <Link href={link.url} key={link.url}>
+                  <Button className="flex items-center gap-2">
+                    <link.icon /> {link.title}
+                  </Button>
+                </Link>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </section>
       {/* <section>
         <BskyFeed />
       </section> */}
-      <BlogPostBats />
-      <section className="mx-auto mt-20 px-2 md:px-6">
+      {/* <BlogPostBats /> */}
+      {/* <section className="mx-auto mt-20 px-2 md:px-6">
         <h2 className="mb-4 text-3xl font-bold">Links</h2>
         <div className="flex flex-wrap gap-6">
           {SOCIALS.map((link) => (
@@ -96,7 +123,7 @@ export default function Home() {
             </Card>
           ))}
         </div>
-      </section>
+      </section> */}
     </>
   );
 }

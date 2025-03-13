@@ -21,4 +21,7 @@ export interface Resume {
   highlightedTitle: string;
   summary: string;
   experience: Job[];
+  skills?: string[][];
+  keyAchievements?: string[];
+  education?: string[];
 }

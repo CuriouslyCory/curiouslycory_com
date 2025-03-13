@@ -33,14 +33,13 @@ export default function ResumeSelector({
   };
 
   const handleDownload = () => {
-    // In a real implementation, this would generate a PDF
-    // For now, we'll just trigger the print dialog
+    // TODO: Implement PDF Generation & Download
     window.print();
   };
 
   return (
-    <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center print:hidden">
-      <div className="w-full sm:w-64">
+    <div className="flex flex-col items-center justify-center gap-x-4 gap-y-2 md:flex-row print:hidden">
+      <div className="">
         <Select value={currentResumeId} onValueChange={handleResumeChange}>
           <SelectTrigger>
             <SelectValue placeholder="Select a resume" />

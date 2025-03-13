@@ -128,4 +128,8 @@
     background: orange;
     mask-image: radial-gradient(circle at bottom, black 25%, transparent 45%);
   }
+
+  .resume-section-title {
+    @apply font-oswald mb-2 pb-1 text-3xl font-semibold text-gray-800 dark:text-foreground;
+  }
 }

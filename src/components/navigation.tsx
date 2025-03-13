@@ -8,8 +8,7 @@ import { CcLogo } from "~/ui/cc-logo";
 
 const navItems = [
   { name: "Home", href: "/" },
-  { name: "CV", href: "/cv" },
-  { name: "Links", href: "/links" },
+  { name: "Resume/CV", href: "/cv" },
 ];
 
 export function Navigation() {

@@ -14,11 +14,10 @@ export default function CVPage() {
 
   return (
     <main className="container mx-auto px-4 py-8">
-      <div className="mb-8">
-        <h1 className="mb-6 text-3xl font-bold">My Resume</h1>
+      <div className="mb-8 print:hidden">
         <ResumeSelector resumes={resumes} defaultResumeId={defaultResume.id} />
       </div>
-      <div className="mx-auto max-w-4xl rounded-lg bg-white p-8 shadow-lg print:p-0 print:shadow-none">
+      <div className="mx-auto max-w-4xl rounded-lg p-8 shadow-lg dark:border dark:shadow-none lg:p-16 print:p-0 print:shadow-none">
         <ResumeDisplay defaultResume={defaultResume} />
       </div>
     </main>

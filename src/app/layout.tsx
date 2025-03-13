@@ -60,7 +60,7 @@ export default function RootLayout({
                 <Toaster position="bottom-right" richColors />
                 <Navigation />
                 <main className="">{children}</main>
-                <footer className="mt-auto bg-secondary py-4">
+                <footer className="mt-12 bg-secondary py-4">
                   <div className="container mx-auto text-center text-sm">
                     © {new Date().getFullYear()} CuriouslyCory. All rights
                     reserved.
