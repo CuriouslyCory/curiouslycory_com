@@ -3,8 +3,8 @@ import { Astronaut } from "~/components/astronaut";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { ChatBubble } from "~/components/ui/chat-bubble";
 import { SOCIALS } from "~/constants/socials";
-import { Button } from "~/components/ui/button";
 import { ScrollText } from "lucide-react";
+import { FavoriteTech } from "~/components/favorite-tech";
 
 export default function Home() {
   return (
@@ -25,11 +25,10 @@ export default function Home() {
           <Astronaut className="translate-y-1" />
         </div>
       </section>
-
       <section className="mx-2 max-w-3xl md:mx-auto">
         <Card className="p-2 md:p-6">
           <CardHeader>
-            <CardTitle className="text-2xl font-bold">
+            <CardTitle className="h-underline text-center text-2xl font-bold md:text-left">
               A little about me
             </CardTitle>
           </CardHeader>
@@ -82,36 +81,36 @@ export default function Home() {
           </CardContent>
         </Card>
       </section>
-      <section className="mx-2 mt-16 max-w-3xl md:mx-auto">
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-2xl font-bold">
-              Want to know more?
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="flex flex-wrap gap-4">
+      <div className="mt-24 flex flex-col gap-y-24">
+        <div className="mb-10 w-full bg-foreground py-10 text-background dark:bg-gray-100/10 dark:text-foreground">
+          <section className="container mx-2 flex flex-col gap-y-4 md:mx-auto">
+            <div className="grid grid-cols-2 gap-4 md:grid-cols-6 lg:grid-cols-8">
               <Link href="/cv">
-                <Button className="flex items-center gap-2">
-                  <ScrollText /> Resume/CV
-                </Button>
+                <div className="flex flex-col items-center gap-2 transition-all hover:scale-105 hover:text-orange-500">
+                  <ScrollText className="h-12 w-12" />
+                  <span>Resume/CV</span>
+                </div>
               </Link>
               {SOCIALS.map((link) => (
-                <Link href={link.url} key={link.url}>
-                  <Button className="flex items-center gap-2">
-                    <link.icon /> {link.title}
-                  </Button>
+                <Link href={link.url} key={link.url} target="top">
+                  <div className="flex flex-col items-center gap-2 transition-colors hover:scale-105 hover:text-orange-500">
+                    <link.icon className="h-12 w-12" />
+                    <span className="text-center">{link.title}</span>
+                  </div>
                 </Link>
               ))}
             </div>
-          </CardContent>
-        </Card>
-      </section>
-      {/* <section>
+          </section>
+        </div>
+        <section className="mx-2 max-w-3xl md:mx-auto">
+          <FavoriteTech />
+        </section>
+
+        {/* <section>
         <BskyFeed />
       </section> */}
-      {/* <BlogPostBats /> */}
-      {/* <section className="mx-auto mt-20 px-2 md:px-6">
+        {/* <BlogPostBats /> */}
+        {/* <section className="mx-auto mt-20 px-2 md:px-6">
         <h2 className="mb-4 text-3xl font-bold">Links</h2>
         <div className="flex flex-wrap gap-6">
           {SOCIALS.map((link) => (
@@ -123,6 +122,7 @@ export default function Home() {
           ))}
         </div>
       </section> */}
+      </div>
     </>
   );
 }

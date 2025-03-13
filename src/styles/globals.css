@@ -130,6 +130,10 @@
   }
 
   .resume-section-title {
-    @apply font-oswald mb-2 pb-1 text-3xl font-semibold text-gray-800 dark:text-foreground;
+    @apply mb-2 pb-1 font-oswald text-3xl font-semibold text-gray-800 dark:text-foreground;
+  }
+
+  .h-underline {
+    @apply underline decoration-orange-500 decoration-2 underline-offset-4;
   }
 }
