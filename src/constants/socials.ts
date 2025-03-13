@@ -1,59 +1,42 @@
 import {
-  FaDiscord,
   FaGithub,
-  FaLinkedin,
   FaTwitch,
-  FaTwitter,
-  FaWordpress,
   FaYoutube,
+  FaInstagram,
+  FaLinkedin,
 } from "react-icons/fa";
-import { GiMirrorMirror } from "react-icons/gi";
-import { MdEmail } from "react-icons/md";
+import { FaBluesky } from "react-icons/fa6";
 
-export const socialLinks = [
+export const SOCIALS = [
+  { title: "GitHub", url: "https://github.com/CuriouslyCory", icon: FaGithub },
   {
-    title: "Github",
-    href: "https://github.com/CuriouslyCory",
-    Icon: FaGithub,
+    title: "BlueSky",
+    url: "https://bsky.app/profile/curiouslycory.com",
+    icon: FaBluesky,
   },
   {
     title: "LinkedIn",
-    href: "https://www.linkedin.com/in/corysougstad/",
-    Icon: FaLinkedin,
+    url: "https://www.linkedin.com/in/corysougstad",
+    icon: FaLinkedin,
   },
   {
     title: "Twitch",
-    href: "https://twitch.tv/CuriouslyCory",
-    Icon: FaTwitch,
+    url: "https://www.twitch.tv/CuriouslyCory",
+    icon: FaTwitch,
   },
   {
-    title: "Twitter",
-    href: "https://www.twitter.com/CuriouslyCory",
-    Icon: FaTwitter,
+    title: "Developer YouTube",
+    url: "https://www.youtube.com/@CuriouslyCory",
+    icon: FaYoutube,
   },
   {
-    title: "YouTube",
-    href: "https://www.youtube.com/@curiouslycory",
-    Icon: FaYoutube,
+    title: "Rock Climbing YouTube",
+    url: "https://www.youtube.com/@CuriouslyCoryClimbs",
+    icon: FaYoutube,
   },
   {
-    title: "Discord",
-    href: "https://discord.gg/r4D9XpDGXN",
-    Icon: FaDiscord,
-  },
-  {
-    title: "Mirror",
-    href: "https://mirror.xyz/curiouslycory.eth",
-    Icon: GiMirrorMirror,
-  },
-  {
-    title: "Maker Blog",
-    href: "https://blog.hau.me/",
-    Icon: FaWordpress,
-  },
-  {
-    title: "Email",
-    href: "mailto:cory@curiouslycory.com",
-    Icon: MdEmail,
+    title: "Instagram",
+    url: "https://www.instagram.com/curiouslycory",
+    icon: FaInstagram,
   },
 ];
