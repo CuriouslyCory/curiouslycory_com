@@ -184,7 +184,10 @@ function ResumeSelectorComponent({
           <SelectContent>
             {resumes.map((resume) => (
               <SelectItem key={resume.id} value={resume.id}>
-                {resume.title}
+                <div className="flex items-center gap-2">
+                  <span>{resume.icon}</span>
+                  <span>{resume.title}</span>
+                </div>
               </SelectItem>
             ))}
           </SelectContent>

@@ -62,8 +62,10 @@ export default function Home() {
           </CardHeader>
           <CardContent className="space-y-4">
             <p>
-              I&apos;m a coding enthusiast who loves building web applications
-              for teams big and small. Currently working with an amazing team at{" "}
+              I&apos;m a code crafter who thrives on crafting smart, scalable
+              solutions using TypeScript and modern frameworks like Next.js,
+              React, and Angular. Currently, I&apos;m proudly part of the
+              talented team at{" "}
               <Link
                 href="https://sudoswap.xyz"
                 target="top"
@@ -71,7 +73,7 @@ export default function Home() {
               >
                 Sudorandom Labs
               </Link>
-              . Alumni of{" "}
+              , and I&apos;ve previously enjoyed roles at{" "}
               <Link
                 href="https://lighthouseglobal.com"
                 target="top"
@@ -94,17 +96,15 @@ export default function Home() {
                 className="underline"
               >
                 Responsive Data
-              </Link>{" "}
-              development teams. I spend most of my development time in
-              TypeScript and frameworks like Next.js, React, and Angular.
-              I&apos;m also pretty handy with Golang, Python, PHP, and even
-              tackled the complexities of ServiceNow.
+              </Link>
+              .
             </p>
             <p>
-              When I&apos;m not coding, you&apos;ll find me scaling rock walls,
-              tinkering with 3D printers, or jumping into creative projects just
-              for fun. Oh, and I was baking sourdough bread long before it
-              became the cool thing to do during quarantine!
+              Beyond the code editor, you&apos;ll find me scaling the peaks of
+              complex UI challenges or exploring innovative backend
+              architectures. When not coding, I&apos;m usually rock climbing,
+              tinkering with generative AI projects, baking bread, or spending
+              time with my son.
             </p>
           </CardContent>
         </Card>

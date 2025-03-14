@@ -1,3 +1,10 @@
+import {
+  FaHardHat,
+  FaHatCowboy,
+  FaHatWizard,
+  FaPiedPiperHat,
+} from "react-icons/fa";
+import { GiMagicHat } from "react-icons/gi";
 import type { Resume } from "~/types/resume";
 
 const contactData = {
@@ -18,6 +25,7 @@ const contactData = {
 export const leadUIDeveloperResume: Resume = {
   id: "lead-ui-developer",
   ...contactData,
+  icon: <FaPiedPiperHat />,
   title: "Lead UI Developer",
   titles: ["Lead UI Engineer", "Full Stack Developer"],
   highlightedTitle: "Seasoned Lead UI Engineer",
@@ -67,6 +75,7 @@ export const leadUIDeveloperResume: Resume = {
 export const engineeringManagerResume: Resume = {
   id: "engineering-manager",
   ...contactData,
+  icon: <FaHardHat />,
   title: "Engineering Manager",
   titles: ["Engineering Manager", "Developer Experience & Web"],
   highlightedTitle: "Experienced Engineering Leader",
@@ -153,6 +162,7 @@ export const engineeringManagerResume: Resume = {
 export const seniorFullStackEngineerResume: Resume = {
   id: "senior-full-stack-engineer",
   ...contactData,
+  icon: <FaHatWizard />,
   title: "Senior Full Stack Engineer",
   titles: [
     "Senior Software Engineer",
@@ -245,6 +255,7 @@ export const seniorFullStackEngineerResume: Resume = {
 export const web3BlockchainSpecialistResume: Resume = {
   id: "web3-blockchain-specialist",
   ...contactData,
+  icon: <FaHatCowboy />,
   title: "Senior Blockchain Software Engineer",
   titles: ["Senior Software Engineer", "Web3 & Blockchain Specialist"],
   highlightedTitle:
@@ -330,6 +341,7 @@ export const web3BlockchainSpecialistResume: Resume = {
 export const aiMachineLearningSpecialistResume: Resume = {
   id: "ai-machine-learning-specialist",
   ...contactData,
+  icon: <GiMagicHat />,
   title: "AI & Machine Learning Specialist",
   titles: ["Senior Software Engineer", "AI & Machine Learning Specialist"],
   highlightedTitle:

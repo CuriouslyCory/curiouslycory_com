@@ -1,3 +1,5 @@
+import { type ReactNode } from "react";
+
 export interface Link {
   text: string;
   url: string;
@@ -15,6 +17,7 @@ export interface Resume {
   id: string;
   title: string;
   name: string;
+  icon: ReactNode;
   titles: string[];
   email: string;
   links: Link[];
