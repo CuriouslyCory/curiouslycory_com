@@ -115,6 +115,14 @@ function ResumeSelectorComponent({
           }
         });
 
+        const allOswaldAlignments =
+          sectionClone.querySelectorAll(".oswald-align");
+        allOswaldAlignments.forEach((alignment) => {
+          if (alignment instanceof HTMLElement) {
+            alignment.style.top = "2px";
+          }
+        });
+
         // Style links for PDF
         const links = sectionClone.querySelectorAll("a");
         links.forEach((link) => {

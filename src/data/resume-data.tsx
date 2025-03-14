@@ -428,10 +428,9 @@ export const apiBackendSpecialistResume: Resume = {
   icon: <FaCode />,
   title: "API Backend Specialist",
   titles: ["Senior Software Engineer", "API & Backend Specialist"],
-  highlightedTitle:
-    "Experienced Senior Software Engineer | API & Backend Specialist",
+  highlightedTitle: "Experienced Senior Software Engineer",
   summary:
-    "Experienced Senior Software Engineer with over 20 years of expertise designing, developing, and scaling robust APIs and backend services. Proficient in TypeScript, Node.js, microservices, and cloud-based solutions. Passionate about crafting efficient, maintainable, and high-performance software solutions that align with organizational objectives.",
+    " with over 20 years of expertise designing, developing, and scaling robust APIs and backend services. Proficient in TypeScript, Node.js, microservices, and cloud-based solutions. Passionate about crafting efficient, maintainable, and high-performance software solutions that align with organizational objectives.",
   experience: [
     {
       title: "Principal Full Stack Engineer",

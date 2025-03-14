@@ -59,14 +59,12 @@ function ResumeContent({ defaultResume }: ResumeDisplayProps) {
       {/* Professional Summary */}
       <div className="resume-section summary-section">
         <h2 className="resume-section-title">Professional Summary</h2>
-        <div className="space-y-2">
-          <p>
-            <span className="font-oswald font-semibold text-orange-600">
-              {selectedResume.highlightedTitle}
-            </span>
-            {" " + selectedResume.summary}
-          </p>
-        </div>
+        <p className="">
+          <span className="oswald-align relative top-[1px] align-baseline font-oswald font-semibold text-orange-600">
+            {selectedResume.highlightedTitle}
+          </span>
+          {" " + selectedResume.summary}
+        </p>
       </div>
 
       {/* Work Experience */}
