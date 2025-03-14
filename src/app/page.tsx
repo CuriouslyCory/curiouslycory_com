@@ -5,6 +5,34 @@ import { ChatBubble } from "~/components/ui/chat-bubble";
 import { SOCIALS } from "~/constants/socials";
 import { ScrollText } from "lucide-react";
 import { FavoriteTech } from "~/components/favorite-tech";
+import { type Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "CuriouslyCory | Web Developer",
+  description: "Hi, I'm CuriouslyCory, and I like to build things.",
+  openGraph: {
+    title: "CuriouslyCory | Web Developer",
+    description: "Hi, I'm CuriouslyCory, and I like to build things.",
+    url: "https://curiouslycory.com",
+    siteName: "CuriouslyCory.com",
+    images: [
+      {
+        url: "/images/og-image.png", // You'll need to create this image
+        width: 1200,
+        height: 630,
+        alt: "CuriouslyCory - Web Developer",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "CuriouslyCory | Web Developer",
+    description: "Hi, I'm CuriouslyCory, and I like to build things.",
+    images: ["/images/og-image.png"], // Same image as OG
+  },
+};
 
 export default function Home() {
   return (
