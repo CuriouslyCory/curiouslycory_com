@@ -64,6 +64,7 @@ export default {
       },
       fontFamily: {
         sans: ["var(--font-raleway)", ...fontFamily.sans],
+        serif: ["var(--font-roboto-serif)", ...fontFamily.serif],
         mono: ["var(--font-oxygen-mono)", ...fontFamily.mono],
         oswald: ["var(--font-oswald)", ...fontFamily.sans],
       },

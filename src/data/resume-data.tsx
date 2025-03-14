@@ -1,4 +1,5 @@
 import {
+  FaCode,
   FaHardHat,
   FaHatCowboy,
   FaHatWizard,
@@ -421,10 +422,112 @@ export const aiMachineLearningSpecialistResume: Resume = {
   ],
 } as const;
 
+export const apiBackendSpecialistResume: Resume = {
+  id: "api-backend-specialist",
+  ...contactData,
+  icon: <FaCode />,
+  title: "API Backend Specialist",
+  titles: ["Senior Software Engineer", "API & Backend Specialist"],
+  highlightedTitle:
+    "Experienced Senior Software Engineer | API & Backend Specialist",
+  summary:
+    "Experienced Senior Software Engineer with over 20 years of expertise designing, developing, and scaling robust APIs and backend services. Proficient in TypeScript, Node.js, microservices, and cloud-based solutions. Passionate about crafting efficient, maintainable, and high-performance software solutions that align with organizational objectives.",
+  experience: [
+    {
+      title: "Principal Full Stack Engineer",
+      company: "Sudorandom",
+      period: "March 2022 - Present",
+      accomplishments: [
+        "Designed, implemented, and maintained scalable APIs and microservices using TypeScript and Node.js.",
+        "Enhanced system performance and reliability through optimized backend architectures and efficient CI/CD practices.",
+        "Collaborated with cross-functional teams to deliver high-quality features meeting rigorous performance and reliability standards.",
+      ],
+      techStack: "TypeScript, Node.js, Microservices, AWS, CI/CD",
+    },
+    {
+      title: "Owner & Lead Developer",
+      company: "CuriouslyCory Corp",
+      period: "July 2021 - April 2023",
+      accomplishments: [
+        "Engineered backend systems and robust APIs tailored to specific client needs.",
+        "Managed project lifecycles using Agile methodologies, from requirement gathering through deployment.",
+        "Utilized modern backend frameworks and cloud infrastructures to ensure scalability and performance.",
+      ],
+      techStack:
+        "TypeScript, Node.js, Express.js, RESTful APIs, Cloud Infrastructures",
+    },
+    {
+      title: "ServiceNow Software Development Engineer II",
+      company: "Lighthouse Global Inc.",
+      period: "Nov 2020 - Mar 2022",
+      accomplishments: [
+        "Developed comprehensive backend integrations, API endpoints, and custom services within ServiceNow.",
+        "Significantly improved backend reliability, scalability, and performance through effective service portal integrations and custom application development.",
+      ],
+      techStack: "ServiceNow APIs, Custom Services",
+    },
+    {
+      title: "Lead Systems Engineer",
+      company: "Insight Enterprises",
+      period: "Oct 2015 - Nov 2020",
+      accomplishments: [
+        "Led development of complex backend systems and integrations, enhancing overall system reliability and user experience.",
+        "Implemented scalable API solutions and conducted code reviews ensuring high-quality standards.",
+      ],
+      techStack: "Backend Systems, Integrations, Scalable APIs",
+    },
+    {
+      title: "Manager of Information Technology",
+      company: "Responsive Data",
+      period: "Mar 2007 - Oct 2015",
+      accomplishments: [
+        "Managed infrastructure and led backend development teams to deliver scalable, efficient web services and APIs.",
+        "Oversaw database administration and optimized backend processes for performance and scalability.",
+      ],
+      techStack: "Web Services, APIs, Database Administration",
+    },
+  ],
+  skills: [
+    ["Programming Languages", "TypeScript", "JavaScript", "Python", "Golang"],
+    [
+      "Frameworks & Technologies",
+      "Node.js",
+      "Express.js",
+      "Fastify",
+      "Nest.js",
+      "Flask",
+    ],
+    [
+      "Cloud & Infrastructure",
+      "GCP",
+      "Serverless Architectures",
+      "Docker",
+      "Kubernetes",
+      "CI/CD (GitHub Actions, Jenkins)",
+    ],
+    ["Databases", "PostgreSQL", "Redis", "MongoDB", "MySQL"],
+    [
+      "Development Practices",
+      "Agile/Scrum",
+      "Unit & Integration Testing",
+      "Microservices Architecture",
+    ],
+  ],
+  keyAchievements: [
+    "Successfully delivered high-performance, scalable API-driven solutions, significantly improving product reliability and user experience.",
+    "Streamlined backend development workflows through advanced tooling, automation, and best practices.",
+    "Fostered collaborative engineering cultures, mentoring teams in effective backend development methodologies.",
+  ],
+  education: [
+    "Ongoing professional development in cloud computing, software architecture, and backend development best practices.",
+  ],
+} as const;
+
 export const resumes: Resume[] = [
   seniorFullStackEngineerResume,
   engineeringManagerResume,
   leadUIDeveloperResume,
   aiMachineLearningSpecialistResume,
   web3BlockchainSpecialistResume,
+  apiBackendSpecialistResume,
 ] as const;

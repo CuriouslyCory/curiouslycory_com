@@ -61,7 +61,7 @@ function ResumeSelectorComponent({
       const contentWidth = pageWidth - 2 * margin;
 
       // Always use white background for PDF regardless of theme
-      const backgroundColor = "#ffffff";
+      const backgroundColor = "#f7f5f2";
 
       // Prepare the resume for PDF generation by adding temporary classes
       const sections = resumeElement.querySelectorAll(".resume-content > div");
@@ -72,6 +72,9 @@ function ResumeSelectorComponent({
       // Track our position on the page
       let yPosition = margin;
       let currentPage = 1;
+
+      pdf.setFillColor(247, 245, 242);
+      pdf.rect(0, yPosition - margin, pageWidth, pageHeight, "F");
 
       // Process each section
       for (const section of Array.from(sections)) {
@@ -98,6 +101,17 @@ function ResumeSelectorComponent({
             } else {
               el.style.color = "#c25000"; // Use print-friendly orange
             }
+          }
+        });
+
+        // Hide all external link icons
+        const allExternalLinkIcons =
+          sectionClone.querySelectorAll(".ext-link-icon");
+        allExternalLinkIcons.forEach((icon) => {
+          if (icon instanceof SVGElement) {
+            icon.style.display = "none";
+          } else {
+            console.log("icon", icon);
           }
         });
 
@@ -145,6 +159,9 @@ function ResumeSelectorComponent({
           pdf.addPage();
           currentPage++;
           yPosition = margin;
+
+          pdf.setFillColor(247, 245, 242);
+          pdf.rect(0, yPosition - margin, pageWidth, pageHeight, "F");
         }
 
         // Add the section to the PDF

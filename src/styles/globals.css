@@ -134,7 +134,7 @@
   }
 
   .resume-section-title {
-    @apply mb-2 pb-1 font-oswald text-3xl font-semibold text-gray-800 dark:text-foreground;
+    @apply mb-2 pb-1 font-oswald text-2xl text-gray-800 dark:text-foreground;
   }
 
   .h-underline {
