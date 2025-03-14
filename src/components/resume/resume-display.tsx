@@ -82,7 +82,7 @@ function ResumeContent({ defaultResume }: ResumeDisplayProps) {
               <div key={index}>
                 {skillCategory.length > 0 && (
                   <div className="">
-                    <span className="mr-2 font-oswald font-semibold text-orange-600">
+                    <span className="oswald-align relative mr-2 align-baseline font-oswald font-semibold text-orange-600">
                       {skillCategory[0]}:
                     </span>
                     <span>{skillCategory.slice(1).join(", ")}</span>
@@ -172,7 +172,7 @@ function JobSection({ job }: { job: Job }) {
         ))}
       </ul>
       <div>
-        <span className="font-oswald font-semibold text-orange-600">
+        <span className="oswald-align relative top-[1px] align-baseline font-oswald font-semibold text-orange-600">
           Tech Stack:{" "}
         </span>
         <span>{job.techStack}</span>

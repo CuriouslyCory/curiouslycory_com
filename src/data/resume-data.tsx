@@ -1,21 +1,12 @@
-import {
-  FaCode,
-  FaHardHat,
-  FaHatCowboy,
-  FaHatWizard,
-  FaPiedPiperHat,
-} from "react-icons/fa";
-import { GiMagicHat } from "react-icons/gi";
 import type { Resume } from "~/types/resume";
+import { FaHardHat, FaHatCowboy, FaHatWizard } from "react-icons/fa";
+import { GiMagicHat } from "react-icons/gi";
 
 const contactData = {
   name: "Cory Sougstad",
   email: "cory@curiouslycory.com",
   links: [
-    {
-      text: "https://curiouslycory.com",
-      url: "https://curiouslycory.com",
-    },
+    { text: "https://curiouslycory.com", url: "https://curiouslycory.com" },
     {
       text: "https://www.linkedin.com/in/corysougstad",
       url: "https://www.linkedin.com/in/corysougstad",
@@ -23,99 +14,175 @@ const contactData = {
   ],
 };
 
-export const leadUIDeveloperResume: Resume = {
-  id: "lead-ui-developer",
+export const principalFullStackEngineerResume: Resume = {
+  id: "principal-full-stack-engineer",
   ...contactData,
-  icon: <FaPiedPiperHat />,
-  title: "Lead UI Developer",
-  titles: ["Lead UI Engineer", "Full Stack Developer"],
-  highlightedTitle: "Seasoned Lead UI Engineer",
+  icon: <FaHatWizard />,
+  title: "Principal Full Stack Engineer",
+  titles: ["Principal Full Stack Engineer"],
+  highlightedTitle: "Highly Experienced Principal Full Stack Engineer",
   summary:
-    "and full stack developer with 20+ years of experience building highly performant, responsive, and scalable user interfaces. Skilled in React, Next.js, TypeScript, and Node.js, with a proven record of improving application performance, optimizing developer workflows, and mentoring teams to deliver exceptional user experiences.",
+    "Accomplished Principal Full Stack Engineer with 20+ years of experience architecting, developing, and deploying complex and scalable web applications. Deep expertise in modern JavaScript/TypeScript ecosystems (React, Next.js, Node.js), cloud infrastructure (AWS, GCP), and backend technologies. Proven ability to drive technical vision, optimize performance, and deliver high-quality, user-centric solutions.",
   experience: [
     {
       title: "Principal Full Stack Engineer",
       company: "Sudorandom",
       period: "March 2022 - Present",
       accomplishments: [
-        "Led UI engineering initiatives focused on performance optimization, significantly reducing API requests and improving load times.",
-        "Established robust testing and CI/CD pipelines, enhancing development speed and reliability.",
-        "Successfully migrated infrastructure to serverless architectures, dramatically improving UI responsiveness, scalability, and operational efficiency.",
-        "Refactored front-end codebases using best practices in TypeScript, React, and Next.js, enhancing maintainability and developer productivity.",
+        "Led full-stack architecture for critical initiatives, resulting in significant performance improvements and enhanced user experience.",
+        "Successfully transitioned backend systems to serverless architectures, improving scalability, reliability, and reducing operational costs.",
+        "Established and championed robust CI/CD pipelines and automated testing frameworks, enhancing development efficiency and software quality.",
+        "Optimized API performance and implemented advanced frontend solutions using React, Next.js, and TypeScript.",
       ],
       techStack:
-        "Angular, TypeScript, React/Next.js, Solidity, Tailwind, SQLite, Vercel, GCP",
+        "TypeScript, React/Next.js, Node.js, Python, Angular, Tailwind CSS, RESTful APIs, GraphQL, AWS, GCP, Serverless, Docker, Kubernetes, PostgreSQL, Redis, CI/CD",
     },
     {
-      title: "Senior Application Engineer",
+      title: "CEO & Lead Developer",
       company: "CuriouslyCory Corp",
-      period: "Feb 2021 - March 2022",
+      period: "July 2021 - April 2023",
       accomplishments: [
-        "Engineered responsive, high-performance user interfaces for diverse client projects, focusing on usability and scalability.",
-        "Developed custom UI solutions for blockchain applications, including advanced responsive platforms such as MechaChaotic Forge, Cozy Express, and LiqdNFT.com.",
-        "Provided strategic consultation and implementation guidance to ensure seamless and robust user experiences.",
+        "Architected and developed custom full-stack web applications and blockchain-integrated dApps for diverse clients.",
+        "Independently managed the entire development lifecycle, from client engagement and scope definition to deployment and launch.",
+        "Leveraged React, Next.js, TypeScript, and modern backend technologies to deliver scalable and user-friendly solutions.",
       ],
       techStack:
-        "TypeScript, React, Solidity, Next.js, tRPC, Tailwind, IPFS, PostgreSQL, IPFS",
+        "TypeScript, React, Next.js, Node.js, Solidity, Web3.js, RESTful APIs, Serverless, PostgreSQL, IPFS",
     },
     {
-      title: "Senior Systems Engineer | UI/UX Lead",
-      company: "Lighthouse Global",
-      period: "Nov 2020 - Feb 2021",
+      title: "Lead Systems Engineer",
+      company: "Insight Enterprises",
+      period: "Oct 2015 - Nov 2020",
       accomplishments: [
-        "Engineered responsive, high-performance user interfaces for diverse client projects, focusing on usability and scalability.",
-        "Developed custom UI solutions for blockchain applications, including advanced responsive platforms such as MechaChaotic Forge, Cozy Express, and LiqdNFT.com.",
-        "Provided strategic consultation and implementation guidance to ensure seamless and robust user experiences.",
+        "Led the development of complex backend systems and integrations, significantly improving system reliability and performance.",
+        "Architected and implemented scalable API solutions to support diverse business needs.",
+        "Provided technical leadership and guidance within Agile development teams.",
       ],
       techStack:
-        "TypeScript, React, Solidity, Next.js, tRPC, Tailwind, IPFS, PostgreSQL, IPFS",
+        "JavaScript, Backend Systems, API Development, Integrations, Agile",
     },
+    {
+      title: "Manager of Information Technology",
+      company: "Responsive Data",
+      period: "Mar 2007 - Oct 2015",
+      accomplishments: [
+        "Oversaw the development and maintenance of scalable web services and APIs.",
+        "Managed infrastructure and optimized backend processes for performance and scalability.",
+      ],
+      techStack: "Web Services, APIs, Database Administration",
+    },
+  ],
+  skills: [
+    [
+      "Frontend",
+      "React",
+      "Next.js",
+      "TypeScript",
+      "JavaScript",
+      "HTML/CSS",
+      "Tailwind CSS",
+    ],
+    [
+      "Backend",
+      "Node.js",
+      "Python",
+      "Fastify",
+      "Nest.js",
+      "RESTful APIs",
+      "GraphQL",
+      "Serverless",
+    ],
+    ["Cloud", "AWS", "GCP", "Vercel", "Netlify", "Docker", "Kubernetes"],
+    [
+      "Databases",
+      "PostgreSQL",
+      "Redis",
+      "MongoDB",
+      "MSSQL",
+      "MySQL",
+      "SQLite",
+      "Pinecone",
+      "Qdrant",
+    ],
+    [
+      "DevOps",
+      "CI/CD",
+      "Playwright",
+      "Puppeteer",
+      "Jest",
+      "Mocha",
+      "Chai",
+      "Jasmine",
+      "Cypress",
+    ],
+    ["Other", "Agile", "Problem-Solving", "Technical Leadership"],
+  ],
+  keyAchievements: [
+    "Led the successful transition of critical backend systems to serverless architectures, improving scalability and reducing operational costs.",
+    "Architected and delivered high-performance, scalable web applications and APIs, significantly enhancing user experience and reliability.",
+    "Established and promoted best practices in software development, including CI/CD and automated testing.",
+  ],
+  education: [
+    "Continuous professional development in modern software engineering practices and cloud technologies.",
   ],
 } as const;
 
-export const engineeringManagerResume: Resume = {
-  id: "engineering-manager",
+export const engineeringManagerCtoResume: Resume = {
+  id: "engineering-manager-cto",
   ...contactData,
   icon: <FaHardHat />,
-  title: "Engineering Manager",
-  titles: ["Engineering Manager", "Developer Experience & Web"],
-  highlightedTitle: "Experienced Engineering Leader",
+  title: "Engineering Manager / CTO",
+  titles: ["Engineering Manager", "CTO", "Technical Leader"],
+  highlightedTitle: "Experienced Engineering Leader with Strategic Vision",
   summary:
-    "Experienced engineering leader with 20+ years in software development and a passion for enhancing developer experiences, scaling distributed systems, and building high-performing teams. Known for clear communication, strategic roadmapping, and a proven track record of delivering robust, globally scalable web infrastructure solutions.",
+    "Results-oriented Engineering Manager with 20+ years of experience leading and mentoring high-performing engineering teams. Proven ability to define technical vision, drive strategic roadmaps, and foster collaborative environments focused on delivering scalable and innovative software solutions. Deep understanding of modern web technologies and cloud infrastructure.",
   experience: [
     {
-      title: "Principal Full Stack Engineer",
-      company: "Sudorandom",
+      title: "Principal Full Stack Engineer (Frontend Lead)",
+      company: "Sudorandom Labs",
       period: "March 2022 - Present",
       accomplishments: [
-        "Led initiatives to transition backend systems to serverless solutions, significantly improving scalability and reducing operational overhead.",
-        "Implemented robust CI/CD pipelines and testing frameworks, enhancing team efficiency and product reliability.",
-        "Optimized developer productivity and application performance through improved error handling and API request optimization.",
-        "Collaborated closely with cross-functional teams to establish technical roadmaps and architectural vision.",
+        "Led and mentored frontend engineering teams, fostering a collaborative and innovation-driven environment.",
+        "Defined technical direction and established development standards for frontend architecture.",
+        "Improved frontend architecture, optimized user experiences, and streamlined developer productivity through modern tooling and processes.",
+        "Collaborated on architectural decisions to transition backend infrastructure to serverless, enhancing scalability and reducing costs.",
       ],
-      techStack:
-        "Angular, TypeScript, React/Next.js, Solidity, Tailwind, SQLite, Vercel, GCP",
+      techStack: "React, TypeScript, Next.js, Tailwind CSS, Agile",
     },
     {
-      title: "Senior Application Engineer",
+      title: "CEO & Lead Developer",
       company: "CuriouslyCory Corp",
-      period: "Feb 2021 - March 2022",
+      period: "July 2021 - April 2023",
       accomplishments: [
-        "Managed and delivered scalable Web3 and frontend solutions for clients, utilizing modern infrastructure technologies.",
-        "Led technical direction and strategic implementation of projects such as MechaChaotic Forge, Cozy Express, and LiqdNFT.com, each involving complex infrastructure and dynamic user experiences.",
+        "Defined project scopes and technical requirements through direct client engagement.",
+        "Managed the full development lifecycle of custom web applications and blockchain-integrated dApps.",
+        "Provided technical leadership and guidance on project execution and technology selection.",
       ],
       techStack:
-        "TypeScript, React, Solidity, Next.js, tRPC, Tailwind, IPFS, PostgreSQL, IPFS",
+        "TypeScript, React, Next.js, Node.js, Solidity, Web3.js, Agile",
     },
     {
-      title: "Senior Systems Engineer | Technical Lead",
-      company: "Lighthouse Global",
-      period: "Nov 2020 - Feb 2021",
+      title: "Lead Systems Engineer",
+      company: "Insight Enterprises",
+      period: "Oct 2015 - Nov 2020",
       accomplishments: [
-        "Architected and maintained scalable, distributed SaaS solutions used globally.",
-        "Provided leadership in agile methodologies and engineering best practices, improving collaboration and developer satisfaction.",
+        "Managed a team of frontend engineers, driving UI/UX initiatives and frontend architecture improvements.",
+        "Led cross-functional collaboration and agile planning to ensure successful project delivery.",
+        "Mentored team members to foster technical growth and improve code quality.",
       ],
-      techStack: "ServiceNow, AngularJS, Tailwind, IPFS, MSSQL",
+      techStack: "JavaScript, UI/UX, Frontend Architecture, Agile",
+    },
+    {
+      title: "Manager of Information Technology",
+      company: "Responsive Data",
+      period: "Mar 2007 - Oct 2015",
+      accomplishments: [
+        "Oversaw frontend and backend development teams and infrastructure management.",
+        "Defined technical roadmaps and ensured alignment with business objectives.",
+        "Facilitated the professional growth of team members and established best practices for software development.",
+      ],
+      techStack:
+        "Web Application Development, Team Management, Infrastructure Management, Strategic Planning",
     },
   ],
   skills: [
@@ -123,146 +190,32 @@ export const engineeringManagerResume: Resume = {
       "Leadership & Management",
       "Team Building",
       "Mentorship",
-      "Agile Methodologies",
-      "Strategic Roadmapping",
-      "Cross-team Collaboration",
+      "Strategic Planning",
+      "Agile",
     ],
-    [
-      "Infrastructure & Scaling",
-      "Serverless Architectures",
-      "Distributed Systems",
-      "Global Infrastructure Operations",
-      "CI/CD",
-      "Cloud Platforms (AWS, GCP, Vercel)",
-    ],
-    [
-      "Developer Experience (DX)",
-      "API Optimization",
-      "Testing Automation",
-      "Error Visibility Improvements",
-      "Developer Productivity Tools",
-    ],
-    [
-      "Technical Communication",
-      "Clear, Effective Communication",
-      "Stakeholder Alignment",
-      "Technical Mentorship",
-    ],
+    ["Frontend", "React", "Next.js", "TypeScript", "JavaScript"],
+    ["Cloud & Infrastructure", "AWS", "GCP", "Serverless Architectures"],
+    ["Communication", "Technical Communication", "Stakeholder Management"],
   ],
   keyAchievements: [
-    "Successfully migrated infrastructure to scalable, serverless solutions, significantly enhancing reliability and reducing operational costs.",
-    "Built and nurtured high-performing engineering teams, consistently fostering a culture of innovation, accountability, and continuous improvement.",
-    "Regularly leveraged clear communication and strategic decision-making to guide teams through complex technical challenges, ensuring consistent product excellence and timely delivery.",
+    "Successfully led and mentored multiple engineering teams to deliver high-quality, scalable web applications.",
+    "Defined and implemented technical strategies that resulted in improved performance, reliability, and team productivity.",
+    "Fostered collaborative and innovative engineering cultures.",
   ],
   education: [
-    "Continuous professional development in Web Infrastructure, AI, and Developer Experience optimization.",
-    "Regular participation in engineering leadership workshops and conferences.",
+    "Continuous professional development in leadership, software architecture, and emerging technologies.",
   ],
 } as const;
 
-export const seniorFullStackEngineerResume: Resume = {
-  id: "senior-full-stack-engineer",
-  ...contactData,
-  icon: <FaHatWizard />,
-  title: "Senior Full Stack Engineer",
-  titles: [
-    "Senior Software Engineer",
-    "Full Stack Development & UX Specialist",
-  ],
-  highlightedTitle: "Experienced Senior Software Engineer",
-  summary:
-    "Experienced Senior Software Engineer passionate about building impactful web applications that improve lives. Over 20 years of experience in software development with deep expertise in React, TypeScript, Python, and modern cloud infrastructure (GCP/AWS). Proven ability to lead engineering teams, architect scalable solutions, and deliver high-quality, user-centric products.",
-  experience: [
-    {
-      title: "Principal Full Stack Engineer",
-      company: "Sudorandom",
-      period: "March 2022 - Present",
-      accomplishments: [
-        "Led full-stack architecture, optimized APIs, and implemented advanced frontend solutions to enhance user experience and performance.",
-        "Transitioned backend infrastructure to serverless architectures, improving scalability, reliability, and reducing operational costs.",
-        "Developed robust CI/CD pipelines and automated testing, increasing development efficiency and software quality.",
-      ],
-      techStack:
-        "Angular, TypeScript, React/Next.js, Python, Tailwind, SQLite, Vercel, GCP",
-    },
-    {
-      title: "Senior Application Engineer",
-      company: "CuriouslyCory Corp",
-      period: "Feb 2021 - March 2022",
-      accomplishments: [
-        "Built responsive, intuitive front-end solutions tailored to specific client needs, ensuring high scalability and seamless user interactions.",
-        "Developed highly interactive responsive UIs integrated with scalable serverless backend processing for MechaChaotic Forge.",
-        "Delivered engaging frontend solutions, tailored specifically for user-friendly digital experiences for Cozy Express.",
-        "Created robust and scalable UIs for marketplace interactions, significantly enhancing user engagement and satisfaction for LiqdNFT.com.",
-      ],
-      techStack:
-        "TypeScript, React, Solidity, Next.js, Python, tRPC, Tailwind, IPFS, PostgreSQL, IPFS",
-    },
-    {
-      title: "Senior Systems Engineer | UI/UX Lead",
-      company: "Lighthouse Global",
-      period: "Nov 2020 - Feb 2021",
-      accomplishments: [
-        "Directed frontend architecture and UI/UX improvements for enterprise applications, enhancing usability and performance.",
-        "Mentored development teams in agile methodologies, code quality, and frontend best practices.",
-      ],
-      techStack: "ServiceNow, AngularJS, MSSQL",
-    },
-  ],
-  skills: [
-    [
-      "Frontend Technologies",
-      "React",
-      "Next.js",
-      "Remix",
-      "Redux",
-      "TypeScript",
-      "Tailwind CSS",
-      "Figma",
-      "Responsive UI",
-    ],
-    [
-      "Backend & Infrastructure",
-      "Python",
-      "FastAPI",
-      "SQLAlchemy",
-      "Node.js",
-      "RESTful APIs",
-      "AWS (ECS, S3)",
-      "Docker",
-      "Kubernetes",
-    ],
-    [
-      "Databases & Data Stores",
-      "PostgreSQL",
-      "MSSQL",
-      "Redis",
-      "MongoDB",
-      "Qdrant",
-    ],
-    ["DevOps & Monitoring", "CI/CD (GitHub Actions)", "Datadog", "PagerDuty"],
-    ["Security Practices", "Secure Coding"],
-  ],
-  keyAchievements: [
-    "Successfully led complex projects from architecture to deployment, ensuring scalability, performance, and user satisfaction.",
-    "Implemented streamlined development practices and automated pipelines, significantly reducing deployment time and increasing reliability.",
-    "Mentored and developed technical teams, consistently fostering collaborative environments and continuous learning.",
-  ],
-  education: [
-    "Continuous professional development in modern software engineering practices, UX/UI design, cloud infrastructure, and data security.",
-  ],
-} as const;
-
-export const web3BlockchainSpecialistResume: Resume = {
-  id: "web3-blockchain-specialist",
+export const seniorFullStackWeb3EngineerResume: Resume = {
+  id: "senior-full-stack-web3-engineer",
   ...contactData,
   icon: <FaHatCowboy />,
-  title: "Senior Blockchain Software Engineer",
+  title: "Senior Full Stack Web3 Engineer",
   titles: ["Senior Software Engineer", "Web3 & Blockchain Specialist"],
-  highlightedTitle:
-    "Experienced Software Engineer | Web3 & Blockchain Specialist",
+  highlightedTitle: "Experienced Senior Full Stack Web3 Engineer",
   summary:
-    "Experienced Software Engineer with deep expertise in building scalable, user-centric blockchain and Web3 solutions. With over 20 years in software development and hands-on experience in TypeScript, React, Next.js, Solidity, and serverless architectures, I have successfully delivered complex projects across multiple domains. Passionate about leveraging blockchain technologies to drive innovation and deliver impactful user experiences.",
+    "Senior Full Stack Engineer with 20+ years of software development experience and a strong focus on building scalable and user-centric Web3 and blockchain solutions. Proficient in TypeScript, React, Next.js, Solidity, and serverless architectures. Proven ability to architect and deliver complex decentralized applications.",
   experience: [
     {
       title: "Principal Full Stack Engineer | Blockchain Development Lead",
@@ -271,32 +224,22 @@ export const web3BlockchainSpecialistResume: Resume = {
       accomplishments: [
         "Designed and implemented scalable Web3 applications, enhancing reliability and user engagement.",
         "Optimized performance through reduced API calls, enhanced error handling, and streamlined serverless architectures.",
-        "Established robust CI/CD pipelines, significantly improving developer productivity and application stability.",
+        "Established robust CI/CD pipelines for Web3 projects, improving developer productivity and application stability.",
       ],
       techStack:
-        "TypeScript, React, Next.js, Solidity, Serverless Architectures, AWS, GCP, Ethers.js, Web3.js, Viem, Wagmi, Tailwind",
+        "TypeScript, React, Next.js, Solidity, Ethers.js, Web3.js, Viem, Wagmi, Serverless Architectures, AWS, GCP, CI/CD",
     },
     {
       title: "Owner/Operator | Blockchain & Web3 Specialist",
       company: "CuriouslyCory Corp",
       period: "Feb 2021 - March 2022",
       accomplishments: [
-        "Developed scalable serverless solutions for complex NFT processing for MechaChaotic Forge.",
-        "Crafted interactive Web3 experiences, including smart contract integration and user-friendly front-ends for Cozy Express.",
-        "Built robust, scalable NFT marketplace and lending platform for LiqdNFT.com.",
+        "Developed scalable serverless solutions for complex NFT processing (MechaChaotic Forge).",
+        "Crafted interactive Web3 experiences with smart contract integration (Cozy Express).",
+        "Built a robust and scalable NFT marketplace and lending platform (LiqdNFT.com).",
       ],
       techStack:
-        "TypeScript, React, Next.js, Solidity, Smart Contract Development, Web3.js, Hardhat, Tailwind, Wagmi, Viem",
-    },
-    {
-      title: "Senior Systems Engineer",
-      company: "Lighthouse Global Inc.",
-      period: "Nov 2020 - Feb 2022",
-      accomplishments: [
-        "Architected and implemented scalable solutions for enterprise applications, emphasizing performance and usability.",
-        "Mentored and guided teams in adopting best practices for agile development and code quality.",
-      ],
-      techStack: "ServiceNow, AngularJS",
+        "TypeScript, React, Next.js, Solidity, Smart Contract Development, Web3.js, Hardhat, IPFS",
     },
   ],
   skills: [
@@ -305,83 +248,74 @@ export const web3BlockchainSpecialistResume: Resume = {
       "Ethereum",
       "Solidity",
       "Web3.js",
+      "Ethers.js",
+      "Viem",
+      "Wagmi",
       "NFTs",
-      "Smart Contract Development",
+      "Smart Contracts",
     ],
-    [
-      "Frontend",
-      "React",
-      "Next.js",
-      "Angular",
-      "TypeScript",
-      "Tailwind CSS",
-      "Redux",
-      "Jest",
-    ],
+    ["Frontend", "React", "Next.js", "TypeScript", "JavaScript"],
     [
       "Backend & Infrastructure",
       "Node.js",
       "Serverless Architectures",
       "AWS",
       "GCP",
-      "API Development",
     ],
-    ["Databases", "PostgreSQL", "Redis", "MongoDB"],
-    ["CI/CD & DevOps", "GitHub Actions", "Jenkins", "Docker", "Kubernetes"],
+    ["Other", "IPFS", "Hardhat"],
   ],
   keyAchievements: [
     "Successfully delivered multiple complex Web3 and blockchain projects from architecture to deployment.",
-    "Transitioned critical backend systems to serverless architectures, significantly improving scalability and reliability.",
-    "Implemented comprehensive testing and CI/CD strategies, streamlining deployment processes and enhancing product stability.",
+    "Transitioned backend systems to serverless architectures, significantly improving scalability and reliability for Web3 applications.",
+    "Implemented comprehensive testing and CI/CD strategies for blockchain projects.",
   ],
   education: [
-    "Ongoing professional training and self-directed learning in blockchain technology, Web3 innovation, and software engineering best practices.",
+    "Ongoing professional training and self-directed learning in blockchain technology and Web3 innovation.",
   ],
 } as const;
 
-export const aiMachineLearningSpecialistResume: Resume = {
-  id: "ai-machine-learning-specialist",
+export const seniorFullStackAiMlEngineerResume: Resume = {
+  id: "senior-full-stack-ai-ml-engineer",
   ...contactData,
   icon: <GiMagicHat />,
-  title: "AI & Machine Learning Specialist",
+  title: "Senior Full Stack AI/ML Engineer",
   titles: ["Senior Software Engineer", "AI & Machine Learning Specialist"],
   highlightedTitle:
-    "Seasoned Software Engineer | AI & Machine Learning Specialist",
+    "Experienced Senior Full Stack Engineer with AI/ML Expertise",
   summary:
-    "Seasoned Software Engineer with over 20 years of experience, specializing in AI-driven solutions and scalable web applications. Skilled in integrating advanced machine learning techniques, generative AI, and intelligent automation to enhance user experiences and business outcomes. Passionate about leveraging cutting-edge AI technologies to solve complex problems and drive innovation.",
+    "Senior Full Stack Engineer with 20+ years of experience specializing in integrating AI and Machine Learning into scalable web applications. Proficient in Python, TypeScript, LangChain, LangGraph, n8n, React, Next.js, and cloud platforms (AWS, GCP). Proven ability to develop and deploy AI-driven solutions to enhance user experiences and business outcomes.",
   experience: [
     {
       title: "Principal Full Stack Engineer",
       company: "Sudorandom",
       period: "March 2022 - Present",
       accomplishments: [
-        "Implemented AI-driven solutions and optimized web performance using generative AI and intelligent context management.",
-        "Developed automated data processing and analytical systems to enhance user experiences.",
-        "Established robust CI/CD pipelines, significantly improving developer productivity and application stability.",
+        "Implemented AI-driven solutions, including generative AI and intelligent context management, to optimize web performance and user experience.",
+        "Developed automated data processing and analytical systems leveraging AI/ML techniques.",
+        "Established robust AI pipelines and integrated them into CI/CD processes.",
       ],
       techStack:
-        "Generative AI, Gemini, Python, TypeScript, React, Next.js, Serverless Architectures, AWS, GCP",
+        "Python, TensorFlow/PyTorch, Generative AI, LLMs, Vector Databases, Embeddings, TypeScript, React, Next.js, AWS, GCP, Serverless",
     },
     {
-      title: "Owner/Operator",
+      title: "Owner/Operator | AI & Machine Learning Specialist",
       company: "CuriouslyCory Corp",
       period: "Feb 2021 - March 2022",
       accomplishments: [
-        "Developed interactive experiences powered by generative AI for dynamic, context-aware storytelling.",
-        "Engineered sophisticated personal assistant leveraging LLMs, advanced context management, and memory systems.",
+        "Developed interactive storytelling experiences powered by generative AI.",
+        "Engineered a sophisticated personal assistant leveraging LLMs, advanced context management, and memory systems.",
       ],
       techStack:
-        "Generative AI, Large Language Models (LLMs), Context & Memory Management, Python, TypeScript, React, Next.js, Serverless Architectures, AWS, GCP",
+        "Python, Generative AI, Large Language Models (LLMs), Context & Memory Management",
     },
     {
       title: "Senior Systems Engineer",
       company: "Lighthouse Global Inc.",
       period: "Nov 2020 - Feb 2022",
       accomplishments: [
-        "Architected scalable systems integrating machine learning and AI, significantly improving product performance and usability.",
-        "Mentored engineering teams in adopting AI best practices and agile methodologies.",
+        "Architected scalable systems integrating machine learning and AI to improve product performance and usability.",
       ],
-      techStack: "Machine Learning, AI",
+      techStack: "Machine Learning, AI, Python",
     },
   ],
   skills: [
@@ -389,144 +323,30 @@ export const aiMachineLearningSpecialistResume: Resume = {
       "AI & Machine Learning",
       "Generative AI",
       "Large Language Models (LLMs)",
-      "Context & Memory Management",
+      "TensorFlow",
+      "PyTorch",
       "Vector Databases",
       "Embeddings",
     ],
-    [
-      "Programming & Frameworks",
-      "Python",
-      "TypeScript",
-      "React",
-      "Next.js",
-      "Node.js",
-    ],
-    [
-      "Cloud & Infrastructure",
-      "AWS",
-      "GCP",
-      "Serverless Architectures",
-      "Kubernetes",
-      "Docker",
-    ],
-    ["Databases & Data Management", "PostgreSQL", "Redis", "MongoDB", "SQL"],
-    ["CI/CD & DevOps", "GitHub Actions", "Jenkins", "Automated Testing"],
+    ["Programming", "Python", "TypeScript", "JavaScript"],
+    ["Frontend", "React", "Next.js"],
+    ["Backend & Cloud", "Node.js", "AWS", "GCP", "Serverless"],
+    ["Databases", "PostgreSQL", "Redis", "MongoDB"],
   ],
   keyAchievements: [
     "Successfully built and deployed sophisticated AI-driven applications, significantly enhancing user engagement and operational efficiency.",
-    "Developed robust and scalable AI infrastructure, enabling advanced data processing and intelligent automation.",
-    "Fostered a culture of continuous innovation, mentoring teams to effectively integrate cutting-edge AI solutions into product development cycles.",
+    "Developed robust and scalable AI infrastructure.",
+    "Integrated AI/ML pipelines into the software development lifecycle.",
   ],
   education: [
-    "Continuous self-directed learning in AI technologies, generative models, machine learning frameworks, and software engineering best practices.",
-  ],
-} as const;
-
-export const apiBackendSpecialistResume: Resume = {
-  id: "api-backend-specialist",
-  ...contactData,
-  icon: <FaCode />,
-  title: "API Backend Specialist",
-  titles: ["Senior Software Engineer", "API & Backend Specialist"],
-  highlightedTitle: "Experienced Senior Software Engineer",
-  summary:
-    " with over 20 years of expertise designing, developing, and scaling robust APIs and backend services. Proficient in TypeScript, Node.js, microservices, and cloud-based solutions. Passionate about crafting efficient, maintainable, and high-performance software solutions that align with organizational objectives.",
-  experience: [
-    {
-      title: "Principal Full Stack Engineer",
-      company: "Sudorandom",
-      period: "March 2022 - Present",
-      accomplishments: [
-        "Designed, implemented, and maintained scalable APIs and microservices using TypeScript and Node.js.",
-        "Enhanced system performance and reliability through optimized backend architectures and efficient CI/CD practices.",
-        "Collaborated with cross-functional teams to deliver high-quality features meeting rigorous performance and reliability standards.",
-      ],
-      techStack: "TypeScript, Node.js, Microservices, AWS, CI/CD",
-    },
-    {
-      title: "Owner & Lead Developer",
-      company: "CuriouslyCory Corp",
-      period: "July 2021 - April 2023",
-      accomplishments: [
-        "Engineered backend systems and robust APIs tailored to specific client needs.",
-        "Managed project lifecycles using Agile methodologies, from requirement gathering through deployment.",
-        "Utilized modern backend frameworks and cloud infrastructures to ensure scalability and performance.",
-      ],
-      techStack:
-        "TypeScript, Node.js, Express.js, RESTful APIs, Cloud Infrastructures",
-    },
-    {
-      title: "ServiceNow Software Development Engineer II",
-      company: "Lighthouse Global Inc.",
-      period: "Nov 2020 - Mar 2022",
-      accomplishments: [
-        "Developed comprehensive backend integrations, API endpoints, and custom services within ServiceNow.",
-        "Significantly improved backend reliability, scalability, and performance through effective service portal integrations and custom application development.",
-      ],
-      techStack: "ServiceNow APIs, Custom Services",
-    },
-    {
-      title: "Lead Systems Engineer",
-      company: "Insight Enterprises",
-      period: "Oct 2015 - Nov 2020",
-      accomplishments: [
-        "Led development of complex backend systems and integrations, enhancing overall system reliability and user experience.",
-        "Implemented scalable API solutions and conducted code reviews ensuring high-quality standards.",
-      ],
-      techStack: "Backend Systems, Integrations, Scalable APIs",
-    },
-    {
-      title: "Manager of Information Technology",
-      company: "Responsive Data",
-      period: "Mar 2007 - Oct 2015",
-      accomplishments: [
-        "Managed infrastructure and led backend development teams to deliver scalable, efficient web services and APIs.",
-        "Oversaw database administration and optimized backend processes for performance and scalability.",
-      ],
-      techStack: "Web Services, APIs, Database Administration",
-    },
-  ],
-  skills: [
-    ["Programming Languages", "TypeScript", "JavaScript", "Python", "Golang"],
-    [
-      "Frameworks & Technologies",
-      "Node.js",
-      "Express.js",
-      "Fastify",
-      "Nest.js",
-      "Flask",
-    ],
-    [
-      "Cloud & Infrastructure",
-      "GCP",
-      "Serverless Architectures",
-      "Docker",
-      "Kubernetes",
-      "CI/CD (GitHub Actions, Jenkins)",
-    ],
-    ["Databases", "PostgreSQL", "Redis", "MongoDB", "MySQL"],
-    [
-      "Development Practices",
-      "Agile/Scrum",
-      "Unit & Integration Testing",
-      "Microservices Architecture",
-    ],
-  ],
-  keyAchievements: [
-    "Successfully delivered high-performance, scalable API-driven solutions, significantly improving product reliability and user experience.",
-    "Streamlined backend development workflows through advanced tooling, automation, and best practices.",
-    "Fostered collaborative engineering cultures, mentoring teams in effective backend development methodologies.",
-  ],
-  education: [
-    "Ongoing professional development in cloud computing, software architecture, and backend development best practices.",
+    "Continuous self-directed learning in AI technologies, generative models, and machine learning frameworks.",
+    "Completed a deep dive AI/ML course from udacity.com.",
   ],
 } as const;
 
 export const resumes: Resume[] = [
-  seniorFullStackEngineerResume,
-  engineeringManagerResume,
-  leadUIDeveloperResume,
-  aiMachineLearningSpecialistResume,
-  web3BlockchainSpecialistResume,
-  apiBackendSpecialistResume,
+  principalFullStackEngineerResume,
+  engineeringManagerCtoResume,
+  seniorFullStackWeb3EngineerResume,
+  seniorFullStackAiMlEngineerResume,
 ] as const;
