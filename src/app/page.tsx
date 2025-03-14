@@ -82,8 +82,9 @@ export default function Home() {
         </Card>
       </section>
       <div className="mt-24 flex flex-col gap-y-24">
-        <div className="mb-10 w-full bg-foreground py-10 text-background dark:bg-gray-100/10 dark:text-foreground">
+        <div className="mb-10 w-full bg-foreground pb-10 pt-8 text-background dark:bg-gray-100/10 dark:text-foreground">
           <section className="container mx-2 flex flex-col gap-y-4 md:mx-auto">
+            <h2 className="mb-2 text-center text-3xl font-bold">My Links</h2>
             <div className="grid grid-cols-2 gap-4 md:grid-cols-6 lg:grid-cols-8">
               <Link href="/cv">
                 <div className="flex flex-col items-center gap-2 transition-all hover:scale-105 hover:text-orange-500">
