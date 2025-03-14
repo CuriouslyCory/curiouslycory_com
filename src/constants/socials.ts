@@ -10,11 +10,6 @@ import { FaBluesky } from "react-icons/fa6";
 export const SOCIALS = [
   { title: "GitHub", url: "https://github.com/CuriouslyCory", icon: FaGithub },
   {
-    title: "BlueSky",
-    url: "https://bsky.app/profile/curiouslycory.com",
-    icon: FaBluesky,
-  },
-  {
     title: "LinkedIn",
     url: "https://www.linkedin.com/in/corysougstad",
     icon: FaLinkedin,
@@ -38,5 +33,10 @@ export const SOCIALS = [
     title: "Instagram",
     url: "https://www.instagram.com/curiouslycory",
     icon: FaInstagram,
+  },
+  {
+    title: "BlueSky",
+    url: "https://bsky.app/profile/curiouslycory.com",
+    icon: FaBluesky,
   },
 ];
