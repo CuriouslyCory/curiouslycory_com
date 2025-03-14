@@ -9,6 +9,10 @@
   body {
     padding: 0;
     margin: 0;
+    background-color: white;
+    color: black;
+    font-size: 12pt;
+    line-height: 1.5;
   }
 
   /* Ensure the resume content fills the page nicely */
@@ -98,4 +102,35 @@
     color: #c25000 !important; /* Darker orange that prints better */
     font-weight: bold !important;
   }
+
+  .print\:hidden {
+    display: none !important;
+  }
+
+  .print\:border-none {
+    border: none !important;
+  }
+
+  .print\:p-0 {
+    padding: 0 !important;
+  }
+
+  .print\:shadow-none {
+    box-shadow: none !important;
+  }
+
+  /* Ensure page breaks don't occur in the middle of job sections */
+  .resume-section-title {
+    page-break-after: avoid;
+  }
+
+  /* Ensure links are visible in print */
+  a {
+    text-decoration: underline;
+  }
+}
+
+/* Ensure proper spacing in the PDF */
+@page {
+  margin: 15mm;
 }

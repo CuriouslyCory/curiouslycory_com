@@ -330,9 +330,92 @@ export const web3BlockchainSpecialistResume: Resume = {
   ],
 } as const;
 
+export const aiMachineLearningSpecialistResume: Resume = {
+  id: "ai-machine-learning-specialist",
+  ...contactData,
+  title: "AI & Machine Learning Specialist",
+  titles: ["Senior Software Engineer", "AI & Machine Learning Specialist"],
+  highlightedTitle:
+    "Seasoned Software Engineer | AI & Machine Learning Specialist",
+  summary:
+    "Seasoned Software Engineer with over 20 years of experience, specializing in AI-driven solutions and scalable web applications. Skilled in integrating advanced machine learning techniques, generative AI, and intelligent automation to enhance user experiences and business outcomes. Passionate about leveraging cutting-edge AI technologies to solve complex problems and drive innovation.",
+  experience: [
+    {
+      title: "Principal Full Stack Engineer",
+      company: "Sudorandom",
+      period: "March 2022 - Present",
+      accomplishments: [
+        "Implemented AI-driven solutions and optimized web performance using generative AI and intelligent context management.",
+        "Developed automated data processing and analytical systems to enhance user experiences.",
+        "Established robust CI/CD pipelines, significantly improving developer productivity and application stability.",
+      ],
+      techStack:
+        "Generative AI, Gemini, Python, TypeScript, React, Next.js, Serverless Architectures, AWS, GCP",
+    },
+    {
+      title: "Owner/Operator",
+      company: "CuriouslyCory Corp",
+      period: "Feb 2021 - March 2022",
+      accomplishments: [
+        "Developed interactive experiences powered by generative AI for dynamic, context-aware storytelling.",
+        "Engineered sophisticated personal assistant leveraging LLMs, advanced context management, and memory systems.",
+      ],
+      techStack:
+        "Generative AI, Large Language Models (LLMs), Context & Memory Management, Python, TypeScript, React, Next.js, Serverless Architectures, AWS, GCP",
+    },
+    {
+      title: "Senior Systems Engineer",
+      company: "Lighthouse Global Inc.",
+      period: "Nov 2020 - Feb 2022",
+      accomplishments: [
+        "Architected scalable systems integrating machine learning and AI, significantly improving product performance and usability.",
+        "Mentored engineering teams in adopting AI best practices and agile methodologies.",
+      ],
+      techStack: "Machine Learning, AI",
+    },
+  ],
+  skills: [
+    [
+      "AI & Machine Learning",
+      "Generative AI",
+      "Large Language Models (LLMs)",
+      "Context & Memory Management",
+      "Vector Databases",
+      "Embeddings",
+    ],
+    [
+      "Programming & Frameworks",
+      "Python",
+      "TypeScript",
+      "React",
+      "Next.js",
+      "Node.js",
+    ],
+    [
+      "Cloud & Infrastructure",
+      "AWS",
+      "GCP",
+      "Serverless Architectures",
+      "Kubernetes",
+      "Docker",
+    ],
+    ["Databases & Data Management", "PostgreSQL", "Redis", "MongoDB", "SQL"],
+    ["CI/CD & DevOps", "GitHub Actions", "Jenkins", "Automated Testing"],
+  ],
+  keyAchievements: [
+    "Successfully built and deployed sophisticated AI-driven applications, significantly enhancing user engagement and operational efficiency.",
+    "Developed robust and scalable AI infrastructure, enabling advanced data processing and intelligent automation.",
+    "Fostered a culture of continuous innovation, mentoring teams to effectively integrate cutting-edge AI solutions into product development cycles.",
+  ],
+  education: [
+    "Continuous self-directed learning in AI technologies, generative models, machine learning frameworks, and software engineering best practices.",
+  ],
+} as const;
+
 export const resumes: Resume[] = [
   seniorFullStackEngineerResume,
   engineeringManagerResume,
   leadUIDeveloperResume,
+  aiMachineLearningSpecialistResume,
   web3BlockchainSpecialistResume,
 ] as const;
