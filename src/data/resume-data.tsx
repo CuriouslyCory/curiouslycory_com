@@ -344,9 +344,134 @@ export const seniorFullStackAiMlEngineerResume: Resume = {
   ],
 } as const;
 
+export const aiWeb3FullStackEngineerResume: Resume = {
+  id: "ai-web3-full-stack-engineer",
+  ...contactData,
+  icon: <GiMagicHat />,
+  title: "Senior Full Stack AI/Web3 Engineer",
+  titles: ["Senior Full Stack Engineer", "AI/ML Engineer", "Web3 Engineer"],
+  highlightedTitle:
+    "Highly Experienced Senior Full Stack Engineer: AI/ML & Web3 Expertise",
+  summary:
+    "Senior Full Stack Engineer with 20+ years of experience architecting, developing, and deploying complex, scalable web applications, specializing in the convergence of AI/ML and Web3 technologies. Deep expertise in modern JavaScript/TypeScript ecosystems (React, Next.js, Node.js), Python, Solidity, cloud infrastructure (AWS, GCP), serverless architectures, and both traditional and vector databases. Proven ability to drive technical vision, optimize performance, and deliver innovative, user-centric solutions across decentralized and intelligent applications.",
+  experience: [
+    {
+      title: "Principal Full Stack Engineer | AI/Web3 Development",
+      company: "Sudorandom",
+      period: "March 2022 - Present",
+      accomplishments: [
+        "Led the design and implementation of full-stack solutions incorporating both AI and Web3 technologies, significantly enhancing user engagement and innovation.",
+        "Architected and deployed scalable Web3 applications with smart contract integration, ensuring security and immutability.",
+        "Implemented AI-driven features, including generative AI integrated into Web3 platforms.",
+        "Optimized performance through reduced API calls, enhanced error handling, streamlined serverless architectures, and intelligent caching strategies.",
+        "Established robust CI/CD pipelines for both AI/ML and Web3 projects, improving developer productivity and application stability.",
+      ],
+      techStack:
+        "TypeScript, React/Next.js, Node.js, Python, Solidity, Ethers.js, Web3.js, Viem, Wagmi, LangChain, LangGraph, n8n, TensorFlow/PyTorch, LLMs, Vector Databases, Embeddings, RESTful APIs, GraphQL, AWS, GCP, Serverless, Docker, Kubernetes, PostgreSQL, Redis, MongoDB, CI/CD",
+    },
+    {
+      title: "Owner/Operator | AI & Web3 Specialist",
+      company: "CuriouslyCory Corp",
+      period: "Feb 2021 - March 2022",
+      accomplishments: [
+        "Developed scalable serverless solutions for complex NFT processing with integrated AI-driven content generation.",
+        "Crafted interactive Web3 experiences with smart contract integration, enhanced by personalized user experiences via AI/ML.",
+        "Built a robust and scalable NFT marketplace and lending platform, incorporating AI-powered fraud detection and risk assessment.",
+      ],
+      techStack:
+        "TypeScript, React, Next.js, Node.js, Solidity, Smart Contract Development, Web3.js, Hardhat, IPFS, Python, Generative AI, LLMs, Context & Memory Management",
+    },
+    {
+      title: "Senior Systems Engineer",
+      company: "Lighthouse Global Inc.",
+      period: "Nov 2020 - Feb 2022",
+      accomplishments: [
+        "Architected scalable systems integrating machine learning and AI to improve product performance, usability, and blockchain security.",
+      ],
+      techStack: "Machine Learning, AI, Python, Blockchain Concepts",
+    },
+  ],
+  skills: [
+    [
+      "AI & Machine Learning",
+      "Generative AI",
+      "Large Language Models (LLMs)",
+      "LangChain",
+      "LangGraph",
+      "n8n",
+      "TensorFlow",
+      "PyTorch",
+      "Vector Databases",
+      "Embeddings",
+    ],
+    [
+      "Web3 & Blockchain",
+      "Ethereum",
+      "Solidity",
+      "Web3.js",
+      "Ethers.js",
+      "Viem",
+      "Wagmi",
+      "NFTs",
+      "Smart Contracts",
+      "IPFS",
+    ],
+    ["Frontend", "React", "Next.js", "TypeScript", "JavaScript", "HTML/CSS"],
+    [
+      "Backend & Cloud",
+      "Node.js",
+      "Python",
+      "Fastify",
+      "Nest.js",
+      "Serverless Architectures",
+      "AWS",
+      "GCP",
+      "Vercel",
+      "Netlify",
+    ],
+    [
+      "Databases",
+      "PostgreSQL",
+      "Redis",
+      "MongoDB",
+      "MSSQL",
+      "MySQL",
+      "SQLite",
+      "Pinecone",
+      "Qdrant",
+    ],
+    [
+      "DevOps",
+      "CI/CD",
+      "Playwright",
+      "Puppeteer",
+      "Jest",
+      "Mocha",
+      "Chai",
+      "Jasmine",
+      "Cypress",
+      "Docker",
+      "Kubernetes",
+    ],
+    ["Other", "Agile", "Problem-Solving", "Technical Leadership"],
+  ],
+  keyAchievements: [
+    "Successfully led the development and deployment of multiple complex projects integrating AI/ML and Web3 technologies from architecture to deployment.",
+    "Architected and delivered high-performance, scalable web applications and APIs, significantly enhancing user experience and reliability in both traditional and decentralized environments.",
+    "Transitioned backend systems to serverless architectures, significantly improving scalability and reliability for Web3 and AI/ML applications.",
+    "Implemented comprehensive testing and CI/CD strategies for blockchain and AI/ML projects.",
+    "Established and promoted best practices in software development, including CI/CD and automated testing, across all projects.",
+  ],
+  education: [
+    "Continuous self-directed learning in AI technologies, generative models, machine learning frameworks, blockchain technology, and Web3 innovation.",
+    "Completed a deep dive AI/ML course from udacity.com.",
+  ],
+} as const;
+
 export const resumes: Resume[] = [
   principalFullStackEngineerResume,
   engineeringManagerCtoResume,
   seniorFullStackWeb3EngineerResume,
   seniorFullStackAiMlEngineerResume,
+  // aiWeb3FullStackEngineerResume,
 ] as const;
