@@ -8,8 +8,12 @@ const contactData = {
   links: [
     { text: "https://curiouslycory.com", url: "https://curiouslycory.com" },
     {
-      text: "https://www.linkedin.com/in/corysougstad",
-      url: "https://www.linkedin.com/in/corysougstad",
+      text: "https://linkedin.com/in/corysougstad",
+      url: "https://linkedin.com/in/corysougstad",
+    },
+    {
+      text: "https://github.com/CuriouslyCory",
+      url: "https://github.com/CuriouslyCory",
     },
   ],
 };
@@ -27,7 +31,7 @@ export const principalFullStackEngineerResume: Resume = {
     {
       title: "Principal Full Stack Engineer",
       company: "Sudorandom",
-      period: "March 2022 - Present",
+      period: "March 2023 - Present",
       accomplishments: [
         "Led full-stack architecture for critical initiatives, resulting in significant performance improvements and enhanced user experience.",
         "Successfully transitioned backend systems to serverless architectures, improving scalability, reliability, and reducing operational costs.",
@@ -140,7 +144,7 @@ export const engineeringManagerCtoResume: Resume = {
     {
       title: "Principal Full Stack Engineer (Frontend Lead)",
       company: "Sudorandom Labs",
-      period: "March 2022 - Present",
+      period: "March 2023 - Present",
       accomplishments: [
         "Led and mentored frontend engineering teams, fostering a collaborative and innovation-driven environment.",
         "Defined technical direction and established development standards for frontend architecture.",
@@ -220,7 +224,7 @@ export const seniorFullStackWeb3EngineerResume: Resume = {
     {
       title: "Principal Full Stack Engineer | Blockchain Development Lead",
       company: "Sudorandom",
-      period: "March 2022 - Present",
+      period: "March 2023 - Present",
       accomplishments: [
         "Designed and implemented scalable Web3 applications, enhancing reliability and user engagement.",
         "Optimized performance through reduced API calls, enhanced error handling, and streamlined serverless architectures.",
@@ -288,7 +292,7 @@ export const seniorFullStackAiMlEngineerResume: Resume = {
     {
       title: "Principal Full Stack Engineer",
       company: "Sudorandom",
-      period: "March 2022 - Present",
+      period: "March 2023 - Present",
       accomplishments: [
         "Implemented AI-driven solutions, including generative AI and intelligent context management, to optimize web performance and user experience.",
         "Developed automated data processing and analytical systems leveraging AI/ML techniques.",
@@ -358,7 +362,7 @@ export const aiWeb3FullStackEngineerResume: Resume = {
     {
       title: "Principal Full Stack Engineer | AI/Web3 Development",
       company: "Sudorandom",
-      period: "March 2022 - Present",
+      period: "March 2023 - Present",
       accomplishments: [
         "Led the design and implementation of full-stack solutions incorporating both AI and Web3 technologies, significantly enhancing user engagement and innovation.",
         "Architected and deployed scalable Web3 applications with smart contract integration, ensuring security and immutability.",
@@ -473,5 +477,5 @@ export const resumes: Resume[] = [
   engineeringManagerCtoResume,
   seniorFullStackWeb3EngineerResume,
   seniorFullStackAiMlEngineerResume,
-  // aiWeb3FullStackEngineerResume,
+  aiWeb3FullStackEngineerResume,
 ] as const;
