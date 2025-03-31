@@ -477,5 +477,5 @@ export const resumes: Resume[] = [
   engineeringManagerCtoResume,
   seniorFullStackWeb3EngineerResume,
   seniorFullStackAiMlEngineerResume,
-  aiWeb3FullStackEngineerResume,
+  //aiWeb3FullStackEngineerResume,
 ] as const;

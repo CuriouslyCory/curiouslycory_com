@@ -197,13 +197,12 @@ function ResumeSelectorComponent({
   };
 
   return (
-    <div className="flex flex-col items-center justify-center gap-x-4 gap-y-2 md:flex-row print:hidden">
-      <div className="">
-        <span className="">I wear many hats, choose one:</span>
-      </div>
-      <div className="">
+    <div className="flex flex-col items-center justify-center gap-4 print:hidden">
+      {/* Mobile Select Menu */}
+      <div className="flex w-full flex-col items-center gap-4 md:hidden">
+        <span>I wear many hats, choose one:</span>
         <Select value={currentResumeId} onValueChange={handleResumeChange}>
-          <SelectTrigger>
+          <SelectTrigger className="w-[280px]">
             <SelectValue placeholder="Select a resume" />
           </SelectTrigger>
           <SelectContent>
@@ -218,6 +217,28 @@ function ResumeSelectorComponent({
           </SelectContent>
         </Select>
       </div>
+
+      {/* Desktop Card Grid */}
+      <div className="hidden w-full max-w-4xl grid-cols-2 gap-4 md:grid lg:grid-cols-4">
+        {resumes.map((resume) => (
+          <button
+            key={resume.id}
+            onClick={() => handleResumeChange(resume.id)}
+            className={`flex flex-col items-center justify-center gap-4 rounded-lg border p-6 text-center transition-all hover:border-orange-600 hover:bg-orange-50 dark:hover:bg-orange-950/20 ${
+              currentResumeId === resume.id
+                ? "border-orange-600 bg-orange-50 dark:bg-orange-950/20"
+                : "border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-950"
+            }`}
+          >
+            <div className="text-4xl text-orange-600">{resume.icon}</div>
+            <div className="text-lg font-semibold">{resume.title}</div>
+            <div className="text-sm text-gray-600 dark:text-gray-400">
+              {resume.titles[0]}
+            </div>
+          </button>
+        ))}
+      </div>
+
       <div className="flex gap-2">
         <Button variant="outline" size="sm" onClick={handlePrint}>
           <Printer className="mr-2 h-4 w-4" />
