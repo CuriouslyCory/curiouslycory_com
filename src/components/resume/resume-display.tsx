@@ -79,7 +79,7 @@ function ResumeContent({ defaultResume }: ResumeDisplayProps) {
                 >
                   {link.text}
                 </a>
-                <ExternalLink className="ext-link-icon h-3 w-3 flex-shrink-0 text-orange-500 print:hidden" />
+                <ExternalLink className="ext-link-icon h-3 w-3 shrink-0 text-orange-500 print:hidden" />
               </div>
             ))}
           </div>
