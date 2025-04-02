@@ -6,14 +6,14 @@ alwaysApply: true
 ## Main tech stack
 - Nextjs v15
 - React v19
-- tailwindcss v3
+- tailwindcss v4
 - Tanstack query (react-query)
 - shadcn/ui (components)
 - TRPC v11 (serverless functions/backend)
 - prisma orm (postgres)
 
 ## Folder Structure Meta
-.
+. // project root
 ├─ prisma  // prisma schema and migrations
 ├─ public  // images and other static files
 │  └─ favicon.ico
@@ -32,6 +32,7 @@ alwaysApply: true
 │  │  ├─ ui // shadcn/ui and other generic ui components
 │  │  ├─ <feature-name> // complex features should be grouped together in a folder
 │  │  └─ component-name.tsx // feature specific components that can be contained in a single file without being hard to read can be a single file.
+│  ├─ data // static data such as social media links, resume data, or other constants
 │  ├─ server // server only code, can not be referenced (imported) directly by frontend/client code. 
 │  │  ├─ auth.ts // next-auth server config
 │  │  ├─ db.ts // prisma-global server instance
@@ -49,12 +50,11 @@ alwaysApply: true
 │     └─ server.ts
 ├─ .env
 ├─ .env.example
-├─ .eslintrc.cjs
 ├─ .gitignore
+├─ eslint.config.js
 ├─ next-env.d.ts
 ├─ next.config.js
 ├─ package.json
 ├─ postcss.config.js
-├─ prettier.config.js
 ├─ README.md
 └─ tsconfig.json
