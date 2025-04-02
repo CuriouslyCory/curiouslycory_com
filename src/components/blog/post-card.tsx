@@ -27,7 +27,7 @@ export function PostCard({ post }: PostCardProps) {
     <Card className="hover:border-primary/50 flex h-full flex-col overflow-hidden">
       <Link href={`/blog/${post.slug}`} className="flex flex-1 flex-col">
         {post.coverImage && (
-          <div className="relative h-48 w-full overflow-hidden">
+          <div className="relative mb-2 h-48 w-full overflow-hidden">
             <Image
               src={post.coverImage}
               alt={post.title}

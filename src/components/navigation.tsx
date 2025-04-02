@@ -9,10 +9,17 @@ import { CcLogo } from "~/ui/cc-logo";
 const navItems = [
   { name: "Home", href: "/" },
   { name: "Resume/CV", href: "/cv" },
+  { name: "Blog", href: "/blog" },
 ];
 
 export function Navigation() {
   const pathname = usePathname();
+
+  const isActive = (href: string) => {
+    return (
+      pathname === href || (href === "/blog" && pathname.startsWith("/blog"))
+    );
+  };
 
   return (
     <nav className="bg-foreground text-background">
@@ -29,11 +36,15 @@ export function Navigation() {
                 className="hover:bg-primary-foreground hover:text-primary relative rounded-md px-3 py-2 text-sm font-medium transition-colors"
               >
                 {item.name}
-                {pathname === item.href && (
+                {isActive(item.href) && (
                   <motion.div
                     className="h-1 w-full bg-orange-500"
                     layoutId="navbar-active"
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    transition={{
+                      type: "spring",
+                      stiffness: 380,
+                      damping: 30,
+                    }}
                   />
                 )}
               </Link>

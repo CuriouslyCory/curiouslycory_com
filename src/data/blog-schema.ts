@@ -26,10 +26,19 @@ export const postSearchParamsSchema = z.object({
   q: z.string().optional(),
   tag: z.string().optional(),
   featured: z.boolean().optional(),
+  year: z.coerce.number().optional(),
+  month: z.coerce.number().optional(),
   page: z.coerce.number().default(1),
   perPage: z.coerce.number().default(10),
+});
+
+export const postDateAggregationSchema = z.object({
+  year: z.number(),
+  month: z.number().optional(),
+  count: z.number(),
 });
 
 export type Tag = z.infer<typeof tagSchema>;
 export type Post = z.infer<typeof postSchema>;
 export type PostSearchParams = z.infer<typeof postSearchParamsSchema>;
+export type PostDateAggregation = z.infer<typeof postDateAggregationSchema>;
