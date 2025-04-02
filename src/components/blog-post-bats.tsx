@@ -5,7 +5,7 @@ import {
   type HTMLMotionProps,
   motion,
   useInView,
-} from "framer-motion";
+} from "motion/react";
 import { toast } from "sonner";
 import { BatWings as BatWingSvg } from "~/components/bat-wings";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
@@ -235,7 +235,7 @@ export default function BlogPostBats() {
     <>
       {wildBats.length > 0 && (
         <div
-          className={cn("fixed left-0 top-0 h-screen w-screen", {
+          className={cn("fixed top-0 left-0 h-screen w-screen", {
             "cursor-none": activeInventoryItem?.name === "net",
           })}
         >
@@ -337,7 +337,7 @@ function BatWings({ children }: { children: React.ReactNode }) {
   return (
     <div
       className={cn(
-        "flex animate-rotate-15 items-center justify-center overflow-hidden align-top hover:animate-none",
+        "animate-rotate-15 flex items-center justify-center overflow-hidden align-top hover:animate-none",
         isPaused && "animate-none",
       )}
       onClick={() => setIsPaused(!isPaused)}

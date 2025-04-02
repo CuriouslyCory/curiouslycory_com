@@ -37,7 +37,7 @@ const robotoSerif = Roboto_Serif({
 
 export const metadata: Metadata = {
   title: "CuriouslyCory.com",
-  description: "CuriouslyCory's Curious Corner",
+  description: "CuriouslyCory's Curious Corner of the Internet | Web Developer",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
@@ -48,7 +48,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "bg-background font-sans text-foreground antialiased",
+          "bg-background text-foreground font-sans antialiased",
           raleway.variable,
           oxygenMono.variable,
           oswald.variable,
@@ -67,7 +67,7 @@ export default function RootLayout({
                 <Toaster position="bottom-right" richColors />
                 <Navigation />
                 <main className="">{children}</main>
-                <footer className="mt-12 bg-secondary py-4">
+                <footer className="bg-secondary mt-12 py-4">
                   <div className="container mx-auto text-center text-sm">
                     © {new Date().getFullYear()} CuriouslyCory. All rights
                     reserved.

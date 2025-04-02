@@ -28,7 +28,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   blogPosts.posts.forEach((post) => {
     sitemap.push({
       url: `https://curiouslycory.com/blog/${post.slug}`,
-      lastModified: post.publishedAt ?? new Date(),
+      lastModified: post.updatedAt,
       changeFrequency: "daily",
       priority: 0.5,
     });
