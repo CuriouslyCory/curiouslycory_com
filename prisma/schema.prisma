@@ -15,15 +15,33 @@ datasource db {
 }
 
 model Post {
-    id        Int      @id @default(autoincrement())
-    name      String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+    id          String    @id @default(cuid())
+    title       String
+    slug        String    @unique
+    content     String?   @db.Text
+    excerpt     String?   @db.Text
+    coverImage  String?
+    published   Boolean   @default(false)
+    featured    Boolean   @default(false)
+    createdAt   DateTime  @default(now())
+    updatedAt   DateTime  @updatedAt
+    publishedAt DateTime?
+    tags        Tag[]     @relation("PostToTag")
+    author      User      @relation(fields: [authorId], references: [id])
+    authorId    String
 
-    createdBy   User   @relation(fields: [createdById], references: [id])
-    createdById String
+    @@index([slug])
+    @@index([published])
+    @@index([featured])
+}
 
-    @@index([name])
+model Tag {
+    id    String @id @default(cuid())
+    name  String @unique
+    slug  String @unique
+    posts Post[] @relation("PostToTag")
+
+    @@index([slug])
 }
 
 // Necessary for Next auth

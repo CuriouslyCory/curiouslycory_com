@@ -1,6 +1,7 @@
 import { postRouter } from "~/server/api/routers/post";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 import { bskyRouter } from "./routers/bsky";
+import { blogRouter } from "./routers/blog";
 
 /**
  * This is the primary router for your server.
@@ -10,6 +11,7 @@ import { bskyRouter } from "./routers/bsky";
 export const appRouter = createTRPCRouter({
   bsky: bskyRouter,
   post: postRouter,
+  blog: blogRouter,
 });
 
 // export type definition of API
