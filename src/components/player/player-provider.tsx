@@ -2,7 +2,7 @@
 
 import {
   createContext,
-  useContext,
+  use,
   useEffect,
   useState,
   type ReactNode,
@@ -203,7 +203,7 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
 
 // Create hook for using the context
 export function usePlayer() {
-  const context = useContext(PlayerContext);
+  const context = use(PlayerContext);
   if (context === undefined) {
     throw new Error("usePlayer must be used within a PlayerProvider");
   }
