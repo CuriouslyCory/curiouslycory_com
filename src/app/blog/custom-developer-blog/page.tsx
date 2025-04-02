@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Button } from "~/components/ui/button";
 
 /* 
@@ -13,12 +14,15 @@ tags: nextjs,typescript,tutorial
 */
 
 export default async function HelloWorldPost() {
-  // Get the post metadata from the database (indexed at build time)
-  // const post = await api.blog.getBySlug({ slug: "hello-world" });
-
   return (
     <div className="mx-auto max-w-3xl">
-      {/* Custom title section with animation */}
+      <Image
+        src="/images/blog/default.png"
+        alt="Image of an astronaut space suit holding a string attached to the hemlet that is floating like a helium balloon. The space suit is empty, floating in space, overlooking the earth blow."
+        width={1000}
+        height={1000}
+        className="flex-1"
+      />
       <div className="mb-12 text-center">
         <h1 className="animate-fade-in from-primary to-secondary bg-gradient-to-r bg-clip-text text-5xl font-bold text-transparent">
           Hello World!
@@ -86,20 +90,6 @@ export default async function HelloWorldPost() {
           </Button>
         </div>
       </div>
-
-      {/* Display tags from the indexed metadata
-      {post?.tags && post.tags.length > 0 && (
-        <div className="mt-8">
-          <h3 className="mb-4 text-lg font-medium">Tags:</h3>
-          <div className="flex flex-wrap gap-2">
-            {post.tags.map((tag) => (
-              <Badge key={tag.id} variant="secondary">
-                {tag.name}
-              </Badge>
-            ))}
-          </div>
-        </div>
-      )} */}
     </div>
   );
 }
