@@ -1,4 +1,3 @@
-import { postRouter } from "~/server/api/routers/post";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 import { bskyRouter } from "./routers/bsky";
 import { blogRouter } from "./routers/blog";
@@ -10,7 +9,6 @@ import { blogRouter } from "./routers/blog";
  */
 export const appRouter = createTRPCRouter({
   bsky: bskyRouter,
-  post: postRouter,
   blog: blogRouter,
 });
 

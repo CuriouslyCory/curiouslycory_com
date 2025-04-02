@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { type Prisma } from "@prisma/client";
 import {
   createTRPCRouter,
   publicProcedure,
@@ -14,7 +15,7 @@ export const blogRouter = createTRPCRouter({
       const skip = (page - 1) * perPage;
 
       // Query builder
-      const query = {
+      const query: Prisma.PostFindManyArgs = {
         where: {
           published: true,
           ...(featured ? { featured: true } : {}),
@@ -22,8 +23,18 @@ export const blogRouter = createTRPCRouter({
           ...(q
             ? {
                 OR: [
-                  { title: { contains: q, mode: "insensitive" } },
-                  { content: { contains: q, mode: "insensitive" } },
+                  {
+                    title: {
+                      contains: q,
+                      mode: "insensitive" as Prisma.QueryMode,
+                    },
+                  },
+                  {
+                    content: {
+                      contains: q,
+                      mode: "insensitive" as Prisma.QueryMode,
+                    },
+                  },
                 ],
               }
             : {}),
@@ -106,25 +117,31 @@ export const blogRouter = createTRPCRouter({
   create: protectedProcedure
     .input(postSchema)
     .mutation(async ({ ctx, input }) => {
-      return ctx.db.post.create({
-        data: {
-          ...input,
-          author: {
-            connect: { id: ctx.session.user.id },
-          },
-          ...(input.tags && {
-            tags: {
-              connectOrCreate: input.tags.map((tag) => ({
-                where: { slug: tag.slug },
-                create: {
-                  name: tag.name,
-                  slug: tag.slug,
-                },
-              })),
-            },
-          }),
+      // Separate tags from other input data
+      const { tags, ...postData } = input;
+
+      // Prepare the create data with proper structure for Prisma
+      const data: Prisma.PostCreateInput = {
+        ...postData,
+        author: {
+          connect: { id: ctx.session.user.id },
         },
-      });
+      };
+
+      // Add tags relation if tags exist
+      if (tags && tags.length > 0) {
+        data.tags = {
+          connectOrCreate: tags.map((tag) => ({
+            where: { slug: tag.slug },
+            create: {
+              name: tag.name,
+              slug: tag.slug,
+            },
+          })),
+        };
+      }
+
+      return ctx.db.post.create({ data });
     }),
 
   update: protectedProcedure
@@ -135,7 +152,8 @@ export const blogRouter = createTRPCRouter({
       }),
     )
     .mutation(async ({ ctx, input }) => {
-      const { id, data } = input;
+      const { id, data: inputData } = input;
+      const { tags, ...postData } = inputData;
 
       // Get the current post
       const currentPost = await ctx.db.post.findUnique({
@@ -152,23 +170,28 @@ export const blogRouter = createTRPCRouter({
         throw new Error("Not authorized to update this post");
       }
 
+      // Prepare update data with proper structure for Prisma
+      const data: Prisma.PostUpdateInput = {
+        ...postData,
+      };
+
+      // Add tags relation if tags exist
+      if (tags && tags.length > 0) {
+        data.tags = {
+          set: [], // First disconnect all tags
+          connectOrCreate: tags.map((tag) => ({
+            where: { slug: tag.slug },
+            create: {
+              name: tag.name,
+              slug: tag.slug,
+            },
+          })),
+        };
+      }
+
       return ctx.db.post.update({
         where: { id },
-        data: {
-          ...data,
-          ...(data.tags && {
-            tags: {
-              set: [], // First disconnect all tags
-              connectOrCreate: data.tags.map((tag) => ({
-                where: { slug: tag.slug },
-                create: {
-                  name: tag.name,
-                  slug: tag.slug,
-                },
-              })),
-            },
-          }),
-        },
+        data,
       });
     }),
 
