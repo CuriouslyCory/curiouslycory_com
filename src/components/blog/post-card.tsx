@@ -33,7 +33,6 @@ export function PostCard({ post }: PostCardProps) {
               alt={post.title}
               fill
               className="object-cover transition-transform duration-300 hover:scale-105"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </div>
         )}

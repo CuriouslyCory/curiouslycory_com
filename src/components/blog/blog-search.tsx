@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { Form, FormControl, FormField, FormItem } from "~/components/ui/form";
+import { SearchIcon } from "lucide-react";
 
 const formSchema = z.object({
   query: z.string().optional(),
@@ -61,7 +62,12 @@ export function BlogSearch() {
             </FormItem>
           )}
         />
-        <Button type="submit">Search</Button>
+        <Button type="submit" className="hidden md:block">
+          Search
+        </Button>
+        <Button type="submit" className="block md:hidden">
+          <SearchIcon className="h-4 w-4" />
+        </Button>
       </form>
     </Form>
   );

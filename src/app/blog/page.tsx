@@ -55,7 +55,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   }
 
   return (
-    <div className="container mx-auto py-8">
+    <div className="container px-4 py-8 md:mx-auto">
       <div className="mb-8 space-y-4">
         <h1 className="text-4xl font-bold">Blog</h1>
         <p className="text-muted-foreground">
@@ -65,7 +65,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
         <ActiveFilters />
       </div>
 
-      <div className="flex gap-8">
+      <div className="flex flex-col gap-8 md:flex-row">
         {/* Sidebar */}
         <div className="w-40 flex-shrink-0">
           <DateFilter />

@@ -33,7 +33,7 @@ export function Navigation() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="hover:bg-primary-foreground hover:text-primary relative rounded-md px-3 py-2 text-sm font-medium transition-colors"
+                className="hover:bg-primary-foreground hover:text-primary relative rounded-md px-0 py-2 text-sm font-medium transition-colors md:px-3"
               >
                 {item.name}
                 {isActive(item.href) && (
