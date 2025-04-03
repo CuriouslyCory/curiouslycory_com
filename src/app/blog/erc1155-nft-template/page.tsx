@@ -10,7 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 title: Build Your NFT Project in Minutes
 excerpt: How to use the ERC1155 monorepo template to launch your own NFT collection
 coverImage: /images/blog/erc1155-nft-template.png
-publishedAt: 2025-05-01
+publishedAt: 2025-04-02
 featured: false
 published: true
 tags: web3,ethereum,nft,nextjs,typescript,solidity,hardhat

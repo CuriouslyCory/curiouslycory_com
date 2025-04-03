@@ -3,7 +3,7 @@
 title: Hello World - My First (new) Blog Post
 excerpt: Just saying hi!
 coverImage: /images/blog/hello-world.png
-publishedAt: 2025-04-02
+publishedAt: 2025-04-01
 featured: false
 published: true
 tags: nextjs,typescript,tutorial

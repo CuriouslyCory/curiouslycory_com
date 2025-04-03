@@ -9,7 +9,7 @@ import { GraduationCap, Gamepad2, Code, Heart } from "lucide-react";
 title: Reviving Number Munchers - A Math Game for the Modern Web
 excerpt: How I reimagined the classic educational game to help my son improve his math skills
 coverImage: /images/blog/number-munchers-clone.png
-publishedAt: 2025-06-01
+publishedAt: 2025-04-02
 featured: false
 published: true
 tags: nextjs,react,game,education,math,nostalgia

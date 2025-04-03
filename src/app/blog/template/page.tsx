@@ -7,7 +7,7 @@ import { Button } from "~/components/ui/button";
 title: Hello World - My First Custom Blog Post
 excerpt: An example of how to create custom blog posts with rich features while still having them indexed.
 coverImage: /images/blog/hello-world.png
-publishedAt: 2025-04-02
+publishedAt: 2025-04-01
 featured: false
 tags: nextjs,typescript,tutorial
 --- 
