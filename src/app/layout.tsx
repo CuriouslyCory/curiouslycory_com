@@ -39,6 +39,14 @@ export const metadata: Metadata = {
   title: "CuriouslyCory.com",
   description: "CuriouslyCory's Curious Corner of the Internet | Web Developer",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
+  metadataBase: new URL("https://curiouslycory.com"),
+  openGraph: {
+    title: "CuriouslyCory.com",
+    description:
+      "CuriouslyCory's Curious Corner of the Internet | Web Developer",
+    url: "https://curiouslycory.com",
+    siteName: "CuriouslyCory.com",
+  },
 };
 
 export default function RootLayout({
