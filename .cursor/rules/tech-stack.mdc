@@ -31,7 +31,7 @@ alwaysApply: true
 │  ├─ components
 │  │  ├─ ui // shadcn/ui and other generic ui components
 │  │  ├─ <feature-name> // complex features should be grouped together in a folder
-│  │  └─ component-name.tsx // feature specific components that can be contained in a single file without being hard to read can be a single file.
+│  │  └─ component-name.tsx // feature specific components that can be contained in a single file without exceeding 500 lines
 │  ├─ data // static data such as social media links, resume data, or other constants
 │  ├─ server // server only code, can not be referenced (imported) directly by frontend/client code. 
 │  │  ├─ auth.ts // next-auth server config
