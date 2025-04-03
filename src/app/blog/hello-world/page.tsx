@@ -4,13 +4,30 @@ title: Hello World - My First (new) Blog Post
 excerpt: Just saying hi!
 coverImage: /images/blog/hello-world.png
 publishedAt: 2025-04-02
-featured: true
+featured: false
 published: true
 tags: nextjs,typescript,tutorial
 ---
 */
 
 import Image from "next/image";
+
+export const metadata = {
+  title: "Hello World - My First (new) Blog Post",
+  description: "Just saying hi!",
+  openGraph: {
+    images: [
+      {
+        url: "/images/blog/hello-world.png",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Hello World - My First (new) Blog Post",
+    description: "Just saying hi!",
+  },
+};
 
 export default async function HelloWorldPost() {
   return (

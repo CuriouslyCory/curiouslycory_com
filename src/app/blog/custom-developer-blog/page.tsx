@@ -12,11 +12,30 @@ title: The Best of Both Worlds
 excerpt: How to build a blog with fully custom pages while keeping database features
 coverImage: /images/blog/default.png
 publishedAt: 2025-04-02
-featured: true
+featured: false
 published: true
 tags: nextjs,typescript,tutorial,react
 --- 
 */
+
+export const metadata = {
+  title: "The Best of Both Worlds",
+  description:
+    "How to build a blog with fully custom pages while keeping database features",
+  openGraph: {
+    images: [
+      {
+        url: "/images/blog/default.png",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "The Best of Both Worlds",
+    description:
+      "How to build a blog with fully custom pages while keeping database features",
+  },
+};
 
 export default async function CustomDeveloperBlog() {
   return (
