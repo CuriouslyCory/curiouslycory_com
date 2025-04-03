@@ -8,7 +8,7 @@ import { motion } from "motion/react";
 
 export const MyLinks = (): ReactNode => {
   return (
-    <div className="bg-foreground text-background dark:text-foreground w-full pt-8 pb-10 dark:bg-gray-100/10">
+    <div className="bg-foreground text-background dark:text-foreground w-full pt-8 pb-14 dark:bg-gray-100/10">
       <div className="container mx-2 flex flex-col gap-y-4 md:mx-auto">
         <h2 className="mb-2 text-center text-3xl font-bold">My Links</h2>
         <div className="grid grid-cols-2 gap-4 md:grid-cols-6 lg:grid-cols-8">
