@@ -19,7 +19,7 @@ title: Building an AI-Powered Telegram Bot with Fastify
 excerpt: Learn how to create an intelligent Telegram bot that leverages Google's Gemini LLM and tool-based capabilities
 coverImage: /images/blog/fastify-telegram-bot.png
 publishedAt: 2025-05-15
-featured: true
+featured: false
 published: true
 tags: fastify,telegram,bot,llm,google,gemini,typescript,nodejs
 --- 
