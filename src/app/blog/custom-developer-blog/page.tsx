@@ -10,7 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 ---bm
 title: The Best of Both Worlds
 excerpt: How to build a blog with fully custom pages while keeping database features
-coverImage: /images/blog/default.png
+coverImage: /images/blog/the-best-of-both-worlds.png
 publishedAt: 2025-04-02
 featured: false
 published: true
@@ -25,7 +25,7 @@ export const metadata = {
   openGraph: {
     images: [
       {
-        url: "/images/blog/default.png",
+        url: "/images/blog/the-best-of-both-worlds.png",
       },
     ],
   },
@@ -34,6 +34,7 @@ export const metadata = {
     title: "The Best of Both Worlds",
     description:
       "How to build a blog with fully custom pages while keeping database features",
+    images: ["/images/blog/the-best-of-both-worlds.png"],
   },
 };
 
