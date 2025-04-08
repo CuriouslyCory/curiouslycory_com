@@ -3,6 +3,7 @@ import { Badge } from "~/components/ui/badge";
 import { Button } from "~/components/ui/button";
 import Image from "next/image";
 import { CodeBlock } from "~/components/ui/code-block";
+import BlogHero from "~/components/blog/hero";
 
 /*
 ---bm
@@ -37,28 +38,12 @@ export const metadata = {
 export default async function CapacitiveSensorPost() {
   return (
     <div className="mx-auto max-w-3xl">
-      <div className="relative">
-        <Image
-          src="/images/blog/diy-capacitive-sensor-for-arduino.png"
-          alt="DIY Capacitive Sensor for Arduino"
-          width={1000}
-          height={500}
-          className="rounded-xl object-cover shadow-lg"
-        />
-        <div className="from-background/80 absolute inset-0 bg-gradient-to-t to-transparent" />
-        <div className="absolute bottom-0 left-0 p-6">
-          <Badge className="mb-2" variant="outline">
-            Arduino
-          </Badge>
-          <h1 className="text-4xl font-bold text-white md:text-5xl">
-            DIY Capacitive Sensor
-            <br />
-            <span className="bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">
-              for Arduino
-            </span>
-          </h1>
-        </div>
-      </div>
+      <BlogHero
+        title="DIY Capacitive Sensor"
+        subtitle="for Arduino"
+        image="/images/blog/diy-capacitive-sensor-for-arduino.png"
+        tags={["Arduino", "Capacitive Sensor"]}
+      />
 
       {/* Custom content section */}
       <div className="prose prose-lg dark:prose-invert mt-12 mb-8 max-w-none">

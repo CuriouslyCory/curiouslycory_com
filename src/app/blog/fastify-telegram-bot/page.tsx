@@ -12,6 +12,7 @@ import {
   DatabaseIcon,
   RocketIcon,
 } from "lucide-react";
+import BlogHero from "~/components/blog/hero";
 
 /* 
 ---bm
@@ -48,28 +49,12 @@ export const metadata = {
 export default async function FastifyTelegramBot() {
   return (
     <article className="mx-4 flex max-w-3xl flex-col gap-8 md:mx-auto">
-      <div className="relative">
-        <Image
-          src="/images/blog/fastify-telegram-bot.png"
-          alt="Illustration of a robot with a Telegram logo, surrounded by AI components and tools, all built on a Fastify foundation."
-          width={1000}
-          height={500}
-          className="rounded-xl object-cover shadow-lg"
-        />
-        <div className="from-background/80 absolute inset-0 bg-gradient-to-t to-transparent" />
-        <div className="absolute bottom-0 left-0 p-6">
-          <Badge className="mb-2" variant="outline">
-            AI & Chat Bots
-          </Badge>
-          <h1 className="text-4xl font-bold text-white md:text-5xl">
-            Building an AI-Powered
-            <br />
-            <span className="bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">
-              Telegram Bot with Fastify
-            </span>
-          </h1>
-        </div>
-      </div>
+      <BlogHero
+        title="Building an AI-Powered"
+        subtitle="Telegram Bot with Fastify"
+        image="/images/blog/fastify-telegram-bot.png"
+        tags={["AI & Chat Bots", "Telegram", "Fastify"]}
+      />
 
       <div className="text-muted-foreground flex items-center gap-2 text-sm">
         <BrainCircuitIcon className="h-4 w-4" />
