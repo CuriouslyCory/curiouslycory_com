@@ -11,6 +11,7 @@ title: DIY Capacitive Sensor for Arduino
 excerpt: Creating a quick and simple capacitive sensor for Arduino porojects.
 coverImage: /images/blog/diy-capacitive-sensor-for-arduino.jpg
 publishedAt: 2018-12-31
+published: true
 featured: false
 tags: arduino,capacitive-sensor,diy,electronics
 --- 
