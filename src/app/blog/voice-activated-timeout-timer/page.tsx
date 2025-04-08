@@ -1,6 +1,4 @@
-import Image from "next/image";
 import { CodeBlock } from "~/components/ui/code-block";
-import BlogHero from "~/components/blog/hero";
 import Link from "next/link";
 
 /*
