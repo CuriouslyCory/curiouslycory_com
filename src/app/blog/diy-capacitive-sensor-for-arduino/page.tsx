@@ -1,6 +1,3 @@
-import { api } from "~/trpc/server";
-import { Badge } from "~/components/ui/badge";
-import { Button } from "~/components/ui/button";
 import Image from "next/image";
 import { CodeBlock } from "~/components/ui/code-block";
 import BlogHero from "~/components/blog/hero";
