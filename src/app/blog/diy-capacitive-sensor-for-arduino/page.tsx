@@ -6,7 +6,7 @@ import BlogHero from "~/components/blog/hero";
 ---bm
 title: DIY Capacitive Sensor for Arduino
 excerpt: Creating a quick and simple capacitive sensor for Arduino porojects.
-coverImage: /images/blog/diy-capacitive-sensor-for-arduino.jpg
+coverImage: /images/blog/diy-capacitive-sensor-for-arduino.png
 publishedAt: 2018-12-31
 published: true
 featured: false
@@ -105,8 +105,7 @@ void loop() {
         </p>
         <div className="flex justify-center">
           <iframe
-            width="560"
-            height="315"
+            className="aspect-video w-full"
             src="https://www.youtube.com/embed/qhvorTE1TGI?si=EnxVDHkS7GkaY0fD"
             title="YouTube video player"
             frameBorder="0"
