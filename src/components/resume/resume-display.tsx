@@ -3,12 +3,9 @@
 import { useSearchParams } from "next/navigation";
 import { resumes } from "~/data/resume-data";
 import type { Resume, Job } from "~/types/resume";
-import { ExternalLink, Download, Printer, Loader2 } from "lucide-react";
-import { Suspense, useState } from "react";
+import { ExternalLink, Printer } from "lucide-react";
+import { Suspense } from "react";
 import { Button } from "~/components/ui/button";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
-import { useTheme } from "next-themes";
 import { DownloadButton } from "./export";
 
 interface ResumeDisplayProps {
@@ -49,8 +46,8 @@ function ResumeContent({ defaultResume }: ResumeDisplayProps) {
 
       <div className="resume-content space-y-10">
         {/* Header */}
-        <div className="resume-section header-section flex flex-col justify-between md:flex-row">
-          <div>
+        <div className="resume-section header-section flex flex-col md:flex-row">
+          <div className="">
             <h1 className="resume-section-title text-3xl">
               {selectedResume.name}
             </h1>
@@ -62,7 +59,7 @@ function ResumeContent({ defaultResume }: ResumeDisplayProps) {
               ))}
             </div>
           </div>
-          <div className="mt-4 md:mt-0 md:text-right">
+          <div className="mt-4 ml-auto md:mt-0 md:text-right">
             <div className="text-gray-600 dark:text-gray-300">
               {selectedResume.email}
             </div>
@@ -89,7 +86,7 @@ function ResumeContent({ defaultResume }: ResumeDisplayProps) {
         <div className="resume-section summary-section">
           <h2 className="resume-section-title">Professional Summary</h2>
           <p className="">
-            <span className="oswald-align relative top-[1px] align-baseline font-oswald font-semibold text-orange-600">
+            <span className="oswald-align font-oswald relative top-[1px] align-baseline font-semibold text-orange-600">
               {selectedResume.highlightedTitle}
             </span>
             {" " + selectedResume.summary}
@@ -111,7 +108,7 @@ function ResumeContent({ defaultResume }: ResumeDisplayProps) {
                 <div key={index}>
                   {skillCategory.length > 0 && (
                     <div className="">
-                      <span className="oswald-align relative mr-2 align-baseline font-oswald font-semibold text-orange-600">
+                      <span className="oswald-align font-oswald relative mr-2 align-baseline font-semibold text-orange-600">
                         {skillCategory[0]}:
                       </span>
                       <span>{skillCategory.slice(1).join(", ")}</span>
@@ -190,7 +187,7 @@ function JobSection({ job }: { job: Job }) {
         <div className="font-semibold">{job.company}</div>
         <div className="text-gray-600 dark:text-gray-300">{job.period}</div>
       </div>
-      <div className="mb-3 font-oswald font-semibold text-orange-600">
+      <div className="font-oswald mb-3 font-semibold text-orange-600">
         Responsibilities and Accomplishments
       </div>
       <ul className="mb-4">
@@ -202,7 +199,7 @@ function JobSection({ job }: { job: Job }) {
         ))}
       </ul>
       <div>
-        <span className="oswald-align relative top-[1px] align-baseline font-oswald font-semibold text-orange-600">
+        <span className="oswald-align font-oswald relative top-[1px] align-baseline font-semibold text-orange-600">
           Tech Stack:{" "}
         </span>
         <span>{job.techStack}</span>

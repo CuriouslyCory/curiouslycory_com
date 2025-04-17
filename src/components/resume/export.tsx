@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useTheme } from "next-themes";
 import { type Resume } from "~/types/resume";
 import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
+import html2canvas from "html2canvas-pro";
 
 export function DownloadButton({ selectedResume }: { selectedResume: Resume }) {
   const [isGenerating, setIsGenerating] = useState(false);
