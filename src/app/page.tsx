@@ -63,10 +63,12 @@ export default function Home() {
           </CardHeader>
           <CardContent className="space-y-4">
             <p>
-              I&apos;m a code crafter who thrives on crafting smart, scalable
-              solutions using TypeScript and modern frameworks like Next.js,
-              React, and Angular. Currently, I&apos;m proudly part of the
-              talented team at{" "}
+              My main goal is to make websites that people actually want to use,
+              not ones that make them want to pull their hair out. Using
+              TypeScript and modern frameworks like Next.js, React, and Angular,
+              I&apos;ll create applications that work the way people want them
+              to, no instructions needed. Currently, I&apos;m proudly part of
+              the talented team at{" "}
               <a href="#" className="text-orange-500 hover:underline">
                 Sudorandom Labs
               </a>
