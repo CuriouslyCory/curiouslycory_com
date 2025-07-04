@@ -82,6 +82,7 @@ model User {
     sessions      Session[]
     posts         Post[]
     SharedCode    SharedCode[]
+    projects      Project[]
 }
 
 model VerificationToken {
@@ -99,4 +100,29 @@ model SharedCode {
     createdAt   DateTime @default(now())
     createdBy   User     @relation(fields: [createdById], references: [id])
     createdById String
+}
+
+model Project {
+    id              String    @id @default(cuid())
+    title           String
+    description     String    @db.Text
+    longDescription String?   @db.Text
+    image           String?
+    tags            String[] // Array of technology tags
+    url             String? // Live demo URL
+    githubUrl       String? // GitHub repository URL
+    category        String // e.g., "ai", "games", "blockchain", "web"
+    featured        Boolean   @default(false)
+    published       Boolean   @default(false)
+    order           Int       @default(0)
+    createdAt       DateTime  @default(now())
+    updatedAt       DateTime  @updatedAt
+    publishedAt     DateTime?
+    author          User      @relation(fields: [authorId], references: [id])
+    authorId        String
+
+    @@index([published])
+    @@index([featured])
+    @@index([category])
+    @@index([order])
 }

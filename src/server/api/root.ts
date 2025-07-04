@@ -2,6 +2,7 @@ import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 import { bskyRouter } from "./routers/bsky";
 import { blogRouter } from "./routers/blog";
 import { twitchRouter } from "./routers/twitch";
+import { projectsRouter } from "./routers/projects";
 
 /**
  * This is the primary router for your server.
@@ -12,6 +13,7 @@ export const appRouter = createTRPCRouter({
   bsky: bskyRouter,
   blog: blogRouter,
   twitch: twitchRouter,
+  projects: projectsRouter,
 });
 
 // export type definition of API
