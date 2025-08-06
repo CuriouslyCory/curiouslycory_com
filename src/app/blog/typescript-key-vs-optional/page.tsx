@@ -8,7 +8,7 @@ import { Badge } from "~/components/ui/badge";
 title: TypeScript Key vs Value Optional - A Critical Difference Every Developer Should Know
 excerpt: Understanding the crucial difference between optional properties and optional values in TypeScript, and why LLMs often get this wrong.
 coverImage: /images/blog/default.png
-publishedAt: 2025-01-16
+publishedAt: 2025-08-06
 featured: true
 published: true
 tags: typescript,beginners,patterns,best-practices
