@@ -14,7 +14,7 @@
     "lint": "next lint",
     "start": "next start",
     "blog:index": "node src/scripts/index-blog.js",
-    "prebuild": "npm run blog:index"
+    "prebuild": "pnpm blog:index"
   },
   "dependencies": {
     "@atproto/api": "^0.13.35",
