@@ -14,12 +14,12 @@
     "lint": "eslint .",
     "ralph": "STORIES=$(jq '.userStories | length' .agents/skills/ralph/scripts/prd.json) && .agents/skills/ralph/scripts/ralph.sh $((STORIES + 4))",
     "start": "next start",
-    "blog:index": "node src/scripts/index-blog.js",
+    "blog:index": "tsx src/scripts/index-blog.js",
     "prebuild": "pnpm blog:index"
   },
   "dependencies": {
     "@atproto/api": "^0.13.35",
-    "@auth/prisma-adapter": "^1.6.0",
+    "@auth/prisma-adapter": "^2.11.1",
     "@hookform/resolvers": "^5.2.2",
     "@prisma/adapter-pg": "^7.5.0",
     "@prisma/client": "^7.5.0",
@@ -89,6 +89,7 @@
     "prettier-plugin-tailwindcss": "^0.6.14",
     "prisma": "^7.5.0",
     "tailwindcss": "^4.2.2",
+    "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.57.1"
   },
@@ -102,6 +103,7 @@
       "@types/react-dom": "19.2.3"
     },
     "onlyBuiltDependencies": [
+      "esbuild",
       "prisma",
       "sharp"
     ]

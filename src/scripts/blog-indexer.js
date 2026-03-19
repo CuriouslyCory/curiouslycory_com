@@ -1,11 +1,13 @@
 import fs from "fs";
 import path from "path";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "../generated/prisma/client.js";
+import { PrismaPg } from "@prisma/adapter-pg";
 import matter from "gray-matter";
 import slugify from "slugify";
 import { z } from "zod";
 
-const prisma = new PrismaClient();
+const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
+const prisma = new PrismaClient({ adapter });
 
 // Define the schema for post metadata validation
 const PostMetadataSchema = z.object({
