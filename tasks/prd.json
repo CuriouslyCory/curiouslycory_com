@@ -16,7 +16,7 @@
         "`pnpm lint` passes"
       ],
       "priority": 1,
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -35,7 +35,7 @@
         "Typecheck passes"
       ],
       "priority": 2,
-      "passes": false,
+      "passes": true,
       "notes": "Follow prisma/upgrade-prompt.md for detailed guidance. The prisma.config.ts should use import.meta.dirname for path resolution."
     },
     {

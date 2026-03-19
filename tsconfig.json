@@ -30,7 +30,8 @@
       "~/components/*": ["./src/components/*"],
       "~/ui/*": ["./src/components/ui/*"],
       "~/data/*": ["./src/data/*"],
-      "~/types/*": ["./src/types/*"]
+      "~/types/*": ["./src/types/*"],
+      "~/generated/*": ["./src/generated/*"]
     }
   },
   "include": [
