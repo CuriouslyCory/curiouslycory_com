@@ -14,7 +14,7 @@
     "lint": "eslint .",
     "ralph": "STORIES=$(jq '.userStories | length' .agents/skills/ralph/scripts/prd.json) && .agents/skills/ralph/scripts/ralph.sh $((STORIES + 4))",
     "start": "next start",
-    "blog:index": "tsx src/scripts/index-blog.js",
+    "blog:index": "tsx src/scripts/index-blog.ts",
     "prebuild": "pnpm blog:index"
   },
   "dependencies": {
