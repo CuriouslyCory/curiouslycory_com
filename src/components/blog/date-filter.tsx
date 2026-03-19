@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   Accordion,
@@ -14,10 +14,6 @@ import { getMonthName } from "~/lib/date-utils";
 export function DateFilter() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [activeYearItem, setActiveYearItem] = useState<string | undefined>(
-    undefined,
-  );
-
   const selectedYear = searchParams.get("year")
     ? Number(searchParams.get("year"))
     : undefined;
@@ -25,21 +21,20 @@ export function DateFilter() {
     ? Number(searchParams.get("month"))
     : undefined;
 
+  const [manualYearItem, setManualYearItem] = useState<string | undefined>(
+    undefined,
+  );
+  const activeYearItem = selectedYear ? selectedYear.toString() : manualYearItem;
+  const setActiveYearItem = (value: string | undefined) => {
+    setManualYearItem(value);
+  };
+
   // Fetch date aggregations
   const { data: dateAggregations, isLoading } =
     api.blog.getDateAggregations.useQuery(undefined, {
       refetchOnWindowFocus: false,
       staleTime: 1000 * 60 * 5, // 5 minutes
     });
-
-  // Set active accordion item when year filter changes
-  useEffect(() => {
-    if (selectedYear) {
-      setActiveYearItem(selectedYear.toString());
-    } else {
-      setActiveYearItem(undefined);
-    }
-  }, [selectedYear]);
 
   const applyDateFilter = (year: number, month?: number) => {
     const params = new URLSearchParams(searchParams.toString());

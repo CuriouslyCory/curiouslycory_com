@@ -1,7 +1,7 @@
 "use client";
 
 import { ChevronUp } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useMounted } from "~/hooks/use-mounted";
 import { Button } from "~/components/ui/button";
 import {
   Drawer,
@@ -23,14 +23,10 @@ import { type InventoryItemId } from "./inventory/items";
 import { type QuestId } from "./quests";
 
 export function DebugConsole() {
-  const [isLocal, setIsLocal] = useState(false);
+  const isMounted = useMounted();
+  const isLocal = isMounted && typeof window !== "undefined" && window.location.hostname === "localhost";
   const { addInventoryItem, startQuest, updateQuestProgress, quests } =
     usePlayer();
-
-  // Check if we're on localhost
-  useEffect(() => {
-    setIsLocal(window.location.hostname === "localhost");
-  }, []);
 
   if (!isLocal) return null;
 

@@ -1,16 +1,12 @@
 "use client";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
 import { type SVGProps, memo } from "react";
+import { useMounted } from "~/hooks/use-mounted";
 import { cn } from "~/lib/utils";
 const SvgComponent = (props: SVGProps<SVGSVGElement>) => {
   const { resolvedTheme, setTheme } = useTheme();
-  const [isMounted, setIsMounted] = useState(false);
   const { className, ...svgProps } = props;
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  const isMounted = useMounted();
 
   if (!isMounted) {
     return null;

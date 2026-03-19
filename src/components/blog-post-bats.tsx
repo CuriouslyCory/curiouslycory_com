@@ -72,48 +72,47 @@ const WildBatPost = memo(
     onCatch,
     ...props
   }: { onCatch?: () => void } & HTMLMotionProps<"div">) => {
-    const randomKey = useMemo(() => Math.floor(Math.random() * 3) + 1, []);
+    const [randomKey] = useState(() => Math.floor(Math.random() * 3) + 1);
     const windowSize = useWindowSize();
 
-    // Wait for window size to be available
-    const [positions, setPositions] = useState<{
-      start?: Position;
-      current?: Position;
-    }>({});
+    const [initEdges] = useState(() => {
+      const startEdge = getRandomEdge();
+      return { startEdge, nextEdge: getRandomEdge(startEdge) };
+    });
 
-    // Initialize positions when window size is available
-    useEffect(() => {
-      if (!windowSize.width || !windowSize.height) return;
+    const positions = useMemo(() => {
+      if (!windowSize.width || !windowSize.height) return {};
+      const start = getEdgePosition(initEdges.startEdge, windowSize);
+      if (!start) return {};
+      const current = getEdgePosition(initEdges.nextEdge, windowSize);
+      return { start, current };
+    }, [windowSize, initEdges]);
 
-      const edge = getRandomEdge();
-      const start = getEdgePosition(edge, windowSize);
+    const [currentPos, setCurrentPos] = useState<Position | undefined>();
+    const activePositions = {
+      start: positions.start,
+      current: currentPos ?? positions.current,
+    };
 
-      if (start) {
-        const nextEdge = getRandomEdge(getCurrentEdge(start, windowSize));
-        const current = getEdgePosition(nextEdge, windowSize);
+    const getNextPosition = () => {
+      const pos = currentPos ?? positions.current;
+      if (!pos || !windowSize.width || !windowSize.height) return;
 
-        setPositions({ start, current });
-      }
-    }, [windowSize]);
-
-    const getNextPosition = useCallback(() => {
-      if (!positions.current || !windowSize.width || !windowSize.height) return;
-
-      const currentEdge = getCurrentEdge(positions.current, windowSize);
+      const currentEdge = getCurrentEdge(pos, windowSize);
       const nextEdge = getRandomEdge(currentEdge);
       return getEdgePosition(nextEdge, windowSize);
-    }, [positions, windowSize]);
+    };
 
-    if (!positions.start || !positions.current) return null;
+    if (!activePositions.start || !activePositions.current) return null;
 
     return (
       <motion.div
-        initial={positions.start}
-        animate={positions.current}
+        initial={activePositions.start}
+        animate={activePositions.current}
         transition={{ duration: ANIMATION_DURATION, ease: "linear" }}
         onAnimationComplete={() => {
           const next = getNextPosition();
-          if (next) setPositions((prev) => ({ ...prev, current: next }));
+          if (next) setCurrentPos(next);
         }}
         onClick={onCatch}
         {...props}
