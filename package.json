@@ -12,6 +12,7 @@
     "dev": "next dev --turbopack",
     "postinstall": "prisma generate",
     "lint": "next lint",
+    "ralph": "STORIES=$(jq '.userStories | length' .agents/skills/ralph/scripts/prd.json) && .agents/skills/ralph/scripts/ralph.sh $((STORIES + 4))",
     "start": "next start",
     "blog:index": "node src/scripts/index-blog.js",
     "prebuild": "pnpm blog:index"

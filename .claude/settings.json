@@ -10,7 +10,8 @@
       "Bash(pnpm type-check:*)",
       "Bash(pnpm info:*)",
       "Read(~/workspace/active-personal/curiuouslcory_com/**)",
-      "Skill(dev-browser:dev-browser)", 
+      "Read(//users/curiouslycory/workspace/active-personal/curiuouslcory_com/**)",
+      "Skill(dev-browser:dev-browser)",
       "WebFetch(domain:pnpm.io)",
       "WebFetch(domain:turbo.build)",
       "WebFetch(domain:www.typescriptlang.org)",
@@ -43,7 +44,8 @@
       "WebFetch(domain:vercel.com)",
       "WebFetch(domain:lodash.com)",
       "WebFetch(domain:code.claude.com)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(pnpm list:*)"
     ]
   }
 }
