@@ -7,9 +7,8 @@ You are an autonomous coding agent working on a software project.
 1. Read the PRD at `prd.json` (in the same directory as this file)
 2. Read the progress log at `progress.txt` (check Codebase Patterns section first)
 3. Check you're on the correct branch. The PRD `branchName` field contains the feature branch name (e.g., `feat/my-feature`).
-   - If the branch doesn't exist: create it from `develop` (`git checkout develop && git checkout -b <branchName>`)
-   - If the branch exists: check it out and ensure it's up to date with develop
-   - IMPORTANT: Always branch from `develop`, never from `main`
+   - If the branch doesn't exist: create it from `main` (`git checkout main && git checkout -b <branchName>`)
+   - If the branch exists: check it out and ensure it's up to date with main
 4. Pick the **highest priority** user story where `passes: false`
 5. Implement that single user story
 6. Run quality checks (e.g., typecheck, lint, test - use whatever your project requires)
@@ -18,7 +17,7 @@ You are an autonomous coding agent working on a software project.
 9. Update the PRD to set `passes: true` for the completed story
 10. Append your progress to `progress.txt`
 
-Note: Branch names use the `feat/` prefix (e.g., `feat/task-status`), not `ralph/`. This follows standard enterprise git flow where feature branches are PRed into `develop`.
+Note: Branch names use the `feat/` prefix (e.g., `feat/task-status`), not `ralph/`. This follows standard enterprise git flow where feature branches are PRed into `main`.
 
 ## Progress Report Format
 

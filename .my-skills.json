@@ -97,6 +97,15 @@
       "sourceType": "github",
       "computedHash": "10030c326a6cb5684c1b1f7000fa6a1d65deace93abcd2b1251af2eb4fe8eed8",
       "installedAt": "2026-03-19T19:25:18.161Z"
+    },
+    "prd": {
+      "source": "CuriouslyCory/skills",
+      "sourceType": "github",
+      "computedHash": "84ed168fc18a06febb66bed06b00ef09f707395c6dd52e8c63fa652fd3997715",
+      "installedAt": "2026-03-19T21:23:24.163Z",
+      "agents": [
+        "claude-code"
+      ]
     }
   }
 }
