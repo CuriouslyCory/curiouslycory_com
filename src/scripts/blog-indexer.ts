@@ -6,8 +6,14 @@ import matter from "gray-matter";
 import slugify from "slugify";
 import { z } from "zod";
 
-const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
-const prisma = new PrismaClient({ adapter });
+let prisma: PrismaClient;
+function getPrisma(): PrismaClient {
+  if (!prisma) {
+    const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
+    prisma = new PrismaClient({ adapter });
+  }
+  return prisma;
+}
 
 // Define the schema for post metadata validation
 const PostMetadataSchema = z.object({
@@ -33,7 +39,7 @@ async function getDefaultUser(): Promise<string> {
 
   // If we have a valid ID, check if it exists
   if (defaultUserId) {
-    const user = await prisma.user.findUnique({
+    const user = await getPrisma().user.findUnique({
       where: { id: defaultUserId },
     });
 
@@ -41,14 +47,14 @@ async function getDefaultUser(): Promise<string> {
   }
 
   // Otherwise, find or create a default user
-  const defaultUser = await prisma.user.findFirst({
+  const defaultUser = await getPrisma().user.findFirst({
     where: { email: 'blog@example.com' },
   });
 
   if (defaultUser) return defaultUser.id;
 
   // Create a default user as a last resort
-  const newUser = await prisma.user.create({
+  const newUser = await getPrisma().user.create({
     data: {
       name: 'Blog Author',
       email: 'blog@example.com',
@@ -135,7 +141,7 @@ export async function indexBlogPosts(): Promise<void> {
       console.log(`Indexing: ${postData.title} (${slug})`);
 
       // Upsert post to maintain index
-      const post = await prisma.post.upsert({
+      const post = await getPrisma().post.upsert({
         where: { slug },
         update: postData,
         create: postData,
@@ -145,7 +151,7 @@ export async function indexBlogPosts(): Promise<void> {
       const tagNames = metadata.tags;
       if (tagNames.length > 0) {
         // First, disconnect all existing tags
-        await prisma.post.update({
+        await getPrisma().post.update({
           where: { id: post.id },
           data: {
             tags: { set: [] },
@@ -156,13 +162,13 @@ export async function indexBlogPosts(): Promise<void> {
         for (const tagName of tagNames) {
           const tagSlug = slugify(tagName, { lower: true });
 
-          await prisma.tag.upsert({
+          await getPrisma().tag.upsert({
             where: { slug: tagSlug },
             update: { name: tagName },
             create: { name: tagName, slug: tagSlug },
           });
 
-          await prisma.post.update({
+          await getPrisma().post.update({
             where: { id: post.id },
             data: {
               tags: {
@@ -178,6 +184,6 @@ export async function indexBlogPosts(): Promise<void> {
   } catch (error) {
     console.error("Error indexing blog posts:", error);
   } finally {
-    await prisma.$disconnect();
+    await getPrisma().$disconnect();
   }
 }
