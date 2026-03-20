@@ -9,7 +9,12 @@ import { z } from "zod";
 let prisma: PrismaClient;
 function getPrisma(): PrismaClient {
   if (!prisma) {
-    const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
+    const connectionString = process.env.DATABASE_URL;
+    const needsSsl = connectionString?.includes("sslmode=require");
+    const adapter = new PrismaPg({
+      connectionString,
+      ...(needsSsl ? { ssl: { rejectUnauthorized: false } } : {}),
+    });
     prisma = new PrismaClient({ adapter });
   }
   return prisma;
