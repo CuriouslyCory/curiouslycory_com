@@ -9,8 +9,11 @@ import { z } from "zod";
 let prisma: PrismaClient;
 function getPrisma(): PrismaClient {
   if (!prisma) {
-    const connectionString = process.env.DATABASE_URL;
-    const needsSsl = connectionString?.includes("sslmode=require");
+    let connectionString = process.env.DATABASE_URL;
+    const needsSsl = connectionString?.includes("sslmode=");
+    if (needsSsl && connectionString) {
+      connectionString = connectionString.replace(/[?&]sslmode=[^&]*/g, "");
+    }
     const adapter = new PrismaPg({
       connectionString,
       ...(needsSsl ? { ssl: { rejectUnauthorized: false } } : {}),
