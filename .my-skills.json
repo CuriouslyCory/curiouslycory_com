@@ -106,6 +106,15 @@
       "agents": [
         "claude-code"
       ]
+    },
+    "ship-it": {
+      "source": "CuriouslyCory/skills",
+      "sourceType": "github",
+      "computedHash": "1969594ccdb865875d950ef4ef5ee38919b159707abd617ceb9e9b4d0e61dce0",
+      "installedAt": "2026-03-20T03:36:05.307Z",
+      "agents": [
+        "claude-code"
+      ]
     }
   }
 }
