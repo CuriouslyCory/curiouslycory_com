@@ -38,20 +38,41 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <section className="pt-10 text-center md:pt-16">
-        <ChatBubble
-          text="Hi, I'm CuriouslyCory, and I like to build things."
-          direction="bottom"
-          className="inline-block md:hidden"
-        />
-        <ChatBubble
-          text="Hi, I'm CuriouslyCory, and I like to build things."
-          direction="rightBottom"
-          className="hidden md:inline-block"
-        />
+      <section className="pt-10 md:pt-16">
+        {/* Mobile hero: ChatBubble + centered Astronaut */}
+        <div className="text-center md:hidden">
+          <ChatBubble
+            text="Hi, I'm CuriouslyCory, and I like to build things."
+            direction="bottom"
+            className="inline-block"
+          />
+          <div className="inline-block w-72 overflow-hidden align-top">
+            <Astronaut className="translate-y-1" />
+          </div>
+        </div>
 
-        <div className="inline-block w-72 overflow-hidden align-top">
-          <Astronaut className="translate-y-1" />
+        {/* Desktop hero: asymmetric two-column */}
+        <div className="mx-auto hidden max-w-6xl items-end justify-between px-4 md:flex md:px-6 lg:px-8">
+          <div className="max-w-lg">
+            <h1 className="font-oswald text-4xl font-bold tracking-tight">
+              Hi, I&apos;m{" "}
+              <span className="text-primary">CuriouslyCory</span>
+            </h1>
+            <p className="mt-4 text-xl text-muted-foreground">
+              I like to build things that people actually want to use.
+            </p>
+            <div className="mt-8 flex gap-x-4">
+              <Button asChild size="lg">
+                <Link href="/cv">View My Resume</Link>
+              </Button>
+              <Button asChild variant="outline" size="lg">
+                <Link href="/blog">Read My Blog</Link>
+              </Button>
+            </div>
+          </div>
+          <div className="w-72 flex-shrink-0">
+            <Astronaut className="translate-y-1" />
+          </div>
         </div>
       </section>
       <section className="max-w-3xl px-2 md:mx-auto">
@@ -102,7 +123,7 @@ export default function Home() {
           </CardContent>
         </Card>
       </section>
-      <section className="mt-24 flex justify-center gap-x-4">
+      <section className="mt-24 flex justify-center gap-x-4 md:hidden">
         <Button asChild size="lg">
           <Link href="/cv">View My Resume</Link>
         </Button>
