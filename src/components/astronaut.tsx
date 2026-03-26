@@ -1,35 +1,74 @@
 "use client";
 import { useTheme } from "next-themes";
-import { type SVGProps, memo } from "react";
+import { type SVGProps, memo, useEffect, useRef, useState } from "react";
 import { useMounted } from "~/hooks/use-mounted";
 import { cn } from "~/lib/utils";
 const SvgComponent = (props: SVGProps<SVGSVGElement>) => {
   const { resolvedTheme, setTheme } = useTheme();
   const { className, ...svgProps } = props;
   const isMounted = useMounted();
+  const [nearCursor, setNearCursor] = useState(false);
+  const [showGlint, setShowGlint] = useState(false);
+  const svgRef = useRef<SVGSVGElement>(null);
+
+  // Cursor proximity detection — speeds up dark-mode star pulses when cursor is close
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!svgRef.current) return;
+      const rect = svgRef.current.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      setNearCursor(Math.hypot(e.clientX - cx, e.clientY - cy) < 100);
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
+  // Visor glint hint — fires once per device on first page load
+  useEffect(() => {
+    if (localStorage.getItem("astronaut-hint-shown")) return;
+    const timer = setTimeout(() => {
+      setShowGlint(true);
+      localStorage.setItem("astronaut-hint-shown", "1");
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handleClick = (nextTheme: "light" | "dark") => {
+    if (document.body.classList.contains("zero-gravity")) {
+      document.body.classList.remove("zero-gravity");
+      localStorage.removeItem("zero-gravity");
+      window.dispatchEvent(new CustomEvent("gravity-restored"));
+      return;
+    }
+    setTheme(nextTheme);
+  };
 
   if (!isMounted) {
     return null;
   }
+
+  const starStyle = nearCursor ? { animationDuration: "0.5s" } : undefined;
 
   if (resolvedTheme === "dark") {
     return (
       <>
         <div className="absolute -z-10 h-72 w-72">
           <div className="absolute top-0 h-1/2 w-full">
-            <div className="absolute top-2 h-1 w-1 animate-pulse rounded-full bg-white"></div>
-            <div className="absolute left-12 top-16 h-1 w-1 animate-pulse rounded-full bg-white"></div>
-            <div className="absolute right-0 top-6 h-1 w-1 animate-pulse rounded-full bg-white"></div>
-            <div className="absolute right-5 top-3 h-1 w-1 animate-pulse rounded-full bg-white"></div>
-            <div className="absolute bottom-0 right-5 h-1 w-1 animate-pulse rounded-full bg-white"></div>
+            <div className="absolute top-2 h-1 w-1 animate-pulse rounded-full bg-white" style={starStyle}></div>
+            <div className="absolute left-12 top-16 h-1 w-1 animate-pulse rounded-full bg-white" style={starStyle}></div>
+            <div className="absolute right-0 top-6 h-1 w-1 animate-pulse rounded-full bg-white" style={starStyle}></div>
+            <div className="absolute right-5 top-3 h-1 w-1 animate-pulse rounded-full bg-white" style={starStyle}></div>
+            <div className="absolute bottom-0 right-5 h-1 w-1 animate-pulse rounded-full bg-white" style={starStyle}></div>
           </div>
         </div>
         <svg
+          ref={svgRef}
           xmlns="http://www.w3.org/2000/svg"
           id="Layer_2"
           data-name="Layer 2"
           viewBox="0 0 806.18 821.5"
-          onClick={() => setTheme("light")}
+          onClick={() => handleClick("light")}
           className={cn("cursor-pointer", className)}
           {...svgProps}
         >
@@ -250,6 +289,15 @@ const SvgComponent = (props: SVGProps<SVGSVGElement>) => {
                 ry={20.5}
                 transform="rotate(-78.76 293.087 97.499)"
               />
+              {showGlint && (
+                <path
+                  d="M284.59 77.5c0 35.62-34.25 64.5-76.5 64.5-25.53 0-48.15-10.55-62.04-26.76-3.53-9.24-5.46-19.26-5.46-29.74 0-25.92 11.81-49.08 30.34-64.39 11-5.17 23.67-8.11 37.16-8.11 42.25 0 76.5 28.88 76.5 64.5Z"
+                  fill="white"
+                  style={{ fillRule: "evenodd" }}
+                  className="animate-visor-glint"
+                  onAnimationEnd={() => setShowGlint(false)}
+                />
+              )}
             </g>
           </g>
         </svg>
@@ -266,7 +314,7 @@ const SvgComponent = (props: SVGProps<SVGSVGElement>) => {
           id="Layer_2"
           data-name="Layer 2"
           viewBox="0 0 806.18 821.5"
-          onClick={() => setTheme("dark")}
+          onClick={() => handleClick("dark")}
           className={cn("cursor-pointer", className)}
           {...svgProps}
         >

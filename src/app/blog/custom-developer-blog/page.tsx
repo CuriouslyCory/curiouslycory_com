@@ -50,7 +50,7 @@ export default async function CustomDeveloperBlog() {
         className="mb-2 rounded-lg shadow-md"
       />
       <div className="mb-6 text-center">
-        <h1 className="animate-fade-in from-primary to-secondary bg-gradient-to-r bg-clip-text text-5xl font-bold text-transparent">
+        <h1 className="animate-fade-in from-primary to-secondary bg-gradient-to-r bg-clip-text text-5xl font-bold text-transparent font-serif">
           The Best of Both Worlds
         </h1>
         <p className="text-muted-foreground mt-4 text-xl">

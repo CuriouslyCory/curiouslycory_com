@@ -18,8 +18,9 @@ type Edge = 0 | 1 | 2 | 3; // Top, Right, Bottom, Left
 type Position = { x: number; y: number };
 
 // Constants
-const SPAWN_INTERVAL = 1000;
-const MAX_WILD_BATS = 3;
+const isSpookyMonth = new Date().getMonth() === 9; // October (0-indexed)
+const SPAWN_INTERVAL = isSpookyMonth ? 500 : 1000;
+const MAX_WILD_BATS = isSpookyMonth ? 6 : 3;
 const EDGE_OFFSET = 0;
 const ANIMATION_DURATION = 2;
 
@@ -341,11 +342,19 @@ function BatWings({ children }: { children: React.ReactNode }) {
       )}
       onClick={() => setIsPaused(!isPaused)}
     >
-      <BatWingSvg className="relative left-1 -z-10 inline-block h-12 w-12" />
+      <BatWingSvg
+        className={cn(
+          "relative left-1 -z-10 inline-block h-12 w-12",
+          isSpookyMonth && "text-orange-500 [filter:sepia(1)_hue-rotate(320deg)_saturate(4)]",
+        )}
+      />
       {children}
       <BatWingSvg
         direction="right"
-        className="relative right-4 -z-10 inline-block h-12 w-12"
+        className={cn(
+          "relative right-4 -z-10 inline-block h-12 w-12",
+          isSpookyMonth && "text-orange-500 [filter:sepia(1)_hue-rotate(320deg)_saturate(4)]",
+        )}
       />
     </div>
   );

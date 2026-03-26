@@ -147,7 +147,7 @@ export function ProjectsFilter({ projects, tags }: ProjectsFilterProps) {
         {filteredProjects.map((project) => (
           <Card
             key={project.id}
-            className="bg-card border-border hover:border-primary/50 overflow-hidden border transition-all duration-300"
+            className="group bg-card border-border hover:border-primary/50 overflow-hidden border hover:shadow-[0_0_20px_-5px_var(--primary)] transition-shadow duration-200"
           >
             <div className="relative aspect-video overflow-hidden">
               <Image
@@ -189,7 +189,12 @@ export function ProjectsFilter({ projects, tags }: ProjectsFilterProps) {
             </CardContent>
             <CardFooter className="flex justify-between p-6 pt-0">
               {project.githubUrl && (
-                <Button asChild variant="outline" size="sm">
+                <Button
+                  asChild
+                  variant="outline"
+                  size="sm"
+                  className="opacity-70 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200"
+                >
                   <Link
                     href={project.githubUrl}
                     target="_blank"
@@ -201,7 +206,11 @@ export function ProjectsFilter({ projects, tags }: ProjectsFilterProps) {
                 </Button>
               )}
               {project.url && (
-                <Button asChild size="sm">
+                <Button
+                  asChild
+                  size="sm"
+                  className="opacity-70 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 delay-75"
+                >
                   <Link
                     href={project.url}
                     target="_blank"

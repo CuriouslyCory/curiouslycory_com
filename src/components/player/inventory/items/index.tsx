@@ -1,5 +1,6 @@
 import { type ReactNode } from "react";
 import { Net } from "./net";
+import { Telescope, TelescopeAsset } from "./telescope";
 import { Tuna } from "./tuna";
 
 export type InventoryItem = {
@@ -30,6 +31,13 @@ const inventoryItems = [
     description: "A can of tuna.",
     icon: <Tuna />,
     asset: <Tuna />,
+  } as const,
+  {
+    name: "telescope",
+    type: "tool",
+    description: "A trusty telescope for stargazing.",
+    icon: <Telescope className="h-8 w-8" />,
+    asset: <TelescopeAsset />,
   } as const,
 ] as const;
 

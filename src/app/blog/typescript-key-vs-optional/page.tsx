@@ -47,7 +47,7 @@ export default async function KeyVsValueOptionalPost() {
         className="mb-2 rounded-lg shadow-md"
       />
       <div className="mb-6 text-center">
-        <h1 className="animate-fade-in from-primary to-secondary bg-gradient-to-r bg-clip-text text-5xl font-bold text-transparent">
+        <h1 className="animate-fade-in from-primary to-secondary bg-gradient-to-r bg-clip-text text-5xl font-bold text-transparent font-serif">
           Key vs Value Optional
         </h1>
         <p className="text-muted-foreground mt-4 text-xl">

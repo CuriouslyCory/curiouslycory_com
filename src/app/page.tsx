@@ -2,7 +2,8 @@ import Link from "next/link";
 import { type Metadata } from "next";
 
 import { Astronaut } from "~/components/astronaut";
-import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
+import { Button } from "~/components/ui/button";
+
 import { ChatBubble } from "~/components/ui/chat-bubble";
 import { FavoriteTech } from "~/components/favorite-tech";
 import { MyLinks } from "~/components/my-links";
@@ -37,32 +38,53 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <section className="pt-10 text-center md:pt-16">
-        <ChatBubble
-          text="Hi, I'm CuriouslyCory, and I like to build things."
-          direction="bottom"
-          className="inline-block md:hidden"
-        />
-        <ChatBubble
-          text="Hi, I'm CuriouslyCory, and I like to build things."
-          direction="rightBottom"
-          className="hidden md:inline-block"
-        />
+      <section className="py-20 md:py-28">
+        {/* Mobile hero: ChatBubble + centered Astronaut */}
+        <div className="text-center md:hidden">
+          <ChatBubble
+            text="Hi, I'm CuriouslyCory, and I like to build things."
+            direction="bottom"
+            className="inline-block"
+          />
+          <div className="inline-block w-72 overflow-hidden align-top">
+            <Astronaut className="translate-y-1" />
+          </div>
+        </div>
 
-        <div className="inline-block w-72 overflow-hidden align-top">
-          <Astronaut className="translate-y-1" />
+        {/* Desktop hero: asymmetric two-column */}
+        <div className="mx-auto hidden max-w-6xl items-end justify-between px-4 md:flex md:px-6 lg:px-8">
+          <div className="max-w-lg">
+            <h1 className="font-oswald text-4xl font-bold tracking-tight">
+              Hi, I&apos;m{" "}
+              <span className="text-primary">CuriouslyCory</span>
+            </h1>
+            <p className="mt-4 text-xl text-muted-foreground">
+              I like to build things that people actually want to use.
+            </p>
+            <div className="mt-8 flex gap-x-4">
+              <Button asChild size="lg">
+                <Link href="/cv">View My Resume</Link>
+              </Button>
+              <Button asChild variant="outline" size="lg">
+                <Link href="/blog">Read My Blog</Link>
+              </Button>
+            </div>
+          </div>
+          <div className="w-72 flex-shrink-0">
+            <Astronaut className="translate-y-1" />
+          </div>
         </div>
       </section>
-      <section className="max-w-3xl px-2 md:mx-auto">
-        <Card className="p-2 md:p-6">
-          <CardHeader>
-            <CardTitle className="mb-2 text-3xl font-bold">
+      <section className="mx-auto max-w-5xl px-4 py-16 md:px-6 md:py-24 lg:px-8">
+        <div className="md:grid md:grid-cols-[280px_1fr] md:gap-12">
+          <div>
+            <h2 className="font-oswald text-2xl font-semibold tracking-tight">
               A little about me
-              <div className="h-1 w-20 bg-orange-500"></div>
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <p>
+            </h2>
+            <div className="heading-accent"></div>
+          </div>
+          <div className="mt-6 space-y-4 md:mt-0">
+            <p className="text-lg leading-relaxed">
               My main goal is to make websites that people actually want to use,
               not ones that make them want to pull their hair out. Using
               TypeScript and modern frameworks like Next.js, React, and Angular,
@@ -86,36 +108,32 @@ export default function Home() {
               </a>
               .
             </p>
-            <p>
+            <p className="text-lg leading-relaxed">
               Beyond the code editor, you&apos;ll find me scaling the peaks of
               complex UI challenges or exploring innovative backend
               architectures. When not coding, I&apos;m usually rock climbing,
               tinkering with generative AI projects, baking bread, or spending
               time with my son.
             </p>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </section>
-      <section className="mt-24 flex justify-center gap-x-4">
-        <Link
-          href="/cv"
-          className="rounded-lg bg-orange-500 px-6 py-3 font-bold text-white transition-all hover:scale-105 hover:text-white"
-        >
-          View My Resume
-        </Link>
-        <Link
-          href="/blog "
-          className="rounded-lg border border-gray-300 px-6 py-3 transition-colors hover:bg-gray-100 dark:border-gray-700 dark:hover:bg-gray-800"
-        >
-          Read My Blog
-        </Link>
+      <section className="flex justify-center gap-x-4 py-16 md:hidden md:py-24">
+        <Button asChild size="lg">
+          <Link href="/cv">View My Resume</Link>
+        </Button>
+        <Button asChild variant="outline" size="lg">
+          <Link href="/blog">Read My Blog</Link>
+        </Button>
       </section>
-      <section className="mt-24 flex flex-col gap-y-24">
+      <section className="flex flex-col gap-y-24 py-16 md:py-24">
         <MyLinks />
       </section>
-      <section className="mt-24 max-w-4xl px-2 md:mx-auto">
-        <FavoriteTech />
-      </section>
+      <div className="w-full bg-surface-elevated py-16 md:py-24">
+        <section className="mx-auto max-w-4xl px-4 md:px-6 lg:px-8">
+          <FavoriteTech />
+        </section>
+      </div>
     </>
   );
 }

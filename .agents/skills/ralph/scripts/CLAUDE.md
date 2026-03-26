@@ -8,7 +8,7 @@ You are an autonomous coding agent working on a software project.
 2. Read the progress log at `progress.txt` (check Codebase Patterns section first)
 3. Check you're on the correct branch. The PRD `branchName` field contains the feature branch name (e.g., `feat/my-feature`).
    - If the branch doesn't exist: create it from `main` (`git checkout main && git checkout -b <branchName>`)
-   - If the branch exists: check it out and ensure it's up to date with main
+   - If the branch exists: check it out
 4. Pick the **highest priority** user story where `passes: false`
 5. Implement that single user story
 6. Run quality checks (e.g., typecheck, lint, test - use whatever your project requires)
@@ -16,13 +16,15 @@ You are an autonomous coding agent working on a software project.
 8. If checks pass, commit ALL changes with message: `feat: [Story ID] - [Story Title]`
 9. Update the PRD to set `passes: true` for the completed story
 10. Append your progress to `progress.txt`
+11. **STOP** Run this exact command to check completion: `jq '[.userStories[] | select(.passes == false)] | length' .agents/skills/ralph/scripts/prd.json`
+   - If the output is `0` (zero stories remaining) -> reply with `<promise>COMPLETE</promise>`
+   - If the output is greater than 0 -> output "Iteration complete: [Story ID] done. [N] stories remaining." and END YOUR SESSION IMMEDIATELY. Do NOT continue. Do NOT pick the next story. Another iteration will handle it.
 
-Note: Branch names use the `feat/` prefix (e.g., `feat/task-status`), not `ralph/`. This follows standard enterprise git flow where feature branches are PRed into `main`.
+Note: Branch names use the `feat/` prefix (e.g., `feat/task-status`), not `ralph/`. This follows standard enterprise github flow where feature branches are PRed into `main`.
 
 ## Progress Report Format
 
 APPEND to progress.txt (never replace, always append):
-
 ```
 ## [Date/Time] - [Story ID]
 - What was implemented
@@ -63,14 +65,12 @@ Before committing, check if any edited files have learnings worth preserving in 
    - Configuration or environment requirements
 
 **Examples of good CLAUDE.md additions:**
-
 - "When modifying X, also update Y to keep them in sync"
 - "This module uses pattern Z for all API calls"
 - "Tests require the dev server running on PORT 3000"
 - "Field names must match the template exactly"
 
 **Do NOT add:**
-
 - Story-specific implementation details
 - Temporary debugging notes
 - Information already in progress.txt
@@ -98,14 +98,16 @@ If no browser tools are available, note in your progress report that manual brow
 
 After completing a user story, check if ALL stories have `passes: true`.
 
-If ALL stories are complete and passing, reply with:
+Run `jq '[.userStories[] | select(.passes == false)] | length' .agents/skills/ralph/scripts/prd.json` to get the count of remaining stories.
+
+If the count is **0**, reply with:
 <promise>COMPLETE</promise>
 
-If there are still stories with `passes: false`, end your response normally (another iteration will pick up the next story).
+If the count is **greater than 0**, end your response. Another iteration will pick up the next story.
 
 ## Important
 
-- Work on ONE story per iteration
+- **ONE STORY PER INVOCATION. This is non-geotiable.** After step 11, your response MUST end.
 - Commit frequently
 - Keep CI green
 - Read the Codebase Patterns section in progress.txt before starting

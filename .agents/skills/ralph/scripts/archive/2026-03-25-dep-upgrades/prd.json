@@ -137,7 +137,7 @@
       ],
       "priority": 8,
       "passes": true,
-      "notes": ""
+      "notes": "Build prebuild step (blog:index) fails without local database — this is expected. The Next.js build itself succeeds when run directly with `SKIP_ENV_VALIDATION=1 npx next build`."
     }
   ]
 }

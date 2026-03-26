@@ -8,6 +8,7 @@ import { BlogSearch } from "~/components/blog/blog-search";
 import { ActiveFilters } from "~/components/blog/active-filters";
 import { DateFilter } from "~/components/blog/date-filter";
 import { getMonthName } from "~/lib/date-utils";
+import { ChatBubble } from "~/components/ui/chat-bubble";
 
 export const metadata: Metadata = {
   title: "Blog | CuriouslyCory",
@@ -57,7 +58,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   return (
     <div className="container px-4 py-8 md:mx-auto">
       <div className="mb-8 space-y-4">
-        <h1 className="text-4xl font-bold">Blog</h1>
+        <h1 className="font-oswald text-4xl font-bold">Blog</h1>
         <p className="text-muted-foreground">
           Thoughts, ideas, and explorations on web development and technology.
         </p>
@@ -67,9 +68,15 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
       <div className="flex flex-col gap-8 md:flex-row">
         {/* Sidebar */}
-        <div className="w-40 flex-shrink-0">
-          <DateFilter />
-        </div>
+        <aside className="w-full flex-shrink-0 md:w-40 md:sticky md:top-20 md:self-start">
+          <details className="md:hidden">
+            <summary className="cursor-pointer text-sm font-medium">Filter by date</summary>
+            <DateFilter />
+          </details>
+          <div className="hidden md:block">
+            <DateFilter />
+          </div>
+        </aside>
 
         {/* Main content */}
         <div className="flex-1">
@@ -77,8 +84,10 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
             <>
               <h2 className="mb-4 text-2xl font-bold">Featured Posts</h2>
               <div className="mb-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {featuredPosts.map((post) => (
-                  <PostCard key={post.id} post={post} />
+                {featuredPosts.map((post, index) => (
+                  <div key={post.id} className={index === 0 ? "h-full md:col-span-2" : "h-full"}>
+                    <PostCard post={post} />
+                  </div>
                 ))}
               </div>
             </>
@@ -120,20 +129,11 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
           {/* Show message if no posts found */}
           {posts.length === 0 && (
             <div className="flex flex-col items-center justify-center py-12 text-center">
-              <h2 className="mb-2 text-2xl font-semibold">No posts found</h2>
-              <p className="text-muted-foreground mb-8">
-                {params.q
-                  ? `No posts found matching "${params.q}"`
-                  : params.tag
-                    ? `No posts found with tag #${params.tag}`
-                    : params.year
-                      ? `No posts found from ${params.year}${
-                          params.month
-                            ? ` - ${getMonthName(Number(params.month))}`
-                            : ""
-                        }`
-                      : "No posts found. Check back later!"}
-              </p>
+              <ChatBubble
+                variant="whisper"
+                text="No transmissions found on that frequency."
+                direction="bottom"
+              />
             </div>
           )}
         </div>

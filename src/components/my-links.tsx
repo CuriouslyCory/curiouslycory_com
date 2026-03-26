@@ -23,16 +23,23 @@ export const MyLinks = (): ReactNode => {
   return (
     <div className="bg-foreground text-background dark:text-foreground w-full pt-8 pb-14 dark:bg-gray-100/10">
       <div className="container mx-2 flex flex-col gap-y-4 md:mx-auto">
-        <h2 className="mb-2 text-center text-3xl font-bold">My Links</h2>
+        <h2 className="mb-2 font-oswald text-2xl font-semibold tracking-tight text-center">My Links</h2>
         <div className="grid grid-cols-2 gap-4 md:grid-cols-6 lg:grid-cols-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            whileHover={{ scale: 1.08, rotate: -2 }}
+            transition={{
+              y: { duration: 0.5 },
+              opacity: { duration: 0.5 },
+              scale: { type: "spring", stiffness: 400, damping: 15 },
+              rotate: { type: "spring", stiffness: 400, damping: 15 },
+            }}
             viewport={{ once: true }}
+            className="hover:drop-shadow-[0_0_8px_rgba(249,115,22,0.3)]"
           >
-            <Link href="/cv">
-              <div className="flex flex-col items-center gap-2 transition-all hover:scale-105 hover:text-orange-500">
+            <Link href="/cv" className="rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+              <div className="flex flex-col items-center gap-2 transition-colors hover:text-orange-500">
                 <ScrollText className="h-12 w-12" />
                 <span>Resume/CV</span>
               </div>
@@ -43,11 +50,18 @@ export const MyLinks = (): ReactNode => {
               key={link.url}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              whileHover={{ scale: 1.08, rotate: -2 }}
+              transition={{
+                y: { duration: 0.5, delay: index * 0.1 },
+                opacity: { duration: 0.5, delay: index * 0.1 },
+                scale: { type: "spring", stiffness: 400, damping: 15 },
+                rotate: { type: "spring", stiffness: 400, damping: 15 },
+              }}
               viewport={{ once: true }}
+              className="hover:drop-shadow-[0_0_8px_rgba(249,115,22,0.3)]"
             >
-              <Link href={link.url} target="top">
-                <div className="flex flex-col items-center gap-2 transition-colors hover:scale-105 hover:text-orange-500">
+              <Link href={link.url} target="top" className="rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+                <div className="flex flex-col items-center gap-2 transition-colors hover:text-orange-500">
                   <link.icon className="h-12 w-12" />
                   <span className="text-center">
                     {link.title}

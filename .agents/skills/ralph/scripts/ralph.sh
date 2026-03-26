@@ -1,35 +1,24 @@
 #!/bin/bash
 # Ralph Wiggum - Long-running AI agent loop
-# Usage: ./ralph.sh [--tool amp|claude] [max_iterations]
+# Usage: ./ralph.sh [max_iterations]
 
 set -e
 
 # Parse arguments
-TOOL="claude"  # Default to claude for workshop
 MAX_ITERATIONS=10
 
 while [[ $# -gt 0 ]]; do
   case $1 in
     -h|--help)
-      echo "Usage: ./.claude/skills/ralph/scripts/ralph.sh [--tool amp|claude] [max_iterations]"
+      echo "Usage: ./.claude/skills/ralph/scripts/ralph.sh [max_iterations]"
       echo ""
       echo "Options:"
-      echo "  --tool <amp|claude>   AI coding tool to use (default: claude)"
       echo "  -h, --help            Show this help message"
       echo ""
       echo "Examples:"
-      echo "  ./.claude/skills/ralph/scripts/ralph.sh              # Run with claude, 10 iterations"
-      echo "  ./.claude/skills/ralph/scripts/ralph.sh 5            # Run with claude, 5 iterations"
-      echo "  ./.claude/skills/ralph/scripts/ralph.sh --tool amp   # Run with amp, 10 iterations"
+      echo "  ./.claude/skills/ralph/scripts/ralph.sh              # Run with 10 iterations"
+      echo "  ./.claude/skills/ralph/scripts/ralph.sh 5            # Run with 5 iterations"
       exit 0
-      ;;
-    --tool)
-      TOOL="$2"
-      shift 2
-      ;;
-    --tool=*)
-      TOOL="${1#*=}"
-      shift
       ;;
     *)
       # Assume it's max_iterations if it's a number
@@ -41,11 +30,6 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-# Validate tool choice
-if [[ "$TOOL" != "amp" && "$TOOL" != "claude" ]]; then
-  echo "Error: Invalid tool '$TOOL'. Must be 'amp' or 'claude'."
-  exit 1
-fi
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PRD_FILE="$SCRIPT_DIR/prd.json"
 PROGRESS_FILE="$SCRIPT_DIR/progress.txt"
@@ -92,21 +76,16 @@ if [ ! -f "$PROGRESS_FILE" ]; then
   echo "---" >> "$PROGRESS_FILE"
 fi
 
-echo "Starting Ralph - Tool: $TOOL - Max iterations: $MAX_ITERATIONS"
+echo "Starting Ralph - Max iterations: $MAX_ITERATIONS"
 
 for i in $(seq 1 $MAX_ITERATIONS); do
   echo ""
   echo "==============================================================="
-  echo "  Ralph Iteration $i of $MAX_ITERATIONS ($TOOL)"
+  echo "  Ralph Iteration $i of $MAX_ITERATIONS"
   echo "==============================================================="
 
-  # Run the selected tool with the ralph prompt
-  if [[ "$TOOL" == "amp" ]]; then
-    OUTPUT=$(cat "$SCRIPT_DIR/prompt.md" | amp --dangerously-allow-all 2>&1 | tee /dev/stderr) || true
-  else
-    # Claude Code: use --dangerously-skip-permissions for autonomous operation, --print for output
-    OUTPUT=$(claude --dangerously-skip-permissions --print < "$SCRIPT_DIR/CLAUDE.md" 2>&1 | tee /dev/stderr) || true
-  fi
+  # Claude Code: use --dangerously-skip-permissions for autonomous operation, --print for output, sonnet model
+  OUTPUT=$(claude --dangerously-skip-permissions --print --model claude-sonnet-4-6 < "$SCRIPT_DIR/CLAUDE.md" 2>&1 | tee /dev/stderr) || true
 
   # Check for completion signal
   if echo "$OUTPUT" | grep -q "<promise>COMPLETE</promise>"; then

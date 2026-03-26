@@ -1,0 +1,23 @@
+# Ralph Progress Log
+Started: Wed Mar 25 2026
+---
+
+## Codebase Patterns
+- Prisma v7 uses generated client at `~/generated/prisma/client` (no `.js` extension) for Next.js/Turbopack imports
+- Standalone scripts (outside Next.js) use relative paths like `../generated/prisma/client.js` with `tsx` runner
+- PrismaClient in v7 requires an adapter (PrismaPg from `@prisma/adapter-pg`) - cannot be instantiated without one
+- The `pnpm build` includes a `prebuild` step that runs `blog:index` - any Prisma import changes must work there too
+- `esbuild` must be in `onlyBuiltDependencies` for `tsx` to work
+- Turbopack resolves `~/generated/prisma/client` (without .js) but NOT `~/generated/prisma/client.js`
+- ESLint enforces `@typescript-eslint/no-floating-promises` — use `void main()` for top-level async calls
+- Zod 4: use `z.unknown().transform().pipe()` instead of removed `z.preprocess()`
+- `@t3-oss/env-nextjs` v0.13+, `@hookform/resolvers` v5+, and `@trpc/*` v11.13+ all use Standard Schema (Zod 3/4 compatible)
+- Auth.js v5: `export const { auth, handlers, signIn, signOut } = NextAuth({...})` — `auth()` replaces `getServerSession()`
+- Auth.js v5: `AUTH_SECRET` and `AUTH_URL` env vars replace `NEXTAUTH_SECRET`/`NEXTAUTH_URL` — auto-detected by Auth.js
+- This project has no `pnpm typecheck` script — use `pnpm exec tsc --noEmit` directly
+- The `blog:index` prebuild step requires a running database — use `SKIP_ENV_VALIDATION=1 npx next build` to verify the Next.js build independently
+- Animation library is `motion/react` (package: `motion` v12.38.0) — NOT `framer-motion`
+- Shadcn/ui components use CVA (class-variance-authority) for variants
+- Sacred elements DO NOT MODIFY: bat-wing quest system (blog-post-bats.tsx), astronaut sun animation (astronaut.tsx, .astronaut-sun-bg CSS), CursorFollower (cursor-follower.tsx), ChatBubble system (ui/chat-bubble.tsx)
+
+---

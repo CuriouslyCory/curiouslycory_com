@@ -1,110 +1,396 @@
-# Ralph Progress Log
-Started: Thu Mar 19 02:30:54 PM MST 2026
+## 2026-03-25 - US-031
+- Added `useRef<SVGSVGElement>`, `useState(nearCursor)`, `useState(showGlint)` to `astronaut.tsx`
+- Added mousemove useEffect: tracks cursor distance from SVG center, sets `nearCursor` when < 100px
+- Applied `style={{ animationDuration: '0.5s' }}` (via `starStyle`) to all 5 star pulse divs in dark mode
+- Added useEffect that checks `localStorage.getItem("astronaut-hint-shown")` and schedules `setShowGlint(true)` after 1000ms; sets the flag and resets `showGlint` on `onAnimationEnd`
+- Added `<path>` with `fill="white"` tracing the dark-mode visor shape, rendered when `showGlint`; uses `className="animate-visor-glint"` and `onAnimationEnd` to clear state
+- Added `@keyframes visor-glint` (fill-opacity fade in/out) in `@theme inline` in `globals.css`
+- Added `.animate-visor-glint` utility in `@layer base`
+- Files changed: `src/components/astronaut.tsx`, `src/styles/globals.css`
+- **Learnings for future iterations:**
+  - CSS `fill-opacity` is animatable on SVG elements — use it instead of `opacity` when you want the fill to fade but keep the element's layout
+  - `onAnimationEnd` on SVG path elements works the same as on HTML elements — safe pattern for self-cleaning animations
+  - For proximity detection, attach mousemove to `window` (not the element) so it works even when cursor enters the element from a fast path
+  - Reading localStorage in the useEffect body (not setState) is fine; setState in setTimeout callback inside useEffect is also lint-safe
+---
+
+## 2026-03-25 - US-030
+- Added `telescope` inventory item in `src/components/player/inventory/items/telescope.tsx` (SVG icon + radial gradient cursor asset)
+- Added telescope to `src/components/player/inventory/items/index.tsx` inventory items array
+- Created `src/components/constellations.tsx` — 4 fixed-position constellation clusters (Curiosia Major, The Debugger, Orion's Fork, The Stack)
+- Each constellation is `opacity-0` by default; reveals with `transition-opacity duration-500` when telescope cursor is within 80px
+- Activation trigger: a nearly-invisible `✦` button (opacity-[0.06]) in the footer copyright bar; clicking it calls `addInventoryItem("telescope", 1)`
+- Added `<ConstellationsOverlay />` to `src/app/layout.tsx` inside `PlayerProvider`
+- Added `usePlayer` to `footer.tsx` for the activation trigger
+- Files changed: `src/components/player/inventory/items/telescope.tsx`, `src/components/player/inventory/items/index.tsx`, `src/components/constellations.tsx`, `src/app/layout.tsx`, `src/components/footer.tsx`
+- **Learnings for future iterations:**
+  - `react-hooks/set-state-in-effect` flags setState called directly in effect body; only call setState in event listener callbacks within the effect
+  - `react-hooks/refs` flags `ref.current` access during render AND during direct effect body; reading `ref.current` inside an event handler callback inside an effect IS allowed
+  - Gate state with an additional condition during render (e.g., `const visible = telescopeActive && nearCursor`) to avoid needing setState when dependencies change — the gate makes stale state harmless
+  - Adding items to `inventoryItems as const` array automatically updates `InventoryItemId` type union — no manual type changes needed
+  - Fixed-position constellation elements use `fixed` CSS so they appear at viewport-relative positions regardless of scroll
+---
+
+## 2026-03-25 - US-029
+- Created `src/components/easter-eggs.tsx` as a client component
+- Detects Konami sequence (ArrowUp×2, ArrowDown×2, ArrowLeft, ArrowRight×2, ArrowLeft, ArrowRight, B, A) using `e.code` tracking via useRef
+- On match: saves `zero-gravity=true` to localStorage, sets React state, syncs body class via effect
+- Persists across navigations — lazy `useState` initializer reads localStorage on first client render
+- Shows fixed `ChatBubble variant='speech'` overlay: 'Oops, gravity module offline.'
+- Added `.zero-gravity section { animation: float ... }` with nth-child staggered delays in `globals.css`
+- Modified `src/components/astronaut.tsx`: added `handleClick` wrapper that intercepts clicks when body has `zero-gravity` class, dispatches `gravity-restored` custom event, and skips theme toggle
+- EasterEggs listens for `gravity-restored` to clear state and localStorage
+- Konami listener skips INPUT/TEXTAREA/contentEditable targets
+- Files changed: `src/components/easter-eggs.tsx`, `src/components/astronaut.tsx`, `src/styles/globals.css`, `src/app/layout.tsx`
+- **Learnings for future iterations:**
+  - `useState(lazyInitFn)` is the correct pattern to read localStorage on mount without triggering the `react-hooks/set-state-in-effect` lint rule
+  - Use `window.dispatchEvent(new CustomEvent(...))` for decoupled cross-component communication; pair with `window.addEventListener` in the consuming component
+  - Effects should sync external systems FROM state (not set state from external reads); read external state in lazy init instead
+---
+
+## 2026-03-25 - US-028
+- Added `const isSpookyMonth = new Date().getMonth() === 9;` at module level in `blog-post-bats.tsx`
+- Changed `SPAWN_INTERVAL` to `isSpookyMonth ? 500 : 1000` (half interval in October)
+- Changed `MAX_WILD_BATS` to `isSpookyMonth ? 6 : 3` (double in October)
+- Added CSS filter `[filter:sepia(1)_hue-rotate(320deg)_saturate(4)]` to both `BatWingSvg` instances in the `BatWings` component when isSpookyMonth (converts dark gray fill to orange)
+- Core quest/catch mechanics (caughtBat, updateQuestProgress, promptBatQuest) left completely untouched
+- Files changed: `src/components/blog-post-bats.tsx`
+- **Learnings for future iterations:**
+  - Module-level constants using `new Date().getMonth()` work fine — computed once at module load, which is correct for seasonal logic
+  - BatWings SVG has hardcoded `fill: "#4d4d4d"` — CSS `filter` is the only way to tint it without modifying the SVG; `sepia(1) hue-rotate(320deg) saturate(4)` gives a good orange
+  - Tailwind arbitrary filter syntax: `[filter:sepia(1)_hue-rotate(320deg)_saturate(4)]` (spaces replaced with underscores)
+---
+
+## 2026-03-25 - US-027
+- Created `src/app/not-found.tsx` as a server component
+- Reused Astronaut component at `h-48 w-48` with `style={{ animationDuration: '6s' }}` to produce a slow drift
+- Added ChatBubble variant='whisper' with text 'I think we took a wrong turn at the nebula.'
+- Added 404 label in `text-primary font-mono` and 'Page not found' subtitle in muted foreground
+- Added `<Button asChild><Link href="/">Take me home</Link></Button>`
+- Centered everything with `min-h-[60vh] flex flex-col items-center justify-center`
+- Files changed: `src/app/not-found.tsx`
+- **Learnings for future iterations:**
+  - Astronaut accepts `style` prop (SVGProps) — `style={{ animationDuration: '6s' }}` overrides the 3s default from `animate-float`
+  - not-found.tsx can be a server component even though Astronaut is 'use client' — Next.js handles this automatically
+  - ChatBubble `direction="bottom"` places the tail at the bottom pointing toward the astronaut below it
+---
+
+## 2026-03-25 - US-026
+- Investigated Next.js 16 viewTransition support — `experimental.viewTransition` exists but uses React's `<ViewTransition>` component, not automatic CSS transitions
+- Chose Motion wrapper approach (safer fallback) — wraps only `<main>` content so fixed-position elements (PlayerMenu, CursorFollower) are unaffected
+- Created `src/components/page-transition.tsx` as a client component using `usePathname()` to key the motion.div per route
+- Uses `initial={{ opacity: 0, y: 8 }}`, `animate={{ opacity: 1, y: 0 }}`, `transition={{ duration: 0.3, ease: 'easeOut' }}` — under 300ms
+- Added `<PageTransition>` wrapper inside `<main>` in `src/app/layout.tsx`
+- Files changed: `src/components/page-transition.tsx`, `src/app/layout.tsx`
+- **Learnings for future iterations:**
+  - `usePathname()` as the `key` prop on `motion.div` triggers re-mount (entrance animation) on every route change
+  - Wrapping only `<main>` guarantees fixed-position UI (nav, player, cursor) is never included in the transition layer
+  - No `AnimatePresence` needed for entrance-only transitions; avoids exit-animation timing issues in Next.js App Router
+---
+
+## 2026-03-25 - US-025
+- First featured post in grid wrapped in div with `md:col-span-2 h-full` to make it span 2 columns on desktop
+- Sidebar changed from `div.w-40.flex-shrink-0` to `aside` with `md:sticky md:top-20 md:self-start` for sticky behavior
+- Mobile sidebar wrapped in `<details><summary>Filter by date</summary><DateFilter /></details>` (md:hidden)
+- Desktop sidebar uses `<div className="hidden md:block"><DateFilter /></div>` (always visible)
+- Files changed: `src/app/blog/page.tsx`
+- **Learnings for future iterations:**
+  - Sticky sidebar needs `md:self-start` in a flex row — otherwise the aside stretches to full height and sticky doesn't activate
+  - `<details>/<summary>` is native HTML; no JS needed for collapsible mobile filter
+  - Wrap first grid item in a div with `md:col-span-2 h-full` (not modifying PostCard component) to achieve hero-sized card
+---
+
+## 2026-03-25 - US-024
+- Replaced all `mt-24` margin spacers with self-contained section padding in `src/app/page.tsx`
+- Hero: `pt-10 md:pt-16` → `py-20 md:py-28`
+- About section: added `py-16 md:py-24` to existing max-w-5xl container
+- Mobile CTA section: `mt-24` → `py-16 md:py-24`
+- MyLinks section: `mt-24` → `py-16 md:py-24`
+- FavoriteTech wrapper: removed `mt-24`, added `md:py-24`; fixed inner container from `px-2` to `px-4 md:px-6 lg:px-8`
+- Files changed: `src/app/page.tsx`
+- **Learnings for future iterations:**
+  - Self-contained section padding (py-16 md:py-24) eliminates the need for sibling margin hacks
+  - The mobile CTA section uses `md:hidden` so `md:py-24` is technically unreachable, but keeping it is harmless and consistent
+---
+
+## 2026-03-25 - US-023
+- Replaced Card-wrapped about section in `src/app/page.tsx` with editorial two-column layout
+- Desktop: `md:grid md:grid-cols-[280px_1fr] md:gap-12` — heading in left 280px column, body text in 1fr right column
+- Mobile: stacked (mt-6 offset on the text column to add spacing below heading)
+- Removed Card, CardHeader, CardContent wrappers and their imports
+- Body paragraphs updated to `text-lg leading-relaxed` for better readability
+- Heading kept with `.heading-accent` bar below it
+- Files changed: `src/app/page.tsx`
+- **Learnings for future iterations:**
+  - Removing Card imports from page.tsx is safe when no other Card usage remains in that file
+  - Two-column editorial layout: heading in narrow fixed col (280px), content in wide flexible col (1fr)
+  - Mobile stacking uses `mt-6` on the content div to add breathing room; `md:mt-0` resets it for desktop grid
+---
+
+## 2026-03-25 - US-022
+- Restructured hero section in `src/app/page.tsx` with mobile/desktop split
+- Mobile (md:hidden): original ChatBubble + centered Astronaut unchanged
+- Desktop (hidden md:flex): asymmetric two-column — left: H1 with text-primary name span, subtitle in text-muted-foreground, CTA buttons; right: w-72 flex-shrink-0 Astronaut
+- Moved CTA buttons to desktop hero left column; standalone CTA section now md:hidden for mobile-only
+- Files changed: `src/app/page.tsx`
+- **Learnings for future iterations:**
+  - Duplicating Astronaut in DOM (one per breakpoint) is safe — it's a client component with no shared state between instances
+  - Desktop hero uses `mx-auto hidden max-w-6xl items-end justify-between px-4 md:flex md:px-6 lg:px-8` — note `hidden md:flex` not `md:flex hidden`
+  - The standalone CTA section gets `md:hidden` to avoid duplicate buttons on desktop
+---
+
+## 2026-03-25 - US-021
+- Added `--surface-elevated` and `--surface-sunken` tokens to `:root` (light) and `.dark` in `globals.css`
+- Registered `--color-surface-elevated` and `--color-surface-sunken` in `@theme inline` block
+- Wrapped FavoriteTech section in full-bleed `<div className="mt-24 w-full bg-surface-elevated py-16">` with inner `<section className="mx-auto max-w-4xl px-2">` container in `src/app/page.tsx`
+- Files changed: `src/styles/globals.css`, `src/app/page.tsx`
+- **Learnings for future iterations:**
+  - Surface tokens follow the same `:root`/`.dark`/`@theme inline` triple-registration pattern as all other color tokens
+  - Full-bleed sections need `w-full` on the outer div and `mx-auto max-w-*` on the inner container
+  - `bg-surface-elevated` utility is available immediately after registering `--color-surface-elevated` in `@theme inline`
+---
+
+## 2026-03-25 - US-020
+- Added ChatBubble variant='thought' below second paragraph in about section of `src/app/page.tsx`
+- Replaced blog empty state (h2 + p) with ChatBubble variant='whisper' in `src/app/blog/page.tsx`
+- Added `ChatBubble` import to blog/page.tsx
+- Files changed: `src/app/page.tsx`, `src/app/blog/page.tsx`
+- **Learnings for future iterations:**
+  - `getMonthName` import in blog/page.tsx is still used by the pagination info — do NOT remove it when simplifying the empty state
+  - ChatBubble accepts `variant`, `text`, and `direction` props; all three variants (speech/whisper/thought) are confirmed working
+---
+
+## 2026-03-25 - US-019
+- Added ChatBubble (variant 'thought') above the contact form with space-themed personality text
+- Wrapped form in Card component with p-6 padding
+- Changed max-w-md to max-w-lg for better card proportions
+- Updated labels: Name→Callsign, Email→Frequency, Message→Your Message
+- Changed submit button text to "Send Transmission"
+- Added staggered motion.div entrance animation (opacity 0→1, x -10→0, delay index*0.1) for each field + button
+- Updated toast message to 'Transmission received. I'll respond at lightspeed. (Results may vary.)'
+- Files changed: `src/app/contact/page.tsx`
+- **Learnings for future iterations:**
+  - ChatBubble direction="bottom" places thought bubbles below the main bubble — good for placing above a form
+  - Wrapping form fields in an array and mapping with index gives clean stagger without duplicating motion props
+  - `motion/react` is already in the project as a dep — no install needed
+---
+
+## 2026-03-25 - US-018
+- Created `src/components/footer.tsx` as a client component
+- 3-column desktop grid (md:grid-cols-3), stacked on mobile
+- Column 1: CcLogo + TypingTagline (character-by-character, triggered by useInView)
+- Column 2: "Explore" heading + navItems links with hover:text-primary
+- Column 3: "Find Me" heading + SOCIALS icons with motion.a whileHover={{ scale: 1.2 }}
+- Bottom bar: © {year} left; dark/light mode text via CSS `dark:hidden` / `dark:inline` (no JS theme detection)
+- Gradient line: `h-px bg-gradient-to-r from-transparent via-primary to-transparent`
+- Replaced inline `<footer>` in `src/app/layout.tsx` with `<Footer />`
+- Files changed: `src/components/footer.tsx`, `src/app/layout.tsx`
+- **Learnings for future iterations:**
+  - Avoid `setMounted(true)` in `useEffect` — the linter flags it as `setState` in effect. Use CSS `dark:hidden`/`dark:inline` for theme-conditional text instead
+  - `useInView({ once: true })` from `motion/react` is the right way to trigger one-shot animations on scroll
+  - `motion.a` works for anchor tags; use it like `motion.div` with `whileHover` props
+---
+
+## 2026-03-25 - US-017
+- Added terminal-style title bar above syntax highlighter in `src/components/ui/code-block.tsx`
+- Title bar: `bg-zinc-800 px-4 py-2 rounded-t-md` with 3 colored dots (red/yellow/green) and language name on right
+- Red dot is a `<button aria-label="Collapse code block">` that sets `collapsed` state to true
+- Collapsed state shows animated button with `{"// collapsed — click to expand"}` — clicking restores code
+- Used `AnimatePresence` + `motion` from `motion/react` for smooth height transitions on both collapse/expand
+- `SyntaxHighlighter` `customStyle` changed from `borderRadius: '0.375rem'` to `borderRadius: 0` (bar handles top-rounding)
+- Outer wrapper changed from `relative` to `overflow-hidden rounded-md` (clips the motion animation)
+- Files changed: `src/components/ui/code-block.tsx`
+- **Learnings for future iterations:**
+  - JSX `//` text inside a button/element triggers `react/jsx-no-comment-textnodes` — wrap in `{"// ..."}` JSX expression
+  - `AnimatePresence` with `initial={false}` skips entrance animation on first render (good for toggle UI)
+  - Set `overflow-hidden` on wrapper to clip height animations without a flash of content
 ---
 
 ## Codebase Patterns
-- Prisma v7 uses generated client at `~/generated/prisma/client` (no `.js` extension) for Next.js/Turbopack imports
-- Standalone scripts (outside Next.js) use relative paths like `../generated/prisma/client.js` with `tsx` runner
-- PrismaClient in v7 requires an adapter (PrismaPg from `@prisma/adapter-pg`) - cannot be instantiated without one
-- The `pnpm build` includes a `prebuild` step that runs `blog:index` - any Prisma import changes must work there too
-- `esbuild` must be in `onlyBuiltDependencies` for `tsx` to work
-- Turbopack resolves `~/generated/prisma/client` (without .js) but NOT `~/generated/prisma/client.js`
-- ESLint enforces `@typescript-eslint/no-floating-promises` — use `void main()` for top-level async calls
-- Zod 4: use `z.unknown().transform().pipe()` instead of removed `z.preprocess()`
-- `@t3-oss/env-nextjs` v0.13+, `@hookform/resolvers` v5+, and `@trpc/*` v11.13+ all use Standard Schema (Zod 3/4 compatible)
-- Auth.js v5: `export const { auth, handlers, signIn, signOut } = NextAuth({...})` — `auth()` replaces `getServerSession()`
-- Auth.js v5: `AUTH_SECRET` and `AUTH_URL` env vars replace `NEXTAUTH_SECRET`/`NEXTAUTH_URL` — auto-detected by Auth.js
+- Tailwind CSS v4 with `@plugin` syntax for plugins (not `plugins: []` in config)
+- Prose styling customization uses CSS custom properties (--tw-prose-*) in `@layer base`
+- Font families: Raleway (sans), Roboto Serif (serif), Oxygen Mono (mono), Oswald (display headings)
+- Color tokens use CSS custom properties in :root and .dark
+- Build requires DATABASE_URL, NEXTAUTH_SECRET, NEXTAUTH_URL, DISCORD_CLIENT_ID, DISCORD_CLIENT_SECRET, TWITCH_CLIENT_ID, TWITCH_CLIENT_SECRET env vars
+- Worktree builds will fail at prerender stage without a real database — typecheck (`npx tsc --noEmit`) is the reliable quality gate
+- The `@eslint/eslintrc` package may need to be installed as devDep for type checking to pass in worktrees
 
+# Ralph Progress Log
+Started: Wed Mar 25 06:15:14 PM MST 2026
 ---
 
-## 2026-03-19 - US-003
-- Implemented Prisma v7 adapter pattern in `src/server/db.ts`: PrismaPg adapter with DATABASE_URL, passed to PrismaClient
-- Updated `src/server/api/routers/blog.ts`: changed `Prisma` type import from `@prisma/client` to `~/generated/prisma/client`
-- Upgraded `@auth/prisma-adapter` from 1.6.0 to 2.11.1 for Prisma v7 compatibility
-- Updated `src/scripts/blog-indexer.js`: changed PrismaClient import to generated path with PrismaPg adapter
-- Installed `tsx` as devDependency and updated `blog:index` script to use it (needed for build to work with generated .ts client)
-- Added `esbuild` to `onlyBuiltDependencies` in package.json
-- Files changed: src/server/db.ts, src/server/api/routers/blog.ts, src/scripts/blog-indexer.js, package.json, pnpm-lock.yaml, next-env.d.ts, tsconfig.json
+## 2026-03-25 - US-003
+- Replaced cold gray HSL tokens in `:root` and `.dark` with warm-tinted equivalents
+- Light mode: card/popover → hsl(36,16%,99%), muted/accent → hsl(30,10%,95%), border/input → hsl(30,8%,88%)
+- Dark mode: card/popover → hsl(240,8%,7%), muted/accent → hsl(240,6%,16%), border/input → hsl(240,6%,18%)
+- Files changed: `src/styles/globals.css`
 - **Learnings for future iterations:**
-  - Prisma v7 with custom `output` path does NOT create `.prisma/client` in node_modules, so `@prisma/client` re-exports don't work
-  - The generated client is `.ts` files, so plain `node` can't run scripts importing from it - must use `tsx`
-  - Turbopack (Next.js build) doesn't resolve `.js` extension for `.ts` source files - use extensionless imports
-  - US-003 overlaps with US-004 because the prebuild blog:index step must work for build to pass
-  - `@auth/prisma-adapter` v2.x works with Prisma v7 generated client without issues
+  - CSS-only token change; typecheck passes trivially (no TS involved)
+  - No pure `hsl(0, 0%, ...)` gray remains in themed token variables
 ---
 
-## 2026-03-19 - US-004
-- Renamed `src/scripts/blog-indexer.js` → `src/scripts/blog-indexer.ts` with TypeScript types (return types on functions, `string | null` type annotations)
-- Renamed `src/scripts/index-blog.js` → `src/scripts/index-blog.ts` with simplified imports (removed unused `fileURLToPath`/`dirname`)
-- Updated `package.json` `blog:index` script to point to `.ts` file
-- `pnpm blog:index` runs successfully (fails only on missing local database, imports resolve fine)
-- Typecheck and lint pass (0 errors)
-- Files changed: src/scripts/blog-indexer.ts (new), src/scripts/index-blog.ts (new), src/scripts/blog-indexer.js (deleted), src/scripts/index-blog.js (deleted), package.json
+## 2026-03-25 - US-002
+- Changed `className="text-4xl"` to `className="text-sm font-medium"` on FavoriteTech labels in `src/components/favorite-tech.tsx` line 57
+- Files changed: `src/components/favorite-tech.tsx`
 - **Learnings for future iterations:**
-  - `tsx` can run `.ts` files directly that import from generated Prisma client — no compilation step needed
-  - ESLint requires `void main()` instead of bare `main()` to satisfy `@typescript-eslint/no-floating-promises`
-  - The `index-blog.ts` script doesn't need `fileURLToPath`/`dirname` — those were only used in the JS version for dynamic import resolution
+  - Simple one-line class change; no side effects
+  - typecheck (`npx tsc --noEmit`) still the reliable gate
 ---
 
-## 2026-03-19 - US-005
-- Upgraded `zod` from ^3.25.76 to ^4.3.6
-- Upgraded `@t3-oss/env-nextjs` from ^0.10.1 to ^0.13.10 (supports Zod 4 via Standard Schema)
-- `@hookform/resolvers` and `@trpc/*` packages were already at latest compatible versions
-- Replaced `z.preprocess()` in `src/env.js` with `z.unknown().transform().pipe()` pattern for NEXTAUTH_URL field
-- Verified `ZodError` import and `.flatten()` method still work in Zod 4
-- Files changed: src/env.js, package.json, pnpm-lock.yaml
+## 2026-03-25 - US-004
+- Changed footer `bg-secondary` to `bg-foreground text-background` in `src/app/layout.tsx:79`
+- Files changed: `src/app/layout.tsx`
 - **Learnings for future iterations:**
-  - Zod 4 removes `z.preprocess()` — replace with `z.unknown().transform().pipe()` pattern
-  - `ZodError` and `.flatten()` are unchanged in Zod 4 — no changes needed in tRPC error formatting
-  - `@t3-oss/env-nextjs` v0.13+ uses Standard Schema, supporting both Zod 3 and 4
-  - `@hookform/resolvers` v5.x already supports Zod 4 via Standard Schema — no upgrade needed
-  - `@trpc/*` v11.13.x already supports Standard Schema — no upgrade needed
+  - Simple one-line class change; typecheck passes trivially
+  - `bg-foreground text-background` pattern mirrors nav bar warmth
 ---
 
-## 2026-03-19 - US-006
-- Upgraded `next-auth` from v4.24.13 to v5.0.0-beta.30
-- Rewrote `src/server/auth.ts`: replaced `NextAuthOptions`/`getServerSession` pattern with Auth.js v5 `NextAuth()` export pattern (`auth`, `handlers`, `signIn`, `signOut`)
-- Discord provider updated from `next-auth/providers/discord` default export (`DiscordProvider`) to named import (`Discord`)
-- `PrismaAdapter` no longer needs `as Adapter` cast — Auth.js v5 types are compatible directly
-- Updated `src/app/api/auth/[...nextauth]/route.ts`: exports `{ GET, POST }` from `handlers`
-- Updated `src/server/api/trpc.ts`: replaced `getServerAuthSession()` with `auth()` import
-- `@auth/prisma-adapter` 2.11.1 is already the latest and compatible with Auth.js v5
-- Files changed: src/server/auth.ts, src/app/api/auth/[...nextauth]/route.ts, src/server/api/trpc.ts, package.json, pnpm-lock.yaml
+## 2026-03-25 - US-001
+- Installed `@tailwindcss/typography` plugin
+- Added `@plugin '@tailwindcss/typography'` to globals.css
+- Added prose customization in `@layer base`: custom CSS properties for body, headings, links, bold, bullets, code colors; max-width 65ch
+- Added `.prose h2` with font-oswald and tracking-tight
+- Added `.prose a` with primary color link styling
+- Added `.prose code` with mono font and muted background
+- Files changed: `src/styles/globals.css`, `package.json`, `pnpm-lock.yaml`
 - **Learnings for future iterations:**
-  - Auth.js v5 (next-auth@beta) uses `export const { auth, handlers, signIn, signOut } = NextAuth({...})` pattern
-  - Discord provider import is `import Discord from "next-auth/providers/discord"` (same path, just convention change)
-  - `PrismaAdapter(db)` works directly without `as Adapter` cast in v5
-  - Route handler is simply `export const { GET, POST } = handlers` — no more `NextAuth(authOptions)` wrapper
-  - `auth()` replaces `getServerSession(authOptions)` — called with no arguments in server contexts
-  - US-006 and US-007 overlap: fixing route handler and trpc.ts was needed for typecheck to pass
+  - Tailwind v4 uses `@plugin` syntax, not the old config-based plugin array
+  - Worktree doesn't have database access, so `pnpm build` fails at prerender. Use `npx tsc --noEmit` for type checking instead
+  - `@eslint/eslintrc` needed as devDep for types to resolve
 ---
 
-## 2026-03-19 - US-007
-- Renamed `NEXTAUTH_SECRET` to `AUTH_SECRET` in `src/env.js` (schema + runtimeEnv)
-- Renamed `NEXTAUTH_URL` to `AUTH_URL` in `src/env.js` (schema + runtimeEnv)
-- Updated `.env.example` with new Auth.js v5 env var names and documentation links
-- Route handler and trpc.ts session consumer were already updated in US-006
-- Typecheck passes, lint passes (0 errors), Next.js build succeeds
-- Files changed: src/env.js, .env.example
+## 2026-03-25 - US-006
+- Fixed `href="/blog "` trailing space to `href="/blog"` in `src/app/page.tsx`
+- Imported `Button` from `~/components/ui/button`
+- Replaced raw Link CTA buttons with `<Button asChild size="lg">` and `<Button asChild variant="outline" size="lg">`
+- Removed all inline color classes (bg-orange-500, border-gray-300, dark:border-gray-700, dark:hover:bg-gray-800)
+- Files changed: `src/app/page.tsx`
 - **Learnings for future iterations:**
-  - Auth.js v5 uses `AUTH_SECRET` and `AUTH_URL` instead of `NEXTAUTH_SECRET`/`NEXTAUTH_URL`
-  - Auth.js v5 auto-detects these env vars without explicit config in the NextAuth() call
-  - The `pnpm build` prebuild step (`blog:index`) fails without a local database — this is expected, use `SKIP_ENV_VALIDATION=1 npx next build` to verify the Next.js build itself
-  - US-006 already completed the route handler and trpc.ts changes that US-007 specified — only env var renaming remained
+  - `Button asChild` pattern wraps a Next.js Link for styled button-as-link
+  - typecheck and eslint both pass cleanly
 ---
 
-## 2026-03-19 - US-008
-- Final verification and cleanup — all acceptance criteria confirmed passing
-- `pnpm prisma generate` succeeds (generates to `src/generated/prisma/`)
-- `tsc --noEmit` passes with zero errors
-- `pnpm lint` passes with zero errors (11 pre-existing warnings unrelated to upgrade)
-- `SKIP_ENV_VALIDATION=1 npx next build` succeeds — all 19 pages generated
-- Grep confirmed: no `@prisma/client` imports, no `z.preprocess` usage, no `getServerSession`/`getServerAuthSession` v4 patterns remain
-- No code changes were needed — all prior stories completed the migration correctly
-- Files changed: prd.json (marked passes: true), progress.txt
+## 2026-03-25 - US-005
+- Replaced `.resume-section-title` rule in `src/styles/globals.css` from hardcoded `text-gray-800 dark:text-foreground text-2xl mb-2` to theme tokens `text-foreground border-b border-border text-xl font-semibold mb-3`
+- Files changed: `src/styles/globals.css`
 - **Learnings for future iterations:**
-  - The `blog:index` prebuild step requires a running database — use `SKIP_ENV_VALIDATION=1 npx next build` to verify the Next.js build independently
-  - Turbopack warns about `pg` not being installed as a direct dependency — it works fine as a transitive dep via `@prisma/adapter-pg`, but could be resolved by adding `pg` directly if needed
-  - Auth.js v5 logs `UntrustedHost` error during static page generation — this is expected in build environments without `AUTH_TRUST_HOST=true`
-  - This project has no `pnpm typecheck` script — use `pnpm exec tsc --noEmit` directly
+  - CSS-only token change; typecheck passes trivially
+  - Hardcoded gray classes (`text-gray-800`) break dark mode — always use `text-foreground` or theme tokens
+---
+
+## 2026-03-25 - US-007
+- Added hamburger menu button (`Menu` from lucide-react) visible only on mobile (`flex md:hidden`)
+- Used existing `Drawer` component from `src/components/ui/drawer.tsx` with `direction="right"`
+- Drawer contains all nav items with `min-h-12` touch targets, `text-lg` font, `border-l-2 border-primary` for active route
+- `ThemeModeToggle` included in both desktop nav and mobile hamburger area
+- `useEffect` watching `pathname` closes drawer automatically on navigation
+- Desktop nav wrapped in `hidden md:flex` (was previously unguarded)
+- Files changed: `src/components/navigation.tsx`
+- **Learnings for future iterations:**
+  - Drawer component supports `direction="right"` for a right-side slide-in panel
+  - `DrawerTrigger asChild` works with plain `<button>` element
+  - `pnpm lint` fails in worktrees with "no such directory: .../lint" — use `npx eslint <file>` instead
+---
+
+## 2026-03-25 - US-008
+- Replaced generic gray spinner with 3 orange `bg-primary` orbital dots at 120° offsets
+- Added `@keyframes orbit-spin` and `@keyframes orbit-dot-breathe` inside `@theme inline` in `globals.css`
+- Added `.orbit-arm` (rotates) and `.orbit-dot` (scale pulse 0.8→1.0) CSS classes in `@layer base`
+- Made `loading.tsx` a client component; uses `useState` initializer for random message selection
+- Three messages: 'Calibrating star charts...', 'Deploying bat signal...', 'Asking the cat for directions...'
+- Files changed: `src/app/loading.tsx`, `src/styles/globals.css`
+- **Learnings for future iterations:**
+  - Orbit effect: nest arm div (rotates via orbit-spin) + dot div (scale via orbit-dot-breathe); set `animation-delay` on arms for 120° offset (0s, -0.5s, -1s for 1.5s period)
+  - `transform-origin: left center` on arm with `top: 50%; left: 50%` pivots around container center
+  - New keyframes should go inside `@theme inline` block alongside existing ones
+---
+
+## 2026-03-25 - US-009
+- Added `--text-display` and `--text-heading` clamp tokens inside `@theme inline` in `globals.css`
+- Added `.heading-accent { @apply mt-2 h-0.5 w-12 rounded-full bg-primary; }` in `@layer base` in `globals.css`
+- Replaced `<div className="h-1 w-20 bg-orange-500">` with `<div className="heading-accent">` in `src/app/page.tsx`
+- Files changed: `src/styles/globals.css`, `src/app/page.tsx`
+- **Learnings for future iterations:**
+  - CSS-only + single JSX class change; typecheck passes trivially
+  - `--text-display` / `--text-heading` custom tokens are available as Tailwind utilities via `@theme inline`
+---
+
+## 2026-03-25 - US-010
+- Added `font-oswald text-2xl font-semibold tracking-tight` to section H2 headings in `page.tsx` (CardTitle), `favorite-tech.tsx`, `my-links.tsx`
+- Added `font-oswald` to page H1s in `blog/page.tsx`, `projects/page.tsx`, `contact/page.tsx`
+- Removed `h-underline` class from favorite-tech.tsx h2 (replaced by Oswald styling)
+- Files changed: `src/app/page.tsx`, `src/components/favorite-tech.tsx`, `src/components/my-links.tsx`, `src/app/blog/page.tsx`, `src/app/projects/page.tsx`, `src/app/contact/page.tsx`
+- **Learnings for future iterations:**
+  - `font-oswald` utility class maps to Oswald font via CSS custom property `--font-oswald` set in globals.css
+  - CardTitle can have `font-oswald` added to its className to override the default Raleway
+  - The `h-underline` class from favorite-tech h2 was removed; it was not a standard Tailwind class and likely had no effect
+---
+
+## 2026-03-25 - US-011
+- Added `font-serif` class to H1 headings in 6 individual blog post pages: custom-developer-blog, erc1155-nft-template, template, building-careercraft-studio, typescript-key-vs-optional, number-munchers-clone
+- Added `.prose blockquote { @apply font-serif italic; }` to `src/styles/globals.css` in `@layer base` after `.prose code`
+- Blog body text (font-sans/Raleway) and post-card excerpts were not changed
+- Files changed: `src/styles/globals.css`, `src/app/blog/custom-developer-blog/page.tsx`, `src/app/blog/erc1155-nft-template/page.tsx`, `src/app/blog/template/page.tsx`, `src/app/blog/building-careercraft-studio/page.tsx`, `src/app/blog/typescript-key-vs-optional/page.tsx`, `src/app/blog/number-munchers-clone/page.tsx`
+- **Learnings for future iterations:**
+  - Blog post pages without H1 (diy-*, fastify-*, voice-*) have no hero title to update — they use other heading structures
+  - `font-serif` maps to Roboto Serif via `--font-serif` CSS custom property
+  - hello-world/page.tsx has no H1 at all; it only has a paragraph — nothing to update there
+---
+
+## 2026-03-25 - US-012
+- Added `focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none rounded-md` to mobile drawer nav links in `navigation.tsx`
+- Added `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-md` to Resume/CV and SOCIALS Link elements in `my-links.tsx`
+- Desktop nav links and hamburger button already had focus-visible rings from US-007
+- CTA Button components already get focus-visible rings for free from the Button component
+- Files changed: `src/components/navigation.tsx`, `src/components/my-links.tsx`
+- **Learnings for future iterations:**
+  - Always add `focus-visible:outline-none` alongside `focus-visible:ring-*` to prevent double outline in some browsers
+  - Focus-visible classes go on the `<Link>` element itself (or the wrapping anchor), not on inner divs
+---
+
+## 2026-03-25 - US-013
+- Wrapped `PostCard` Card in `motion.div` with `whileHover={{ y: -4 }}` and spring transition (stiffness 300, damping 25)
+- Added `group` class to the Link wrapper
+- Changed image hover from `hover:scale-105` to `group-hover:scale-110 duration-700`
+- Added `group-hover:text-primary transition-colors duration-300` to CardTitle
+- Added `transition-[box-shadow,border-color] duration-200` to Card (not transition-all)
+- BlogPostBats component uses its own separate motion animations — not affected
+- Files changed: `src/components/blog/post-card.tsx`
+- **Learnings for future iterations:**
+  - `motion.div` from `motion/react` is already a dep — no install needed
+  - Use `className="h-full"` on `motion.div` wrapper so the Card still fills its grid cell
+  - `group` goes on the Link (direct child of Card), not the Card itself — image and title inside the Link pick up `group-hover:*` utilities
+---
+
+## 2026-03-25 - US-012 (verification + lint fix)
+- US-012 focus-visible implementation was already committed but prd.json was not updated
+- Fixed lint error in `navigation.tsx`: replaced `useEffect(() => { setDrawerOpen(false) }, [pathname])` with `onClick={() => setDrawerOpen(false)}` on mobile drawer nav links
+- Removed `useEffect` import from navigation.tsx (no longer needed)
+- Files changed: `src/components/navigation.tsx`, `.agents/skills/ralph/scripts/prd.json`
+- **Learnings for future iterations:**
+  - To close a controlled Drawer on navigation, add `onClick` to nav links directly — avoids setState-in-useEffect lint error
+  - After implementing a story, always verify `prd.json` was updated in the same commit; merge conflicts can silently revert it
+---
+
+## 2026-03-25 - US-015
+- Added `whileHover={{ scale: 1.08, rotate: -2 }}` with spring transition to each motion.div wrapper in `src/components/my-links.tsx`
+- Added `hover:drop-shadow-[0_0_8px_rgba(249,115,22,0.3)]` className to each motion.div
+- Removed `hover:scale-105` from inner divs (Motion whileHover replaces CSS scale)
+- Used per-property transitions: y/opacity use duration-based for scroll-in stagger; scale/rotate use spring for hover
+- Files changed: `src/components/my-links.tsx`
+- **Learnings for future iterations:**
+  - motion.div `transition` prop applies to ALL animations (whileInView AND whileHover). Use per-property transition objects (`{ y: {...}, scale: {...} }`) to give scroll-in animations delays without delaying hover responses
+  - The motion.div wrappers were already in place from a prior iteration; only needed to add whileHover + drop-shadow
+---
+
+## 2026-03-25 - US-016
+- Converted `src/components/favorite-tech.tsx` to a client component (`'use client'` directive)
+- Imported `motion` from `motion/react`
+- Replaced plain `<div>` tech items with `motion.div` using `initial/whileInView/whileHover` + `viewport={{ once: true }}`
+- Added `hover:bg-primary/10 rounded-xl p-4 transition-colors duration-200` to each motion.div
+- Used per-property transition object to give scroll-in stagger delay while keeping hover spring instant
+- Files changed: `src/components/favorite-tech.tsx`
+- **Learnings for future iterations:**
+  - Per-property transition object `{ default: { duration, delay }, y: { type: 'spring', ... }, scale: { type: 'spring', ... } }` lets scroll-in have stagger delays without slowing hover responses
+  - `whileInView` scroll animations and `whileHover` spring can coexist on the same `motion.div`
 ---

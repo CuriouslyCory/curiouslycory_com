@@ -47,7 +47,7 @@ export default async function CareerCraftStudioPost() {
     <div className="mx-auto max-w-4xl">
       {/* Hero Section */}
       <div className="mb-12 text-center">
-        <h1 className="animate-fade-in from-primary to-secondary mb-6 bg-gradient-to-r bg-clip-text text-5xl font-bold text-transparent">
+        <h1 className="animate-fade-in from-primary to-secondary mb-6 bg-gradient-to-r bg-clip-text text-5xl font-bold text-transparent font-serif">
           Building CareerCraft Studio
         </h1>
         <p className="text-muted-foreground mb-8 text-xl">
