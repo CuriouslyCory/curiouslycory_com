@@ -1,0 +1,52 @@
+## Codebase Patterns
+- Next.js 16 removed `next lint` command - use `eslint .` directly instead
+- eslint-config-next 16 exports native flat config - no FlatCompat needed
+- React compiler rules (eslint-plugin-react-compiler) ship with eslint-config-next 16 - avoid setState in useEffect, use derived state or useSyncExternalStore instead
+- For mount detection, use `useSyncExternalStore` with getServerSnapshot returning false (see `src/hooks/use-mounted.ts`)
+- Use `useState(() => ...)` initializer for random values that should be computed once (not useMemo with impure functions)
+- Typecheck command is `npx tsc --noEmit` (no `pnpm typecheck` script defined)
+- pnpm overrides for @types/react and @types/react-dom must be kept in sync with devDependencies versions
+- Prisma v7 uses `provider = "prisma-client"` (not `prisma-client-js`) and requires explicit `output` in generator block
+- Prisma v7 removes `url` from datasource block — connection URL goes in `prisma.config.ts` instead
+- Import PrismaClient from generated path (`~/generated/prisma/client.js`), not from `@prisma/client`
+- `@prisma/adapter-pg` is needed for Direct TCP connections in Prisma v7
+
+---
+
+## 2026-03-19 - US-001
+- What was implemented: Bulk dependency update for all minor/patch versions
+- Files changed:
+  - package.json (dep versions, overrides, lint script)
+  - pnpm-lock.yaml
+  - eslint.config.js (migrated from FlatCompat to native flat config)
+  - tsconfig.json (restored from master)
+  - src/hooks/use-mounted.ts (new - useSyncExternalStore-based mount hook)
+  - src/components/astronaut.tsx (use useMounted hook)
+  - src/components/blog-post-bats.tsx (fix impure render + setState-in-effect)
+  - src/components/blog/date-filter.tsx (derive state instead of effect sync)
+  - src/components/player/debug-console.tsx (use useMounted for client check)
+  - src/components/player/inventory/inventory-item-dialog.tsx (key-based reset pattern)
+  - src/components/ui/form.tsx, pagination.tsx, sonner.tsx (auto-fixed type imports)
+  - src/server/api/trpc.ts (auto-fixed prefer-optional-chain)
+- **Learnings for future iterations:**
+  - eslint-config-next 16 introduces React compiler lint rules that flag common patterns (setState in useEffect, refs during render, impure functions in render)
+  - The FlatCompat wrapper is no longer needed - eslint-config-next 16 natively exports flat config arrays
+  - `next lint` was removed in Next.js 16 - must use `eslint .` directly
+  - Pre-existing warnings (unused vars) exist in many files - these are pre-existing technical debt, not new issues
+---
+
+## 2026-03-19 - US-002
+- What was implemented: Prisma v7 schema, config, and dependency setup
+- Files changed:
+  - package.json (upgraded prisma to ^7.5.0, @prisma/client to ^7.5.0, added @prisma/adapter-pg, removed @prisma/client and @prisma/engines from onlyBuiltDependencies)
+  - pnpm-lock.yaml
+  - prisma/schema.prisma (provider → prisma-client, added output, removed url from datasource)
+  - prisma.config.ts (new - centralizes Prisma CLI config with DATABASE_URL)
+  - tsconfig.json (added ~/generated/* path alias)
+  - .gitignore (added /src/generated)
+- **Learnings for future iterations:**
+  - `prisma generate` outputs to src/generated/prisma/ — this directory is gitignored
+  - prisma.config.ts uses `import.meta.dirname` for path resolution (ESM compatible)
+  - After changing generator provider, all imports from `@prisma/client` break — must update to generated path (US-003)
+  - Pre-existing implicit `any` type errors exist in blog.ts, blog/page.tsx, sitemap.tsx, date-filter.tsx, projects.ts
+---

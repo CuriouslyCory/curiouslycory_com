@@ -45,6 +45,9 @@
       ],
       "~/types/*": [
         "./src/types/*"
+      ],
+      "~/generated/*": [
+        "./src/generated/*"
       ]
     }
   },
