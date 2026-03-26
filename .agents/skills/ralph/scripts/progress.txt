@@ -1,3 +1,18 @@
+## 2026-03-25 - US-019
+- Added ChatBubble (variant 'thought') above the contact form with space-themed personality text
+- Wrapped form in Card component with p-6 padding
+- Changed max-w-md to max-w-lg for better card proportions
+- Updated labels: Name→Callsign, Email→Frequency, Message→Your Message
+- Changed submit button text to "Send Transmission"
+- Added staggered motion.div entrance animation (opacity 0→1, x -10→0, delay index*0.1) for each field + button
+- Updated toast message to 'Transmission received. I'll respond at lightspeed. (Results may vary.)'
+- Files changed: `src/app/contact/page.tsx`
+- **Learnings for future iterations:**
+  - ChatBubble direction="bottom" places thought bubbles below the main bubble — good for placing above a form
+  - Wrapping form fields in an array and mapping with index gives clean stagger without duplicating motion props
+  - `motion/react` is already in the project as a dep — no install needed
+---
+
 ## 2026-03-25 - US-018
 - Created `src/components/footer.tsx` as a client component
 - 3-column desktop grid (md:grid-cols-3), stacked on mobile
