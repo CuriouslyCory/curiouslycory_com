@@ -1,0 +1,44 @@
+## Codebase Patterns
+- Tailwind CSS v4 with `@plugin` syntax for plugins (not `plugins: []` in config)
+- Prose styling customization uses CSS custom properties (--tw-prose-*) in `@layer base`
+- Font families: Raleway (sans), Roboto Serif (serif), Oxygen Mono (mono), Oswald (display headings)
+- Color tokens use CSS custom properties in :root and .dark
+- Build requires DATABASE_URL, NEXTAUTH_SECRET, NEXTAUTH_URL, DISCORD_CLIENT_ID, DISCORD_CLIENT_SECRET, TWITCH_CLIENT_ID, TWITCH_CLIENT_SECRET env vars
+- Worktree builds will fail at prerender stage without a real database — typecheck (`npx tsc --noEmit`) is the reliable quality gate
+- The `@eslint/eslintrc` package may need to be installed as devDep for type checking to pass in worktrees
+
+# Ralph Progress Log
+Started: Wed Mar 25 06:15:14 PM MST 2026
+---
+
+## 2026-03-25 - US-003
+- Replaced cold gray HSL tokens in `:root` and `.dark` with warm-tinted equivalents
+- Light mode: card/popover → hsl(36,16%,99%), muted/accent → hsl(30,10%,95%), border/input → hsl(30,8%,88%)
+- Dark mode: card/popover → hsl(240,8%,7%), muted/accent → hsl(240,6%,16%), border/input → hsl(240,6%,18%)
+- Files changed: `src/styles/globals.css`
+- **Learnings for future iterations:**
+  - CSS-only token change; typecheck passes trivially (no TS involved)
+  - No pure `hsl(0, 0%, ...)` gray remains in themed token variables
+---
+
+## 2026-03-25 - US-002
+- Changed `className="text-4xl"` to `className="text-sm font-medium"` on FavoriteTech labels in `src/components/favorite-tech.tsx` line 57
+- Files changed: `src/components/favorite-tech.tsx`
+- **Learnings for future iterations:**
+  - Simple one-line class change; no side effects
+  - typecheck (`npx tsc --noEmit`) still the reliable gate
+---
+
+## 2026-03-25 - US-001
+- Installed `@tailwindcss/typography` plugin
+- Added `@plugin '@tailwindcss/typography'` to globals.css
+- Added prose customization in `@layer base`: custom CSS properties for body, headings, links, bold, bullets, code colors; max-width 65ch
+- Added `.prose h2` with font-oswald and tracking-tight
+- Added `.prose a` with primary color link styling
+- Added `.prose code` with mono font and muted background
+- Files changed: `src/styles/globals.css`, `package.json`, `pnpm-lock.yaml`
+- **Learnings for future iterations:**
+  - Tailwind v4 uses `@plugin` syntax, not the old config-based plugin array
+  - Worktree doesn't have database access, so `pnpm build` fails at prerender. Use `npx tsc --noEmit` for type checking instead
+  - `@eslint/eslintrc` needed as devDep for types to resolve
+---

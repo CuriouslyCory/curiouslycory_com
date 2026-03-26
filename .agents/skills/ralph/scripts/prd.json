@@ -45,7 +45,7 @@
         "`npx tsc --noEmit` passes (use this instead of pnpm build \u2014 worktree has no database for prerender)"
       ],
       "priority": 3,
-      "passes": false,
+      "passes": true,
       "notes": "No pure gray hsl(0, 0%, ...) should remain in themed token variables after this."
     },
     {
