@@ -387,7 +387,7 @@
         "`npx tsc --noEmit` passes (use this instead of pnpm build — worktree has no database for prerender)"
       ],
       "priority": 24,
-      "passes": false,
+      "passes": true,
       "notes": "Depends on US-022 and US-023 (homepage layout should be restructured first)."
     },
     {

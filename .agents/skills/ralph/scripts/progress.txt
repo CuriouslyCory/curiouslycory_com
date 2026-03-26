@@ -1,3 +1,16 @@
+## 2026-03-25 - US-024
+- Replaced all `mt-24` margin spacers with self-contained section padding in `src/app/page.tsx`
+- Hero: `pt-10 md:pt-16` → `py-20 md:py-28`
+- About section: added `py-16 md:py-24` to existing max-w-5xl container
+- Mobile CTA section: `mt-24` → `py-16 md:py-24`
+- MyLinks section: `mt-24` → `py-16 md:py-24`
+- FavoriteTech wrapper: removed `mt-24`, added `md:py-24`; fixed inner container from `px-2` to `px-4 md:px-6 lg:px-8`
+- Files changed: `src/app/page.tsx`
+- **Learnings for future iterations:**
+  - Self-contained section padding (py-16 md:py-24) eliminates the need for sibling margin hacks
+  - The mobile CTA section uses `md:hidden` so `md:py-24` is technically unreachable, but keeping it is harmless and consistent
+---
+
 ## 2026-03-25 - US-023
 - Replaced Card-wrapped about section in `src/app/page.tsx` with editorial two-column layout
 - Desktop: `md:grid md:grid-cols-[280px_1fr] md:gap-12` — heading in left 280px column, body text in 1fr right column
