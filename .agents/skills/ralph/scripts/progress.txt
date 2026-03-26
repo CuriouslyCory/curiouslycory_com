@@ -1,3 +1,16 @@
+## 2026-03-25 - US-028
+- Added `const isSpookyMonth = new Date().getMonth() === 9;` at module level in `blog-post-bats.tsx`
+- Changed `SPAWN_INTERVAL` to `isSpookyMonth ? 500 : 1000` (half interval in October)
+- Changed `MAX_WILD_BATS` to `isSpookyMonth ? 6 : 3` (double in October)
+- Added CSS filter `[filter:sepia(1)_hue-rotate(320deg)_saturate(4)]` to both `BatWingSvg` instances in the `BatWings` component when isSpookyMonth (converts dark gray fill to orange)
+- Core quest/catch mechanics (caughtBat, updateQuestProgress, promptBatQuest) left completely untouched
+- Files changed: `src/components/blog-post-bats.tsx`
+- **Learnings for future iterations:**
+  - Module-level constants using `new Date().getMonth()` work fine — computed once at module load, which is correct for seasonal logic
+  - BatWings SVG has hardcoded `fill: "#4d4d4d"` — CSS `filter` is the only way to tint it without modifying the SVG; `sepia(1) hue-rotate(320deg) saturate(4)` gives a good orange
+  - Tailwind arbitrary filter syntax: `[filter:sepia(1)_hue-rotate(320deg)_saturate(4)]` (spaces replaced with underscores)
+---
+
 ## 2026-03-25 - US-027
 - Created `src/app/not-found.tsx` as a server component
 - Reused Astronaut component at `h-48 w-48` with `style={{ animationDuration: '6s' }}` to produce a slow drift
