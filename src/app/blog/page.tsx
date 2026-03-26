@@ -57,7 +57,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   return (
     <div className="container px-4 py-8 md:mx-auto">
       <div className="mb-8 space-y-4">
-        <h1 className="text-4xl font-bold">Blog</h1>
+        <h1 className="font-oswald text-4xl font-bold">Blog</h1>
         <p className="text-muted-foreground">
           Thoughts, ideas, and explorations on web development and technology.
         </p>

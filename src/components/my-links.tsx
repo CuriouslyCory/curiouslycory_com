@@ -23,7 +23,7 @@ export const MyLinks = (): ReactNode => {
   return (
     <div className="bg-foreground text-background dark:text-foreground w-full pt-8 pb-14 dark:bg-gray-100/10">
       <div className="container mx-2 flex flex-col gap-y-4 md:mx-auto">
-        <h2 className="mb-2 text-center text-3xl font-bold">My Links</h2>
+        <h2 className="mb-2 font-oswald text-2xl font-semibold tracking-tight text-center">My Links</h2>
         <div className="grid grid-cols-2 gap-4 md:grid-cols-6 lg:grid-cols-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

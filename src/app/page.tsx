@@ -57,7 +57,7 @@ export default function Home() {
       <section className="max-w-3xl px-2 md:mx-auto">
         <Card className="p-2 md:p-6">
           <CardHeader>
-            <CardTitle className="mb-2 text-3xl font-bold">
+            <CardTitle className="mb-2 font-oswald text-2xl font-semibold tracking-tight">
               A little about me
               <div className="heading-accent"></div>
             </CardTitle>

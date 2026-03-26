@@ -24,7 +24,7 @@ export default async function ProjectsPage() {
       <main className="flex min-h-screen flex-col items-center px-4 py-12 md:px-6 lg:px-8">
         <div className="w-full max-w-7xl space-y-12">
           <div className="space-y-4">
-            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
+            <h1 className="font-oswald text-4xl font-bold tracking-tight sm:text-5xl">
               My Projects
             </h1>
             <p className="text-muted-foreground max-w-3xl text-xl">

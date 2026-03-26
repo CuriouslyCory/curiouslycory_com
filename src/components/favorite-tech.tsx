@@ -42,7 +42,7 @@ export const FavoriteTech = (): ReactNode => {
   return (
     <Card className="p-2 md:p-6">
       <CardHeader>
-        <h2 className="h-underline text-center text-2xl font-bold md:text-left">
+        <h2 className="font-oswald text-2xl font-semibold tracking-tight text-center md:text-left">
           My Main Toolbox
         </h2>
       </CardHeader>

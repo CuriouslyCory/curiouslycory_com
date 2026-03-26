@@ -1,0 +1,143 @@
+{
+  "project": "curiouslycory.com",
+  "branchName": "chore/dep-upgrades",
+  "description": "Full dependency upgrade: Prisma 6→7.5, Zod 3→4, next-auth v4→Auth.js v5, plus all deps to latest compatible versions",
+  "userStories": [
+    {
+      "id": "US-001",
+      "title": "Bulk dependency update (non-breaking)",
+      "description": "As a developer, I want all minor/patch dependencies updated so the project stays current on bug fixes and security patches.",
+      "acceptanceCriteria": [
+        "Run `pnpm update` to bump all deps within existing semver ranges",
+        "Update `eslint-config-next` to latest (16.x to match Next 16)",
+        "Update `@types/react` and `@types/react-dom` to latest 19.x (also update the pnpm overrides in package.json to match)",
+        "Update all `@radix-ui/*`, `@tanstack/*`, `lucide-react`, `motion`, and other deps to latest compatible",
+        "`pnpm typecheck` passes",
+        "`pnpm lint` passes"
+      ],
+      "priority": 1,
+      "passes": true,
+      "notes": ""
+    },
+    {
+      "id": "US-002",
+      "title": "Prisma v7 schema, config, and dependency setup",
+      "description": "As a developer, I want Prisma upgraded to v7.5 with the new schema format, generated client output, and CLI config file.",
+      "acceptanceCriteria": [
+        "Upgrade `prisma` (devDep) and `@prisma/client` to ^7.5.0, install `@prisma/adapter-pg` as a dependency",
+        "In `prisma/schema.prisma`: change generator provider from `prisma-client-js` to `prisma-client`, add `output = \"../src/generated/prisma\"`",
+        "In `prisma/schema.prisma`: remove `url = env(\"DATABASE_URL\")` from datasource block (keep `provider = \"postgresql\"` and all comments)",
+        "Create `prisma.config.ts` at repo root using `defineConfig` from `prisma/config` with `process.env.DATABASE_URL`",
+        "Add `~/generated/*` path alias to `tsconfig.json` paths mapping to `./src/generated/*`",
+        "Add `/src/generated` to `.gitignore`",
+        "Remove `@prisma/client` and `@prisma/engines` from `pnpm.onlyBuiltDependencies` in package.json (keep `prisma` and `sharp`)",
+        "`pnpm prisma generate` succeeds and outputs to `src/generated/prisma/`",
+        "Typecheck passes"
+      ],
+      "priority": 2,
+      "passes": true,
+      "notes": "Follow prisma/upgrade-prompt.md for detailed guidance. The prisma.config.ts should use import.meta.dirname for path resolution."
+    },
+    {
+      "id": "US-003",
+      "title": "Prisma client instantiation refactor with adapter pattern",
+      "description": "As a developer, I want the PrismaClient singleton and all Prisma imports updated to use the v7 adapter pattern with Direct TCP.",
+      "acceptanceCriteria": [
+        "`src/server/db.ts` updated: import PrismaClient from `~/generated/prisma/client.js`, create PrismaPg adapter with `env.DATABASE_URL`, pass adapter to PrismaClient constructor",
+        "`src/server/api/routers/blog.ts` updated: change `type Prisma` import from `@prisma/client` to `~/generated/prisma/client.js`",
+        "Upgrade `@auth/prisma-adapter` to latest version for Prisma v7 compatibility",
+        "Typecheck passes",
+        "`pnpm build` passes"
+      ],
+      "priority": 3,
+      "passes": true,
+      "notes": "The PrismaPg adapter is imported from @prisma/adapter-pg. The adapter takes { connectionString: env.DATABASE_URL }."
+    },
+    {
+      "id": "US-004",
+      "title": "Convert blog-indexer scripts to TypeScript with Prisma v7",
+      "description": "As a developer, I want the blog-indexer standalone scripts converted to TypeScript and updated for Prisma v7 adapter pattern.",
+      "acceptanceCriteria": [
+        "Add `tsx` as a devDependency",
+        "Rename `src/scripts/blog-indexer.js` to `src/scripts/blog-indexer.ts` with proper TypeScript types added",
+        "Rename `src/scripts/index-blog.js` to `src/scripts/index-blog.ts`",
+        "Blog indexer uses PrismaClient from generated path with PrismaPg adapter (uses dotenv for env loading since it runs outside Next.js)",
+        "Update `package.json` script `blog:index` to use `tsx` (e.g., `tsx src/scripts/index-blog.ts`)",
+        "`pnpm blog:index` runs successfully",
+        "Typecheck passes"
+      ],
+      "priority": 4,
+      "passes": true,
+      "notes": "The index-blog script loads dotenv/config before importing blog-indexer. Both scripts run outside Next.js as standalone Node scripts via prebuild."
+    },
+    {
+      "id": "US-005",
+      "title": "Zod 3 to 4 migration",
+      "description": "As a developer, I want Zod upgraded to v4 with all dependent packages updated for Standard Schema compatibility.",
+      "acceptanceCriteria": [
+        "Upgrade `zod` to ^4.0.0",
+        "Upgrade `@t3-oss/env-nextjs` to latest Zod 4 compatible version",
+        "Upgrade `@hookform/resolvers` to latest (Zod 4 compatible via Standard Schema)",
+        "Upgrade `@trpc/server`, `@trpc/client`, `@trpc/react-query` to latest (Standard Schema support)",
+        "In `src/env.js`: replace `z.preprocess()` with `z.unknown().transform().pipe()` pattern for the NEXTAUTH_URL field",
+        "Verify `src/server/api/trpc.ts` compiles (ZodError import and .flatten() must still work in v4)",
+        "Typecheck passes",
+        "`pnpm build` passes"
+      ],
+      "priority": 5,
+      "passes": true,
+      "notes": "z.preprocess() was removed in Zod 4. The replacement pattern is: z.unknown().transform((str) => process.env.VERCEL_URL ?? str).pipe(process.env.VERCEL ? z.string() : z.string().url()). Most other Zod APIs (z.object, z.string, z.infer, .safeParse, .parse, .transform) are unchanged in v4."
+    },
+    {
+      "id": "US-006",
+      "title": "Auth.js v5 core config migration",
+      "description": "As a developer, I want the auth configuration rewritten for Auth.js v5 with the new NextAuth() export pattern.",
+      "acceptanceCriteria": [
+        "Upgrade `next-auth` to v5 (latest stable or beta)",
+        "Upgrade `@auth/prisma-adapter` to latest compatible with Auth.js v5",
+        "Rewrite `src/server/auth.ts`: export `auth`, `handlers`, `signIn`, `signOut` from `NextAuth()` config using Auth.js v5 API",
+        "Auth.js v5 config uses `PrismaAdapter` with the `db` instance from `~/server/db`",
+        "Discord provider updated to Auth.js v5 import path",
+        "Session callback preserved: `user.id` added to session object",
+        "Update module augmentation to Auth.js v5 types if needed",
+        "Typecheck passes"
+      ],
+      "priority": 6,
+      "passes": true,
+      "notes": "Auth.js v5 uses: import NextAuth from 'next-auth'; export const { auth, handlers, signIn, signOut } = NextAuth({ adapter, providers, callbacks }). The PrismaAdapter import stays from @auth/prisma-adapter."
+    },
+    {
+      "id": "US-007",
+      "title": "Auth.js v5 route handler and session consumers",
+      "description": "As a developer, I want the auth route handler and all session consumers updated to use Auth.js v5's auth() function.",
+      "acceptanceCriteria": [
+        "`src/app/api/auth/[...nextauth]/route.ts` updated to export `{ GET, POST }` from the `handlers` export of auth config",
+        "`src/server/api/trpc.ts` updated: replace `getServerAuthSession()` with `auth()` call imported from `~/server/auth`",
+        "Update `src/env.js`: rename `NEXTAUTH_SECRET` to `AUTH_SECRET` if required by Auth.js v5, update NEXTAUTH_URL handling",
+        "Update `.env.example` with any changed env var names",
+        "Typecheck passes",
+        "`pnpm build` passes"
+      ],
+      "priority": 7,
+      "passes": true,
+      "notes": "In Auth.js v5, getServerSession(authOptions) is replaced by auth() which is exported from the NextAuth() call. The route handler uses: export const { GET, POST } = handlers."
+    },
+    {
+      "id": "US-008",
+      "title": "Final verification and cleanup",
+      "description": "As a developer, I want to verify the entire upgrade works end-to-end with no regressions.",
+      "acceptanceCriteria": [
+        "`pnpm prisma generate` succeeds",
+        "`pnpm typecheck` passes with zero errors",
+        "`pnpm lint` passes with zero errors",
+        "`pnpm build` succeeds (includes blog:index prebuild step)",
+        "No remaining imports from `@prisma/client` (all should use `~/generated/prisma/client.js`)",
+        "No remaining usage of `z.preprocess` anywhere in the codebase",
+        "No remaining imports from `next-auth` v4 patterns (getServerSession with authOptions)"
+      ],
+      "priority": 8,
+      "passes": true,
+      "notes": "Build prebuild step (blog:index) fails without local database — this is expected. The Next.js build itself succeeds when run directly with `SKIP_ENV_VALIDATION=1 npx next build`."
+    }
+  ]
+}
