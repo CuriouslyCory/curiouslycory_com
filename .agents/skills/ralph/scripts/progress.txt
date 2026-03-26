@@ -106,3 +106,14 @@ Started: Wed Mar 25 06:15:14 PM MST 2026
   - CSS-only + single JSX class change; typecheck passes trivially
   - `--text-display` / `--text-heading` custom tokens are available as Tailwind utilities via `@theme inline`
 ---
+
+## 2026-03-25 - US-010
+- Added `font-oswald text-2xl font-semibold tracking-tight` to section H2 headings in `page.tsx` (CardTitle), `favorite-tech.tsx`, `my-links.tsx`
+- Added `font-oswald` to page H1s in `blog/page.tsx`, `projects/page.tsx`, `contact/page.tsx`
+- Removed `h-underline` class from favorite-tech.tsx h2 (replaced by Oswald styling)
+- Files changed: `src/app/page.tsx`, `src/components/favorite-tech.tsx`, `src/components/my-links.tsx`, `src/app/blog/page.tsx`, `src/app/projects/page.tsx`, `src/app/contact/page.tsx`
+- **Learnings for future iterations:**
+  - `font-oswald` utility class maps to Oswald font via CSS custom property `--font-oswald` set in globals.css
+  - CardTitle can have `font-oswald` added to its className to override the default Raleway
+  - The `h-underline` class from favorite-tech h2 was removed; it was not a standard Tailwind class and likely had no effect
+---
