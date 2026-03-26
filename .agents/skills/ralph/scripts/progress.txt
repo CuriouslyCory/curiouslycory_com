@@ -69,3 +69,17 @@ Started: Wed Mar 25 06:15:14 PM MST 2026
   - CSS-only token change; typecheck passes trivially
   - Hardcoded gray classes (`text-gray-800`) break dark mode — always use `text-foreground` or theme tokens
 ---
+
+## 2026-03-25 - US-007
+- Added hamburger menu button (`Menu` from lucide-react) visible only on mobile (`flex md:hidden`)
+- Used existing `Drawer` component from `src/components/ui/drawer.tsx` with `direction="right"`
+- Drawer contains all nav items with `min-h-12` touch targets, `text-lg` font, `border-l-2 border-primary` for active route
+- `ThemeModeToggle` included in both desktop nav and mobile hamburger area
+- `useEffect` watching `pathname` closes drawer automatically on navigation
+- Desktop nav wrapped in `hidden md:flex` (was previously unguarded)
+- Files changed: `src/components/navigation.tsx`
+- **Learnings for future iterations:**
+  - Drawer component supports `direction="right"` for a right-side slide-in panel
+  - `DrawerTrigger asChild` works with plain `<button>` element
+  - `pnpm lint` fails in worktrees with "no such directory: .../lint" — use `npx eslint <file>` instead
+---
