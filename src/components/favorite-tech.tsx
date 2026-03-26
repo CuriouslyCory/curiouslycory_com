@@ -54,7 +54,7 @@ export const FavoriteTech = (): ReactNode => {
               className="flex w-32 flex-col items-center"
             >
               <tech.icon className="text-6xl" />
-              <h3 className="text-4xl">{tech.title}</h3>
+              <h3 className="text-sm font-medium">{tech.title}</h3>
             </div>
           ))}
         </div>
