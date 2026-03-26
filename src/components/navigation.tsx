@@ -89,7 +89,7 @@ export function Navigation() {
                     <Link
                       key={item.href}
                       href={item.href}
-                      className={`flex min-h-12 items-center pl-4 text-lg font-medium transition-colors hover:text-primary ${
+                      className={`flex min-h-12 items-center pl-4 text-lg font-medium transition-colors hover:text-primary focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none rounded-md ${
                         isActive(item.href)
                           ? "border-l-2 border-primary text-primary"
                           : "border-l-2 border-transparent"

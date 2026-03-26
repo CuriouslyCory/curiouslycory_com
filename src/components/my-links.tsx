@@ -31,7 +31,7 @@ export const MyLinks = (): ReactNode => {
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <Link href="/cv">
+            <Link href="/cv" className="rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
               <div className="flex flex-col items-center gap-2 transition-all hover:scale-105 hover:text-orange-500">
                 <ScrollText className="h-12 w-12" />
                 <span>Resume/CV</span>
@@ -46,7 +46,7 @@ export const MyLinks = (): ReactNode => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Link href={link.url} target="top">
+              <Link href={link.url} target="top" className="rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
                 <div className="flex flex-col items-center gap-2 transition-colors hover:scale-105 hover:text-orange-500">
                   <link.icon className="h-12 w-12" />
                   <span className="text-center">
