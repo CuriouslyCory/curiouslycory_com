@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 
 @plugin 'tailwindcss-animate';
+@plugin '@tailwindcss/typography';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -249,6 +250,28 @@
 
   .resume-section-title {
     @apply mb-2 pb-1 font-oswald text-2xl text-gray-800 dark:text-foreground;
+  }
+
+  .prose {
+    --tw-prose-body: var(--foreground);
+    --tw-prose-headings: var(--foreground);
+    --tw-prose-links: var(--primary);
+    --tw-prose-bold: var(--foreground);
+    --tw-prose-bullets: var(--primary);
+    --tw-prose-code: var(--foreground);
+    max-width: 65ch;
+  }
+
+  .prose h2 {
+    @apply font-oswald tracking-tight;
+  }
+
+  .prose a {
+    @apply text-primary decoration-primary/40 underline-offset-2 hover:decoration-primary;
+  }
+
+  .prose code {
+    @apply font-mono rounded bg-muted px-1.5 py-0.5 text-sm;
   }
 
   .h-underline {
