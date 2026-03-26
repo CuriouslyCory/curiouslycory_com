@@ -2,6 +2,7 @@ import Link from "next/link";
 import { type Metadata } from "next";
 
 import { Astronaut } from "~/components/astronaut";
+import { Button } from "~/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import { ChatBubble } from "~/components/ui/chat-bubble";
 import { FavoriteTech } from "~/components/favorite-tech";
@@ -97,18 +98,12 @@ export default function Home() {
         </Card>
       </section>
       <section className="mt-24 flex justify-center gap-x-4">
-        <Link
-          href="/cv"
-          className="rounded-lg bg-orange-500 px-6 py-3 font-bold text-white transition-all hover:scale-105 hover:text-white"
-        >
-          View My Resume
-        </Link>
-        <Link
-          href="/blog "
-          className="rounded-lg border border-gray-300 px-6 py-3 transition-colors hover:bg-gray-100 dark:border-gray-700 dark:hover:bg-gray-800"
-        >
-          Read My Blog
-        </Link>
+        <Button asChild size="lg">
+          <Link href="/cv">View My Resume</Link>
+        </Button>
+        <Button asChild variant="outline" size="lg">
+          <Link href="/blog">Read My Blog</Link>
+        </Button>
       </section>
       <section className="mt-24 flex flex-col gap-y-24">
         <MyLinks />
