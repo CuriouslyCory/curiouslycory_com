@@ -96,3 +96,13 @@ Started: Wed Mar 25 06:15:14 PM MST 2026
   - `transform-origin: left center` on arm with `top: 50%; left: 50%` pivots around container center
   - New keyframes should go inside `@theme inline` block alongside existing ones
 ---
+
+## 2026-03-25 - US-009
+- Added `--text-display` and `--text-heading` clamp tokens inside `@theme inline` in `globals.css`
+- Added `.heading-accent { @apply mt-2 h-0.5 w-12 rounded-full bg-primary; }` in `@layer base` in `globals.css`
+- Replaced `<div className="h-1 w-20 bg-orange-500">` with `<div className="heading-accent">` in `src/app/page.tsx`
+- Files changed: `src/styles/globals.css`, `src/app/page.tsx`
+- **Learnings for future iterations:**
+  - CSS-only + single JSX class change; typecheck passes trivially
+  - `--text-display` / `--text-heading` custom tokens are available as Tailwind utilities via `@theme inline`
+---

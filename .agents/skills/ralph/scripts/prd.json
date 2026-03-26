@@ -139,7 +139,7 @@
         "`npx tsc --noEmit` passes (use this instead of pnpm build \u2014 worktree has no database for prerender)"
       ],
       "priority": 9,
-      "passes": false,
+      "passes": true,
       "notes": "Combines plan items 2B and 2C since both are small CSS additions."
     },
     {
