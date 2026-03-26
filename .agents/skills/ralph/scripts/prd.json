@@ -374,7 +374,7 @@
         "Verify in browser using dev-browser skill"
       ],
       "priority": 23,
-      "passes": false,
+      "passes": true,
       "notes": "Depends on US-009 (heading accent bar utility should exist)."
     },
     {

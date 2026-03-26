@@ -1,3 +1,17 @@
+## 2026-03-25 - US-023
+- Replaced Card-wrapped about section in `src/app/page.tsx` with editorial two-column layout
+- Desktop: `md:grid md:grid-cols-[280px_1fr] md:gap-12` — heading in left 280px column, body text in 1fr right column
+- Mobile: stacked (mt-6 offset on the text column to add spacing below heading)
+- Removed Card, CardHeader, CardContent wrappers and their imports
+- Body paragraphs updated to `text-lg leading-relaxed` for better readability
+- Heading kept with `.heading-accent` bar below it
+- Files changed: `src/app/page.tsx`
+- **Learnings for future iterations:**
+  - Removing Card imports from page.tsx is safe when no other Card usage remains in that file
+  - Two-column editorial layout: heading in narrow fixed col (280px), content in wide flexible col (1fr)
+  - Mobile stacking uses `mt-6` on the content div to add breathing room; `md:mt-0` resets it for desktop grid
+---
+
 ## 2026-03-25 - US-022
 - Restructured hero section in `src/app/page.tsx` with mobile/desktop split
 - Mobile (md:hidden): original ChatBubble + centered Astronaut unchanged
