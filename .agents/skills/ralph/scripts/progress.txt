@@ -83,3 +83,16 @@ Started: Wed Mar 25 06:15:14 PM MST 2026
   - `DrawerTrigger asChild` works with plain `<button>` element
   - `pnpm lint` fails in worktrees with "no such directory: .../lint" — use `npx eslint <file>` instead
 ---
+
+## 2026-03-25 - US-008
+- Replaced generic gray spinner with 3 orange `bg-primary` orbital dots at 120° offsets
+- Added `@keyframes orbit-spin` and `@keyframes orbit-dot-breathe` inside `@theme inline` in `globals.css`
+- Added `.orbit-arm` (rotates) and `.orbit-dot` (scale pulse 0.8→1.0) CSS classes in `@layer base`
+- Made `loading.tsx` a client component; uses `useState` initializer for random message selection
+- Three messages: 'Calibrating star charts...', 'Deploying bat signal...', 'Asking the cat for directions...'
+- Files changed: `src/app/loading.tsx`, `src/styles/globals.css`
+- **Learnings for future iterations:**
+  - Orbit effect: nest arm div (rotates via orbit-spin) + dot div (scale via orbit-dot-breathe); set `animation-delay` on arms for 120° offset (0s, -0.5s, -1s for 1.5s period)
+  - `transform-origin: left center` on arm with `top: 50%; left: 50%` pivots around container center
+  - New keyframes should go inside `@theme inline` block alongside existing ones
+---
