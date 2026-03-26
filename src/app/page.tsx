@@ -38,7 +38,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <section className="pt-10 md:pt-16">
+      <section className="py-20 md:py-28">
         {/* Mobile hero: ChatBubble + centered Astronaut */}
         <div className="text-center md:hidden">
           <ChatBubble
@@ -75,7 +75,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="mx-auto max-w-5xl px-4 md:px-6 lg:px-8">
+      <section className="mx-auto max-w-5xl px-4 py-16 md:px-6 md:py-24 lg:px-8">
         <div className="md:grid md:grid-cols-[280px_1fr] md:gap-12">
           <div>
             <h2 className="font-oswald text-2xl font-semibold tracking-tight">
@@ -123,7 +123,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="mt-24 flex justify-center gap-x-4 md:hidden">
+      <section className="flex justify-center gap-x-4 py-16 md:hidden md:py-24">
         <Button asChild size="lg">
           <Link href="/cv">View My Resume</Link>
         </Button>
@@ -131,11 +131,11 @@ export default function Home() {
           <Link href="/blog">Read My Blog</Link>
         </Button>
       </section>
-      <section className="mt-24 flex flex-col gap-y-24">
+      <section className="flex flex-col gap-y-24 py-16 md:py-24">
         <MyLinks />
       </section>
-      <div className="mt-24 w-full bg-surface-elevated py-16">
-        <section className="mx-auto max-w-4xl px-2">
+      <div className="w-full bg-surface-elevated py-16 md:py-24">
+        <section className="mx-auto max-w-4xl px-4 md:px-6 lg:px-8">
           <FavoriteTech />
         </section>
       </div>
