@@ -117,3 +117,14 @@ Started: Wed Mar 25 06:15:14 PM MST 2026
   - CardTitle can have `font-oswald` added to its className to override the default Raleway
   - The `h-underline` class from favorite-tech h2 was removed; it was not a standard Tailwind class and likely had no effect
 ---
+
+## 2026-03-25 - US-011
+- Added `font-serif` class to H1 headings in 6 individual blog post pages: custom-developer-blog, erc1155-nft-template, template, building-careercraft-studio, typescript-key-vs-optional, number-munchers-clone
+- Added `.prose blockquote { @apply font-serif italic; }` to `src/styles/globals.css` in `@layer base` after `.prose code`
+- Blog body text (font-sans/Raleway) and post-card excerpts were not changed
+- Files changed: `src/styles/globals.css`, `src/app/blog/custom-developer-blog/page.tsx`, `src/app/blog/erc1155-nft-template/page.tsx`, `src/app/blog/template/page.tsx`, `src/app/blog/building-careercraft-studio/page.tsx`, `src/app/blog/typescript-key-vs-optional/page.tsx`, `src/app/blog/number-munchers-clone/page.tsx`
+- **Learnings for future iterations:**
+  - Blog post pages without H1 (diy-*, fastify-*, voice-*) have no hero title to update — they use other heading structures
+  - `font-serif` maps to Roboto Serif via `--font-serif` CSS custom property
+  - hello-world/page.tsx has no H1 at all; it only has a paragraph — nothing to update there
+---
