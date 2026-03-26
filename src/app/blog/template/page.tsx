@@ -40,7 +40,7 @@ export default async function HelloWorldPost() {
     <div className="mx-auto max-w-3xl">
       {/* Custom title section with animation */}
       <div className="mb-12 text-center">
-        <h1 className="animate-fade-in from-primary to-secondary bg-gradient-to-r bg-clip-text text-5xl font-bold text-transparent">
+        <h1 className="animate-fade-in from-primary to-secondary bg-gradient-to-r bg-clip-text text-5xl font-bold text-transparent font-serif">
           Hello World!
         </h1>
         <p className="text-muted-foreground mt-4 text-xl">

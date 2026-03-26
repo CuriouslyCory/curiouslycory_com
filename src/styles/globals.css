@@ -286,6 +286,10 @@
     @apply font-mono rounded bg-muted px-1.5 py-0.5 text-sm;
   }
 
+  .prose blockquote {
+    @apply font-serif italic;
+  }
+
   .heading-accent {
     @apply mt-2 h-0.5 w-12 rounded-full bg-primary;
   }
