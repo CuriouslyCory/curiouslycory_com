@@ -163,3 +163,26 @@ Started: Wed Mar 25 06:15:14 PM MST 2026
   - To close a controlled Drawer on navigation, add `onClick` to nav links directly — avoids setState-in-useEffect lint error
   - After implementing a story, always verify `prd.json` was updated in the same commit; merge conflicts can silently revert it
 ---
+
+## 2026-03-25 - US-015
+- Added `whileHover={{ scale: 1.08, rotate: -2 }}` with spring transition to each motion.div wrapper in `src/components/my-links.tsx`
+- Added `hover:drop-shadow-[0_0_8px_rgba(249,115,22,0.3)]` className to each motion.div
+- Removed `hover:scale-105` from inner divs (Motion whileHover replaces CSS scale)
+- Used per-property transitions: y/opacity use duration-based for scroll-in stagger; scale/rotate use spring for hover
+- Files changed: `src/components/my-links.tsx`
+- **Learnings for future iterations:**
+  - motion.div `transition` prop applies to ALL animations (whileInView AND whileHover). Use per-property transition objects (`{ y: {...}, scale: {...} }`) to give scroll-in animations delays without delaying hover responses
+  - The motion.div wrappers were already in place from a prior iteration; only needed to add whileHover + drop-shadow
+---
+
+## 2026-03-25 - US-016
+- Converted `src/components/favorite-tech.tsx` to a client component (`'use client'` directive)
+- Imported `motion` from `motion/react`
+- Replaced plain `<div>` tech items with `motion.div` using `initial/whileInView/whileHover` + `viewport={{ once: true }}`
+- Added `hover:bg-primary/10 rounded-xl p-4 transition-colors duration-200` to each motion.div
+- Used per-property transition object to give scroll-in stagger delay while keeping hover spring instant
+- Files changed: `src/components/favorite-tech.tsx`
+- **Learnings for future iterations:**
+  - Per-property transition object `{ default: { duration, delay }, y: { type: 'spring', ... }, scale: { type: 'spring', ... } }` lets scroll-in have stagger delays without slowing hover responses
+  - `whileInView` scroll animations and `whileHover` spring can coexist on the same `motion.div`
+---
