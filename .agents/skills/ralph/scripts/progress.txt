@@ -140,6 +140,20 @@ Started: Wed Mar 25 06:15:14 PM MST 2026
   - Focus-visible classes go on the `<Link>` element itself (or the wrapping anchor), not on inner divs
 ---
 
+## 2026-03-25 - US-013
+- Wrapped `PostCard` Card in `motion.div` with `whileHover={{ y: -4 }}` and spring transition (stiffness 300, damping 25)
+- Added `group` class to the Link wrapper
+- Changed image hover from `hover:scale-105` to `group-hover:scale-110 duration-700`
+- Added `group-hover:text-primary transition-colors duration-300` to CardTitle
+- Added `transition-[box-shadow,border-color] duration-200` to Card (not transition-all)
+- BlogPostBats component uses its own separate motion animations — not affected
+- Files changed: `src/components/blog/post-card.tsx`
+- **Learnings for future iterations:**
+  - `motion.div` from `motion/react` is already a dep — no install needed
+  - Use `className="h-full"` on `motion.div` wrapper so the Card still fills its grid cell
+  - `group` goes on the Link (direct child of Card), not the Card itself — image and title inside the Link pick up `group-hover:*` utilities
+---
+
 ## 2026-03-25 - US-012 (verification + lint fix)
 - US-012 focus-visible implementation was already committed but prd.json was not updated
 - Fixed lint error in `navigation.tsx`: replaced `useEffect(() => { setDrawerOpen(false) }, [pathname])` with `onClick={() => setDrawerOpen(false)}` on mobile drawer nav links

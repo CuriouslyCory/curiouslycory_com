@@ -205,7 +205,7 @@
         "`npx tsc --noEmit` passes (use this instead of pnpm build \u2014 worktree has no database for prerender)"
       ],
       "priority": 13,
-      "passes": false,
+      "passes": true,
       "notes": "BlogPostBats cards must be excluded from these hover styles."
     },
     {
