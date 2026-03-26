@@ -139,3 +139,13 @@ Started: Wed Mar 25 06:15:14 PM MST 2026
   - Always add `focus-visible:outline-none` alongside `focus-visible:ring-*` to prevent double outline in some browsers
   - Focus-visible classes go on the `<Link>` element itself (or the wrapping anchor), not on inner divs
 ---
+
+## 2026-03-25 - US-012 (verification + lint fix)
+- US-012 focus-visible implementation was already committed but prd.json was not updated
+- Fixed lint error in `navigation.tsx`: replaced `useEffect(() => { setDrawerOpen(false) }, [pathname])` with `onClick={() => setDrawerOpen(false)}` on mobile drawer nav links
+- Removed `useEffect` import from navigation.tsx (no longer needed)
+- Files changed: `src/components/navigation.tsx`, `.agents/skills/ralph/scripts/prd.json`
+- **Learnings for future iterations:**
+  - To close a controlled Drawer on navigation, add `onClick` to nav links directly — avoids setState-in-useEffect lint error
+  - After implementing a story, always verify `prd.json` was updated in the same commit; merge conflicts can silently revert it
+---

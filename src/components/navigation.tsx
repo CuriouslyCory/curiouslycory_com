@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion } from "motion/react";
 import { Menu } from "lucide-react";
 import { ThemeModeToggle } from "./theme-mode-toggle";
@@ -29,10 +29,6 @@ export function Navigation() {
       pathname === href || (href === "/blog" && pathname.startsWith("/blog"))
     );
   };
-
-  useEffect(() => {
-    setDrawerOpen(false);
-  }, [pathname]);
 
   return (
     <nav className="bg-foreground text-background">
@@ -89,6 +85,7 @@ export function Navigation() {
                     <Link
                       key={item.href}
                       href={item.href}
+                      onClick={() => setDrawerOpen(false)}
                       className={`flex min-h-12 items-center pl-4 text-lg font-medium transition-colors hover:text-primary focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none rounded-md ${
                         isActive(item.href)
                           ? "border-l-2 border-primary text-primary"
