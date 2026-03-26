@@ -59,7 +59,7 @@ export default function Home() {
           <CardHeader>
             <CardTitle className="mb-2 text-3xl font-bold">
               A little about me
-              <div className="h-1 w-20 bg-orange-500"></div>
+              <div className="heading-accent"></div>
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
