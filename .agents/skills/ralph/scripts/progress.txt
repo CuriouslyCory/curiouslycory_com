@@ -29,6 +29,14 @@ Started: Wed Mar 25 06:15:14 PM MST 2026
   - typecheck (`npx tsc --noEmit`) still the reliable gate
 ---
 
+## 2026-03-25 - US-004
+- Changed footer `bg-secondary` to `bg-foreground text-background` in `src/app/layout.tsx:79`
+- Files changed: `src/app/layout.tsx`
+- **Learnings for future iterations:**
+  - Simple one-line class change; typecheck passes trivially
+  - `bg-foreground text-background` pattern mirrors nav bar warmth
+---
+
 ## 2026-03-25 - US-001
 - Installed `@tailwindcss/typography` plugin
 - Added `@plugin '@tailwindcss/typography'` to globals.css
