@@ -473,7 +473,7 @@
         "`npx tsc --noEmit` passes (use this instead of pnpm build — worktree has no database for prerender)"
       ],
       "priority": 29,
-      "passes": false,
+      "passes": true,
       "notes": "Must persist across navigations via localStorage."
     },
     {

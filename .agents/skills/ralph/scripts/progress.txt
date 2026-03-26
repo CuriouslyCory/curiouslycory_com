@@ -1,3 +1,20 @@
+## 2026-03-25 - US-029
+- Created `src/components/easter-eggs.tsx` as a client component
+- Detects Konami sequence (ArrowUp×2, ArrowDown×2, ArrowLeft, ArrowRight×2, ArrowLeft, ArrowRight, B, A) using `e.code` tracking via useRef
+- On match: saves `zero-gravity=true` to localStorage, sets React state, syncs body class via effect
+- Persists across navigations — lazy `useState` initializer reads localStorage on first client render
+- Shows fixed `ChatBubble variant='speech'` overlay: 'Oops, gravity module offline.'
+- Added `.zero-gravity section { animation: float ... }` with nth-child staggered delays in `globals.css`
+- Modified `src/components/astronaut.tsx`: added `handleClick` wrapper that intercepts clicks when body has `zero-gravity` class, dispatches `gravity-restored` custom event, and skips theme toggle
+- EasterEggs listens for `gravity-restored` to clear state and localStorage
+- Konami listener skips INPUT/TEXTAREA/contentEditable targets
+- Files changed: `src/components/easter-eggs.tsx`, `src/components/astronaut.tsx`, `src/styles/globals.css`, `src/app/layout.tsx`
+- **Learnings for future iterations:**
+  - `useState(lazyInitFn)` is the correct pattern to read localStorage on mount without triggering the `react-hooks/set-state-in-effect` lint rule
+  - Use `window.dispatchEvent(new CustomEvent(...))` for decoupled cross-component communication; pair with `window.addEventListener` in the consuming component
+  - Effects should sync external systems FROM state (not set state from external reads); read external state in lazy init instead
+---
+
 ## 2026-03-25 - US-028
 - Added `const isSpookyMonth = new Date().getMonth() === 9;` at module level in `blog-post-bats.tsx`
 - Changed `SPAWN_INTERVAL` to `isSpookyMonth ? 500 : 1000` (half interval in October)
