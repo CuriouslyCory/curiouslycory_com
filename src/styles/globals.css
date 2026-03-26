@@ -84,6 +84,15 @@
   --animate-rotate-15: rotate-15 0.25s ease-in-out infinite;
   --animate-mirror-rotate-15: mirror-rotate-15 0.25s ease-in-out infinite;
 
+  @keyframes orbit-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  @keyframes orbit-dot-breathe {
+    0%, 100% { transform: scale(0.8); }
+    50% { transform: scale(1); }
+  }
+
   --background-image-gradient-radial: radial-gradient(
     var(--gradient-color-stops)
   );
@@ -276,5 +285,26 @@
 
   .h-underline {
     @apply underline decoration-orange-500 decoration-2 underline-offset-4;
+  }
+
+  .orbit-arm {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 0;
+    transform-origin: left center;
+    animation: orbit-spin 1.5s linear infinite;
+  }
+
+  .orbit-dot {
+    position: absolute;
+    right: -4px;
+    top: -4px;
+    width: 8px;
+    height: 8px;
+    border-radius: 9999px;
+    background-color: var(--primary);
+    animation: orbit-dot-breathe 1.5s ease-in-out infinite;
   }
 }
