@@ -28,11 +28,18 @@ export const MyLinks = (): ReactNode => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            whileHover={{ scale: 1.08, rotate: -2 }}
+            transition={{
+              y: { duration: 0.5 },
+              opacity: { duration: 0.5 },
+              scale: { type: "spring", stiffness: 400, damping: 15 },
+              rotate: { type: "spring", stiffness: 400, damping: 15 },
+            }}
             viewport={{ once: true }}
+            className="hover:drop-shadow-[0_0_8px_rgba(249,115,22,0.3)]"
           >
             <Link href="/cv" className="rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
-              <div className="flex flex-col items-center gap-2 transition-all hover:scale-105 hover:text-orange-500">
+              <div className="flex flex-col items-center gap-2 transition-colors hover:text-orange-500">
                 <ScrollText className="h-12 w-12" />
                 <span>Resume/CV</span>
               </div>
@@ -43,11 +50,18 @@ export const MyLinks = (): ReactNode => {
               key={link.url}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              whileHover={{ scale: 1.08, rotate: -2 }}
+              transition={{
+                y: { duration: 0.5, delay: index * 0.1 },
+                opacity: { duration: 0.5, delay: index * 0.1 },
+                scale: { type: "spring", stiffness: 400, damping: 15 },
+                rotate: { type: "spring", stiffness: 400, damping: 15 },
+              }}
               viewport={{ once: true }}
+              className="hover:drop-shadow-[0_0_8px_rgba(249,115,22,0.3)]"
             >
               <Link href={link.url} target="top" className="rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
-                <div className="flex flex-col items-center gap-2 transition-colors hover:scale-105 hover:text-orange-500">
+                <div className="flex flex-col items-center gap-2 transition-colors hover:text-orange-500">
                   <link.icon className="h-12 w-12" />
                   <span className="text-center">
                     {link.title}
