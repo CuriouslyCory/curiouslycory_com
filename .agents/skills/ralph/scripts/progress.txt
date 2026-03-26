@@ -1,3 +1,15 @@
+## 2026-03-25 - US-022
+- Restructured hero section in `src/app/page.tsx` with mobile/desktop split
+- Mobile (md:hidden): original ChatBubble + centered Astronaut unchanged
+- Desktop (hidden md:flex): asymmetric two-column — left: H1 with text-primary name span, subtitle in text-muted-foreground, CTA buttons; right: w-72 flex-shrink-0 Astronaut
+- Moved CTA buttons to desktop hero left column; standalone CTA section now md:hidden for mobile-only
+- Files changed: `src/app/page.tsx`
+- **Learnings for future iterations:**
+  - Duplicating Astronaut in DOM (one per breakpoint) is safe — it's a client component with no shared state between instances
+  - Desktop hero uses `mx-auto hidden max-w-6xl items-end justify-between px-4 md:flex md:px-6 lg:px-8` — note `hidden md:flex` not `md:flex hidden`
+  - The standalone CTA section gets `md:hidden` to avoid duplicate buttons on desktop
+---
+
 ## 2026-03-25 - US-021
 - Added `--surface-elevated` and `--surface-sunken` tokens to `:root` (light) and `.dark` in `globals.css`
 - Registered `--color-surface-elevated` and `--color-surface-sunken` in `@theme inline` block

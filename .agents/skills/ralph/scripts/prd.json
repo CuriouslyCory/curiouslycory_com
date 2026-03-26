@@ -358,7 +358,7 @@
         "Verify in browser using dev-browser skill"
       ],
       "priority": 22,
-      "passes": false,
+      "passes": true,
       "notes": "Depends on US-006 (CTA buttons should already use Button component)."
     },
     {
