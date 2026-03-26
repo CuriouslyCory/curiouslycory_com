@@ -491,7 +491,7 @@
         "`npx tsc --noEmit` passes (use this instead of pnpm build — worktree has no database for prerender)"
       ],
       "priority": 30,
-      "passes": false,
+      "passes": true,
       "notes": "Requires understanding the existing quest/inventory system in blog-post-bats.tsx and cursor-follower.tsx. Quest chain integration deferred."
     },
     {

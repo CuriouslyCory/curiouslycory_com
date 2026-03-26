@@ -1,3 +1,20 @@
+## 2026-03-25 - US-030
+- Added `telescope` inventory item in `src/components/player/inventory/items/telescope.tsx` (SVG icon + radial gradient cursor asset)
+- Added telescope to `src/components/player/inventory/items/index.tsx` inventory items array
+- Created `src/components/constellations.tsx` — 4 fixed-position constellation clusters (Curiosia Major, The Debugger, Orion's Fork, The Stack)
+- Each constellation is `opacity-0` by default; reveals with `transition-opacity duration-500` when telescope cursor is within 80px
+- Activation trigger: a nearly-invisible `✦` button (opacity-[0.06]) in the footer copyright bar; clicking it calls `addInventoryItem("telescope", 1)`
+- Added `<ConstellationsOverlay />` to `src/app/layout.tsx` inside `PlayerProvider`
+- Added `usePlayer` to `footer.tsx` for the activation trigger
+- Files changed: `src/components/player/inventory/items/telescope.tsx`, `src/components/player/inventory/items/index.tsx`, `src/components/constellations.tsx`, `src/app/layout.tsx`, `src/components/footer.tsx`
+- **Learnings for future iterations:**
+  - `react-hooks/set-state-in-effect` flags setState called directly in effect body; only call setState in event listener callbacks within the effect
+  - `react-hooks/refs` flags `ref.current` access during render AND during direct effect body; reading `ref.current` inside an event handler callback inside an effect IS allowed
+  - Gate state with an additional condition during render (e.g., `const visible = telescopeActive && nearCursor`) to avoid needing setState when dependencies change — the gate makes stale state harmless
+  - Adding items to `inventoryItems as const` array automatically updates `InventoryItemId` type union — no manual type changes needed
+  - Fixed-position constellation elements use `fixed` CSS so they appear at viewport-relative positions regardless of scroll
+---
+
 ## 2026-03-25 - US-029
 - Created `src/components/easter-eggs.tsx` as a client component
 - Detects Konami sequence (ArrowUp×2, ArrowDown×2, ArrowLeft, ArrowRight×2, ArrowLeft, ArrowRight, B, A) using `e.code` tracking via useRef
