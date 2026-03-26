@@ -16,11 +16,11 @@
         "Add `.prose code { @apply font-mono rounded bg-muted px-1.5 py-0.5 text-sm; }`",
         "`npx tsc --noEmit` passes",
         "`pnpm lint` passes",
-        "`npx tsc --noEmit` passes (use this instead of pnpm build \u2014 worktree has no database for prerender)"
+        "`npx tsc --noEmit` passes (use this instead of pnpm build — worktree has no database for prerender)"
       ],
       "priority": 1,
       "passes": true,
-      "notes": "This is the highest-impact fix \u2014 10+ blog posts use prose classes with no plugin installed."
+      "notes": "This is the highest-impact fix — 10+ blog posts use prose classes with no plugin installed."
     },
     {
       "id": "US-002",
@@ -29,7 +29,7 @@
       "acceptanceCriteria": [
         "In `src/components/favorite-tech.tsx` line 57, change `className=\"text-4xl\"` to `className=\"text-sm font-medium\"`",
         "`npx tsc --noEmit` passes",
-        "`npx tsc --noEmit` passes (use this instead of pnpm build \u2014 worktree has no database for prerender)"
+        "`npx tsc --noEmit` passes (use this instead of pnpm build — worktree has no database for prerender)"
       ],
       "priority": 2,
       "passes": true,
@@ -42,7 +42,7 @@
       "acceptanceCriteria": [
         "In `src/styles/globals.css` `:root` light mode: --card: hsl(36, 16%, 99%), --card-foreground: hsl(23, 8%, 8%), --popover: hsl(36, 16%, 99%), --popover-foreground: hsl(23, 8%, 8%), --muted: hsl(30, 10%, 95%), --muted-foreground: hsl(23, 4%, 45%), --accent: hsl(30, 10%, 95%), --accent-foreground: hsl(23, 6%, 12%), --border: hsl(30, 8%, 88%), --input: hsl(30, 8%, 88%)",
         "In `src/styles/globals.css` `.dark` mode: --card: hsl(240, 8%, 7%), --card-foreground: hsl(36, 18%, 95%), --popover: hsl(240, 8%, 7%), --popover-foreground: hsl(36, 18%, 95%), --muted: hsl(240, 6%, 16%), --muted-foreground: hsl(36, 10%, 65%), --accent: hsl(240, 6%, 16%), --accent-foreground: hsl(36, 18%, 95%), --border: hsl(240, 6%, 18%), --input: hsl(240, 6%, 18%)",
-        "`npx tsc --noEmit` passes (use this instead of pnpm build \u2014 worktree has no database for prerender)"
+        "`npx tsc --noEmit` passes (use this instead of pnpm build — worktree has no database for prerender)"
       ],
       "priority": 3,
       "passes": true,
@@ -55,7 +55,7 @@
       "acceptanceCriteria": [
         "In `src/app/layout.tsx`, change the footer's `bg-secondary` class to `bg-foreground text-background` to match the nav bar warmth",
         "Footer text remains readable in both light and dark mode",
-        "`npx tsc --noEmit` passes (use this instead of pnpm build \u2014 worktree has no database for prerender)"
+        "`npx tsc --noEmit` passes (use this instead of pnpm build — worktree has no database for prerender)"
       ],
       "priority": 4,
       "passes": true,
@@ -68,7 +68,7 @@
       "acceptanceCriteria": [
         "In `src/styles/globals.css`, replace the `.resume-section-title` rule with: `@apply mb-3 pb-1 font-oswald text-xl font-semibold text-foreground border-b border-border;`",
         "Verify resume page headings render correctly in both light and dark mode at `/cv`",
-        "`npx tsc --noEmit` passes (use this instead of pnpm build \u2014 worktree has no database for prerender)"
+        "`npx tsc --noEmit` passes (use this instead of pnpm build — worktree has no database for prerender)"
       ],
       "priority": 5,
       "passes": true,
@@ -85,7 +85,7 @@
         "Replace the 'Read My Blog' raw Link with `<Button asChild variant=\"outline\" size=\"lg\"><Link href=\"/blog\">Read My Blog</Link></Button>`",
         "Remove all inline color classes (bg-orange-500, border-gray-300, dark:border-gray-700, dark:hover:bg-gray-800) from these links",
         "`npx tsc --noEmit` passes",
-        "`npx tsc --noEmit` passes (use this instead of pnpm build \u2014 worktree has no database for prerender)"
+        "`npx tsc --noEmit` passes (use this instead of pnpm build — worktree has no database for prerender)"
       ],
       "priority": 6,
       "passes": true,
@@ -104,7 +104,7 @@
         "Desktop navigation (`hidden md:flex`) remains unchanged",
         "The theme toggle is accessible in the mobile drawer",
         "`npx tsc --noEmit` passes",
-        "`npx tsc --noEmit` passes (use this instead of pnpm build \u2014 worktree has no database for prerender)",
+        "`npx tsc --noEmit` passes (use this instead of pnpm build — worktree has no database for prerender)",
         "Verify in browser using dev-browser skill"
       ],
       "priority": 7,
@@ -116,13 +116,13 @@
       "title": "Branded orbital loading spinner",
       "description": "As a visitor seeing a loading state, I want a branded animation that matches the site's space theme instead of a generic gray spinner.",
       "acceptanceCriteria": [
-        "In `src/app/loading.tsx`, replace the current spinner with 3 orange dots (bg-primary, h-2 w-2 rounded-full) at 120\u00b0 offset orbiting a center point",
+        "In `src/app/loading.tsx`, replace the current spinner with 3 orange dots (bg-primary, h-2 w-2 rounded-full) at 120° offset orbiting a center point",
         "Orbit period: 1.5-2s per revolution using CSS animations or Motion library",
         "Each dot has a subtle scale pulse (0.8 to 1.0) so they breathe",
         "Add a `<p className=\"font-mono text-sm text-muted-foreground\">` below the loader that randomly displays one of: 'Calibrating star charts...', 'Deploying bat signal...', 'Asking the cat for directions...'",
         "No `border-gray-900` or `dark:border-white` hardcoded colors remain",
         "`npx tsc --noEmit` passes",
-        "`npx tsc --noEmit` passes (use this instead of pnpm build \u2014 worktree has no database for prerender)"
+        "`npx tsc --noEmit` passes (use this instead of pnpm build — worktree has no database for prerender)"
       ],
       "priority": 8,
       "passes": true,
@@ -136,7 +136,7 @@
         "In `src/styles/globals.css` inside the `@theme inline` block, add: --text-display: clamp(2.25rem, 1.5rem + 3vw, 3rem); --text-heading: clamp(1.875rem, 1.5rem + 1.5vw, 2.25rem);",
         "In `src/styles/globals.css`, add in `@layer base`: `.heading-accent { @apply mt-2 h-0.5 w-12 rounded-full bg-primary; }`",
         "In `src/app/page.tsx`, replace the existing `<div className=\"h-1 w-20 bg-orange-500\"></div>` with `<div className=\"heading-accent\"></div>`",
-        "`npx tsc --noEmit` passes (use this instead of pnpm build \u2014 worktree has no database for prerender)"
+        "`npx tsc --noEmit` passes (use this instead of pnpm build — worktree has no database for prerender)"
       ],
       "priority": 9,
       "passes": true,
@@ -153,7 +153,7 @@
         "Update `src/components/my-links.tsx` 'My Links' h2",
         "For page H1s, test font-oswald at display size. If pinched, keep Raleway bold. Update: `src/app/blog/page.tsx`, `src/app/projects/page.tsx`, `src/app/contact/page.tsx` page h1s",
         "Card titles (CardTitle components) remain in Raleway (font-sans)",
-        "`npx tsc --noEmit` passes (use this instead of pnpm build \u2014 worktree has no database for prerender)",
+        "`npx tsc --noEmit` passes (use this instead of pnpm build — worktree has no database for prerender)",
         "Verify in browser using dev-browser skill"
       ],
       "priority": 10,
@@ -167,9 +167,9 @@
       "acceptanceCriteria": [
         "Blog post hero titles (H1 on individual blog post pages) get `font-serif` class added",
         "In `src/styles/globals.css`, add: `.prose blockquote { @apply font-serif italic; }`",
-        "Blog body text remains in Raleway (font-sans) \u2014 do NOT add font-serif to the .prose base rule",
+        "Blog body text remains in Raleway (font-sans) — do NOT add font-serif to the .prose base rule",
         "Blog card excerpts in `src/components/blog/post-card.tsx` remain in Raleway",
-        "`npx tsc --noEmit` passes (use this instead of pnpm build \u2014 worktree has no database for prerender)"
+        "`npx tsc --noEmit` passes (use this instead of pnpm build — worktree has no database for prerender)"
       ],
       "priority": 11,
       "passes": true,
@@ -184,7 +184,7 @@
         "Social link cards in `src/components/my-links.tsx` have visible focus indicators",
         "All homepage CTA buttons have visible focus (should come free from Button component)",
         "Tab through the entire homepage and verify every interactive element has a visible focus ring",
-        "`npx tsc --noEmit` passes (use this instead of pnpm build \u2014 worktree has no database for prerender)"
+        "`npx tsc --noEmit` passes (use this instead of pnpm build — worktree has no database for prerender)"
       ],
       "priority": 12,
       "passes": true,
@@ -192,17 +192,17 @@
     },
     {
       "id": "US-013",
-      "title": "Blog PostCard hover \u2014 lift effect",
-      "description": "As a visitor browsing blog posts, I want blog cards to feel like picking up a piece of paper \u2014 a subtle lift with deepening shadow.",
+      "title": "Blog PostCard hover — lift effect",
+      "description": "As a visitor browsing blog posts, I want blog cards to feel like picking up a piece of paper — a subtle lift with deepening shadow.",
       "acceptanceCriteria": [
         "In `src/components/blog/post-card.tsx`, wrap the Card in a `motion.div` with `whileHover={{ y: -4 }}` and `transition={{ type: 'spring', stiffness: 300, damping: 25 }}`",
         "Add `group` class to the Card's Link wrapper",
         "Change image hover from `hover:scale-105` to `group-hover:scale-110` with `duration-700`",
         "Add `group-hover:text-primary transition-colors duration-300` to the CardTitle",
         "Use `transition-[box-shadow,border-color] duration-200` (NOT transition-all) for shadow changes",
-        "CRITICAL: Verify that BlogPostBats component's cards are NOT affected \u2014 those use their own whileHover={{ scale: 1.05 }}",
+        "CRITICAL: Verify that BlogPostBats component's cards are NOT affected — those use their own whileHover={{ scale: 1.05 }}",
         "`npx tsc --noEmit` passes",
-        "`npx tsc --noEmit` passes (use this instead of pnpm build \u2014 worktree has no database for prerender)"
+        "`npx tsc --noEmit` passes (use this instead of pnpm build — worktree has no database for prerender)"
       ],
       "priority": 13,
       "passes": true,
@@ -210,14 +210,14 @@
     },
     {
       "id": "US-014",
-      "title": "Project card hover \u2014 border glow",
+      "title": "Project card hover — border glow",
       "description": "As a visitor browsing projects, I want project cards to have a distinct glow interaction different from blog cards.",
       "acceptanceCriteria": [
         "In `src/components/projects-filter.tsx`, add to the project Card: `hover:shadow-[0_0_20px_-5px_var(--primary)]` and `transition-shadow duration-200`",
         "Add `group` class to the card wrapper",
         "Action buttons get: `opacity-70 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200`",
         "Stagger button appearance: second button gets `delay-75`",
-        "`npx tsc --noEmit` passes (use this instead of pnpm build \u2014 worktree has no database for prerender)"
+        "`npx tsc --noEmit` passes (use this instead of pnpm build — worktree has no database for prerender)"
       ],
       "priority": 14,
       "passes": true,
@@ -225,7 +225,7 @@
     },
     {
       "id": "US-015",
-      "title": "Link card hover \u2014 bouncy spring",
+      "title": "Link card hover — bouncy spring",
       "description": "As a visitor viewing social links, I want the link cards to have a playful, bouncy interaction.",
       "acceptanceCriteria": [
         "In `src/components/my-links.tsx`, wrap each link card in a `motion.div` (import from `motion/react`)",
@@ -233,7 +233,7 @@
         "Add `hover:drop-shadow-[0_0_8px_rgba(249,115,22,0.3)]` to the link card className",
         "Remove any existing `hover:scale-105` from these cards (replaced by Motion hover)",
         "`npx tsc --noEmit` passes",
-        "`npx tsc --noEmit` passes (use this instead of pnpm build \u2014 worktree has no database for prerender)"
+        "`npx tsc --noEmit` passes (use this instead of pnpm build — worktree has no database for prerender)"
       ],
       "priority": 15,
       "passes": true,
@@ -250,7 +250,7 @@
         "Each tech item gets whileHover={{ y: -8, scale: 1.05 }} with spring transition (stiffness: 400, damping: 20)",
         "Add hover background pill: `hover:bg-primary/10 rounded-xl p-4 transition-colors duration-200`",
         "`npx tsc --noEmit` passes",
-        "`npx tsc --noEmit` passes (use this instead of pnpm build \u2014 worktree has no database for prerender)"
+        "`npx tsc --noEmit` passes (use this instead of pnpm build — worktree has no database for prerender)"
       ],
       "priority": 16,
       "passes": true,
@@ -265,10 +265,10 @@
         "Three dots: red (bg-red-500/60), yellow (bg-yellow-500/60), green (bg-green-500/60), each h-2.5 w-2.5 rounded-full",
         "Language name displayed on the right in text-xs text-muted-foreground font-mono",
         "Bar background: bg-zinc-800 px-4 py-2 rounded-t-md",
-        "The red dot is a <button> with aria-label='Collapse code block'. Clicking it collapses the code to a single bar showing '// collapsed \u2014 click to expand' in muted monospace",
+        "The red dot is a <button> with aria-label='Collapse code block'. Clicking it collapses the code to a single bar showing '// collapsed — click to expand' in muted monospace",
         "Uses Motion AnimatePresence for smooth height transition. Clicking collapsed bar restores the code",
         "`npx tsc --noEmit` passes",
-        "`npx tsc --noEmit` passes (use this instead of pnpm build \u2014 worktree has no database for prerender)"
+        "`npx tsc --noEmit` passes (use this instead of pnpm build — worktree has no database for prerender)"
       ],
       "priority": 17,
       "passes": true,
@@ -282,12 +282,12 @@
         "Create `src/components/footer.tsx` as a client component",
         "Import and reuse: CcLogo from ~/components/ui/cc-logo, SOCIALS from ~/data/socials, navigation items",
         "Layout: 3-column grid on desktop (md:grid-cols-3), stacked on mobile. Column 1: CcLogo + tagline. Column 2: Explore heading + nav links. Column 3: Find Me heading + social icons with hover:text-primary",
-        "Bottom bar: \u00a9 {year} CuriouslyCory on left. On right in font-mono text-xs opacity-60: light mode '// end of transmission', dark mode '// signing off for the night'",
+        "Bottom bar: © {year} CuriouslyCory on left. On right in font-mono text-xs opacity-60: light mode '// end of transmission', dark mode '// signing off for the night'",
         "Footer tagline has a typing animation (characters appear one-by-one) triggered by whileInView",
         "Gradient line at top: <div className='h-px bg-gradient-to-r from-transparent via-primary to-transparent' />",
         "In `src/app/layout.tsx`, replace the existing inline footer with <Footer />",
         "`npx tsc --noEmit` passes",
-        "`npx tsc --noEmit` passes (use this instead of pnpm build \u2014 worktree has no database for prerender)",
+        "`npx tsc --noEmit` passes (use this instead of pnpm build — worktree has no database for prerender)",
         "Verify in browser using dev-browser skill"
       ],
       "priority": 18,
@@ -307,7 +307,7 @@
         "Add staggered entrance: wrap each form field group in motion.div with initial={{ opacity: 0, x: -10 }}, animate={{ opacity: 1, x: 0 }}, transition={{ delay: index * 0.1 }}",
         "On successful submission, show toast: 'Transmission received. I'll respond at lightspeed. (Results may vary.)'",
         "`npx tsc --noEmit` passes",
-        "`npx tsc --noEmit` passes (use this instead of pnpm build \u2014 worktree has no database for prerender)",
+        "`npx tsc --noEmit` passes (use this instead of pnpm build — worktree has no database for prerender)",
         "Verify in browser using dev-browser skill"
       ],
       "priority": 19,
@@ -322,7 +322,7 @@
         "In `src/app/page.tsx` about section: add a ChatBubble with variant 'thought' for an aside: 'When not coding, I'm usually rock climbing or baking bread.'",
         "In the blog search empty state (find the empty results message in the blog listing): replace with ChatBubble variant 'whisper' text: 'No transmissions found on that frequency.'",
         "Verify each ChatBubble variant renders with its correct styling",
-        "`npx tsc --noEmit` passes (use this instead of pnpm build \u2014 worktree has no database for prerender)"
+        "`npx tsc --noEmit` passes (use this instead of pnpm build — worktree has no database for prerender)"
       ],
       "priority": 20,
       "passes": true,
@@ -337,11 +337,11 @@
         "Add dark mode surface tokens in .dark: --surface-elevated: hsl(240, 8%, 13%); --surface-sunken: hsl(240, 10%, 7%);",
         "Register in @theme inline: --color-surface-elevated: var(--surface-elevated); --color-surface-sunken: var(--surface-sunken);",
         "In `src/app/page.tsx`, wrap FavoriteTech section in full-bleed `<div className='bg-surface-elevated'>` with internal container",
-        "`npx tsc --noEmit` passes (use this instead of pnpm build \u2014 worktree has no database for prerender)",
+        "`npx tsc --noEmit` passes (use this instead of pnpm build — worktree has no database for prerender)",
         "Verify in browser using dev-browser skill"
       ],
       "priority": 21,
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
@@ -352,9 +352,9 @@
         "In `src/app/page.tsx`, restructure the hero section",
         "Mobile (md:hidden): Keep existing ChatBubble + centered Astronaut layout exactly as-is",
         "Desktop (hidden md:flex): New layout with md:flex md:items-end md:justify-between inside max-w-6xl mx-auto. Left: max-w-lg div with H1 ('Hi, I'm CuriouslyCory' with text-primary on name), subtitle in text-xl text-muted-foreground, and CTA buttons. Right: w-72 flex-shrink-0 with Astronaut",
-        "The Astronaut component and its sun animation must render identically \u2014 only the layout wrapper changes",
+        "The Astronaut component and its sun animation must render identically — only the layout wrapper changes",
         "`npx tsc --noEmit` passes",
-        "`npx tsc --noEmit` passes (use this instead of pnpm build \u2014 worktree has no database for prerender)",
+        "`npx tsc --noEmit` passes (use this instead of pnpm build — worktree has no database for prerender)",
         "Verify in browser using dev-browser skill"
       ],
       "priority": 22,
@@ -370,7 +370,7 @@
         "Remove the Card, CardHeader, CardContent wrappers",
         "Keep the heading 'A little about me' with the .heading-accent bar below it",
         "Body text paragraphs use text-lg leading-relaxed for better readability",
-        "`npx tsc --noEmit` passes (use this instead of pnpm build \u2014 worktree has no database for prerender)",
+        "`npx tsc --noEmit` passes (use this instead of pnpm build — worktree has no database for prerender)",
         "Verify in browser using dev-browser skill"
       ],
       "priority": 23,
@@ -384,7 +384,7 @@
       "acceptanceCriteria": [
         "In `src/app/page.tsx`, replace all mt-24 spacers with standardized section padding: Hero: py-20 md:py-28, Major sections: py-16 md:py-24, Container: px-4 md:px-6 lg:px-8",
         "Sections become self-contained <section> elements with their own padding instead of relying on margin between siblings",
-        "`npx tsc --noEmit` passes (use this instead of pnpm build \u2014 worktree has no database for prerender)"
+        "`npx tsc --noEmit` passes (use this instead of pnpm build — worktree has no database for prerender)"
       ],
       "priority": 24,
       "passes": false,
@@ -398,7 +398,7 @@
         "In `src/app/blog/page.tsx`: first featured post in the grid spans md:col-span-2 for a larger card",
         "Date filter sidebar gets md:sticky md:top-20 so it stays visible while scrolling",
         "On mobile, wrap the sidebar in a <details><summary>Filter by date</summary>...</details> so it's collapsible",
-        "`npx tsc --noEmit` passes (use this instead of pnpm build \u2014 worktree has no database for prerender)",
+        "`npx tsc --noEmit` passes (use this instead of pnpm build — worktree has no database for prerender)",
         "Verify in browser using dev-browser skill"
       ],
       "priority": 25,
@@ -416,15 +416,15 @@
         "CRITICAL: transitions must NOT clip or re-layer the CursorFollower (position: fixed) or PlayerMenu",
         "Keep total transition duration under 300ms",
         "If View Transitions API not stable, use Motion wrapper. If Motion unstable with RSC, use CSS-only fade (@starting-style or keyframe). Do NOT skip this story",
-        "`npx tsc --noEmit` passes (use this instead of pnpm build \u2014 worktree has no database for prerender)"
+        "`npx tsc --noEmit` passes (use this instead of pnpm build — worktree has no database for prerender)"
       ],
       "priority": 26,
       "passes": false,
-      "notes": "Do this last in Tier 4. Fallback chain: View Transitions \u2192 Motion wrapper \u2192 CSS-only fade."
+      "notes": "Do this last in Tier 4. Fallback chain: View Transitions → Motion wrapper → CSS-only fade."
     },
     {
       "id": "US-027",
-      "title": "404 page \u2014 Lost in Space",
+      "title": "404 page — Lost in Space",
       "description": "As a visitor hitting a missing page, I want a charming 404 experience that uses the site's space theme.",
       "acceptanceCriteria": [
         "Create `src/app/not-found.tsx`",
@@ -433,7 +433,7 @@
         "Add a 'Take me home' Button: <Button asChild><Link href='/'>Take me home</Link></Button>",
         "Center everything vertically on the page with min-h-[60vh]",
         "`npx tsc --noEmit` passes",
-        "`npx tsc --noEmit` passes (use this instead of pnpm build \u2014 worktree has no database for prerender)",
+        "`npx tsc --noEmit` passes (use this instead of pnpm build — worktree has no database for prerender)",
         "Verify in browser using dev-browser skill"
       ],
       "priority": 27,
@@ -443,14 +443,14 @@
     {
       "id": "US-028",
       "title": "Seasonal bat behavior (October)",
-      "description": "As a returning visitor in October, I want the bat-wing blog cards to go wild \u2014 more bats, faster spawning, orange-tinted wings.",
+      "description": "As a returning visitor in October, I want the bat-wing blog cards to go wild — more bats, faster spawning, orange-tinted wings.",
       "acceptanceCriteria": [
         "In `src/components/blog-post-bats.tsx`, add a date check: `const isSpookyMonth = new Date().getMonth() === 9;`",
         "When isSpookyMonth is true: increase MAX_WILD_BATS (or equivalent) to double, decrease SPAWN_INTERVAL by half, add orange tint to bat wing elements (className conditional adding text-orange-500 or CSS filter)",
         "When isSpookyMonth is false, behavior is identical to current (no regression)",
         "Must not modify the core quest/catch mechanics",
         "`npx tsc --noEmit` passes",
-        "`npx tsc --noEmit` passes (use this instead of pnpm build \u2014 worktree has no database for prerender)"
+        "`npx tsc --noEmit` passes (use this instead of pnpm build — worktree has no database for prerender)"
       ],
       "priority": 28,
       "passes": false,
@@ -458,7 +458,7 @@
     },
     {
       "id": "US-029",
-      "title": "Konami Code \u2014 Zero Gravity Mode",
+      "title": "Konami Code — Zero Gravity Mode",
       "description": "As a curious visitor, I want a hidden Easter egg where the Konami code makes the page float in zero gravity.",
       "acceptanceCriteria": [
         "Add a global keydown listener in a client component at the layout level (e.g., inside PlayerProvider or a new EasterEggs component)",
@@ -470,7 +470,7 @@
         "Clicking the astronaut in zero-gravity mode restores normal gravity (removes the class and clears persisted state)",
         "Konami code listener must not interfere with normal keyboard usage in form inputs",
         "`npx tsc --noEmit` passes",
-        "`npx tsc --noEmit` passes (use this instead of pnpm build \u2014 worktree has no database for prerender)"
+        "`npx tsc --noEmit` passes (use this instead of pnpm build — worktree has no database for prerender)"
       ],
       "priority": 29,
       "passes": false,
@@ -478,17 +478,17 @@
     },
     {
       "id": "US-030",
-      "title": "Telescope cursor \u2014 constellation discovery",
+      "title": "Telescope cursor — constellation discovery",
       "description": "As a curious visitor, I want a hidden telescope mode that reveals secret constellations scattered across the site.",
       "acceptanceCriteria": [
         "Add 'telescope' as a new inventory item in the quest/inventory system (look at how 'net' and 'tuna' are registered)",
-        "Add a hidden activation trigger for the telescope (e.g., clicking a specific star in the astronaut's dark-mode background, or a subtle icon in the footer). Full quest chain integration deferred \u2014 provide standalone activation",
+        "Add a hidden activation trigger for the telescope (e.g., clicking a specific star in the astronaut's dark-mode background, or a subtle icon in the footer). Full quest chain integration deferred — provide standalone activation",
         "When telescope is active cursor item in CursorFollower, render a radial gradient reveal mask (radial-gradient(circle 80px, rgba(255,255,255,0.15), transparent)) around cursor",
         "Scatter 3-5 hidden star clusters across the homepage as absolutely-positioned divs with opacity-0 pointer-events-none. Each cluster is a small SVG group of dots forming a constellation",
         "Stars within telescope reveal radius become visible (transition from opacity-0 to opacity-100)",
         "Each constellation has a tiny label that fades in (e.g., 'Curiosia Major', 'The Debugger')",
         "`npx tsc --noEmit` passes",
-        "`npx tsc --noEmit` passes (use this instead of pnpm build \u2014 worktree has no database for prerender)"
+        "`npx tsc --noEmit` passes (use this instead of pnpm build — worktree has no database for prerender)"
       ],
       "priority": 30,
       "passes": false,
@@ -504,7 +504,7 @@
         "Set the localStorage flag after the glint so it only happens once",
         "The astronaut's existing theme toggle onClick behavior is unchanged",
         "`npx tsc --noEmit` passes",
-        "`npx tsc --noEmit` passes (use this instead of pnpm build \u2014 worktree has no database for prerender)"
+        "`npx tsc --noEmit` passes (use this instead of pnpm build — worktree has no database for prerender)"
       ],
       "priority": 31,
       "passes": false,

@@ -1,3 +1,14 @@
+## 2026-03-25 - US-021
+- Added `--surface-elevated` and `--surface-sunken` tokens to `:root` (light) and `.dark` in `globals.css`
+- Registered `--color-surface-elevated` and `--color-surface-sunken` in `@theme inline` block
+- Wrapped FavoriteTech section in full-bleed `<div className="mt-24 w-full bg-surface-elevated py-16">` with inner `<section className="mx-auto max-w-4xl px-2">` container in `src/app/page.tsx`
+- Files changed: `src/styles/globals.css`, `src/app/page.tsx`
+- **Learnings for future iterations:**
+  - Surface tokens follow the same `:root`/`.dark`/`@theme inline` triple-registration pattern as all other color tokens
+  - Full-bleed sections need `w-full` on the outer div and `mx-auto max-w-*` on the inner container
+  - `bg-surface-elevated` utility is available immediately after registering `--color-surface-elevated` in `@theme inline`
+---
+
 ## 2026-03-25 - US-020
 - Added ChatBubble variant='thought' below second paragraph in about section of `src/app/page.tsx`
 - Replaced blog empty state (h2 + p) with ChatBubble variant='whisper' in `src/app/blog/page.tsx`
