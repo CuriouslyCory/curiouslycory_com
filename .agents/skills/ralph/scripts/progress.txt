@@ -128,3 +128,14 @@ Started: Wed Mar 25 06:15:14 PM MST 2026
   - `font-serif` maps to Roboto Serif via `--font-serif` CSS custom property
   - hello-world/page.tsx has no H1 at all; it only has a paragraph — nothing to update there
 ---
+
+## 2026-03-25 - US-012
+- Added `focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none rounded-md` to mobile drawer nav links in `navigation.tsx`
+- Added `focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-md` to Resume/CV and SOCIALS Link elements in `my-links.tsx`
+- Desktop nav links and hamburger button already had focus-visible rings from US-007
+- CTA Button components already get focus-visible rings for free from the Button component
+- Files changed: `src/components/navigation.tsx`, `src/components/my-links.tsx`
+- **Learnings for future iterations:**
+  - Always add `focus-visible:outline-none` alongside `focus-visible:ring-*` to prevent double outline in some browsers
+  - Focus-visible classes go on the `<Link>` element itself (or the wrapping anchor), not on inner divs
+---
