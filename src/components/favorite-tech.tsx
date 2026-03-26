@@ -1,3 +1,5 @@
+"use client";
+
 import { type ReactNode } from "react";
 import {
   FaAndroid,
@@ -17,6 +19,7 @@ import {
   SiOpenai,
   SiPostgresql,
 } from "react-icons/si";
+import { motion } from "motion/react";
 import SvgServiceNow from "~/components/custom-icons/service-now";
 import { Card, CardContent, CardHeader } from "./ui/card";
 
@@ -48,14 +51,23 @@ export const FavoriteTech = (): ReactNode => {
       </CardHeader>
       <CardContent>
         <div className="flex flex-row flex-wrap justify-center gap-16">
-          {tech.map((tech) => (
-            <div
-              key={`fav-tech-${tech.title}`}
-              className="flex w-32 flex-col items-center"
+          {tech.map((item, index) => (
+            <motion.div
+              key={`fav-tech-${item.title}`}
+              className="flex w-32 flex-col items-center hover:bg-primary/10 rounded-xl p-4 transition-colors duration-200"
+              initial={{ opacity: 0, y: 20, scale: 0.9 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              whileHover={{ y: -8, scale: 1.05 }}
+              transition={{
+                default: { duration: 0.4, delay: index * 0.05 },
+                y: { type: "spring", stiffness: 400, damping: 20 },
+                scale: { type: "spring", stiffness: 400, damping: 20 },
+              }}
+              viewport={{ once: true }}
             >
-              <tech.icon className="text-6xl" />
-              <h3 className="text-sm font-medium">{tech.title}</h3>
-            </div>
+              <item.icon className="text-6xl" />
+              <h3 className="text-sm font-medium">{item.title}</h3>
+            </motion.div>
           ))}
         </div>
       </CardContent>
