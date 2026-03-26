@@ -1,3 +1,13 @@
+## 2026-03-25 - US-020
+- Added ChatBubble variant='thought' below second paragraph in about section of `src/app/page.tsx`
+- Replaced blog empty state (h2 + p) with ChatBubble variant='whisper' in `src/app/blog/page.tsx`
+- Added `ChatBubble` import to blog/page.tsx
+- Files changed: `src/app/page.tsx`, `src/app/blog/page.tsx`
+- **Learnings for future iterations:**
+  - `getMonthName` import in blog/page.tsx is still used by the pagination info — do NOT remove it when simplifying the empty state
+  - ChatBubble accepts `variant`, `text`, and `direction` props; all three variants (speech/whisper/thought) are confirmed working
+---
+
 ## 2026-03-25 - US-019
 - Added ChatBubble (variant 'thought') above the contact form with space-themed personality text
 - Wrapped form in Card component with p-6 padding

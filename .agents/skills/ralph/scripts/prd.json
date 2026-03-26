@@ -325,7 +325,7 @@
         "`npx tsc --noEmit` passes (use this instead of pnpm build \u2014 worktree has no database for prerender)"
       ],
       "priority": 20,
-      "passes": false,
+      "passes": true,
       "notes": ""
     },
     {
