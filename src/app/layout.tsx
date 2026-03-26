@@ -2,6 +2,7 @@ import { Oswald, Oxygen_Mono, Raleway, Roboto_Serif } from "next/font/google";
 import { type Metadata } from "next";
 import { TRPCReactProvider } from "~/trpc/react";
 
+import { Footer } from "~/components/footer";
 import { Navigation } from "~/components/navigation";
 import { ThemeProvider } from "~/components/theme-provider";
 import { PlayerProvider } from "~/components/player/player-provider";
@@ -76,12 +77,7 @@ export default function RootLayout({
                 <Navigation />
                 <main className="">{children}</main>
               </div>
-              <footer className="bg-foreground text-background mt-12 py-4">
-                <div className="container mx-auto text-center text-sm">
-                  © {new Date().getFullYear()} CuriouslyCory. All rights
-                  reserved.
-                </div>
-              </footer>
+              <Footer />
             </PlayerProvider>
           </ThemeProvider>
         </TRPCReactProvider>
