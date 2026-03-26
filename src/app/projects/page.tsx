@@ -54,13 +54,13 @@ export default async function ProjectsPage() {
               <div className="hidden justify-end md:flex">
                 <div className="relative h-64 w-64 overflow-hidden rounded-lg">
                   <Image
-                    src="/images/collaboration-light.png?height=256&width=256"
+                    src="/images/collaboration-light.png"
                     alt="Collaboration"
                     fill
                     className="object-contain dark:hidden"
                   />
                   <Image
-                    src="/images/collaboration-dark.png?height=256&width=256"
+                    src="/images/collaboration-dark.png"
                     alt="Collaboration"
                     fill
                     className="hidden object-contain dark:block"

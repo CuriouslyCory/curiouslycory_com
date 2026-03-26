@@ -7,9 +7,8 @@ You are an autonomous coding agent working on a software project.
 1. Read the PRD at `prd.json` (in the same directory as this file)
 2. Read the progress log at `progress.txt` (check Codebase Patterns section first)
 3. Check you're on the correct branch. The PRD `branchName` field contains the feature branch name (e.g., `feat/my-feature`).
-   - If the branch doesn't exist: create it from `develop` (`git checkout develop && git checkout -b <branchName>`)
-   - If the branch exists: check it out and ensure it's up to date with develop
-   - IMPORTANT: Always branch from `develop`, never from `main`
+   - If the branch doesn't exist: create it from `main` (`git checkout main && git checkout -b <branchName>`)
+   - If the branch exists: check it out
 4. Pick the **highest priority** user story where `passes: false`
 5. Implement that single user story
 6. Run quality checks (e.g., typecheck, lint, test - use whatever your project requires)
@@ -17,9 +16,9 @@ You are an autonomous coding agent working on a software project.
 8. If checks pass, commit ALL changes with message: `feat: [Story ID] - [Story Title]`
 9. Update the PRD to set `passes: true` for the completed story
 10. Append your progress to `progress.txt`
-11. **STOP** Check if ALL stories have `passes: true`:
-   - If YES -> reply with `<promise>COMPLETE</promise>`
-   - If NO -> output "Itteration complete: [Story ID] done. X stories remaining." and END YOUR SESSION IMMEDIATELY. Do NOT continue. Do NOT pick the next story. Another itteration will handle it.
+11. **STOP** Run this exact command to check completion: `jq '[.userStories[] | select(.passes == false)] | length' .agents/skills/ralph/scripts/prd.json`
+   - If the output is `0` (zero stories remaining) -> reply with `<promise>COMPLETE</promise>`
+   - If the output is greater than 0 -> output "Iteration complete: [Story ID] done. [N] stories remaining." and END YOUR SESSION IMMEDIATELY. Do NOT continue. Do NOT pick the next story. Another iteration will handle it.
 
 Note: Branch names use the `feat/` prefix (e.g., `feat/task-status`), not `ralph/`. This follows standard enterprise github flow where feature branches are PRed into `main`.
 
@@ -99,10 +98,12 @@ If no browser tools are available, note in your progress report that manual brow
 
 After completing a user story, check if ALL stories have `passes: true`.
 
-If ALL stories are complete and passing, reply with:
+Run `jq '[.userStories[] | select(.passes == false)] | length' .agents/skills/ralph/scripts/prd.json` to get the count of remaining stories.
+
+If the count is **0**, reply with:
 <promise>COMPLETE</promise>
 
-If there are still stories with `passes: false`, end your response normally (another iteration will pick up the next story).
+If the count is **greater than 0**, end your response. Another iteration will pick up the next story.
 
 ## Important
 
