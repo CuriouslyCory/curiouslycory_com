@@ -94,6 +94,11 @@ export default function Home() {
               tinkering with generative AI projects, baking bread, or spending
               time with my son.
             </p>
+            <ChatBubble
+              variant="thought"
+              text="When not coding, I'm usually rock climbing or baking bread."
+              direction="bottom"
+            />
           </CardContent>
         </Card>
       </section>

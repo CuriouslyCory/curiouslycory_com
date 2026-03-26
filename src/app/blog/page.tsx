@@ -8,6 +8,7 @@ import { BlogSearch } from "~/components/blog/blog-search";
 import { ActiveFilters } from "~/components/blog/active-filters";
 import { DateFilter } from "~/components/blog/date-filter";
 import { getMonthName } from "~/lib/date-utils";
+import { ChatBubble } from "~/components/ui/chat-bubble";
 
 export const metadata: Metadata = {
   title: "Blog | CuriouslyCory",
@@ -120,20 +121,11 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
           {/* Show message if no posts found */}
           {posts.length === 0 && (
             <div className="flex flex-col items-center justify-center py-12 text-center">
-              <h2 className="mb-2 text-2xl font-semibold">No posts found</h2>
-              <p className="text-muted-foreground mb-8">
-                {params.q
-                  ? `No posts found matching "${params.q}"`
-                  : params.tag
-                    ? `No posts found with tag #${params.tag}`
-                    : params.year
-                      ? `No posts found from ${params.year}${
-                          params.month
-                            ? ` - ${getMonthName(Number(params.month))}`
-                            : ""
-                        }`
-                      : "No posts found. Check back later!"}
-              </p>
+              <ChatBubble
+                variant="whisper"
+                text="No transmissions found on that frequency."
+                direction="bottom"
+              />
             </div>
           )}
         </div>
