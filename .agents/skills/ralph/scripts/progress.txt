@@ -1,3 +1,19 @@
+## 2026-03-25 - US-031
+- Added `useRef<SVGSVGElement>`, `useState(nearCursor)`, `useState(showGlint)` to `astronaut.tsx`
+- Added mousemove useEffect: tracks cursor distance from SVG center, sets `nearCursor` when < 100px
+- Applied `style={{ animationDuration: '0.5s' }}` (via `starStyle`) to all 5 star pulse divs in dark mode
+- Added useEffect that checks `localStorage.getItem("astronaut-hint-shown")` and schedules `setShowGlint(true)` after 1000ms; sets the flag and resets `showGlint` on `onAnimationEnd`
+- Added `<path>` with `fill="white"` tracing the dark-mode visor shape, rendered when `showGlint`; uses `className="animate-visor-glint"` and `onAnimationEnd` to clear state
+- Added `@keyframes visor-glint` (fill-opacity fade in/out) in `@theme inline` in `globals.css`
+- Added `.animate-visor-glint` utility in `@layer base`
+- Files changed: `src/components/astronaut.tsx`, `src/styles/globals.css`
+- **Learnings for future iterations:**
+  - CSS `fill-opacity` is animatable on SVG elements — use it instead of `opacity` when you want the fill to fade but keep the element's layout
+  - `onAnimationEnd` on SVG path elements works the same as on HTML elements — safe pattern for self-cleaning animations
+  - For proximity detection, attach mousemove to `window` (not the element) so it works even when cursor enters the element from a fast path
+  - Reading localStorage in the useEffect body (not setState) is fine; setState in setTimeout callback inside useEffect is also lint-safe
+---
+
 ## 2026-03-25 - US-030
 - Added `telescope` inventory item in `src/components/player/inventory/items/telescope.tsx` (SVG icon + radial gradient cursor asset)
 - Added telescope to `src/components/player/inventory/items/index.tsx` inventory items array
