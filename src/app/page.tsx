@@ -3,7 +3,7 @@ import { type Metadata } from "next";
 
 import { Astronaut } from "~/components/astronaut";
 import { Button } from "~/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
+
 import { ChatBubble } from "~/components/ui/chat-bubble";
 import { FavoriteTech } from "~/components/favorite-tech";
 import { MyLinks } from "~/components/my-links";
@@ -75,16 +75,16 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="max-w-3xl px-2 md:mx-auto">
-        <Card className="p-2 md:p-6">
-          <CardHeader>
-            <CardTitle className="mb-2 font-oswald text-2xl font-semibold tracking-tight">
+      <section className="mx-auto max-w-5xl px-4 md:px-6 lg:px-8">
+        <div className="md:grid md:grid-cols-[280px_1fr] md:gap-12">
+          <div>
+            <h2 className="font-oswald text-2xl font-semibold tracking-tight">
               A little about me
-              <div className="heading-accent"></div>
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <p>
+            </h2>
+            <div className="heading-accent"></div>
+          </div>
+          <div className="mt-6 space-y-4 md:mt-0">
+            <p className="text-lg leading-relaxed">
               My main goal is to make websites that people actually want to use,
               not ones that make them want to pull their hair out. Using
               TypeScript and modern frameworks like Next.js, React, and Angular,
@@ -108,7 +108,7 @@ export default function Home() {
               </a>
               .
             </p>
-            <p>
+            <p className="text-lg leading-relaxed">
               Beyond the code editor, you&apos;ll find me scaling the peaks of
               complex UI challenges or exploring innovative backend
               architectures. When not coding, I&apos;m usually rock climbing,
@@ -120,8 +120,8 @@ export default function Home() {
               text="When not coding, I'm usually rock climbing or baking bread."
               direction="bottom"
             />
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </section>
       <section className="mt-24 flex justify-center gap-x-4 md:hidden">
         <Button asChild size="lg">
