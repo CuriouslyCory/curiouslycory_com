@@ -50,3 +50,11 @@ Started: Wed Mar 25 06:15:14 PM MST 2026
   - Worktree doesn't have database access, so `pnpm build` fails at prerender. Use `npx tsc --noEmit` for type checking instead
   - `@eslint/eslintrc` needed as devDep for types to resolve
 ---
+
+## 2026-03-25 - US-005
+- Replaced `.resume-section-title` rule in `src/styles/globals.css` from hardcoded `text-gray-800 dark:text-foreground text-2xl mb-2` to theme tokens `text-foreground border-b border-border text-xl font-semibold mb-3`
+- Files changed: `src/styles/globals.css`
+- **Learnings for future iterations:**
+  - CSS-only token change; typecheck passes trivially
+  - Hardcoded gray classes (`text-gray-800`) break dark mode — always use `text-foreground` or theme tokens
+---
