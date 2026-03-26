@@ -76,7 +76,7 @@ export default function RootLayout({
                 <Navigation />
                 <main className="">{children}</main>
               </div>
-              <footer className="bg-secondary mt-12 py-4">
+              <footer className="bg-foreground text-background mt-12 py-4">
                 <div className="container mx-auto text-center text-sm">
                   © {new Date().getFullYear()} CuriouslyCory. All rights
                   reserved.
