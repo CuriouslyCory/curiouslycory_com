@@ -325,4 +325,17 @@
     background-color: var(--primary);
     animation: orbit-dot-breathe 1.5s ease-in-out infinite;
   }
+
+  .zero-gravity section {
+    animation: float 3s ease-in-out infinite;
+  }
+  .zero-gravity section:nth-child(2) {
+    animation-delay: -0.7s;
+  }
+  .zero-gravity section:nth-child(3) {
+    animation-delay: -1.4s;
+  }
+  .zero-gravity section:nth-child(4) {
+    animation-delay: -2.1s;
+  }
 }

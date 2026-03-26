@@ -8,6 +8,16 @@ const SvgComponent = (props: SVGProps<SVGSVGElement>) => {
   const { className, ...svgProps } = props;
   const isMounted = useMounted();
 
+  const handleClick = (nextTheme: "light" | "dark") => {
+    if (document.body.classList.contains("zero-gravity")) {
+      document.body.classList.remove("zero-gravity");
+      localStorage.removeItem("zero-gravity");
+      window.dispatchEvent(new CustomEvent("gravity-restored"));
+      return;
+    }
+    setTheme(nextTheme);
+  };
+
   if (!isMounted) {
     return null;
   }
@@ -29,7 +39,7 @@ const SvgComponent = (props: SVGProps<SVGSVGElement>) => {
           id="Layer_2"
           data-name="Layer 2"
           viewBox="0 0 806.18 821.5"
-          onClick={() => setTheme("light")}
+          onClick={() => handleClick("light")}
           className={cn("cursor-pointer", className)}
           {...svgProps}
         >
@@ -266,7 +276,7 @@ const SvgComponent = (props: SVGProps<SVGSVGElement>) => {
           id="Layer_2"
           data-name="Layer 2"
           viewBox="0 0 806.18 821.5"
-          onClick={() => setTheme("dark")}
+          onClick={() => handleClick("dark")}
           className={cn("cursor-pointer", className)}
           {...svgProps}
         >

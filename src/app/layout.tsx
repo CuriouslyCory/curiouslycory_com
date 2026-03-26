@@ -2,6 +2,7 @@ import { Oswald, Oxygen_Mono, Raleway, Roboto_Serif } from "next/font/google";
 import { type Metadata } from "next";
 import { TRPCReactProvider } from "~/trpc/react";
 
+import { EasterEggs } from "~/components/easter-eggs";
 import { Footer } from "~/components/footer";
 import { Navigation } from "~/components/navigation";
 import { PageTransition } from "~/components/page-transition";
@@ -73,6 +74,7 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <PlayerProvider>
+              <EasterEggs />
               <div className="flex min-h-screen flex-col">
                 <Toaster position="bottom-right" richColors />
                 <Navigation />
