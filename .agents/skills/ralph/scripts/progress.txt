@@ -1,3 +1,15 @@
+## 2026-03-25 - US-025
+- First featured post in grid wrapped in div with `md:col-span-2 h-full` to make it span 2 columns on desktop
+- Sidebar changed from `div.w-40.flex-shrink-0` to `aside` with `md:sticky md:top-20 md:self-start` for sticky behavior
+- Mobile sidebar wrapped in `<details><summary>Filter by date</summary><DateFilter /></details>` (md:hidden)
+- Desktop sidebar uses `<div className="hidden md:block"><DateFilter /></div>` (always visible)
+- Files changed: `src/app/blog/page.tsx`
+- **Learnings for future iterations:**
+  - Sticky sidebar needs `md:self-start` in a flex row — otherwise the aside stretches to full height and sticky doesn't activate
+  - `<details>/<summary>` is native HTML; no JS needed for collapsible mobile filter
+  - Wrap first grid item in a div with `md:col-span-2 h-full` (not modifying PostCard component) to achieve hero-sized card
+---
+
 ## 2026-03-25 - US-024
 - Replaced all `mt-24` margin spacers with self-contained section padding in `src/app/page.tsx`
 - Hero: `pt-10 md:pt-16` → `py-20 md:py-28`
