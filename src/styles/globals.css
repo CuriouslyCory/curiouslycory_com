@@ -249,7 +249,7 @@
   }
 
   .resume-section-title {
-    @apply mb-2 pb-1 font-oswald text-2xl text-gray-800 dark:text-foreground;
+    @apply mb-3 pb-1 font-oswald text-xl font-semibold text-foreground border-b border-border;
   }
 
   .prose {
