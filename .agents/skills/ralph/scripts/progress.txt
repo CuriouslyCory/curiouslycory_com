@@ -51,6 +51,17 @@ Started: Wed Mar 25 06:15:14 PM MST 2026
   - `@eslint/eslintrc` needed as devDep for types to resolve
 ---
 
+## 2026-03-25 - US-006
+- Fixed `href="/blog "` trailing space to `href="/blog"` in `src/app/page.tsx`
+- Imported `Button` from `~/components/ui/button`
+- Replaced raw Link CTA buttons with `<Button asChild size="lg">` and `<Button asChild variant="outline" size="lg">`
+- Removed all inline color classes (bg-orange-500, border-gray-300, dark:border-gray-700, dark:hover:bg-gray-800)
+- Files changed: `src/app/page.tsx`
+- **Learnings for future iterations:**
+  - `Button asChild` pattern wraps a Next.js Link for styled button-as-link
+  - typecheck and eslint both pass cleanly
+---
+
 ## 2026-03-25 - US-005
 - Replaced `.resume-section-title` rule in `src/styles/globals.css` from hardcoded `text-gray-800 dark:text-foreground text-2xl mb-2` to theme tokens `text-foreground border-b border-border text-xl font-semibold mb-3`
 - Files changed: `src/styles/globals.css`

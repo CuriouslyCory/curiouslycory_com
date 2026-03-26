@@ -88,7 +88,7 @@
         "`npx tsc --noEmit` passes (use this instead of pnpm build \u2014 worktree has no database for prerender)"
       ],
       "priority": 6,
-      "passes": false,
+      "passes": true,
       "notes": "Combines plan items 1F and 1G since they touch the same file and lines."
     },
     {
