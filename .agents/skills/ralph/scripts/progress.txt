@@ -1,3 +1,17 @@
+## 2026-03-25 - US-027
+- Created `src/app/not-found.tsx` as a server component
+- Reused Astronaut component at `h-48 w-48` with `style={{ animationDuration: '6s' }}` to produce a slow drift
+- Added ChatBubble variant='whisper' with text 'I think we took a wrong turn at the nebula.'
+- Added 404 label in `text-primary font-mono` and 'Page not found' subtitle in muted foreground
+- Added `<Button asChild><Link href="/">Take me home</Link></Button>`
+- Centered everything with `min-h-[60vh] flex flex-col items-center justify-center`
+- Files changed: `src/app/not-found.tsx`
+- **Learnings for future iterations:**
+  - Astronaut accepts `style` prop (SVGProps) — `style={{ animationDuration: '6s' }}` overrides the 3s default from `animate-float`
+  - not-found.tsx can be a server component even though Astronaut is 'use client' — Next.js handles this automatically
+  - ChatBubble `direction="bottom"` places the tail at the bottom pointing toward the astronaut below it
+---
+
 ## 2026-03-25 - US-026
 - Investigated Next.js 16 viewTransition support — `experimental.viewTransition` exists but uses React's `<ViewTransition>` component, not automatic CSS transitions
 - Chose Motion wrapper approach (safer fallback) — wraps only `<main>` content so fixed-position elements (PlayerMenu, CursorFollower) are unaffected
