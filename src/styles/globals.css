@@ -50,6 +50,8 @@
   --chart-4: hsl(43, 74%, 66%);
   --chart-5: hsl(27, 87%, 67%);
   --radius: 0.5rem;
+  --surface-elevated: hsl(36, 20%, 99%);
+  --surface-sunken: hsl(30, 16%, 93%);
 }
 
 .dark {
@@ -72,6 +74,8 @@
   --border: hsl(240, 6%, 18%);
   --input: hsl(240, 6%, 18%);
   --ring: hsl(0, 0%, 83.1%);
+  --surface-elevated: hsl(240, 8%, 13%);
+  --surface-sunken: hsl(240, 10%, 7%);
   --chart-1: hsl(220, 70%, 50%);
   --chart-2: hsl(160, 60%, 45%);
   --chart-3: hsl(30, 80%, 55%);
@@ -137,6 +141,9 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+
+  --color-surface-elevated: var(--surface-elevated);
+  --color-surface-sunken: var(--surface-sunken);
 
   --font-sans:
     var(--font-raleway), ui-sans-serif, system-ui, sans-serif,

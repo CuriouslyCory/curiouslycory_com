@@ -113,9 +113,11 @@ export default function Home() {
       <section className="mt-24 flex flex-col gap-y-24">
         <MyLinks />
       </section>
-      <section className="mt-24 max-w-4xl px-2 md:mx-auto">
-        <FavoriteTech />
-      </section>
+      <div className="mt-24 w-full bg-surface-elevated py-16">
+        <section className="mx-auto max-w-4xl px-2">
+          <FavoriteTech />
+        </section>
+      </div>
     </>
   );
 }
