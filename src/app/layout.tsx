@@ -2,6 +2,7 @@ import { Oswald, Oxygen_Mono, Raleway, Roboto_Serif } from "next/font/google";
 import { type Metadata } from "next";
 import { TRPCReactProvider } from "~/trpc/react";
 
+import { ConstellationsOverlay } from "~/components/constellations";
 import { EasterEggs } from "~/components/easter-eggs";
 import { Footer } from "~/components/footer";
 import { Navigation } from "~/components/navigation";
@@ -75,6 +76,7 @@ export default function RootLayout({
           >
             <PlayerProvider>
               <EasterEggs />
+              <ConstellationsOverlay />
               <div className="flex min-h-screen flex-col">
                 <Toaster position="bottom-right" richColors />
                 <Navigation />

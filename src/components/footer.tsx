@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "motion/react";
 import { CcLogo } from "~/components/ui/cc-logo";
 import { SOCIALS } from "~/data/socials";
+import { usePlayer } from "~/components/player/player-provider";
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -60,6 +61,8 @@ function BottomBarRight() {
 }
 
 export function Footer() {
+  const { addInventoryItem } = usePlayer();
+
   return (
     <footer className="bg-foreground text-background">
       <div className="h-px bg-gradient-to-r from-transparent via-primary to-transparent" />
@@ -120,6 +123,14 @@ export function Footer() {
         <div className="mt-10 flex flex-col items-center justify-between gap-2 border-t border-background/20 pt-6 sm:flex-row">
           <span className="text-sm opacity-80">
             &copy; {new Date().getFullYear()} CuriouslyCory
+            <button
+              onClick={() => addInventoryItem("telescope", 1)}
+              className="ml-1 cursor-default opacity-[0.06] transition-opacity hover:opacity-20"
+              aria-hidden="true"
+              tabIndex={-1}
+            >
+              ✦
+            </button>
           </span>
           <BottomBarRight />
         </div>
