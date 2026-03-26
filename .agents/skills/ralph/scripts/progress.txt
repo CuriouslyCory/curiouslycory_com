@@ -1,3 +1,18 @@
+## 2026-03-25 - US-017
+- Added terminal-style title bar above syntax highlighter in `src/components/ui/code-block.tsx`
+- Title bar: `bg-zinc-800 px-4 py-2 rounded-t-md` with 3 colored dots (red/yellow/green) and language name on right
+- Red dot is a `<button aria-label="Collapse code block">` that sets `collapsed` state to true
+- Collapsed state shows animated button with `{"// collapsed — click to expand"}` — clicking restores code
+- Used `AnimatePresence` + `motion` from `motion/react` for smooth height transitions on both collapse/expand
+- `SyntaxHighlighter` `customStyle` changed from `borderRadius: '0.375rem'` to `borderRadius: 0` (bar handles top-rounding)
+- Outer wrapper changed from `relative` to `overflow-hidden rounded-md` (clips the motion animation)
+- Files changed: `src/components/ui/code-block.tsx`
+- **Learnings for future iterations:**
+  - JSX `//` text inside a button/element triggers `react/jsx-no-comment-textnodes` — wrap in `{"// ..."}` JSX expression
+  - `AnimatePresence` with `initial={false}` skips entrance animation on first render (good for toggle UI)
+  - Set `overflow-hidden` on wrapper to clip height animations without a flash of content
+---
+
 ## Codebase Patterns
 - Tailwind CSS v4 with `@plugin` syntax for plugins (not `plugins: []` in config)
 - Prose styling customization uses CSS custom properties (--tw-prose-*) in `@layer base`
