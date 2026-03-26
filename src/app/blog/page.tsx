@@ -68,9 +68,15 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
       <div className="flex flex-col gap-8 md:flex-row">
         {/* Sidebar */}
-        <div className="w-40 flex-shrink-0">
-          <DateFilter />
-        </div>
+        <aside className="w-full flex-shrink-0 md:w-40 md:sticky md:top-20 md:self-start">
+          <details className="md:hidden">
+            <summary className="cursor-pointer text-sm font-medium">Filter by date</summary>
+            <DateFilter />
+          </details>
+          <div className="hidden md:block">
+            <DateFilter />
+          </div>
+        </aside>
 
         {/* Main content */}
         <div className="flex-1">
@@ -78,8 +84,10 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
             <>
               <h2 className="mb-4 text-2xl font-bold">Featured Posts</h2>
               <div className="mb-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {featuredPosts.map((post) => (
-                  <PostCard key={post.id} post={post} />
+                {featuredPosts.map((post, index) => (
+                  <div key={post.id} className={index === 0 ? "h-full md:col-span-2" : "h-full"}>
+                    <PostCard post={post} />
+                  </div>
                 ))}
               </div>
             </>
