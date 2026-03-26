@@ -419,7 +419,7 @@
         "`npx tsc --noEmit` passes (use this instead of pnpm build — worktree has no database for prerender)"
       ],
       "priority": 26,
-      "passes": false,
+      "passes": true,
       "notes": "Do this last in Tier 4. Fallback chain: View Transitions → Motion wrapper → CSS-only fade."
     },
     {

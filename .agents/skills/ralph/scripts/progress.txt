@@ -1,3 +1,16 @@
+## 2026-03-25 - US-026
+- Investigated Next.js 16 viewTransition support — `experimental.viewTransition` exists but uses React's `<ViewTransition>` component, not automatic CSS transitions
+- Chose Motion wrapper approach (safer fallback) — wraps only `<main>` content so fixed-position elements (PlayerMenu, CursorFollower) are unaffected
+- Created `src/components/page-transition.tsx` as a client component using `usePathname()` to key the motion.div per route
+- Uses `initial={{ opacity: 0, y: 8 }}`, `animate={{ opacity: 1, y: 0 }}`, `transition={{ duration: 0.3, ease: 'easeOut' }}` — under 300ms
+- Added `<PageTransition>` wrapper inside `<main>` in `src/app/layout.tsx`
+- Files changed: `src/components/page-transition.tsx`, `src/app/layout.tsx`
+- **Learnings for future iterations:**
+  - `usePathname()` as the `key` prop on `motion.div` triggers re-mount (entrance animation) on every route change
+  - Wrapping only `<main>` guarantees fixed-position UI (nav, player, cursor) is never included in the transition layer
+  - No `AnimatePresence` needed for entrance-only transitions; avoids exit-animation timing issues in Next.js App Router
+---
+
 ## 2026-03-25 - US-025
 - First featured post in grid wrapped in div with `md:col-span-2 h-full` to make it span 2 columns on desktop
 - Sidebar changed from `div.w-40.flex-shrink-0` to `aside` with `md:sticky md:top-20 md:self-start` for sticky behavior
