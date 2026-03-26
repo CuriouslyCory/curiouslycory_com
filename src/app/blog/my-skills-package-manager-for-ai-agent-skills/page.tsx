@@ -2,7 +2,7 @@
 ---bm
 title: Introducing my-skills — The Package Manager for AI Agent Skills
 excerpt: A universal CLI and optional web dashboard for installing, managing, and sharing reusable skills across Claude Code, Cursor, Copilot, and 10+ AI coding agents.
-coverImage: /images/blog/my-skills.webp
+coverImage: /images/blog/my-skills-package-manager-for-ai-agent-skills.jpg
 publishedAt: 2026-03-19
 featured: true
 published: true
@@ -90,10 +90,11 @@ export default async function MySkillsPost() {
 
             <p>
               I built <strong>my-skills</strong> to fix this. It&apos;s a single
-              CLI that installs skills from any Git repository, keeps them
-              updated, and works across 10+ AI coding agents — from Claude Code
-              and Cursor to Copilot and Gemini CLI. Think of it as{" "}
-              <code>npm</code> for AI agent skills.
+              CLI that installs skills from any Git repository using a simple{" "}
+              <code>owner/repo</code> shorthand, keeps them updated via
+              content hashing, and works across 10+ AI coding agents — from
+              Claude Code and Cursor to Copilot and Gemini CLI. Think of it
+              as <code>npm</code> for AI agent skills.
             </p>
           </div>
         </FadeUp>
@@ -174,17 +175,18 @@ export default async function MySkillsPost() {
 
         <Separator className="my-8" />
 
-        {/* Three Ways to Use my-skills */}
+        {/* How to Use my-skills */}
         <section className="mb-12">
           <FadeUp>
             <h2 className="mb-6 text-3xl font-bold">
-              Three Ways to Use my-skills
+              How to Use my-skills
             </h2>
 
             <p className="mb-8">
-              my-skills is designed to meet you where you are. Use it as a
-              lightweight CLI, spin up a local dashboard, or connect a remote
-              database for team-wide collaboration. Each mode builds on the last.
+              my-skills is designed to meet you where you are. Start with the
+              CLI for instant skill management, use the web dashboard for a
+              visual workflow, or share skills across your team with Git repos
+              and favorites.
             </p>
           </FadeUp>
 
@@ -213,10 +215,16 @@ export default async function MySkillsPost() {
                     {`# Install globally
 npm install -g my-skills
 
-# Add a skill from a GitHub repo
-ms add code-review
+# Add a skill using owner/repo shorthand
+ms add curiouslycory/my-skills/code-review
 
-# Search for skills
+# Add all skills from a repo
+ms add curiouslycory/my-skills --all
+
+# Save a repo as a favorite for quick access
+ms favorite add curiouslycory/my-skills
+
+# Search installed + favorited skills
 ms find "pr review"
 
 # List installed skills
@@ -235,8 +243,10 @@ ms check`}
                     </div>
                     <div>
                       <strong>What you get:</strong> Git-based skill
-                      installation, content hashing for integrity, a
-                      lockfile-style manifest, and automatic agent detection
+                      installation via <code>owner/repo</code> shorthand,
+                      SHA-256 content hashing for integrity, a lockfile-style
+                      manifest, favorite repos for fast discovery, and
+                      automatic agent detection
                     </div>
                   </div>
                 </CardContent>
@@ -301,33 +311,44 @@ ms check`}
             </LiftCard>
           </FadeUp>
 
-          {/* Remote Connected */}
+          {/* Sharing & Collaboration */}
           <FadeUp delay={0.2}>
             <LiftCard className="mb-8">
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center gap-3">
                     <StepBadge step={3} />
-                    Remote Connected — Team Collaboration
+                    Share Skills via Git — Team Collaboration
                   </CardTitle>
                   <CardDescription>
-                    PostgreSQL via Supabase for shared skill management across
-                    teams
+                    Publish skills to any Git repo, share with favorites, and
+                    keep teams in sync
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <p className="mb-4">
-                    Point my-skills at a shared PostgreSQL database and your
-                    entire team gets a synchronized skill library. Shared
-                    favorites, shared compositions, and a single source of truth
-                    for which skills your organization uses.
+                    Skills live in Git repositories — just create a repo with{" "}
+                    <code>SKILL.md</code> files and your whole team can install
+                    from it. Scaffold new skills with <code>ms init</code>,
+                    configure favorite repos so teammates don&apos;t need to
+                    remember URLs, and let <code>ms update</code> keep everyone
+                    on the latest version.
                   </p>
                   <TerminalBlock>
-                    {`# Set your database connection
-export POSTGRES_URL="postgresql://user:pass@db.supabase.co:5432/mydb"
+                    {`# Scaffold a new skill in your repo
+ms init
 
-# Now the web dashboard syncs across your team
-# Favorites, compositions, and skill configs are shared`}
+# Your team installs from your shared repo
+ms add myorg/our-skills/code-review
+
+# Save it as a favorite so the whole team has quick access
+ms favorite add myorg/our-skills
+
+# Now anyone can discover and install from favorites
+ms find "review"
+
+# Commit .my-skills.json — teammates restore with one command
+ms add`}
                   </TerminalBlock>
                   <div className="space-y-2">
                     <div>
@@ -335,9 +356,10 @@ export POSTGRES_URL="postgresql://user:pass@db.supabase.co:5432/mydb"
                       on a shared set of AI skills and keep everyone in sync
                     </div>
                     <div>
-                      <strong>What you get:</strong> Everything from local mode
-                      plus cross-machine sync, team-wide favorites, shared
-                      compositions, and centralized skill governance
+                      <strong>What you get:</strong> Git-native skill sharing,
+                      the <code>ms init</code> scaffolder for authoring new
+                      skills, favorite repos for frictionless discovery, and a
+                      manifest file that makes skill setups fully reproducible
                     </div>
                   </div>
                 </CardContent>
@@ -389,15 +411,15 @@ export POSTGRES_URL="postgresql://user:pass@db.supabase.co:5432/mydb"
                 </CardHeader>
                 <CardContent>
                   <TerminalBlock>
-                    {`# Skills are installed to .agents/skills/ and symlinked
+                    {`# Skills are installed to .agents/skills/ and deployed
 # to each agent's expected location automatically
 
-ms add code-review
-# → Claude Code: .claude/skills/code-review.md
-# → Cursor: .cursor/skills/code-review.md
-# → Copilot: .github/copilot-instructions/code-review.md
-# → Gemini: .gemini/skills/code-review.md
-# → ...and more`}
+ms add curiouslycory/my-skills/code-review
+# → Claude Code: .claude/skills/code-review/ (symlink)
+# → Cursor: .cursor/skills/code-review/ (symlink)
+# → Copilot: .github/copilot-instructions.md (injected section)
+# → Gemini: .gemini/skills/code-review/ (symlink)
+# → ...and 6 more agents`}
                   </TerminalBlock>
                 </CardContent>
               </Card>
@@ -421,13 +443,16 @@ ms add code-review
                     {`# Install
 npm install -g my-skills
 
-# Add your first skill
-ms add code-review
+# Add your first skill from a GitHub repo
+ms add curiouslycory/my-skills/code-review
 
 # See what's installed
 ms list
 
-# Search for more
+# Save a repo as a favorite for easy discovery
+ms favorite add curiouslycory/my-skills
+
+# Search installed + favorited skills
 ms find "feature development"
 
 # Keep everything up to date
