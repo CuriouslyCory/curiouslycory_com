@@ -4,6 +4,7 @@ import { TRPCReactProvider } from "~/trpc/react";
 
 import { Footer } from "~/components/footer";
 import { Navigation } from "~/components/navigation";
+import { PageTransition } from "~/components/page-transition";
 import { ThemeProvider } from "~/components/theme-provider";
 import { PlayerProvider } from "~/components/player/player-provider";
 
@@ -75,7 +76,9 @@ export default function RootLayout({
               <div className="flex min-h-screen flex-col">
                 <Toaster position="bottom-right" richColors />
                 <Navigation />
-                <main className="">{children}</main>
+                <main className="">
+                  <PageTransition>{children}</PageTransition>
+                </main>
               </div>
               <Footer />
             </PlayerProvider>
