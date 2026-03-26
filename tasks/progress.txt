@@ -1,4 +1,9 @@
 ## Codebase Patterns
+- Auth.js v5 uses `export const { auth, handlers, signIn, signOut } = NextAuth({ ... })` pattern
+- Auth.js v5 session access: use `auth()` instead of `getServerSession(authOptions)`
+- Zod v4 removed `z.preprocess()` — use `z.unknown().transform().pipe()` instead
+- blog-indexer scripts use `tsx` to run TypeScript outside Next.js (with dotenv/config for env loading)
+- SSL connection string handling: strip `sslmode=` params before passing to PrismaPg adapter
 - Next.js 16 removed `next lint` command - use `eslint .` directly instead
 - eslint-config-next 16 exports native flat config - no FlatCompat needed
 - React compiler rules (eslint-plugin-react-compiler) ship with eslint-config-next 16 - avoid setState in useEffect, use derived state or useSyncExternalStore instead
@@ -49,4 +54,78 @@
   - prisma.config.ts uses `import.meta.dirname` for path resolution (ESM compatible)
   - After changing generator provider, all imports from `@prisma/client` break — must update to generated path (US-003)
   - Pre-existing implicit `any` type errors exist in blog.ts, blog/page.tsx, sitemap.tsx, date-filter.tsx, projects.ts
+---
+
+## 2026-03-25 - US-003
+- What was implemented: Prisma client instantiation refactor with adapter pattern
+- Files changed:
+  - src/server/db.ts (import from ~/generated/prisma/client, PrismaPg adapter, SSL handling)
+  - src/server/api/routers/blog.ts (type Prisma import from ~/generated/prisma/client.js)
+  - package.json (@auth/prisma-adapter upgraded to ^2.11.1)
+- **Learnings for future iterations:**
+  - SSL connection strings need sslmode param stripped before passing to PrismaPg adapter
+  - pnpm build and typecheck both pass with Prisma v7 adapter pattern
+---
+
+## 2026-03-25 - US-004
+- What was implemented: Convert blog-indexer scripts to TypeScript with Prisma v7
+- Files changed:
+  - src/scripts/blog-indexer.ts (renamed from .js, TypeScript types, PrismaPg adapter)
+  - src/scripts/index-blog.ts (renamed from .js)
+  - package.json (added tsx devDep, updated blog:index script)
+- **Learnings for future iterations:**
+  - Use lazy initialization in blog-indexer to avoid ESM import hoisting issues
+  - dotenv/config must load before any DB imports
+---
+
+## 2026-03-25 - US-005
+- What was implemented: Zod 3 to 4 migration
+- Files changed:
+  - package.json (zod ^4.0.0, @t3-oss/env-nextjs latest, @hookform/resolvers latest, @trpc/* latest)
+  - src/env.js (z.preprocess → z.unknown().transform().pipe() for NEXTAUTH_URL)
+  - src/server/api/trpc.ts (ZodError import verified)
+- **Learnings for future iterations:**
+  - Zod v4 Standard Schema support means @trpc and @hookform/resolvers work without changes
+  - z.preprocess was fully removed in Zod v4
+---
+
+## 2026-03-25 - US-006
+- What was implemented: Auth.js v5 core config migration
+- Files changed:
+  - src/server/auth.ts (rewritten for Auth.js v5 NextAuth() export pattern)
+  - package.json (next-auth v5, @auth/prisma-adapter latest)
+- **Learnings for future iterations:**
+  - Auth.js v5: export { auth, handlers, signIn, signOut } = NextAuth({ adapter, providers, callbacks })
+  - Discord provider import path changed in Auth.js v5
+---
+
+## 2026-03-25 - US-007
+- What was implemented: Auth.js v5 route handler and session consumers
+- Files changed:
+  - src/app/api/auth/[...nextauth]/route.ts (export { GET, POST } from handlers)
+  - src/server/api/trpc.ts (auth() replaces getServerAuthSession())
+  - src/env.js (AUTH_SECRET replaces NEXTAUTH_SECRET)
+  - .env.example (updated env var names)
+- **Learnings for future iterations:**
+  - Auth.js v5 auto-reads AUTH_SECRET env var without explicit config
+  - Route handler: export const { GET, POST } = handlers
+---
+
+## 2026-03-25 - US-014
+- What was implemented: Project card hover border glow effect
+- Files changed:
+  - src/components/projects-filter.tsx (added group, hover shadow glow, button opacity/translate animations with stagger)
+- **Learnings for future iterations:**
+  - Button with asChild passes className to the child element — safe to add utility classes directly
+  - `transition-shadow` targets box-shadow only; existing border-color transition still works visually (just not animated)
+---
+
+## 2026-03-25 - US-008
+- What was implemented: Final verification and cleanup
+- Files changed: verified all acceptance criteria met
+- pnpm prisma generate: passes
+- npx tsc --noEmit: passes (0 errors)
+- eslint .: passes
+- pnpm build: passes
+- No remaining @prisma/client imports, no z.preprocess, no getServerSession
 ---
