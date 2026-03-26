@@ -291,7 +291,7 @@
         "Verify in browser using dev-browser skill"
       ],
       "priority": 18,
-      "passes": false,
+      "passes": true,
       "notes": "Depends on US-004 (footer palette fix should inform the new footer's color choices). Reuse CcLogo, SOCIALS, navItems."
     },
     {

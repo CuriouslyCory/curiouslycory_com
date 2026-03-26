@@ -1,3 +1,19 @@
+## 2026-03-25 - US-018
+- Created `src/components/footer.tsx` as a client component
+- 3-column desktop grid (md:grid-cols-3), stacked on mobile
+- Column 1: CcLogo + TypingTagline (character-by-character, triggered by useInView)
+- Column 2: "Explore" heading + navItems links with hover:text-primary
+- Column 3: "Find Me" heading + SOCIALS icons with motion.a whileHover={{ scale: 1.2 }}
+- Bottom bar: © {year} left; dark/light mode text via CSS `dark:hidden` / `dark:inline` (no JS theme detection)
+- Gradient line: `h-px bg-gradient-to-r from-transparent via-primary to-transparent`
+- Replaced inline `<footer>` in `src/app/layout.tsx` with `<Footer />`
+- Files changed: `src/components/footer.tsx`, `src/app/layout.tsx`
+- **Learnings for future iterations:**
+  - Avoid `setMounted(true)` in `useEffect` — the linter flags it as `setState` in effect. Use CSS `dark:hidden`/`dark:inline` for theme-conditional text instead
+  - `useInView({ once: true })` from `motion/react` is the right way to trigger one-shot animations on scroll
+  - `motion.a` works for anchor tags; use it like `motion.div` with `whileHover` props
+---
+
 ## 2026-03-25 - US-017
 - Added terminal-style title bar above syntax highlighter in `src/components/ui/code-block.tsx`
 - Title bar: `bg-zinc-800 px-4 py-2 rounded-t-md` with 3 colored dots (red/yellow/green) and language name on right
