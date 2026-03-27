@@ -38,22 +38,22 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <section className="py-20 md:py-28">
+      <section className="overflow-x-clip pb-0 pt-12 md:overflow-clip md:pt-28">
         {/* Mobile hero: ChatBubble + centered Astronaut */}
-        <div className="text-center md:hidden">
+        <div className="flex flex-col items-center md:hidden">
           <ChatBubble
             text="Hi, I'm CuriouslyCory, and I like to build things."
             direction="bottom"
             className="inline-block"
           />
-          <div className="inline-block w-72 overflow-hidden align-top">
+          <div className="w-full max-w-72 overflow-hidden">
             <Astronaut className="translate-y-1" />
           </div>
         </div>
 
         {/* Desktop hero: asymmetric two-column */}
         <div className="mx-auto hidden max-w-6xl items-end justify-between px-4 md:flex md:px-6 lg:px-8">
-          <div className="max-w-lg">
+          <div className="max-w-lg md:pb-8">
             <h1 className="font-oswald text-4xl font-bold tracking-tight">
               Hi, I&apos;m{" "}
               <span className="text-primary">CuriouslyCory</span>
@@ -70,11 +70,15 @@ export default function Home() {
               </Button>
             </div>
           </div>
-          <div className="w-72 flex-shrink-0">
+          <div className="relative w-72 flex-shrink-0 [clip-path:inset(0_-50%_0_-50%)]">
             <Astronaut className="translate-y-1" />
           </div>
         </div>
       </section>
+
+      {/* Horizon gradient — dark band below astronaut, overlaps hero to cover sun glow bleed */}
+      <div className="hero-horizon relative z-20 -mt-1 h-10 md:-mt-3 md:h-24" aria-hidden="true" />
+
       <section className="mx-auto max-w-5xl px-4 py-16 md:px-6 md:py-24 lg:px-8">
         <div className="md:grid md:grid-cols-[280px_1fr] md:gap-12">
           <div>
@@ -89,14 +93,14 @@ export default function Home() {
               not ones that make them want to pull their hair out. Using
               TypeScript and modern frameworks like Next.js, React, and Angular,
               I&apos;ll create applications that work the way people want them
-              to, no instructions needed. Currently, I&apos;m proudly part of
-              the talented team at{" "}
+              to, no instructions needed. Currently, I&apos;m leading
+              engineering at{" "}
               <a href="#" className="text-orange-500 hover:underline">
-                Sudorandom Labs
+                Centauri Health Solutions
               </a>
               , and I&apos;ve previously enjoyed roles at{" "}
               <a href="#" className="text-orange-500 hover:underline">
-                Lighthouse Global
+                Sudorandom Labs
               </a>
               ,{" "}
               <a href="#" className="text-orange-500 hover:underline">

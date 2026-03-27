@@ -273,6 +273,30 @@
     mask-image: radial-gradient(circle at bottom, black 25%, transparent 45%);
   }
 
+  /* Horizon band below the astronaut — grounds the sun/moon like a surface.
+     Stays fully opaque for the first 40% to cover any glow bleed at the section boundary. */
+  .hero-horizon {
+    background: linear-gradient(
+      to bottom,
+      hsl(30 10% 89%) 0%,
+      hsl(30 10% 89%) 40%,
+      hsl(30 8% 91% / 0.4) 65%,
+      hsl(30 6% 93% / 0.1) 85%,
+      transparent 100%
+    );
+  }
+
+  .dark .hero-horizon {
+    background: linear-gradient(
+      to bottom,
+      hsl(220 15% 8%) 0%,
+      hsl(220 15% 8%) 40%,
+      hsl(220 15% 8% / 0.5) 60%,
+      hsl(220 12% 10% / 0.15) 80%,
+      transparent 100%
+    );
+  }
+
   .resume-section-title {
     @apply mb-3 pb-1 font-oswald text-xl font-semibold text-foreground border-b border-border;
   }
