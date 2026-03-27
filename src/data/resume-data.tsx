@@ -29,9 +29,22 @@ export const principalFullStackEngineerResume: Resume = {
     "Accomplished Principal Full Stack Engineer with 20+ years of experience architecting, developing, and deploying complex and scalable web applications. Deep expertise in modern JavaScript/TypeScript ecosystems (React, Next.js, Node.js), cloud infrastructure (AWS, GCP), and backend technologies. Proven ability to drive technical vision, optimize performance, and deliver high-quality, user-centric solutions.",
   experience: [
     {
+      title: "Solution Architect & Engineering Lead",
+      company: "Centauri Health Solutions",
+      period: "2024 - Present",
+      accomplishments: [
+        "Architected and led development of ClarionViewer for Advance 1.0, including PDF editing, Okta integration, and ETL Manager pipelines on a highly scalable GCP infrastructure.",
+        "Designed and built an Intelligent Clinical Dashboard featuring SMART on FHIR integration, RAG-powered medical document chat, and proactive health insight notifications.",
+        "Drove Epic on FHIR platform onboarding and integration, enhancing healthcare data interoperability across systems.",
+        "Led agile delivery of Clarion Solutions ICW through daily standups, sprint planning, demos, and retrospectives, ensuring consistent team alignment and velocity.",
+      ],
+      techStack:
+        "TypeScript, React/Next.js, Node.js, Python, GCP, FHIR/SMART on FHIR, RAG, PostgreSQL, Okta, ETL Pipelines, CI/CD",
+    },
+    {
       title: "Principal Full Stack Engineer",
       company: "Sudorandom",
-      period: "March 2023 - Present",
+      period: "March 2023 - 2024",
       accomplishments: [
         "Led full-stack architecture for critical initiatives, resulting in significant performance improvements and enhanced user experience.",
         "Successfully transitioned backend systems to serverless architectures, improving scalability, reliability, and reducing operational costs.",
@@ -142,9 +155,24 @@ export const engineeringManagerCtoResume: Resume = {
     "Results-oriented Engineering Manager with 20+ years of full stack experience and 5 years of leading and mentoring high-performing engineering teams. Proven ability to define technical vision, drive strategic roadmaps, and foster collaborative environments focused on delivering scalable and innovative software solutions. Deep understanding of modern web technologies and cloud infrastructure.",
   experience: [
     {
+      title: "Engineering Manager & Solution Architect",
+      company: "Centauri Health Solutions",
+      period: "2024 - Present",
+      accomplishments: [
+        "Built, hired, onboarded, and organized a team of 7 full-stack engineers, providing both people management and technical leadership across multiple concurrent products.",
+        "Served as scrum master, product owner, and product manager — translating leadership requirements into SAFe capabilities, initiatives, features, and stories.",
+        "Drove strategic expansion as a Qualified Health Information Network (QHIN), engaging in partnership exploration and shaping the company's interoperability roadmap.",
+        "Participated in the AI Governance Board, establishing policies and strategic direction for AI/ML adoption across the organization.",
+        "Mentored Dartmouth Engineering Capstone project team, strengthening the company's relationship with a prestigious academic institution while delivering a successful project outcome.",
+        "Designed performant, highly scalable GCP architectures as solution architect across all team deliverables.",
+      ],
+      techStack:
+        "SAFe Agile, Team Leadership, GCP, Strategic Planning, AI Governance, FHIR, Stakeholder Management",
+    },
+    {
       title: "Principal Full Stack Engineer (Frontend Lead)",
       company: "Sudorandom Labs",
-      period: "March 2023 - Present",
+      period: "March 2023 - 2024",
       accomplishments: [
         "Led and mentored frontend engineering teams, fostering a collaborative and innovation-driven environment.",
         "Defined technical direction and established development standards for frontend architecture.",
@@ -290,9 +318,22 @@ export const seniorFullStackAiMlEngineerResume: Resume = {
     "Senior Full Stack Engineer with 20+ years of experience specializing in integrating AI and Machine Learning into scalable web applications. Proficient in Python, TypeScript, LangChain, LangGraph, n8n, React, Next.js, and cloud platforms (AWS, GCP). Proven ability to develop and deploy AI-driven solutions to enhance user experiences and business outcomes.",
   experience: [
     {
+      title: "AI/ML Engineering Lead & Solution Architect",
+      company: "Centauri Health Solutions",
+      period: "2024 - Present",
+      accomplishments: [
+        "Led development of an Intelligent Clinical Dashboard featuring RAG-powered medical document chat, conversational UI for user customization, and proactive AI-driven health insight notifications.",
+        "Served on the AI Governance Board, establishing organizational policies and strategic direction for AI/ML adoption in healthcare applications.",
+        "Architected SMART on FHIR integrations enabling real-time clinical data exchange, powering AI-driven analytics and decision support tools.",
+        "Designed scalable GCP architectures optimized for ML inference workloads and healthcare data processing pipelines.",
+      ],
+      techStack:
+        "Python, RAG, LLMs, Conversational AI, SMART on FHIR, GCP, TypeScript, React/Next.js, PostgreSQL, Vector Databases",
+    },
+    {
       title: "Principal Full Stack Engineer",
       company: "Sudorandom",
-      period: "March 2023 - Present",
+      period: "March 2023 - 2024",
       accomplishments: [
         "Implemented AI-driven solutions, including generative AI and intelligent context management, to optimize web performance and user experience.",
         "Developed automated data processing and analytical systems leveraging AI/ML techniques.",
@@ -360,9 +401,22 @@ export const aiWeb3FullStackEngineerResume: Resume = {
     "Senior Full Stack Engineer with 20+ years of experience architecting, developing, and deploying complex, scalable web applications, specializing in the convergence of AI/ML and Web3 technologies. Deep expertise in modern JavaScript/TypeScript ecosystems (React, Next.js, Node.js), Python, Solidity, cloud infrastructure (AWS, GCP), serverless architectures, and both traditional and vector databases. Proven ability to drive technical vision, optimize performance, and deliver innovative, user-centric solutions across decentralized and intelligent applications.",
   experience: [
     {
+      title: "AI/ML Engineering Lead & Solution Architect",
+      company: "Centauri Health Solutions",
+      period: "2024 - Present",
+      accomplishments: [
+        "Led development of an Intelligent Clinical Dashboard with RAG-powered medical document chat, conversational AI for user customization, and proactive health insight notifications.",
+        "Served on the AI Governance Board, shaping organizational AI/ML policies and strategic direction for healthcare applications.",
+        "Architected SMART on FHIR integrations for real-time clinical data exchange, powering AI-driven analytics and decision support.",
+        "Designed highly scalable GCP architectures for ML inference and healthcare data processing pipelines.",
+      ],
+      techStack:
+        "Python, RAG, LLMs, Conversational AI, SMART on FHIR, GCP, TypeScript, React/Next.js, PostgreSQL, Vector Databases",
+    },
+    {
       title: "Principal Full Stack Engineer | AI/Web3 Development",
       company: "Sudorandom",
-      period: "March 2023 - Present",
+      period: "March 2023 - 2024",
       accomplishments: [
         "Led the design and implementation of full-stack solutions incorporating both AI and Web3 technologies, significantly enhancing user engagement and innovation.",
         "Architected and deployed scalable Web3 applications with smart contract integration, ensuring security and immutability.",
