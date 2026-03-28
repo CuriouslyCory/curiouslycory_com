@@ -15,7 +15,8 @@
     "ralph": "STORIES=$(jq '.userStories | length' .agents/skills/ralph/scripts/prd.json) && .agents/skills/ralph/scripts/ralph.sh $((STORIES + 4))",
     "start": "next start",
     "blog:index": "tsx src/scripts/index-blog.ts",
-    "prebuild": "pnpm blog:index"
+    "prebuild": "pnpm blog:index",
+    "db:seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
     "@atproto/api": "^0.13.35",
@@ -97,6 +98,9 @@
   },
   "ct3aMetadata": {
     "initVersion": "7.37.0"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
   },
   "packageManager": "pnpm@10.12.1",
   "pnpm": {
