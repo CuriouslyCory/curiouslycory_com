@@ -72,6 +72,53 @@ const projectSeeds = [
     order: 0,
     publishedAt: new Date("2026-03-19"),
   },
+  {
+    title: "Morse Bot",
+    description:
+      "A real-time morse code decoder and encoder with live signal visualization, adaptive speed tracking, and session persistence — built as a TypeScript monorepo.",
+    longDescription: null,
+    image: "morse-bot.jpg",
+    tags: [
+      "TypeScript",
+      "Next.js",
+      "React Native",
+      "tRPC",
+      "Drizzle ORM",
+      "Turborepo",
+      "Vitest",
+    ],
+    url: null,
+    githubUrl: "https://github.com/CuriouslyCory/morse-bot",
+    category: "audio-tools",
+    featured: false,
+    published: true,
+    order: 1,
+    publishedAt: new Date("2026-03-27"),
+  },
+  {
+    title: "Dossier",
+    description:
+      "An AI-powered personal relationship assistant that extracts biographical facts and builds structured profiles of people through conversational AI.",
+    longDescription: null,
+    image: "dossier.jpg",
+    tags: [
+      "TypeScript",
+      "Next.js",
+      "React",
+      "tRPC",
+      "Prisma",
+      "Google Generative AI",
+      "Vercel AI SDK",
+      "Stripe",
+    ],
+    url: null,
+    githubUrl: "https://github.com/CuriouslyCory/dossier",
+    category: "ai-tools",
+    featured: false,
+    published: true,
+    order: 2,
+    publishedAt: new Date("2026-03-27"),
+  },
 ];
 
 // --- Main seed function ---
