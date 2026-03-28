@@ -77,7 +77,7 @@ const projectSeeds = [
     description:
       "A real-time morse code decoder and encoder with live signal visualization, adaptive speed tracking, and session persistence — built as a TypeScript monorepo.",
     longDescription: null,
-    image: "morse-bot.jpg",
+    image: "morse-bot.png",
     tags: [
       "TypeScript",
       "Next.js",
@@ -87,7 +87,7 @@ const projectSeeds = [
       "Turborepo",
       "Vitest",
     ],
-    url: null,
+    url: "https://morse-bot.curiouslycory.com/",
     githubUrl: "https://github.com/CuriouslyCory/morse-bot",
     category: "audio-tools",
     featured: false,
@@ -100,7 +100,7 @@ const projectSeeds = [
     description:
       "An AI-powered personal relationship assistant that extracts biographical facts and builds structured profiles of people through conversational AI.",
     longDescription: null,
-    image: "dossier.jpg",
+    image: "dossier.png",
     tags: [
       "TypeScript",
       "Next.js",
@@ -111,7 +111,7 @@ const projectSeeds = [
       "Vercel AI SDK",
       "Stripe",
     ],
-    url: null,
+    url: "https://dossier.curiouslycory.com/",
     githubUrl: "https://github.com/CuriouslyCory/dossier",
     category: "ai-tools",
     featured: false,
