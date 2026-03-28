@@ -14,4 +14,4 @@ No plan is complete without testing steps. pnpm lint, pnpm typecheck, and pnpm b
 
 ### Codebase navigation
 
-Lean on dedicated tools — Read, Glob, Grep unless the Bash command provides necessary benefit.
+Lean on dedicated tools — Read, Glob, Grep unless the Bash command provides critical benefit.
