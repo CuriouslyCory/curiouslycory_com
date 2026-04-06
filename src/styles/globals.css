@@ -90,6 +90,10 @@
   --animate-float: float 3s ease-in-out infinite;
   --animate-rotate-15: rotate-15 0.25s ease-in-out infinite;
   --animate-mirror-rotate-15: mirror-rotate-15 0.25s ease-in-out infinite;
+  --animate-sky-drift-ltr: sky-drift-ltr 30s linear forwards;
+  --animate-sky-drift-rtl: sky-drift-rtl 30s linear forwards;
+  --animate-shooting-star-ltr: shooting-star-ltr 2s linear forwards;
+  --animate-shooting-star-rtl: shooting-star-rtl 2s linear forwards;
 
   @keyframes orbit-spin {
     from { transform: rotate(0deg); }
@@ -195,6 +199,7 @@
       transform: rotate(0deg) scaleX(-1) translateX(-4rem);
     }
   }
+
 }
 
 @layer base {
@@ -371,5 +376,35 @@
 
   .animate-visor-glint {
     animation: visor-glint 1.5s ease-in-out forwards;
+  }
+
+  /* Sky ambiance — decorative hero drifters.
+     Defined in @layer base (not @theme inline) so keyframe names are
+     accessible from inline animation styles. */
+  @keyframes sky-drift-ltr {
+    from { transform: translate3d(-5%, 0, 0); }
+    to   { transform: translate3d(100vw, 0, 0); }
+  }
+  @keyframes sky-drift-rtl {
+    from { transform: translate3d(100vw, 0, 0); }
+    to   { transform: translate3d(-5%, 0, 0); }
+  }
+  @keyframes shooting-star-ltr {
+    0%   { transform: translate3d(-5%, 0, 0) rotate(35deg); opacity: 0; }
+    8%   { opacity: 1; }
+    75%  { opacity: 1; }
+    100% { transform: translate3d(100vw, 40px, 0) rotate(35deg); opacity: 0; }
+  }
+  @keyframes shooting-star-rtl {
+    0%   { transform: translate3d(100vw, 0, 0) rotate(-35deg); opacity: 0; }
+    8%   { opacity: 1; }
+    75%  { opacity: 1; }
+    100% { transform: translate3d(-5%, 40px, 0) rotate(-35deg); opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .sky-ambiance-entity {
+      animation: none !important;
+    }
   }
 }

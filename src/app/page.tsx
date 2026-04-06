@@ -3,6 +3,7 @@ import { type Metadata } from "next";
 
 import { Astronaut } from "~/components/astronaut";
 import { Button } from "~/components/ui/button";
+import { SkyAmbiance } from "~/components/sky-ambiance";
 
 import { ChatBubble } from "~/components/ui/chat-bubble";
 import { FavoriteTech } from "~/components/favorite-tech";
@@ -38,7 +39,8 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <section className="overflow-x-clip pb-0 pt-12 md:overflow-clip md:pt-28">
+      <section className="relative overflow-x-clip pb-0 pt-12 md:overflow-clip md:pt-28">
+        <SkyAmbiance />
         {/* Mobile hero: ChatBubble + centered Astronaut */}
         <div className="flex flex-col items-center md:hidden">
           <ChatBubble
