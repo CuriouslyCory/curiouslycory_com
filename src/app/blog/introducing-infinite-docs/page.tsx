@@ -91,12 +91,14 @@ export default async function IntroducingInfiniteDocsPost() {
           </p>
 
           <p>
-            I built <strong>Infinite Docs</strong> because I was tired of that
+            I built <strong>Infinite Docs</strong>{" "}
+            because I was tired of that
             trade-off. It&apos;s a drag-and-drop tool for documenting software
             architecture as an <strong>infinitely-nestable graph</strong>: you
             place <strong>Components</strong> on a <strong>Canvas</strong> and
             link them with <strong>Connections</strong>. Opening a Component
-            descends into <em>its own</em> interior Canvas, recursing to any
+            descends into <em>its own</em>{" "}
+            interior Canvas, recursing to any
             depth &mdash; from top-level infrastructure (hosts, databases,
             external APIs) all the way down to internal services, modules, or a
             single database table. It&apos;s one place to model a system at any
@@ -221,7 +223,8 @@ export default async function IntroducingInfiniteDocsPost() {
               </CardHeader>
               <CardContent>
                 <p className="mb-0">
-                  A Canvas is a <em>derived</em> view &mdash; it&apos;s never
+                  A Canvas is a <em>derived</em>{" "}
+                  view &mdash; it&apos;s never
                   saved as a file. The graph stores only Components and their
                   Connections; every Canvas, breadcrumb, and boundary view is
                   computed at read time. There is no separate diagram to fall out
@@ -295,7 +298,8 @@ export default async function IntroducingInfiniteDocsPost() {
             This is where Infinite Docs stops being &ldquo;a nicer diagram
             tool&rdquo; and becomes something new. The entire graph serializes to{" "}
             <strong>deterministic markdown</strong> &mdash; byte-stable output
-            with stable <code>{"{#nodeId}"}</code> anchors &mdash; so an LLM can
+            with stable <code>{"{#nodeId}"}</code>{" "}
+            anchors &mdash; so an LLM can
             read your architecture as text and an agent can reference any
             Component by anchor. There&apos;s a &ldquo;Copy as markdown&rdquo;
             button right on the toolbar.
@@ -305,7 +309,8 @@ export default async function IntroducingInfiniteDocsPost() {
             Better still, an authenticated <strong>MCP server</strong> lets AI
             agents read <em>and maintain</em> the architecture as they work on
             the actual system it describes. You mint an API token on the{" "}
-            <em>Connect an agent</em> page, paste one snippet, and your agent of
+            <em>Connect an agent</em>{" "}
+            page, paste one snippet, and your agent of
             choice &mdash; Claude Code, Codex, Cursor, and friends &mdash; is
             pointed at your graph.
           </p>
@@ -394,7 +399,8 @@ apply_spec    # parse an OpenAPI or SQL-DDL spec and sync the graph`}</code>
               <CardContent>
                 <p className="mb-0">
                   Define a couple of points on the graph and a named{" "}
-                  <strong>Trace</strong> projects the path(s) between them across
+                  <strong>Trace</strong>{" "}
+                  projects the path(s) between them across
                   every depth at once, auto-laid-out and read-only &mdash; ideal
                   for following a request flow or a dependency chain. Each Trace
                   is exportable as its own MCP resource.
@@ -439,12 +445,14 @@ apply_spec    # parse an OpenAPI or SQL-DDL spec and sync the graph`}</code>
               </pre>
               <div className="space-y-2">
                 <div>
-                  <strong>No &ldquo;agent mode&rdquo;:</strong> there isn&apos;t a
+                  <strong>No &ldquo;agent mode&rdquo;:</strong>{" "}
+                  there isn&apos;t a
                   second set of rules for AI to drift away from.
                 </div>
                 <div>
                   <strong>Testable by construction:</strong> the{" "}
-                  <code>(db, actor, input)</code> seam is exercised by Vitest
+                  <code>(db, actor, input)</code>{" "}
+                  seam is exercised by Vitest
                   against a real, isolated Postgres &mdash; no mocks, asserting
                   real behavior.
                 </div>
