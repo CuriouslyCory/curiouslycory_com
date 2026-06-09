@@ -29,22 +29,22 @@ export const principalFullStackEngineerResume: Resume = {
     "Accomplished Principal Full Stack Engineer with 20+ years of experience architecting, developing, and deploying complex and scalable web applications. Deep expertise in modern JavaScript/TypeScript ecosystems (React, Next.js, Node.js), cloud infrastructure (AWS, GCP), and backend technologies. Proven ability to drive technical vision, optimize performance, and deliver high-quality, user-centric solutions.",
   experience: [
     {
-      title: "Solution Architect & Engineering Lead",
+      title: "Manager of Software Engineering",
       company: "Centauri Health Solutions",
-      period: "2024 - Present",
+      period: "Sep 2025 - Present",
       accomplishments: [
-        "Architected and led development of ClarionViewer for Advance 1.0, including PDF editing, Okta integration, and ETL Manager pipelines on a highly scalable GCP infrastructure.",
-        "Designed and built an Intelligent Clinical Dashboard featuring SMART on FHIR integration, RAG-powered medical document chat, and proactive health insight notifications.",
-        "Drove Epic on FHIR platform onboarding and integration, enhancing healthcare data interoperability across systems.",
-        "Led agile delivery of Clarion Solutions ICW through daily standups, sprint planning, demos, and retrospectives, ensuring consistent team alignment and velocity.",
+        "Drove two greenfield clinical applications — the primary Clinical Viewer and the patient-facing IAS (Individual Access Services) Viewer of the ClarionViewer / Advance 1.0 Intelligent Clinical Workspace — from zero to within a month of production release in under a year on scalable GCP architecture.",
+        "Embedded RAG and LLMs into the product to extract relevant clinical data and answer natural-language questions across large volumes of fragmented medical records.",
+        "Built TEFCA “Kill the Clipboard” interoperability — patient consent, data privacy, and SMART Health Link (QR-based) provider data sharing, plus Epic-on-FHIR onboarding — under full HIPAA and HITRUST compliance.",
+        "Engineered an AI-augmented SDLC with custom agents and tooling that automate code review against internal, accessibility (WCAG), HIPAA, and HITRUST standards, cutting code review time ~75% and reducing compliance misses to near zero.",
       ],
       techStack:
-        "TypeScript, React/Next.js, Node.js, Python, GCP, FHIR/SMART on FHIR, RAG, PostgreSQL, Okta, ETL Pipelines, CI/CD",
+        "TypeScript, React/Next.js, Node.js, Python, GCP, FHIR/SMART on FHIR, SMART Health Link, RAG/LLMs, PostgreSQL, CI/CD",
     },
     {
       title: "Principal Full Stack Engineer",
       company: "Sudorandom",
-      period: "March 2023 - 2024",
+      period: "March 2023 - May 2025",
       accomplishments: [
         "Led full-stack architecture for critical initiatives, resulting in significant performance improvements and enhanced user experience.",
         "Successfully transitioned backend systems to serverless architectures, improving scalability, reliability, and reducing operational costs.",
@@ -155,24 +155,23 @@ export const engineeringManagerCtoResume: Resume = {
     "Results-oriented Engineering Manager with 20+ years of full stack experience and 5 years of leading and mentoring high-performing engineering teams. Proven ability to define technical vision, drive strategic roadmaps, and foster collaborative environments focused on delivering scalable and innovative software solutions. Deep understanding of modern web technologies and cloud infrastructure.",
   experience: [
     {
-      title: "Engineering Manager & Solution Architect",
+      title: "Manager of Software Engineering",
       company: "Centauri Health Solutions",
-      period: "2024 - Present",
+      period: "Sep 2025 - Present",
       accomplishments: [
-        "Built, hired, onboarded, and organized a team of 7 full-stack engineers, providing both people management and technical leadership across multiple concurrent products.",
-        "Served as scrum master, product owner, and product manager — translating leadership requirements into SAFe capabilities, initiatives, features, and stories.",
-        "Drove strategic expansion as a Qualified Health Information Network (QHIN), engaging in partnership exploration and shaping the company's interoperability roadmap.",
-        "Participated in the AI Governance Board, establishing policies and strategic direction for AI/ML adoption across the organization.",
-        "Mentored Dartmouth Engineering Capstone project team, strengthening the company's relationship with a prestigious academic institution while delivering a successful project outcome.",
-        "Designed performant, highly scalable GCP architectures as solution architect across all team deliverables.",
+        "Stood up a brand-new engineering team and its entire delivery function — SDLC, Agile process, toolchain, and standards — growing it from 2 to 6 engineers (junior to senior) while serving as technical lead, scrum master, and acting product owner.",
+        "Drove two greenfield clinical applications (Clinical Viewer and the patient-facing IAS Viewer) to within a month of production release in under a year, sustaining predictable delivery through ~6 months of absent product requirements and shifting executive direction.",
+        "Delivered TEFCA “Kill the Clipboard” compliance — patient consent, data privacy, and SMART Health Link provider data sharing — alongside HIPAA and HITRUST requirements.",
+        "Architected an AI-augmented SDLC with custom agents and tooling that cut code review time ~75% and reduced compliance misses to near zero; participated in the AI Governance Board shaping AI/ML policy.",
+        "Set technical direction as GCP solution architect, leading a reusable design system and an iterative risk-adjustment viewer in direct partnership with medical coders.",
       ],
       techStack:
-        "SAFe Agile, Team Leadership, GCP, Strategic Planning, AI Governance, FHIR, Stakeholder Management",
+        "Team Leadership, Agile/Scrum, Product Ownership, GCP, AI Governance, FHIR, HIPAA/HITRUST, Stakeholder Management",
     },
     {
       title: "Principal Full Stack Engineer (Frontend Lead)",
       company: "Sudorandom Labs",
-      period: "March 2023 - 2024",
+      period: "March 2023 - May 2025",
       accomplishments: [
         "Led and mentored frontend engineering teams, fostering a collaborative and innovation-driven environment.",
         "Defined technical direction and established development standards for frontend architecture.",
@@ -252,7 +251,7 @@ export const seniorFullStackWeb3EngineerResume: Resume = {
     {
       title: "Principal Full Stack Engineer | Blockchain Development Lead",
       company: "Sudorandom",
-      period: "March 2023 - Present",
+      period: "March 2023 - May 2025",
       accomplishments: [
         "Designed and implemented scalable Web3 applications, enhancing reliability and user engagement.",
         "Optimized performance through reduced API calls, enhanced error handling, and streamlined serverless architectures.",
@@ -318,22 +317,22 @@ export const seniorFullStackAiMlEngineerResume: Resume = {
     "Senior Full Stack Engineer with 20+ years of experience specializing in integrating AI and Machine Learning into scalable web applications. Proficient in Python, TypeScript, LangChain, LangGraph, n8n, React, Next.js, and cloud platforms (AWS, GCP). Proven ability to develop and deploy AI-driven solutions to enhance user experiences and business outcomes.",
   experience: [
     {
-      title: "AI/ML Engineering Lead & Solution Architect",
+      title: "Manager of Software Engineering",
       company: "Centauri Health Solutions",
-      period: "2024 - Present",
+      period: "Sep 2025 - Present",
       accomplishments: [
-        "Led development of an Intelligent Clinical Dashboard featuring RAG-powered medical document chat, conversational UI for user customization, and proactive AI-driven health insight notifications.",
-        "Served on the AI Governance Board, establishing organizational policies and strategic direction for AI/ML adoption in healthcare applications.",
-        "Architected SMART on FHIR integrations enabling real-time clinical data exchange, powering AI-driven analytics and decision support tools.",
-        "Designed scalable GCP architectures optimized for ML inference workloads and healthcare data processing pipelines.",
+        "Embedded RAG and LLMs into the Intelligent Clinical Workspace to extract relevant clinical data and answer natural-language questions across large volumes of fragmented medical records.",
+        "Architected an AI-augmented SDLC with custom agents and skills that automate code review against internal, accessibility (WCAG), HIPAA, and HITRUST standards — cutting code review time ~75% and reducing compliance misses to near zero.",
+        "Served on the AI Governance Board, establishing policy and strategic direction for AI/ML adoption in healthcare applications.",
+        "Built SMART on FHIR and SMART Health Link integrations for TEFCA “Kill the Clipboard” clinical data exchange on scalable GCP architecture.",
       ],
       techStack:
-        "Python, RAG, LLMs, Conversational AI, SMART on FHIR, GCP, TypeScript, React/Next.js, PostgreSQL, Vector Databases",
+        "Python, RAG, LLMs, AI Agents, SMART on FHIR, GCP, TypeScript, React/Next.js, PostgreSQL, Vector Databases",
     },
     {
       title: "Principal Full Stack Engineer",
       company: "Sudorandom",
-      period: "March 2023 - 2024",
+      period: "March 2023 - May 2025",
       accomplishments: [
         "Implemented AI-driven solutions, including generative AI and intelligent context management, to optimize web performance and user experience.",
         "Developed automated data processing and analytical systems leveraging AI/ML techniques.",
@@ -401,22 +400,22 @@ export const aiWeb3FullStackEngineerResume: Resume = {
     "Senior Full Stack Engineer with 20+ years of experience architecting, developing, and deploying complex, scalable web applications, specializing in the convergence of AI/ML and Web3 technologies. Deep expertise in modern JavaScript/TypeScript ecosystems (React, Next.js, Node.js), Python, Solidity, cloud infrastructure (AWS, GCP), serverless architectures, and both traditional and vector databases. Proven ability to drive technical vision, optimize performance, and deliver innovative, user-centric solutions across decentralized and intelligent applications.",
   experience: [
     {
-      title: "AI/ML Engineering Lead & Solution Architect",
+      title: "Manager of Software Engineering",
       company: "Centauri Health Solutions",
-      period: "2024 - Present",
+      period: "Sep 2025 - Present",
       accomplishments: [
-        "Led development of an Intelligent Clinical Dashboard with RAG-powered medical document chat, conversational AI for user customization, and proactive health insight notifications.",
-        "Served on the AI Governance Board, shaping organizational AI/ML policies and strategic direction for healthcare applications.",
-        "Architected SMART on FHIR integrations for real-time clinical data exchange, powering AI-driven analytics and decision support.",
-        "Designed highly scalable GCP architectures for ML inference and healthcare data processing pipelines.",
+        "Embedded RAG and LLMs into the Intelligent Clinical Workspace to extract relevant clinical data and answer natural-language questions across large volumes of fragmented medical records.",
+        "Architected an AI-augmented SDLC with custom agents and skills that automate code review against internal, accessibility (WCAG), HIPAA, and HITRUST standards — cutting code review time ~75% and reducing compliance misses to near zero.",
+        "Served on the AI Governance Board, establishing policy and strategic direction for AI/ML adoption in healthcare applications.",
+        "Built SMART on FHIR and SMART Health Link integrations for TEFCA “Kill the Clipboard” clinical data exchange on scalable GCP architecture.",
       ],
       techStack:
-        "Python, RAG, LLMs, Conversational AI, SMART on FHIR, GCP, TypeScript, React/Next.js, PostgreSQL, Vector Databases",
+        "Python, RAG, LLMs, AI Agents, SMART on FHIR, GCP, TypeScript, React/Next.js, PostgreSQL, Vector Databases",
     },
     {
       title: "Principal Full Stack Engineer | AI/Web3 Development",
       company: "Sudorandom",
-      period: "March 2023 - 2024",
+      period: "March 2023 - May 2025",
       accomplishments: [
         "Led the design and implementation of full-stack solutions incorporating both AI and Web3 technologies, significantly enhancing user engagement and innovation.",
         "Architected and deployed scalable Web3 applications with smart contract integration, ensuring security and immutability.",
