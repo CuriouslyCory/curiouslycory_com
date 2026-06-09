@@ -51,6 +51,21 @@ async function getDefaultUser(): Promise<string> {
 
 const projectSeeds = [
   {
+    title: "Infinite Docs",
+    description:
+      "A drag-and-drop tool for documenting software architecture as an infinitely-nestable graph — kept alive as the system evolves and maintainable by AI agents over an authenticated MCP server.",
+    longDescription: null,
+    image: "infinite-docs.png",
+    tags: ["TypeScript", "Next.js", "tRPC", "Prisma", "React Flow", "MCP"],
+    url: "https://infinite-docs.com",
+    githubUrl: "https://github.com/CuriouslyCory/infinite-docs",
+    category: "developer-tools",
+    featured: true,
+    published: true,
+    order: 0,
+    publishedAt: new Date("2026-06-05"),
+  },
+  {
     title: "my-skills",
     description:
       "A universal CLI and optional web dashboard for installing, managing, and sharing reusable skills across Claude Code, Cursor, Copilot, and 10+ AI coding agents.",
@@ -69,7 +84,7 @@ const projectSeeds = [
     category: "developer-tools",
     featured: true,
     published: true,
-    order: 0,
+    order: 1,
     publishedAt: new Date("2026-03-19"),
   },
   {
@@ -92,7 +107,7 @@ const projectSeeds = [
     category: "audio-tools",
     featured: false,
     published: true,
-    order: 1,
+    order: 2,
     publishedAt: new Date("2026-03-27"),
   },
   {
@@ -116,7 +131,7 @@ const projectSeeds = [
     category: "ai-tools",
     featured: false,
     published: true,
-    order: 2,
+    order: 3,
     publishedAt: new Date("2026-03-27"),
   },
 ];
