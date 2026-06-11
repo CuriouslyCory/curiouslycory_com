@@ -81,13 +81,13 @@ const quests = [
   } as const,
 ] as const;
 
-export const QUESTS = new Map(
+export const QUESTS = new Map<QuestId, Quest>(
   Object.entries(quests).map(([_, value]) => [
     value.id,
     {
       ...value,
       steps: [...value.steps],
-    } as Quest,
+    },
   ]),
 );
 
