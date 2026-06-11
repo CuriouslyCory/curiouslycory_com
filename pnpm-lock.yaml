@@ -106,11 +106,11 @@ importers:
         specifier: ^4.0.3
         version: 4.0.3
       html2canvas-pro:
-        specifier: ^1.6.7
-        version: 1.6.7
+        specifier: ^2.0.4
+        version: 2.0.4
       jspdf:
-        specifier: ^3.0.4
-        version: 3.0.4
+        specifier: ^4.2.1
+        version: 4.2.1
       lucide-react:
         specifier: ^1.17.0
         version: 1.17.0(react@19.2.7)
@@ -2837,8 +2837,8 @@ packages:
   html-url-attributes@3.0.1:
     resolution: {integrity: sha512-ol6UPyBWqsrO6EJySPz2O7ZSr856WDrEzM5zMqp+FJJLGMW35cLYmmZnl0vztAZxRUoNZJFTCohfjuIJ8I4QBQ==}
 
-  html2canvas-pro@1.6.7:
-    resolution: {integrity: sha512-BzuCTXx0jf2TfnrJrtjMCY1FR9rxlPdy7yLWt9ZMhZm7Ylaw9MLb7agSheqv2mT/ARduBHDAqvJIFlbxrZfyOA==}
+  html2canvas-pro@2.0.4:
+    resolution: {integrity: sha512-tfL8XNvuITvYQJKgAx4bvANauuLKc88C+ZSZt7HZJveqQBWjBDtkqs/It06UzlqbM+sSq7Cv45rFbuUxOFgmow==}
     engines: {node: '>=16.0.0'}
 
   html2canvas@1.4.1:
@@ -3065,8 +3065,8 @@ packages:
     engines: {node: '>=6'}
     hasBin: true
 
-  jspdf@3.0.4:
-    resolution: {integrity: sha512-dc6oQ8y37rRcHn316s4ngz/nOjayLF/FFxBF4V9zamQKRqXxyiH1zagkCdktdWhtoQId5K20xt1lB90XzkB+hQ==}
+  jspdf@4.2.1:
+    resolution: {integrity: sha512-YyAXyvnmjTbR4bHQRLzex3CuINCDlQnBqoSYyjJwTP2x9jDLuKDzy7aKUl0hgx3uhcl7xzg32agn5vlie6HIlQ==}
 
   jsx-ast-utils@3.3.5:
     resolution: {integrity: sha512-ZZow9HBI5O6EPgSJLUb8n2NKgmVWTwCvHGwFuJlMjvLFqlGG6pjirPhtdsseaLZjSibD8eegzmYpUZwoIlj2cQ==}
@@ -6900,7 +6900,7 @@ snapshots:
 
   html-url-attributes@3.0.1: {}
 
-  html2canvas-pro@1.6.7:
+  html2canvas-pro@2.0.4:
     dependencies:
       css-line-break: 2.1.0
       text-segmentation: 1.0.3
@@ -7115,7 +7115,7 @@ snapshots:
 
   json5@2.2.3: {}
 
-  jspdf@3.0.4:
+  jspdf@4.2.1:
     dependencies:
       '@babel/runtime': 7.29.2
       fast-png: 6.4.0
