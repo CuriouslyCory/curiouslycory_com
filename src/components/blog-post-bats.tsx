@@ -130,7 +130,7 @@ WildBatPost.displayName = "WildBatPost";
 // Main component
 export default function BlogPostBats() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref as React.RefObject<Element>, {
+  const isInView = useInView(ref, {
     once: true,
     amount: 1,
   });

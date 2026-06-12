@@ -24,8 +24,9 @@ function BskyPost({ fvPost }: { fvPost: AppBskyFeedDefs.FeedViewPost }) {
   const { post } = fvPost;
   // extract the record from the post
   const record = useMemo(() => {
-    if (AppBskyFeedPost.isRecord(post?.record)) {
-      return post.record;
+    const result = AppBskyFeedPost.validateMain(post?.record);
+    if (result.success) {
+      return result.value;
     }
     return null;
   }, [post]);

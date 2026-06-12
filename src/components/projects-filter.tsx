@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ExternalLink, Github, Check, ChevronsUpDown } from "lucide-react";
+import { ExternalLink, Check, ChevronsUpDown } from "lucide-react";
+import { FaGithub } from "react-icons/fa";
 import { useState } from "react";
 
 import { Badge } from "~/components/ui/badge";
@@ -200,7 +201,7 @@ export function ProjectsFilter({ projects, tags }: ProjectsFilterProps) {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <Github className="mr-2 h-4 w-4" />
+                    <FaGithub className="mr-2 h-4 w-4" />
                     Code
                   </Link>
                 </Button>
