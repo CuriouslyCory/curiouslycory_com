@@ -6,6 +6,7 @@ import {
   protectedProcedure,
 } from "~/server/api/trpc";
 import { postSearchParamsSchema, postSchema } from "~/data/blog-schema";
+import { reorderByRank } from "~/lib/reorder-by-rank";
 
 /**
  * Postgres full-text search over the generated `Post.searchVector` tsvector
@@ -34,20 +35,6 @@ export async function searchPostIds(
     WHERE "Post"."published" = true AND "Post"."searchVector" @@ query.tsq
     ORDER BY rank DESC
   `);
-}
-
-/**
- * `findMany({ id: { in } })` does not preserve the order of the `in` list,
- * so re-sort the fetched rows back into rank order via a Map lookup.
- */
-function reorderByRank<T extends { id: string }>(
-  rows: T[],
-  rankedIds: Array<{ id: string; rank: number }>,
-): T[] {
-  const order = new Map(rankedIds.map((r, index) => [r.id, index]));
-  return [...rows].sort(
-    (a, b) => (order.get(a.id) ?? 0) - (order.get(b.id) ?? 0),
-  );
 }
 
 export const blogRouter = createTRPCRouter({

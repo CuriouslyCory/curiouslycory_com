@@ -112,7 +112,17 @@ export function extractSearchableText(
     if (ts.isJsxText(node)) {
       chunks.push(node.text);
     } else if (ts.isJsxExpression(node)) {
-      if (node.expression) {
+      // Only collect literal text for JsxExpressions in element/child position
+      // (the `{" "}` spacers and `` {`code`} `` CodeBlock children). A
+      // JsxExpression whose parent is a JsxAttribute (`alt={"x"}`,
+      // `className={`y`}`) is owned by the isJsxAttribute branch below — the
+      // generic `forEachChild` descent still reaches it, so without this guard
+      // it would be processed twice: double-counting allowed attributes and
+      // leaking excluded ones (className/href/src) past the allowlist.
+      if (
+        node.expression &&
+        !(node.parent && ts.isJsxAttribute(node.parent))
+      ) {
         pushLiteralExpressionText(node.expression, chunks);
       }
     } else if (ts.isJsxAttribute(node)) {

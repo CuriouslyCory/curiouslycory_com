@@ -101,6 +101,37 @@ const app = Fastify();\`}
     expect(result).not.toContain("https://example.com");
   });
 
+  it("counts a brace-form allowed attribute exactly once (no double-processing)", () => {
+    // Regression: a JsxAttribute's brace-form initializer was walked by both
+    // the attribute branch and the generic expression branch, so `alt={"x"}`
+    // yielded "x x".
+    const source = `export default () => <img alt={"Alpha"} />;`;
+    const result = extractSearchableText(source);
+    expect(result).toBe("Alpha");
+    expect(result).not.toContain("Alpha Alpha");
+    // Exactly one occurrence.
+    expect(result.match(/Alpha/g)?.length).toBe(1);
+  });
+
+  it("keeps brace-form excluded attributes excluded (allowlist not bypassed)", () => {
+    // Regression: excluded attrs in brace form (className={`...`}, href={`...`})
+    // leaked in via the generic expression branch, bypassing includeAttributes.
+    const source = `export default () => <div className={\`hero\`}><a href={\`https://x.test/p\`}>go</a></div>;`;
+    const result = extractSearchableText(source);
+    expect(result).toBe("go");
+    expect(result).not.toContain("hero");
+    expect(result).not.toContain("x.test");
+  });
+
+  it("still recurses into nested JSX inside an attribute value, without re-collecting the attribute's own literals", () => {
+    // prop={<Foo/>}: nested JSX text must still be collected, but the excluded
+    // attribute name (`label`) itself must not leak.
+    const source = `export default () => <Card label={<span>Inner prose</span>}>Body</Card>;`;
+    const result = extractSearchableText(source);
+    expect(result).toContain("Inner prose");
+    expect(result).toContain("Body");
+  });
+
   it("excludes the metadata export object and the ---bm frontmatter comment", () => {
     const source = `
       /*
