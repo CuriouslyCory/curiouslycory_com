@@ -1,0 +1,68 @@
+name: Blog Indexing
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "src/app/blog/**"
+      - "src/scripts/**"
+      - "prisma/**"
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Force re-embed all posts (sets FORCE_REEMBED)"
+        required: false
+        type: boolean
+        default: false
+
+concurrency:
+  group: index-blog-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+# Required repo secrets (Settings → Secrets and variables → Actions):
+#   DATABASE_URL      - required. Used by `pnpm db:migrate` and `pnpm blog:index`.
+#   OPENAI_API_KEY    - optional. Enables semantic-search embedding during indexing;
+#                       indexer falls back to FTS-only metadata/body indexing without it.
+#   DEFAULT_AUTHOR_ID - optional. Fallback author ID for posts that don't specify one.
+
+jobs:
+  index-blog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      DEFAULT_AUTHOR_ID: ${{ secrets.DEFAULT_AUTHOR_ID }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      # Must run BEFORE actions/setup-node when using cache: 'pnpm' — setup-node's
+      # cache step shells out to `pnpm store path`, which fails if pnpm isn't on PATH.
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+        # No `version:` — action-setup v6 reads packageManager: "pnpm@10.12.1" from package.json.
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Apply database migrations
+        run: pnpm db:migrate
+
+      - name: Index blog posts
+        run: pnpm blog:index
+        env:
+          # inputs.force is a real boolean only on workflow_dispatch; on push it's
+          # unset → resolves to '' (empty), NOT the string "false". This matters:
+          # blog-indexer.ts uses !!process.env.FORCE_REEMBED, and "false" is truthy.
+          FORCE_REEMBED: ${{ inputs.force && '1' || '' }}
