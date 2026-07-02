@@ -1,11 +1,41 @@
 import { z } from "zod";
-import { type Prisma } from "~/generated/prisma/client";
+import { Prisma, type PrismaClient } from "~/generated/prisma/client";
 import {
   createTRPCRouter,
   publicProcedure,
   protectedProcedure,
 } from "~/server/api/trpc";
 import { postSearchParamsSchema, postSchema } from "~/data/blog-schema";
+import { reorderByRank } from "~/lib/reorder-by-rank";
+
+/**
+ * Postgres full-text search over the generated `Post.searchVector` tsvector
+ * column (title A / excerpt B / content C weighted). Returns the *full*
+ * ranked id list for `q` — no LIMIT, no other filters — so #44's semantic
+ * (RRF) layer can compose against the same ranked set without a rewrite.
+ *
+ * `published = true` is enforced here in SQL as defense-in-depth, in
+ * addition to the Prisma `where` composed by the caller.
+ *
+ * Exported as a standalone function (not inlined in `getAll`) so it is a
+ * stable seam other callers can compose against.
+ */
+export async function searchPostIds(
+  db: PrismaClient,
+  q: string,
+): Promise<Array<{ id: string; rank: number }>> {
+  return db.$queryRaw<Array<{ id: string; rank: number }>>(Prisma.sql`
+    WITH query AS (
+      SELECT CASE WHEN numnode(websearch_to_tsquery('english', ${q})) = 0
+                  THEN plainto_tsquery('english', ${q})
+                  ELSE websearch_to_tsquery('english', ${q}) END AS tsq
+    )
+    SELECT "Post"."id" AS id, ts_rank_cd("Post"."searchVector", query.tsq) AS rank
+    FROM "Post", query
+    WHERE "Post"."published" = true AND "Post"."searchVector" @@ query.tsq
+    ORDER BY rank DESC
+  `);
+}
 
 export const blogRouter = createTRPCRouter({
   getAll: publicProcedure
@@ -14,29 +44,16 @@ export const blogRouter = createTRPCRouter({
       const { q, tag, featured, year, month, page, perPage } = input;
       const skip = (page - 1) * perPage;
 
+      const rankedIds = q ? await searchPostIds(ctx.db, q) : null;
+
       // Query builder
       const query: Prisma.PostFindManyArgs = {
         where: {
           published: true,
           ...(featured ? { featured: true } : {}),
           ...(tag ? { tags: { some: { slug: tag } } } : {}),
-          ...(q
-            ? {
-                OR: [
-                  {
-                    title: {
-                      contains: q,
-                      mode: "insensitive" as Prisma.QueryMode,
-                    },
-                  },
-                  {
-                    content: {
-                      contains: q,
-                      mode: "insensitive" as Prisma.QueryMode,
-                    },
-                  },
-                ],
-              }
+          ...(rankedIds
+            ? { id: { in: rankedIds.map((r) => r.id) } }
             : {}),
           ...(year
             ? {
@@ -59,8 +76,10 @@ export const blogRouter = createTRPCRouter({
             },
           },
         },
-        skip,
-        take: perPage,
+        // Non-search results are paginated in SQL; search results are
+        // fetched in full (composed with the other filters above), then
+        // reordered by FTS rank and sliced in JS below.
+        ...(rankedIds ? {} : { skip, take: perPage }),
       };
 
       const [posts, totalCount] = await Promise.all([
@@ -68,8 +87,15 @@ export const blogRouter = createTRPCRouter({
         ctx.db.post.count({ where: query.where }),
       ]);
 
+      // Pagination total with `q` present = count of the fully composed
+      // filter set (FTS ∩ tag ∩ date ∩ featured), not raw FTS hit count —
+      // otherwise pagination overcounts when other filters are active.
+      const paginatedPosts = rankedIds
+        ? reorderByRank(posts, rankedIds).slice(skip, skip + perPage)
+        : posts;
+
       return {
-        posts,
+        posts: paginatedPosts,
         pagination: {
           total: totalCount,
           page,

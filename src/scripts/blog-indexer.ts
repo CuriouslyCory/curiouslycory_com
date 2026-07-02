@@ -1,10 +1,12 @@
 import fs from "fs";
 import path from "path";
+import { createHash } from "node:crypto";
 import { PrismaClient } from "../generated/prisma/client.js";
 import { PrismaPg } from "@prisma/adapter-pg";
 import matter from "gray-matter";
 import slugify from "slugify";
 import { z } from "zod";
+import { extractSearchableText } from "../lib/blog-content-extractor.js";
 
 let prisma: PrismaClient;
 function getPrisma(): PrismaClient {
@@ -92,6 +94,7 @@ export async function indexBlogPosts(): Promise<void> {
         (dirent) =>
           dirent.isDirectory() &&
           dirent.name !== "[slug]" &&
+          dirent.name !== "template" &&
           !dirent.name.startsWith("_"),
       )
       .map((dirent) => dirent.name);
@@ -133,11 +136,21 @@ export async function indexBlogPosts(): Promise<void> {
 
       const metadata = result.data;
 
+      // Extract real searchable prose/code from the page's JSX via the AST
+      // (DB-free) so the generated tsvector column has real body content to
+      // rank against, not just title/excerpt.
+      const bodyText = extractSearchableText(fileContent);
+      const content = bodyText.length > 0 ? bodyText : null;
+      const contentHash = content
+        ? createHash("sha256").update(content).digest("hex")
+        : null;
+
       // Format the post data with validated metadata
       const postData = {
         title: String(metadata.title ?? slug),
         slug,
-        content: null as string | null,
+        content,
+        contentHash,
         excerpt: metadata.excerpt ?? null,
         coverImage: metadata.coverImage ?? null,
         published: metadata.published,
