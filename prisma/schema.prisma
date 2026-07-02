@@ -31,11 +31,33 @@ model Post {
     authorId     String
     contentHash  String? // sha256(hex) of extracted prose; #44's re-embed guard (write here, #44 reads)
     searchVector Unsupported("tsvector")?
+    chunks       PostChunk[]
 
     @@index([slug])
     @@index([published])
     @@index([featured])
     @@index([searchVector], type: Gin)
+}
+
+// Embedding chunks for semantic search (#44). `embedding` is written/read
+// only via raw SQL (Unsupported fields are excluded from Prisma's generated
+// create/update/select types), so ordinary `Post`/`Tag` queries elsewhere in
+// the app are unaffected. `contentHash` is a denormalized snapshot of the
+// parent `Post.content` hash *at embed time* — comparing it against the
+// current `Post.contentHash` is the re-embed guard that keeps `blog:index`
+// re-runs at zero OpenAI calls when a post is unchanged.
+model PostChunk {
+    id          String   @id @default(cuid())
+    postId      String
+    post        Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+    chunkIndex  Int
+    content     String   @db.Text
+    contentHash String
+    embedding   Unsupported("vector(1536)")
+    createdAt   DateTime @default(now())
+
+    @@unique([postId, chunkIndex])
+    @@index([postId])
 }
 
 model Tag {
