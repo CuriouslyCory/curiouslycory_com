@@ -1,8 +1,8 @@
 import { type MetadataRoute } from "next";
 import { api } from "~/trpc/server";
 
-// Configure this route as static
-export const dynamic = "force-static";
+// Configure this route as dynamic (renders at request time; reads from the DB)
+export const dynamic = "force-dynamic";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const sitemap: MetadataRoute.Sitemap = [
