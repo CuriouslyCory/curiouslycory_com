@@ -26,6 +26,9 @@ export const env = createEnv({
     DISCORD_CLIENT_SECRET: z.string(),
     TWITCH_CLIENT_ID: z.string(),
     TWITCH_CLIENT_SECRET: z.string(),
+    // Optional: enables semantic search (#44). Search degrades to
+    // full-text-only when unset, including in production.
+    OPENAI_API_KEY: z.string().optional(),
   },
 
   /**
@@ -50,6 +53,7 @@ export const env = createEnv({
     DISCORD_CLIENT_SECRET: process.env.DISCORD_CLIENT_SECRET,
     TWITCH_CLIENT_ID: process.env.TWITCH_CLIENT_ID,
     TWITCH_CLIENT_SECRET: process.env.TWITCH_CLIENT_SECRET,
+    OPENAI_API_KEY: process.env.OPENAI_API_KEY,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

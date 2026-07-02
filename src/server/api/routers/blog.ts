@@ -7,6 +7,10 @@ import {
 } from "~/server/api/trpc";
 import { postSearchParamsSchema, postSchema } from "~/data/blog-schema";
 import { reorderByRank } from "~/lib/reorder-by-rank";
+import { reciprocalRankFusion } from "~/lib/reciprocal-rank-fusion";
+import { toVectorLiteral } from "~/lib/vector-literal";
+import { embedQuery } from "~/server/embeddings";
+import { env } from "~/env";
 
 /**
  * Postgres full-text search over the generated `Post.searchVector` tsvector
@@ -37,6 +41,33 @@ export async function searchPostIds(
   `);
 }
 
+/**
+ * Semantic search over `PostChunk.embedding` (#44): ranks posts by their
+ * best-matching chunk's cosine distance to the query embedding. Bounded to
+ * the 50 closest posts (`ORDER BY distance ASC LIMIT 50`) so pagination
+ * `total` stays meaningful as the corpus grows — harmless at today's scale,
+ * matters once there are hundreds of posts.
+ *
+ * `published = true` is enforced here in SQL, same defense-in-depth
+ * rationale as `searchPostIds`. Callers must catch: this can throw if
+ * `PostChunk`/pgvector isn't provisioned yet (e.g. migration not applied),
+ * and getAll must degrade to FTS-only in that case.
+ */
+export async function searchPostIdsSemantic(
+  db: PrismaClient,
+  queryEmbedding: number[],
+): Promise<Array<{ id: string; distance: number }>> {
+  return db.$queryRaw<Array<{ id: string; distance: number }>>(Prisma.sql`
+    SELECT "PostChunk"."postId" AS id, MIN("PostChunk"."embedding" <=> ${toVectorLiteral(queryEmbedding)}::vector) AS distance
+    FROM "PostChunk"
+    JOIN "Post" ON "Post"."id" = "PostChunk"."postId"
+    WHERE "Post"."published" = true
+    GROUP BY "PostChunk"."postId"
+    ORDER BY distance ASC
+    LIMIT 50
+  `);
+}
+
 export const blogRouter = createTRPCRouter({
   getAll: publicProcedure
     .input(postSearchParamsSchema)
@@ -44,7 +75,27 @@ export const blogRouter = createTRPCRouter({
       const { q, tag, featured, year, month, page, perPage } = input;
       const skip = (page - 1) * perPage;
 
-      const rankedIds = q ? await searchPostIds(ctx.db, q) : null;
+      const ftsIds = q ? await searchPostIds(ctx.db, q) : null;
+
+      // Semantic fusion (#44): every branch here degrades to FTS-only
+      // (`rankedIds = ftsIds`) and none can throw out of `getAll` — no `q`,
+      // `q` too short, no OPENAI_API_KEY, embed timeout/error (embedQuery
+      // never throws, resolves null), or the semantic query itself throwing
+      // (e.g. PostChunk/pgvector not provisioned yet).
+      let rankedIds = ftsIds;
+      if (q && q.trim().length >= 3) {
+        const emb = await embedQuery(q, env.OPENAI_API_KEY);
+        if (emb) {
+          try {
+            const sem = await searchPostIdsSemantic(ctx.db, emb);
+            rankedIds = reciprocalRankFusion([ftsIds ?? [], sem]).map(
+              ({ id, score }) => ({ id, rank: score }),
+            );
+          } catch {
+            // pgvector/PostChunk missing or query failed -> keep FTS-only.
+          }
+        }
+      }
 
       // Query builder
       const query: Prisma.PostFindManyArgs = {
