@@ -15,24 +15,27 @@ datasource db {
 }
 
 model Post {
-    id          String    @id @default(cuid())
-    title       String
-    slug        String    @unique
-    content     String?   @db.Text
-    excerpt     String?   @db.Text
-    coverImage  String?
-    published   Boolean   @default(false)
-    featured    Boolean   @default(false)
-    createdAt   DateTime  @default(now())
-    updatedAt   DateTime  @updatedAt
-    publishedAt DateTime?
-    tags        Tag[]     @relation("PostToTag")
-    author      User      @relation(fields: [authorId], references: [id])
-    authorId    String
+    id           String                    @id @default(cuid())
+    title        String
+    slug         String                    @unique
+    content      String?                   @db.Text
+    excerpt      String?                   @db.Text
+    coverImage   String?
+    published    Boolean                   @default(false)
+    featured     Boolean                   @default(false)
+    createdAt    DateTime                  @default(now())
+    updatedAt    DateTime                  @updatedAt
+    publishedAt  DateTime?
+    tags         Tag[]                     @relation("PostToTag")
+    author       User                      @relation(fields: [authorId], references: [id])
+    authorId     String
+    contentHash  String? // sha256(hex) of extracted prose; #44's re-embed guard (write here, #44 reads)
+    searchVector Unsupported("tsvector")?
 
     @@index([slug])
     @@index([published])
     @@index([featured])
+    @@index([searchVector], type: Gin)
 }
 
 model Tag {
