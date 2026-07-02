@@ -11,7 +11,7 @@ The website includes a custom blog system with the following features:
 
 - **Custom Post Pages**: Each blog post is a custom Next.js page component with its own unique layout and features
 - **Database Indexing**: Custom posts are still indexed in the database for search and listings
-- **Build-time Indexing**: A script that runs at build time to extract metadata from custom post components and update the database
+- **Manual Indexing**: Blog indexing is decoupled from the build; run `pnpm blog:index` to extract metadata from custom post components and update the database. This runs manually today and moves to CI on merge in a future update.
 - **Rich Features**: Full support for pagination, tags, search, featured posts, and more
 - **SEO Friendly**: Automatic metadata generation for each post
 
@@ -34,7 +34,17 @@ The website includes a custom blog system with the following features:
 */}
 ```
 
-4. The post will be automatically indexed at build time
+4. Run `pnpm blog:index` to index the new post (search and listings won't show it until you do). Blog indexing is decoupled from the build; it runs manually until CI automation lands.
+
+## Development Commands
+
+| Command             | Description                                                  |
+| -------------------- | ------------------------------------------------------------ |
+| `pnpm dev`           | Start the local dev server with Turbopack                    |
+| `pnpm lint`           | Run ESLint                                                    |
+| `pnpm typecheck`      | Run the TypeScript compiler in `--noEmit` mode                |
+| `pnpm build`          | Build for production (does not touch the database)            |
+| `pnpm blog:index`     | Index blog posts (extract metadata from custom post components and update the database) |
 
 ## Credits
 
