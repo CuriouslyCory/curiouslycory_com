@@ -48,10 +48,14 @@ export async function embedQuery(
   const cached = queryCache.get(cacheKey);
   if (cached) return cached;
 
-  const model = getEmbeddingModel(apiKey);
-  if (!model) return null;
-
   try {
+    // Inside try: getEmbeddingModel calls createOpenAI(...).embedding(...),
+    // which doesn't throw synchronously in the pinned SDK today — but keeping
+    // it here means the catch-all → null contract holds structurally even if
+    // a future SDK bump (or a bad MODEL_ID) adds eager validation.
+    const model = getEmbeddingModel(apiKey);
+    if (!model) return null;
+
     const { embedding } = await embed({
       model,
       value: q,
@@ -74,10 +78,13 @@ export async function embedChunks(
   values: string[],
   apiKey: string | undefined,
 ): Promise<number[][] | null> {
-  const model = getEmbeddingModel(apiKey);
-  if (!model) return null;
-
   try {
+    // Inside try for the same reason as embedQuery: guarantees the
+    // never-throws → null contract even if model construction gains eager
+    // validation in a future SDK version.
+    const model = getEmbeddingModel(apiKey);
+    if (!model) return null;
+
     const { embeddings } = await embedMany({ model, values });
     return embeddings;
   } catch {
