@@ -12,13 +12,15 @@
     "dev": "next dev --turbopack",
     "postinstall": "prisma generate",
     "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
     "ralph": "STORIES=$(jq '.userStories | length' .agents/skills/ralph/scripts/prd.json) && .agents/skills/ralph/scripts/ralph.sh $((STORIES + 4))",
     "start": "next start",
     "blog:index": "tsx src/scripts/index-blog.ts",
-    "prebuild": "pnpm blog:index",
-    "db:seed": "tsx prisma/seed.ts"
+    "db:seed": "tsx prisma/seed.ts",
+    "test": "vitest run"
   },
   "dependencies": {
+    "@ai-sdk/openai": "4.0.7",
     "@atproto/api": "^0.20.13",
     "@auth/prisma-adapter": "^2.11.2",
     "@hookform/resolvers": "^5.4.0",
@@ -43,6 +45,7 @@
     "@trpc/client": "^11.17.0",
     "@trpc/react-query": "^11.17.0",
     "@trpc/server": "^11.17.0",
+    "ai": "7.0.14",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
@@ -93,7 +96,9 @@
     "tailwindcss": "^4.3.0",
     "tsx": "^4.22.4",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.61.0"
+    "typescript-eslint": "^8.61.0",
+    "vite-tsconfig-paths": "^6.1.1",
+    "vitest": "^4.1.9"
   },
   "ct3aMetadata": {
     "initVersion": "7.37.0"

@@ -1,11 +1,72 @@
 import { z } from "zod";
-import { type Prisma } from "~/generated/prisma/client";
+import { Prisma, type PrismaClient } from "~/generated/prisma/client";
 import {
   createTRPCRouter,
   publicProcedure,
   protectedProcedure,
 } from "~/server/api/trpc";
 import { postSearchParamsSchema, postSchema } from "~/data/blog-schema";
+import { reorderByRank } from "~/lib/reorder-by-rank";
+import { reciprocalRankFusion } from "~/lib/reciprocal-rank-fusion";
+import { toVectorLiteral } from "~/lib/vector-literal";
+import { embedQuery } from "~/server/embeddings";
+import { env } from "~/env";
+
+/**
+ * Postgres full-text search over the generated `Post.searchVector` tsvector
+ * column (title A / excerpt B / content C weighted). Returns the *full*
+ * ranked id list for `q` — no LIMIT, no other filters — so #44's semantic
+ * (RRF) layer can compose against the same ranked set without a rewrite.
+ *
+ * `published = true` is enforced here in SQL as defense-in-depth, in
+ * addition to the Prisma `where` composed by the caller.
+ *
+ * Exported as a standalone function (not inlined in `getAll`) so it is a
+ * stable seam other callers can compose against.
+ */
+export async function searchPostIds(
+  db: PrismaClient,
+  q: string,
+): Promise<Array<{ id: string; rank: number }>> {
+  return db.$queryRaw<Array<{ id: string; rank: number }>>(Prisma.sql`
+    WITH query AS (
+      SELECT CASE WHEN numnode(websearch_to_tsquery('english', ${q})) = 0
+                  THEN plainto_tsquery('english', ${q})
+                  ELSE websearch_to_tsquery('english', ${q}) END AS tsq
+    )
+    SELECT "Post"."id" AS id, ts_rank_cd("Post"."searchVector", query.tsq) AS rank
+    FROM "Post", query
+    WHERE "Post"."published" = true AND "Post"."searchVector" @@ query.tsq
+    ORDER BY rank DESC
+  `);
+}
+
+/**
+ * Semantic search over `PostChunk.embedding` (#44): ranks posts by their
+ * best-matching chunk's cosine distance to the query embedding. Bounded to
+ * the 50 closest posts (`ORDER BY distance ASC LIMIT 50`) so pagination
+ * `total` stays meaningful as the corpus grows — harmless at today's scale,
+ * matters once there are hundreds of posts.
+ *
+ * `published = true` is enforced here in SQL, same defense-in-depth
+ * rationale as `searchPostIds`. Callers must catch: this can throw if
+ * `PostChunk`/pgvector isn't provisioned yet (e.g. migration not applied),
+ * and getAll must degrade to FTS-only in that case.
+ */
+export async function searchPostIdsSemantic(
+  db: PrismaClient,
+  queryEmbedding: number[],
+): Promise<Array<{ id: string; distance: number }>> {
+  return db.$queryRaw<Array<{ id: string; distance: number }>>(Prisma.sql`
+    SELECT "PostChunk"."postId" AS id, MIN("PostChunk"."embedding" <=> ${toVectorLiteral(queryEmbedding)}::vector) AS distance
+    FROM "PostChunk"
+    JOIN "Post" ON "Post"."id" = "PostChunk"."postId"
+    WHERE "Post"."published" = true
+    GROUP BY "PostChunk"."postId"
+    ORDER BY distance ASC
+    LIMIT 50
+  `);
+}
 
 export const blogRouter = createTRPCRouter({
   getAll: publicProcedure
@@ -14,29 +75,36 @@ export const blogRouter = createTRPCRouter({
       const { q, tag, featured, year, month, page, perPage } = input;
       const skip = (page - 1) * perPage;
 
+      const ftsIds = q ? await searchPostIds(ctx.db, q) : null;
+
+      // Semantic fusion (#44): every branch here degrades to FTS-only
+      // (`rankedIds = ftsIds`) and none can throw out of `getAll` — no `q`,
+      // `q` too short, no OPENAI_API_KEY, embed timeout/error (embedQuery
+      // never throws, resolves null), or the semantic query itself throwing
+      // (e.g. PostChunk/pgvector not provisioned yet).
+      let rankedIds = ftsIds;
+      if (q && q.trim().length >= 3) {
+        const emb = await embedQuery(q, env.OPENAI_API_KEY);
+        if (emb) {
+          try {
+            const sem = await searchPostIdsSemantic(ctx.db, emb);
+            rankedIds = reciprocalRankFusion([ftsIds ?? [], sem]).map(
+              ({ id, score }) => ({ id, rank: score }),
+            );
+          } catch {
+            // pgvector/PostChunk missing or query failed -> keep FTS-only.
+          }
+        }
+      }
+
       // Query builder
       const query: Prisma.PostFindManyArgs = {
         where: {
           published: true,
           ...(featured ? { featured: true } : {}),
           ...(tag ? { tags: { some: { slug: tag } } } : {}),
-          ...(q
-            ? {
-                OR: [
-                  {
-                    title: {
-                      contains: q,
-                      mode: "insensitive" as Prisma.QueryMode,
-                    },
-                  },
-                  {
-                    content: {
-                      contains: q,
-                      mode: "insensitive" as Prisma.QueryMode,
-                    },
-                  },
-                ],
-              }
+          ...(rankedIds
+            ? { id: { in: rankedIds.map((r) => r.id) } }
             : {}),
           ...(year
             ? {
@@ -59,8 +127,10 @@ export const blogRouter = createTRPCRouter({
             },
           },
         },
-        skip,
-        take: perPage,
+        // Non-search results are paginated in SQL; search results are
+        // fetched in full (composed with the other filters above), then
+        // reordered by FTS rank and sliced in JS below.
+        ...(rankedIds ? {} : { skip, take: perPage }),
       };
 
       const [posts, totalCount] = await Promise.all([
@@ -68,8 +138,15 @@ export const blogRouter = createTRPCRouter({
         ctx.db.post.count({ where: query.where }),
       ]);
 
+      // Pagination total with `q` present = count of the fully composed
+      // filter set (FTS ∩ tag ∩ date ∩ featured), not raw FTS hit count —
+      // otherwise pagination overcounts when other filters are active.
+      const paginatedPosts = rankedIds
+        ? reorderByRank(posts, rankedIds).slice(skip, skip + perPage)
+        : posts;
+
       return {
-        posts,
+        posts: paginatedPosts,
         pagination: {
           total: totalCount,
           page,

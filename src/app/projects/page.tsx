@@ -12,6 +12,8 @@ export const metadata: Metadata = {
   description: "Explore my web development projects and applications",
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function ProjectsPage() {
   // Fetch projects and tags from the database using TRPC server component
   const [projects, tags] = await Promise.all([

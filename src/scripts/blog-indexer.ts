@@ -1,10 +1,15 @@
 import fs from "fs";
 import path from "path";
-import { PrismaClient } from "../generated/prisma/client.js";
+import { createHash, randomUUID } from "node:crypto";
+import { Prisma, PrismaClient } from "../generated/prisma/client.js";
 import { PrismaPg } from "@prisma/adapter-pg";
 import matter from "gray-matter";
 import slugify from "slugify";
 import { z } from "zod";
+import { extractSearchableText } from "../lib/blog-content-extractor.js";
+import { chunkText } from "../lib/chunk-text.js";
+import { toVectorLiteral } from "../lib/vector-literal.js";
+import { embedChunks } from "../server/embeddings.js";
 
 let prisma: PrismaClient;
 function getPrisma(): PrismaClient {
@@ -72,6 +77,75 @@ async function getDefaultUser(): Promise<string> {
   return newUser.id;
 }
 
+/**
+ * Chunk + embed a single post's content into `PostChunk`, guarded so
+ * unchanged posts make zero OpenAI calls on re-runs (#44).
+ *
+ * Read raw from `process.env` here (not `~/env`), mirroring the
+ * `DEFAULT_AUTHOR_ID` precedent above — this keeps the indexer script
+ * decoupled from full t3-env validation (no Discord/Twitch/Auth secrets
+ * required to run it standalone, e.g. from CI in a future update).
+ */
+async function embedPostChunks(
+  post: { id: string; slug: string; content: string | null; contentHash: string | null },
+  forceReembed: boolean,
+  apiKey: string | undefined,
+  embedCallCounter: { count: number },
+): Promise<void> {
+  const { id: postId, slug, content, contentHash } = post;
+
+  if (!content) {
+    // Content removed/empty -> clean up any stale chunks, no API call.
+    await getPrisma().postChunk.deleteMany({ where: { postId } });
+    return;
+  }
+
+  const existing = await getPrisma().postChunk.findFirst({
+    where: { postId },
+    select: { contentHash: true },
+  });
+  const needsEmbed =
+    forceReembed || existing?.contentHash !== contentHash;
+
+  if (!needsEmbed) return; // zero OpenAI calls on unchanged re-run
+
+  if (!apiKey) {
+    console.warn(`skip embed ${slug}: no OPENAI_API_KEY (leaving stale chunks)`);
+    return;
+  }
+
+  const chunks = chunkText(content);
+  if (chunks.length === 0) {
+    await getPrisma().postChunk.deleteMany({ where: { postId } });
+    return;
+  }
+
+  embedCallCounter.count += 1;
+  const embeddings = await embedChunks(
+    chunks.map((c) => c.content),
+    apiKey,
+  );
+
+  if (!embeddings) {
+    console.warn(`skip embed ${slug}: embedding failed (leaving old chunks intact)`);
+    return;
+  }
+
+  // Transaction opens only AFTER embedChunks has succeeded — never hold a
+  // DB txn open across the network call to OpenAI.
+  await getPrisma().$transaction(async (tx) => {
+    await tx.postChunk.deleteMany({ where: { postId } });
+    for (let i = 0; i < chunks.length; i++) {
+      await tx.$executeRaw(Prisma.sql`
+        INSERT INTO "PostChunk" ("id", "postId", "chunkIndex", "content", "contentHash", "embedding")
+        VALUES (${randomUUID()}, ${postId}, ${chunks[i]!.index}, ${chunks[i]!.content}, ${contentHash}, ${toVectorLiteral(embeddings[i]!)}::vector)
+      `);
+    }
+  });
+
+  console.log(`Embedded ${chunks.length} chunk(s) for ${slug}`);
+}
+
 // This will run at build time to extract metadata from custom blog pages
 // and upsert them to the database to maintain the searchable index
 export async function indexBlogPosts(): Promise<void> {
@@ -80,6 +154,11 @@ export async function indexBlogPosts(): Promise<void> {
   // Get or create a default user for blog posts
   const defaultUserId = await getDefaultUser();
   console.log(`Using default user ID: ${defaultUserId}`);
+
+  // Embedding config (#44) — raw process.env, mirrors DEFAULT_AUTHOR_ID.
+  const forceReembed = !!process.env.FORCE_REEMBED;
+  const apiKey = process.env.OPENAI_API_KEY;
+  const embedCallCounter = { count: 0 };
 
   // Path to blog posts directory
   const postsDirectory = path.join(process.cwd(), "src/app/blog");
@@ -92,6 +171,7 @@ export async function indexBlogPosts(): Promise<void> {
         (dirent) =>
           dirent.isDirectory() &&
           dirent.name !== "[slug]" &&
+          dirent.name !== "template" &&
           !dirent.name.startsWith("_"),
       )
       .map((dirent) => dirent.name);
@@ -133,11 +213,21 @@ export async function indexBlogPosts(): Promise<void> {
 
       const metadata = result.data;
 
+      // Extract real searchable prose/code from the page's JSX via the AST
+      // (DB-free) so the generated tsvector column has real body content to
+      // rank against, not just title/excerpt.
+      const bodyText = extractSearchableText(fileContent);
+      const content = bodyText.length > 0 ? bodyText : null;
+      const contentHash = content
+        ? createHash("sha256").update(content).digest("hex")
+        : null;
+
       // Format the post data with validated metadata
       const postData = {
         title: String(metadata.title ?? slug),
         slug,
-        content: null as string | null,
+        content,
+        contentHash,
         excerpt: metadata.excerpt ?? null,
         coverImage: metadata.coverImage ?? null,
         published: metadata.published,
@@ -154,6 +244,15 @@ export async function indexBlogPosts(): Promise<void> {
         update: postData,
         create: postData,
       });
+
+      // Chunk + embed for semantic search (#44). Wrapped per-post so one
+      // bad post (embed failure, transient DB error) never aborts the run
+      // for the rest of the posts.
+      try {
+        await embedPostChunks(post, forceReembed, apiKey, embedCallCounter);
+      } catch (error) {
+        console.error(`Error embedding chunks for ${slug}:`, error);
+      }
 
       // Process tags
       const tagNames = metadata.tags;
@@ -188,7 +287,9 @@ export async function indexBlogPosts(): Promise<void> {
       }
     }
 
-    console.log("✅ Blog indexing completed");
+    console.log(
+      `✅ Blog indexing completed (${embedCallCounter.count} embed call(s))`,
+    );
   } catch (error) {
     console.error("Error indexing blog posts:", error);
   } finally {
