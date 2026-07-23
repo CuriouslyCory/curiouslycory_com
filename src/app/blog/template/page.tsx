@@ -90,8 +90,8 @@ export default async function HelloWorldPost() {
 
         <p>
           The indexer (<code>pnpm blog:index</code>, run automatically by a
-          GitHub Action on merge to <code>main</code>) scans all directories
-          under <code>/app/blog/</code> (except the <code>[slug]</code>,{" "}
+          GitHub Action on pushes to <code>main</code>) scans all directories
+          under <code>src/app/blog/</code> (except the <code>[slug]</code>,{" "}
           <code>template</code>, and underscore-prefixed directories), extracts
           the metadata and searchable body content from each post, and upserts
           this data to the database.
