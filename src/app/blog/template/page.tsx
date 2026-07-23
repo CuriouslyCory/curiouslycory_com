@@ -9,8 +9,9 @@ excerpt: An example of how to create custom blog posts with rich features while 
 coverImage: /images/blog/hello-world.png
 publishedAt: 2025-04-01
 featured: false
+published: true
 tags: nextjs,typescript,tutorial
---- 
+---
 */
 
 export const metadata = {
@@ -33,7 +34,7 @@ export const metadata = {
 };
 
 export default async function HelloWorldPost() {
-  // Get the post metadata from the database (indexed at build time)
+  // Get the post metadata from the database (populated by the blog indexer)
   // const post = await api.blog.getBySlug({ slug: "hello-world" });
 
   return (
@@ -57,8 +58,8 @@ export default async function HelloWorldPost() {
 
         <p>
           The metadata for this post is defined in a special comment at the top
-          of the file, which gets extracted and indexed in the database at build
-          time.
+          of the file, which gets extracted and indexed in the database when the
+          blog indexer runs.
         </p>
 
         <h2>Benefits of this approach</h2>
@@ -88,10 +89,12 @@ export default async function HelloWorldPost() {
         <h2>How it works</h2>
 
         <p>
-          At build time, a script scans all directories under{" "}
-          <code>/app/blog/</code> (except the <code>[slug]</code> directory),
-          extracts the metadata from the special comment block, and upserts this
-          data to the database.
+          The indexer (<code>pnpm blog:index</code>, run automatically by a
+          GitHub Action on merge to <code>main</code>) scans all directories
+          under <code>/app/blog/</code> (except the <code>[slug]</code>,{" "}
+          <code>template</code>, and underscore-prefixed directories), extracts
+          the metadata and searchable body content from each post, and upserts
+          this data to the database.
         </p>
 
         <p>

@@ -37,20 +37,23 @@ The workflow needs the following repo secrets, set under **Settings → Secrets 
 
 1. Create a new directory under `src/app/blog/your-post-slug/`
 2. Create a `page.tsx` file in that directory with your custom content
-3. Include a special comment with your post metadata:
+3. Include a metadata block as a plain block comment near the top of the file. The opening marker **must** be `---bm` (this is what the indexer's parser looks for), and `published: true` is **required** — without it the post is treated as a draft and never appears in listings or search:
 
 ```tsx
-{/* 
-  ---
-  title: Your Post Title
-  excerpt: Short description of your post
-  coverImage: /images/blog/your-image.jpg
-  publishedAt: 2023-12-15
-  featured: true
-  tags: tag1,tag2,tag3
-  --- 
-*/}
+/*
+---bm
+title: Your Post Title
+excerpt: Short description of your post
+coverImage: /images/blog/your-image.jpg
+publishedAt: 2023-12-15
+featured: true
+published: true
+tags: tag1,tag2,tag3
+--- 
+*/
 ```
+
+The `slug` is taken from the directory name, not the metadata block.
 
 4. Merge to `main` and the blog-indexing GitHub Action will automatically index the new post (search and listings won't show it until then). The indexer extracts both metadata and searchable body content from the page component, so a merge that edits a post's body triggers re-indexing too. Before merging, run `pnpm blog:index` locally to verify the post extracts cleanly. Blog indexing is decoupled from the build. With `OPENAI_API_KEY` set, the same command also embeds the post for semantic search — the cost for a full blog's worth of posts is a few pennies at most, and unchanged posts are skipped automatically on re-runs (set `FORCE_REEMBED=1` to bypass that and re-embed everything).
 
