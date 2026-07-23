@@ -1,7 +1,7 @@
 /*
 ---bm
-title: Rebuilding My Blog's Search: Full-Text + Semantic, Fused
-excerpt: How I rebuilt search on this site — from a title-only match to hybrid full-text and semantic retrieval fused with Reciprocal Rank Fusion — shipped as four small, decoupled PRs.
+title: "Rebuilding My Blog's Search: Full-Text + Semantic, Fused"
+excerpt: "How I rebuilt search on this site — from a title-only match to hybrid full-text and semantic retrieval fused with Reciprocal Rank Fusion — shipped as four small, decoupled PRs."
 coverImage: /images/blog/rebuilding-blog-search.jpg
 publishedAt: 2026-07-23
 featured: true
