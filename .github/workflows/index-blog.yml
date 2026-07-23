@@ -18,7 +18,11 @@ on:
 
 concurrency:
   group: index-blog-${{ github.ref }}
-  cancel-in-progress: true
+  # Queue overlapping runs rather than cancel: this job runs `prisma migrate deploy`,
+  # and interrupting a migration mid-apply can leave `_prisma_migrations` in a
+  # "started but not finished" state needing a manual `migrate resolve`. Serializing
+  # still satisfies "rapid merges don't race" without that risk.
+  cancel-in-progress: false
 
 permissions:
   contents: read
