@@ -53,7 +53,7 @@ tags: tag1,tag2,tag3
 */
 ```
 
-The `slug` is taken from the directory name, not the metadata block.
+The `slug` is taken from the directory name, not the metadata block. The block is parsed as YAML, so **wrap any value containing a colon in quotes** (e.g. `title: "My Post: A Subtitle"`) — an unquoted `: ` is read as a key/value separator and breaks parsing.
 
 4. Merge to `main` and the blog-indexing GitHub Action will automatically index the new post (search and listings won't show it until then). The indexer extracts both metadata and searchable body content from the page component, so a merge that edits a post's body triggers re-indexing too. Before merging, run `pnpm blog:index` locally to verify the post extracts cleanly. Blog indexing is decoupled from the build. With `OPENAI_API_KEY` set, the same command also embeds the post for semantic search — the cost for a full blog's worth of posts is a few pennies at most, and unchanged posts are skipped automatically on re-runs (set `FORCE_REEMBED=1` to bypass that and re-embed everything).
 
