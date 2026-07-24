@@ -408,3 +408,15 @@
     }
   }
 }
+
+/*
+ * Section-heading top spacing.
+ * The typography plugin sets h2 margins (and zeroes the first-child margin) in
+ * a later cascade layer, so a layered `.prose h2` override loses to it on layer
+ * order regardless of specificity. This rule is intentionally UNLAYERED so it
+ * wins — giving every section heading real top spacing, including h2s that open
+ * a fresh `prose` block right after a full-width treatment (grids, diagrams).
+ */
+.prose h2 {
+  margin-top: 3.5rem;
+}
