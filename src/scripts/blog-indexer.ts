@@ -141,6 +141,7 @@ export async function indexBlogPosts(): Promise<void> {
 
   const postsDirectory = path.join(process.cwd(), "src/app/blog");
   const failed: string[] = [];
+  let indexedCount = 0;
 
   try {
     // Get or create a default user for blog posts
@@ -255,6 +256,10 @@ export async function indexBlogPosts(): Promise<void> {
             });
           }
         }
+
+        // Reached only when the post fully processed without throwing —
+        // skipped dirs `continue` out above and never count here.
+        indexedCount++;
       } catch (error) {
         console.error(
           `❌ Failed to index ${slug}:`,
@@ -265,7 +270,7 @@ export async function indexBlogPosts(): Promise<void> {
     }
 
     console.log(
-      `✅ Blog indexing completed: ${slugDirs.length - failed.length} indexed, ${failed.length} failed, ${embedCallCounter.count} embed call(s)`,
+      `✅ Blog indexing completed: ${indexedCount} indexed, ${failed.length} failed, ${embedCallCounter.count} embed call(s)`,
     );
 
     // Fail loudly so CI goes red instead of silently succeeding on a bad post.
