@@ -211,6 +211,9 @@ function TelegramExchange() {
                 : "bg-card text-foreground max-w-[80%] rounded-2xl rounded-bl-sm border px-4 py-2 text-sm"
             }
           >
+            <span className="sr-only">
+              {line.from === "user" ? "You said: " : "Bot said: "}
+            </span>
             {line.text}
           </div>
         </div>
