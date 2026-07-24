@@ -36,7 +36,7 @@ function TypingTagline() {
   return (
     <p
       ref={ref}
-      className="mt-3 text-sm text-muted-foreground min-h-[1.25rem]"
+      className="text-muted-foreground mt-3 min-h-[1.25rem] text-sm"
       aria-label={tagline}
     >
       {displayed}
@@ -65,7 +65,7 @@ export function Footer() {
 
   return (
     <footer className="bg-foreground text-background">
-      <div className="h-px bg-gradient-to-r from-transparent via-primary to-transparent" />
+      <div className="via-primary h-px bg-gradient-to-r from-transparent to-transparent" />
 
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
@@ -77,7 +77,7 @@ export function Footer() {
 
           {/* Column 2: Explore nav links */}
           <div>
-            <h3 className="font-oswald text-sm font-semibold uppercase tracking-widest text-muted-foreground">
+            <h3 className="font-oswald text-muted-foreground text-sm font-semibold tracking-widest uppercase">
               Explore
             </h3>
             <ul className="mt-4 space-y-2">
@@ -85,7 +85,7 @@ export function Footer() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-sm transition-colors hover:text-primary"
+                    className="hover:text-primary text-sm transition-colors"
                   >
                     {item.name}
                   </Link>
@@ -96,7 +96,7 @@ export function Footer() {
 
           {/* Column 3: Find Me social icons */}
           <div>
-            <h3 className="font-oswald text-sm font-semibold uppercase tracking-widest text-muted-foreground">
+            <h3 className="font-oswald text-muted-foreground text-sm font-semibold tracking-widest uppercase">
               Find Me
             </h3>
             <ul className="mt-4 flex flex-wrap gap-4">
@@ -107,7 +107,7 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.title}
-                    className="transition-colors hover:text-primary"
+                    className="hover:text-primary transition-colors"
                     whileHover={{ scale: 1.2 }}
                     transition={{ type: "spring", stiffness: 400, damping: 15 }}
                   >
@@ -120,7 +120,7 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-10 flex flex-col items-center justify-between gap-2 border-t border-background/20 pt-6 sm:flex-row">
+        <div className="border-background/20 mt-10 flex flex-col items-center justify-between gap-2 border-t pt-6 sm:flex-row">
           <span className="text-sm opacity-80">
             &copy; {new Date().getFullYear()} CuriouslyCory
             <button

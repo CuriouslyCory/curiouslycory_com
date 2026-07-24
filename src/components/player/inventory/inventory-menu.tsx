@@ -30,7 +30,7 @@ export default function InventoryMenu() {
               onClick={() => activateInventoryItem(item.name)}
             >
               {item.icon}
-              <p className="hidden text-sm text-muted-foreground">
+              <p className="text-muted-foreground hidden text-sm">
                 {item.description}
               </p>
             </div>

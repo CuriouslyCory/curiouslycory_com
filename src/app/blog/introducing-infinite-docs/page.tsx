@@ -91,14 +91,12 @@ export default async function IntroducingInfiniteDocsPost() {
           </p>
 
           <p>
-            I built <strong>Infinite Docs</strong>{" "}
-            because I was tired of that
+            I built <strong>Infinite Docs</strong> because I was tired of that
             trade-off. It&apos;s a drag-and-drop tool for documenting software
             architecture as an <strong>infinitely-nestable graph</strong>: you
             place <strong>Components</strong> on a <strong>Canvas</strong> and
             link them with <strong>Connections</strong>. Opening a Component
-            descends into <em>its own</em>{" "}
-            interior Canvas, recursing to any
+            descends into <em>its own</em> interior Canvas, recursing to any
             depth &mdash; from top-level infrastructure (hosts, databases,
             external APIs) all the way down to internal services, modules, or a
             single database table. It&apos;s one place to model a system at any
@@ -108,7 +106,8 @@ export default async function IntroducingInfiniteDocsPost() {
 
           <p>
             The cover image above isn&apos;t a mockup &mdash; it&apos;s Infinite
-            Docs documenting <em>itself</em>, exported live from the running app.
+            Docs documenting <em>itself</em>, exported live from the running
+            app.
           </p>
         </div>
 
@@ -120,8 +119,8 @@ export default async function IntroducingInfiniteDocsPost() {
 
           <p className="mb-6">
             Existing tools force a choice no one should have to make. You can
-            have the picture or you can have the detail, but not both &mdash; and
-            neither talks to an LLM.
+            have the picture or you can have the detail, but not both &mdash;
+            and neither talks to an LLM.
           </p>
 
           <div className="mb-8 grid gap-6 md:grid-cols-2">
@@ -134,7 +133,9 @@ export default async function IntroducingInfiniteDocsPost() {
               <CardContent>
                 <ul className="space-y-2">
                   <li>• Rot the moment the system changes</li>
-                  <li>• Can&apos;t be drilled into &mdash; a box is just a box</li>
+                  <li>
+                    • Can&apos;t be drilled into &mdash; a box is just a box
+                  </li>
                   <li>• Carry no real documentation</li>
                   <li>• Don&apos;t feed cleanly into an LLM</li>
                 </ul>
@@ -179,11 +180,12 @@ export default async function IntroducingInfiniteDocsPost() {
 
           <p className="mb-6">
             You work on a Canvas. You add Components from a searchable,
-            affinity-ranked palette of 26 kinds &mdash; everything from a generic
-            box down to a host, a database, a service, a function, or a single
-            table. You drag them around, rename them inline, and draw Connections
-            between them. Every Component carries its own markdown documentation,
-            edited in a WYSIWYG editor that autosaves as you type.
+            affinity-ranked palette of 26 kinds &mdash; everything from a
+            generic box down to a host, a database, a service, a function, or a
+            single table. You drag them around, rename them inline, and draw
+            Connections between them. Every Component carries its own markdown
+            documentation, edited in a WYSIWYG editor that autosaves as you
+            type.
           </p>
 
           <div className="mb-8 grid gap-6 md:grid-cols-2">
@@ -223,12 +225,11 @@ export default async function IntroducingInfiniteDocsPost() {
               </CardHeader>
               <CardContent>
                 <p className="mb-0">
-                  A Canvas is a <em>derived</em>{" "}
-                  view &mdash; it&apos;s never
+                  A Canvas is a <em>derived</em> view &mdash; it&apos;s never
                   saved as a file. The graph stores only Components and their
                   Connections; every Canvas, breadcrumb, and boundary view is
-                  computed at read time. There is no separate diagram to fall out
-                  of sync, because there is no separate diagram.
+                  computed at read time. There is no separate diagram to fall
+                  out of sync, because there is no separate diagram.
                 </p>
               </CardContent>
             </Card>
@@ -296,21 +297,19 @@ export default async function IntroducingInfiniteDocsPost() {
 
           <p className="mb-6">
             This is where Infinite Docs stops being &ldquo;a nicer diagram
-            tool&rdquo; and becomes something new. The entire graph serializes to{" "}
-            <strong>deterministic markdown</strong> &mdash; byte-stable output
-            with stable <code>{"{#nodeId}"}</code>{" "}
-            anchors &mdash; so an LLM can
-            read your architecture as text and an agent can reference any
-            Component by anchor. There&apos;s a &ldquo;Copy as markdown&rdquo;
-            button right on the toolbar.
+            tool&rdquo; and becomes something new. The entire graph serializes
+            to <strong>deterministic markdown</strong> &mdash; byte-stable
+            output with stable <code>{"{#nodeId}"}</code> anchors &mdash; so an
+            LLM can read your architecture as text and an agent can reference
+            any Component by anchor. There&apos;s a &ldquo;Copy as
+            markdown&rdquo; button right on the toolbar.
           </p>
 
           <p className="mb-6">
             Better still, an authenticated <strong>MCP server</strong> lets AI
             agents read <em>and maintain</em> the architecture as they work on
             the actual system it describes. You mint an API token on the{" "}
-            <em>Connect an agent</em>{" "}
-            page, paste one snippet, and your agent of
+            <em>Connect an agent</em> page, paste one snippet, and your agent of
             choice &mdash; Claude Code, Codex, Cursor, and friends &mdash; is
             pointed at your graph.
           </p>
@@ -399,11 +398,10 @@ apply_spec    # parse an OpenAPI or SQL-DDL spec and sync the graph`}</code>
               <CardContent>
                 <p className="mb-0">
                   Define a couple of points on the graph and a named{" "}
-                  <strong>Trace</strong>{" "}
-                  projects the path(s) between them across
-                  every depth at once, auto-laid-out and read-only &mdash; ideal
-                  for following a request flow or a dependency chain. Each Trace
-                  is exportable as its own MCP resource.
+                  <strong>Trace</strong> projects the path(s) between them
+                  across every depth at once, auto-laid-out and read-only
+                  &mdash; ideal for following a request flow or a dependency
+                  chain. Each Trace is exportable as its own MCP resource.
                 </p>
               </CardContent>
             </Card>
@@ -445,14 +443,12 @@ apply_spec    # parse an OpenAPI or SQL-DDL spec and sync the graph`}</code>
               </pre>
               <div className="space-y-2">
                 <div>
-                  <strong>No &ldquo;agent mode&rdquo;:</strong>{" "}
-                  there isn&apos;t a
-                  second set of rules for AI to drift away from.
+                  <strong>No &ldquo;agent mode&rdquo;:</strong> there isn&apos;t
+                  a second set of rules for AI to drift away from.
                 </div>
                 <div>
                   <strong>Testable by construction:</strong> the{" "}
-                  <code>(db, actor, input)</code>{" "}
-                  seam is exercised by Vitest
+                  <code>(db, actor, input)</code> seam is exercised by Vitest
                   against a real, isolated Postgres &mdash; no mocks, asserting
                   real behavior.
                 </div>
@@ -470,16 +466,19 @@ apply_spec    # parse an OpenAPI or SQL-DDL spec and sync the graph`}</code>
 
           <p className="mb-6">
             Three levels into the dogfood graph above, you can see the shape of
-            it: the <strong>tRPC API</strong> and the <strong>MCP Server</strong>{" "}
-            sit side by side as front doors, with <code>llms.txt</code> and auth
-            beside them, all resolving down to the same database. The picture the
-            tool draws of itself <em>is</em> its architecture.
+            it: the <strong>tRPC API</strong> and the{" "}
+            <strong>MCP Server</strong> sit side by side as front doors, with{" "}
+            <code>llms.txt</code> and auth beside them, all resolving down to
+            the same database. The picture the tool draws of itself <em>is</em>{" "}
+            its architecture.
           </p>
 
           <Card>
             <CardHeader>
               <CardTitle>The stack</CardTitle>
-              <CardDescription>Modern, type-safe, T3 foundation</CardDescription>
+              <CardDescription>
+                Modern, type-safe, T3 foundation
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid gap-2 md:grid-cols-2">
@@ -502,7 +501,8 @@ apply_spec    # parse an OpenAPI or SQL-DDL spec and sync the graph`}</code>
                   <strong>Plate</strong> &mdash; the docs editor
                 </div>
                 <div>
-                  <strong>mcp-handler</strong> &mdash; the agent-facing MCP server
+                  <strong>mcp-handler</strong> &mdash; the agent-facing MCP
+                  server
                 </div>
                 <div>
                   <strong>Tailwind v4 + TypeScript</strong> &mdash; strict
@@ -520,10 +520,11 @@ apply_spec    # parse an OpenAPI or SQL-DDL spec and sync the graph`}</code>
           <h2 className="mb-6 text-3xl font-bold">What Works Today</h2>
 
           <p className="mb-6">
-            Infinite Docs shipped its full initial roadmap &mdash; six milestones
-            from the data model and service layer through nested canvases,
-            markdown export, boundary proxies, the MCP server, and typed
-            cross-scope connections &mdash; and has grown well past it since.
+            Infinite Docs shipped its full initial roadmap &mdash; six
+            milestones from the data model and service layer through nested
+            canvases, markdown export, boundary proxies, the MCP server, and
+            typed cross-scope connections &mdash; and has grown well past it
+            since.
           </p>
 
           <div className="mb-8 grid gap-6 md:grid-cols-2">
@@ -538,7 +539,9 @@ apply_spec    # parse an OpenAPI or SQL-DDL spec and sync the graph`}</code>
                     • Add Components, drag, inline-rename, draw &amp; label
                     typed Connections
                   </li>
-                  <li>• Descend into any Component with breadcrumb navigation</li>
+                  <li>
+                    • Descend into any Component with breadcrumb navigation
+                  </li>
                   <li>• Edit autosaving markdown docs on every Component</li>
                   <li>
                     • Export any Project or subtree as deterministic markdown

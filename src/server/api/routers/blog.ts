@@ -103,9 +103,7 @@ export const blogRouter = createTRPCRouter({
           published: true,
           ...(featured ? { featured: true } : {}),
           ...(tag ? { tags: { some: { slug: tag } } } : {}),
-          ...(rankedIds
-            ? { id: { in: rankedIds.map((r) => r.id) } }
-            : {}),
+          ...(rankedIds ? { id: { in: rankedIds.map((r) => r.id) } } : {}),
           ...(year
             ? {
                 publishedAt: {

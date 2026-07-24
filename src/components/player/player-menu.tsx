@@ -3,7 +3,7 @@ import QuestLog from "./quest-log";
 
 export default function PlayerMenu() {
   return (
-    <div className="fixed right-4 top-4 flex flex-col gap-4">
+    <div className="fixed top-4 right-4 flex flex-col gap-4">
       <QuestLog />
       <InventoryMenu />
     </div>

@@ -151,7 +151,7 @@ function Constellation({ def }: { def: ConstellationDef }) {
           />
         ))}
       </svg>
-      <p className="mt-0.5 text-center font-mono text-[9px] text-primary/80">
+      <p className="text-primary/80 mt-0.5 text-center font-mono text-[9px]">
         {def.label}
       </p>
     </div>

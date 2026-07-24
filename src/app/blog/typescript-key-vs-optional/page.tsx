@@ -16,7 +16,8 @@ tags: typescript,beginners,patterns,best-practices
 */
 
 export const metadata = {
-  title: "TypeScript Key vs Value Optional - A Critical Difference Every Developer Should Know",
+  title:
+    "TypeScript Key vs Value Optional - A Critical Difference Every Developer Should Know",
   description:
     "Understanding the crucial difference between optional properties and optional values in TypeScript, and why LLMs often get this wrong.",
   openGraph: {
@@ -28,7 +29,8 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "TypeScript Key vs Value Optional - A Critical Difference Every Developer Should Know",
+    title:
+      "TypeScript Key vs Value Optional - A Critical Difference Every Developer Should Know",
     description:
       "Understanding the crucial difference between optional properties and optional values in TypeScript, and why LLMs often get this wrong.",
     images: ["/images/blog/default.png"],
@@ -47,11 +49,12 @@ export default async function KeyVsValueOptionalPost() {
         className="mb-2 rounded-lg shadow-md"
       />
       <div className="mb-6 text-center">
-        <h1 className="animate-fade-in from-primary to-secondary bg-gradient-to-r bg-clip-text text-5xl font-bold text-transparent font-serif">
+        <h1 className="animate-fade-in from-primary to-secondary bg-gradient-to-r bg-clip-text font-serif text-5xl font-bold text-transparent">
           Key vs Value Optional
         </h1>
         <p className="text-muted-foreground mt-4 text-xl">
-          A critical TypeScript pattern that LLMs (and developers) often get wrong
+          A critical TypeScript pattern that LLMs (and developers) often get
+          wrong
         </p>
       </div>
 
@@ -60,19 +63,22 @@ export default async function KeyVsValueOptionalPost() {
         {/* Introduction */}
         <section className="flex flex-col gap-4">
           <p>
-            If you&apos;re working with TypeScript and large language models (LLMs), there&apos;s a 
-            crucial distinction you need to understand: the difference between <strong>key optional</strong> and 
-            <strong>value optional</strong> properties. This seemingly small detail can make or break 
-            your application&apos;s reliability, especially when dealing with telemetry, logging, 
-            or any data that needs to flow through multiple function calls.
+            If you&apos;re working with TypeScript and large language models
+            (LLMs), there&apos;s a crucial distinction you need to understand:
+            the difference between <strong>key optional</strong> and
+            <strong>value optional</strong> properties. This seemingly small
+            detail can make or break your application&apos;s reliability,
+            especially when dealing with telemetry, logging, or any data that
+            needs to flow through multiple function calls.
           </p>
 
           <div className="not-prose">
             <Card className="border-yellow-200 bg-yellow-50 dark:border-yellow-800 dark:bg-yellow-950">
               <CardContent className="pt-6">
                 <p className="text-yellow-800 dark:text-yellow-200">
-                  <strong>Why this matters:</strong> LLMs love adding question marks to make properties optional, 
-                  but this can accidentally break data flow in your application when values need to be 
+                  <strong>Why this matters:</strong> LLMs love adding question
+                  marks to make properties optional, but this can accidentally
+                  break data flow in your application when values need to be
                   passed down through function chains.
                 </p>
               </CardContent>
@@ -87,14 +93,17 @@ export default async function KeyVsValueOptionalPost() {
           </h2>
 
           <p>
-            Let&apos;s start with a real-world example. Imagine you have a module that handles 
-            telemetry tracing - think OpenTelemetry where you need to pass trace IDs 
-            through your application to track what happens across different functions.
+            Let&apos;s start with a real-world example. Imagine you have a
+            module that handles telemetry tracing - think OpenTelemetry where
+            you need to pass trace IDs through your application to track what
+            happens across different functions.
           </p>
 
-          <h3 className="text-lg font-semibold mb-3">❌ The problematic approach</h3>
+          <h3 className="mb-3 text-lg font-semibold">
+            ❌ The problematic approach
+          </h3>
           <CodeBlock language="typescript">
-{`// This looks innocent, but it's a trap!
+            {`// This looks innocent, but it's a trap!
 type Context = {
   traceId?: string; // Key optional - can be omitted entirely
 };
@@ -116,10 +125,12 @@ function doAnotherThing(ctx: Context) {
           </CodeBlock>
 
           <p>
-            The issue here is subtle but critical. In production, when <code>main</code> is 
-            called with a <code>traceId</code>, that valuable telemetry data gets lost because 
-            the internal functions don&apos;t receive it. If <code>doThing</code> or <code>doAnotherThing</code> fail, 
-            you&apos;ll have no trace of what went wrong.
+            The issue here is subtle but critical. In production, when{" "}
+            <code>main</code> is called with a <code>traceId</code>, that
+            valuable telemetry data gets lost because the internal functions
+            don&apos;t receive it. If <code>doThing</code> or{" "}
+            <code>doAnotherThing</code> fail, you&apos;ll have no trace of what
+            went wrong.
           </p>
         </section>
 
@@ -138,7 +149,7 @@ function doAnotherThing(ctx: Context) {
               </CardHeader>
               <CardContent>
                 <CodeBlock language="typescript">
-{`type Context = {
+                  {`type Context = {
   traceId?: string;
 }
 
@@ -147,8 +158,8 @@ someFunction({})
 someFunction({ traceId: "abc123" })`}
                 </CodeBlock>
                 <p className="mt-4 text-sm">
-                  The property can be completely omitted from the object. 
-                  Great for public APIs where you want clean interfaces.
+                  The property can be completely omitted from the object. Great
+                  for public APIs where you want clean interfaces.
                 </p>
               </CardContent>
             </Card>
@@ -161,7 +172,7 @@ someFunction({ traceId: "abc123" })`}
               </CardHeader>
               <CardContent>
                 <CodeBlock language="typescript">
-{`type Context = {
+                  {`type Context = {
   traceId: string | undefined;
 }
 
@@ -170,8 +181,8 @@ someFunction({ traceId: undefined })
 someFunction({ traceId: "abc123" })`}
                 </CodeBlock>
                 <p className="mt-4 text-sm">
-                  The property must be provided but can be undefined. 
-                  Ensures values are explicitly passed through function chains.
+                  The property must be provided but can be undefined. Ensures
+                  values are explicitly passed through function chains.
                 </p>
               </CardContent>
             </Card>
@@ -185,12 +196,15 @@ someFunction({ traceId: "abc123" })`}
           </h2>
 
           <p>
-            Here&apos;s how to fix our telemetry example using value optional types:
+            Here&apos;s how to fix our telemetry example using value optional
+            types:
           </p>
 
-          <h3 className="text-lg font-semibold mb-3">✅ The correct approach</h3>
+          <h3 className="mb-3 text-lg font-semibold">
+            ✅ The correct approach
+          </h3>
           <CodeBlock language="typescript">
-{`type Context = {
+            {`type Context = {
   traceId: string | undefined; // Value optional - must be provided
 };
 
@@ -218,9 +232,11 @@ function doAnotherThing(ctx: Context) {
           </CodeBlock>
 
           <p>
-            With this approach, TypeScript forces us to explicitly pass the <code>traceId</code> 
-            through each function call. Even if it&apos;s <code>undefined</code>, we know it was 
-            intentionally passed as <code>undefined</code>, not accidentally omitted.
+            With this approach, TypeScript forces us to explicitly pass the{" "}
+            <code>traceId</code>
+            through each function call. Even if it&apos;s <code>undefined</code>
+            , we know it was intentionally passed as <code>undefined</code>, not
+            accidentally omitted.
           </p>
         </section>
 
@@ -241,7 +257,10 @@ function doAnotherThing(ctx: Context) {
                 <ul className="space-y-2 text-green-700 dark:text-green-300">
                   <li>• Public APIs that should look clean</li>
                   <li>• Configuration objects</li>
-                  <li>• Optional features that don&apos;t flow through function chains</li>
+                  <li>
+                    • Optional features that don&apos;t flow through function
+                    chains
+                  </li>
                   <li>• When backwards compatibility matters</li>
                 </ul>
               </CardContent>
@@ -272,13 +291,16 @@ function doAnotherThing(ctx: Context) {
           </h2>
 
           <p>
-            In practice, you often want a clean public API (key optional) but reliable 
-            internal data flow (value optional). Here&apos;s how to achieve both:
+            In practice, you often want a clean public API (key optional) but
+            reliable internal data flow (value optional). Here&apos;s how to
+            achieve both:
           </p>
 
-          <h3 className="text-lg font-semibold mb-3">🎯 Hybrid approach example</h3>
+          <h3 className="mb-3 text-lg font-semibold">
+            🎯 Hybrid approach example
+          </h3>
           <CodeBlock language="typescript">
-{`// Public API - clean and optional
+            {`// Public API - clean and optional
 type PublicContext = {
   traceId?: string;
 };
@@ -310,9 +332,10 @@ function doAnotherThing(ctx: InternalContext) {
           </CodeBlock>
 
           <p>
-            This gives you a clean public interface while ensuring that internal data flow 
-            is explicit and reliable. Your users can call <code>main({})</code> cleanly, 
-            but internally you have guarantees about data flow.
+            This gives you a clean public interface while ensuring that internal
+            data flow is explicit and reliable. Your users can call{" "}
+            <code>main({})</code> cleanly, but internally you have guarantees
+            about data flow.
           </p>
         </section>
 
@@ -329,33 +352,41 @@ function doAnotherThing(ctx: InternalContext) {
               </CardHeader>
               <CardContent>
                 <p>
-                  When working with AI assistants, be explicit about your intent. 
-                  Instead of saying &ldquo;make this optional,&rdquo; specify whether you want 
-                  &ldquo;key optional&rdquo; (can omit) or &ldquo;value optional&rdquo; (must provide, can be undefined).
+                  When working with AI assistants, be explicit about your
+                  intent. Instead of saying &ldquo;make this optional,&rdquo;
+                  specify whether you want &ldquo;key optional&rdquo; (can omit)
+                  or &ldquo;value optional&rdquo; (must provide, can be
+                  undefined).
                 </p>
               </CardContent>
             </Card>
 
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">📝 Code Review Guidelines</CardTitle>
+                <CardTitle className="text-lg">
+                  📝 Code Review Guidelines
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <p>
-                  When reviewing TypeScript code, pay special attention to optional properties 
-                  in function parameters. Ask: &ldquo;Does this value need to flow through to other functions?&rdquo;
+                  When reviewing TypeScript code, pay special attention to
+                  optional properties in function parameters. Ask: &ldquo;Does
+                  this value need to flow through to other functions?&rdquo;
                 </p>
               </CardContent>
             </Card>
 
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">🔧 Refactoring Strategy</CardTitle>
+                <CardTitle className="text-lg">
+                  🔧 Refactoring Strategy
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <p>
-                  When refactoring, identify data that needs to flow through function chains 
-                  (like user IDs, trace IDs, request contexts) and convert them to value optional.
+                  When refactoring, identify data that needs to flow through
+                  function chains (like user IDs, trace IDs, request contexts)
+                  and convert them to value optional.
                 </p>
               </CardContent>
             </Card>
@@ -373,24 +404,52 @@ function doAnotherThing(ctx: InternalContext) {
               <CardContent className="pt-6">
                 <ul className="space-y-3">
                   <li className="flex items-start gap-3">
-                    <Badge variant="secondary" className="mt-1">1</Badge>
-                    <span><strong>Key optional</strong> (<code>property?: Type</code>) means the property can be omitted entirely - great for clean APIs</span>
+                    <Badge variant="secondary" className="mt-1">
+                      1
+                    </Badge>
+                    <span>
+                      <strong>Key optional</strong> (
+                      <code>property?: Type</code>) means the property can be
+                      omitted entirely - great for clean APIs
+                    </span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <Badge variant="secondary" className="mt-1">2</Badge>
-                    <span><strong>Value optional</strong> (<code>property: Type | undefined</code>) means the property must be provided but can be undefined - essential for data flow</span>
+                    <Badge variant="secondary" className="mt-1">
+                      2
+                    </Badge>
+                    <span>
+                      <strong>Value optional</strong> (
+                      <code>property: Type | undefined</code>) means the
+                      property must be provided but can be undefined - essential
+                      for data flow
+                    </span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <Badge variant="secondary" className="mt-1">3</Badge>
-                    <span>Use value optional for any data that needs to flow through function chains, especially telemetry and context data</span>
+                    <Badge variant="secondary" className="mt-1">
+                      3
+                    </Badge>
+                    <span>
+                      Use value optional for any data that needs to flow through
+                      function chains, especially telemetry and context data
+                    </span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <Badge variant="secondary" className="mt-1">4</Badge>
-                    <span>Consider a hybrid approach: key optional for public APIs, value optional for internal functions</span>
+                    <Badge variant="secondary" className="mt-1">
+                      4
+                    </Badge>
+                    <span>
+                      Consider a hybrid approach: key optional for public APIs,
+                      value optional for internal functions
+                    </span>
                   </li>
                   <li className="flex items-start gap-3">
-                    <Badge variant="secondary" className="mt-1">5</Badge>
-                    <span>Be explicit with LLMs about which type of optional you want</span>
+                    <Badge variant="secondary" className="mt-1">
+                      5
+                    </Badge>
+                    <span>
+                      Be explicit with LLMs about which type of optional you
+                      want
+                    </span>
                   </li>
                 </ul>
               </CardContent>
@@ -398,9 +457,10 @@ function doAnotherThing(ctx: InternalContext) {
           </div>
 
           <p>
-            Understanding this distinction will make your TypeScript code more reliable and 
-            help you avoid subtle bugs where important data gets lost in function calls. 
-            It&apos;s a small detail that makes a big difference in application reliability.
+            Understanding this distinction will make your TypeScript code more
+            reliable and help you avoid subtle bugs where important data gets
+            lost in function calls. It&apos;s a small detail that makes a big
+            difference in application reliability.
           </p>
         </section>
       </div>

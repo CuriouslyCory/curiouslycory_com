@@ -60,10 +60,9 @@ export function EasterEggs() {
       }
 
       const key = e.code;
-      sequenceRef.current = [
-        ...sequenceRef.current,
-        key,
-      ].slice(-KONAMI_SEQUENCE.length);
+      sequenceRef.current = [...sequenceRef.current, key].slice(
+        -KONAMI_SEQUENCE.length,
+      );
 
       if (
         sequenceRef.current.length === KONAMI_SEQUENCE.length &&

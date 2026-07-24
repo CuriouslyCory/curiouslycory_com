@@ -72,7 +72,7 @@ export const Telescope = memo(TelescopeIcon);
 export function TelescopeAsset() {
   return (
     <div
-      className="h-24 w-24 rounded-full border border-primary/40"
+      className="border-primary/40 h-24 w-24 rounded-full border"
       style={{
         background:
           "radial-gradient(circle at center, rgba(249,115,22,0.12) 0%, rgba(249,115,22,0.04) 40%, transparent 70%)",

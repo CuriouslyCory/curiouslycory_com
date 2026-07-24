@@ -17,7 +17,9 @@ describe("extractSearchableText", () => {
       }
     `;
     const result = extractSearchableText(source);
-    expect(result).toContain("I built Infinite Docs and it descends into its own canvas.");
+    expect(result).toContain(
+      "I built Infinite Docs and it descends into its own canvas.",
+    );
     expect(result).not.toMatch(/Docsand/);
     expect(result).not.toMatch(/own\)canvas/);
   });

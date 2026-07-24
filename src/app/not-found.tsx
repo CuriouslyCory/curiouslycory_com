@@ -12,13 +12,10 @@ export default function NotFound() {
           direction="bottom"
           text="I think we took a wrong turn at the nebula."
         />
-        <Astronaut
-          className="h-48 w-48"
-          style={{ animationDuration: "6s" }}
-        />
+        <Astronaut className="h-48 w-48" style={{ animationDuration: "6s" }} />
       </div>
       <div className="flex flex-col items-center gap-2">
-        <p className="font-mono text-4xl font-bold text-primary">404</p>
+        <p className="text-primary font-mono text-4xl font-bold">404</p>
         <p className="text-muted-foreground">Page not found</p>
       </div>
       <Button asChild>

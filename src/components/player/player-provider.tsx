@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  createContext,
-  use,
-  useEffect,
-  useState,
-  type ReactNode,
-} from "react";
+import { createContext, use, useEffect, useState, type ReactNode } from "react";
 import { InventoryItemDialog } from "./inventory/inventory-item-dialog";
 import PlayerMenu from "./player-menu";
 import { DebugConsole } from "./debug-console";

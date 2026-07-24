@@ -1,13 +1,13 @@
 #!/usr/bin/env tsx
 // This script runs the blog post indexer
 
-import { config } from 'dotenv';
+import { config } from "dotenv";
 
 // Setup environment variables from .env
 config();
 
 // Import the blog indexer function
-import { indexBlogPosts } from './blog-indexer.js';
+import { indexBlogPosts } from "./blog-indexer.js";
 
 async function main(): Promise<void> {
   try {

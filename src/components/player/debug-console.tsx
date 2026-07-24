@@ -24,7 +24,10 @@ import { type QuestId } from "./quests";
 
 export function DebugConsole() {
   const isMounted = useMounted();
-  const isLocal = isMounted && typeof window !== "undefined" && window.location.hostname === "localhost";
+  const isLocal =
+    isMounted &&
+    typeof window !== "undefined" &&
+    window.location.hostname === "localhost";
   const { addInventoryItem, startQuest, updateQuestProgress, quests } =
     usePlayer();
 
@@ -87,7 +90,7 @@ export function DebugConsole() {
                 <h3 className="text-sm font-medium">Update Quest Progress</h3>
                 {quests.map((quest) => (
                   <div key={quest.id} className="space-y-2">
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-muted-foreground text-sm">
                       {quest.title}
                     </p>
                     <Input
@@ -102,7 +105,7 @@ export function DebugConsole() {
                         );
                         updateQuestProgress(quest.id, value);
                       }}
-                      className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background"
+                      className="border-input bg-background ring-offset-background w-full rounded-md border px-3 py-2 text-sm"
                     />
                   </div>
                 ))}

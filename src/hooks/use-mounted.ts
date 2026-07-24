@@ -1,6 +1,8 @@
 import { useSyncExternalStore } from "react";
 
-function noop() { /* no-op */ }
+function noop() {
+  /* no-op */
+}
 const subscribe = () => noop;
 const getSnapshot = () => true;
 const getServerSnapshot = () => false;

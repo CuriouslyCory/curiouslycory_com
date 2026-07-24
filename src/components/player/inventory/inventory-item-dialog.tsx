@@ -21,7 +21,7 @@ function InventoryItemDialogInner({ item }: { item: InventoryItem }) {
         <div className="flex flex-col items-center gap-4 p-4">
           <div className="h-24 w-24">{item.icon}</div>
           <h3 className="text-lg font-semibold capitalize">{item.name}</h3>
-          <p className="text-center text-sm text-muted-foreground">
+          <p className="text-muted-foreground text-center text-sm">
             {item.description}
           </p>
           <p className="text-sm">Quantity: {item.quantity}</p>
