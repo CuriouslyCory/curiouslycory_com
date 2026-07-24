@@ -55,11 +55,26 @@ const SvgComponent = (props: SVGProps<SVGSVGElement>) => {
       <>
         <div className="absolute -z-10 h-72 w-72">
           <div className="absolute top-0 h-1/2 w-full">
-            <div className="absolute top-2 h-1 w-1 animate-pulse rounded-full bg-white" style={starStyle}></div>
-            <div className="absolute left-12 top-16 h-1 w-1 animate-pulse rounded-full bg-white" style={starStyle}></div>
-            <div className="absolute right-0 top-6 h-1 w-1 animate-pulse rounded-full bg-white" style={starStyle}></div>
-            <div className="absolute right-5 top-3 h-1 w-1 animate-pulse rounded-full bg-white" style={starStyle}></div>
-            <div className="absolute bottom-0 right-5 h-1 w-1 animate-pulse rounded-full bg-white" style={starStyle}></div>
+            <div
+              className="absolute top-2 h-1 w-1 animate-pulse rounded-full bg-white"
+              style={starStyle}
+            ></div>
+            <div
+              className="absolute top-16 left-12 h-1 w-1 animate-pulse rounded-full bg-white"
+              style={starStyle}
+            ></div>
+            <div
+              className="absolute top-6 right-0 h-1 w-1 animate-pulse rounded-full bg-white"
+              style={starStyle}
+            ></div>
+            <div
+              className="absolute top-3 right-5 h-1 w-1 animate-pulse rounded-full bg-white"
+              style={starStyle}
+            ></div>
+            <div
+              className="absolute right-5 bottom-0 h-1 w-1 animate-pulse rounded-full bg-white"
+              style={starStyle}
+            ></div>
           </div>
         </div>
         <svg

@@ -59,7 +59,8 @@ const thoughtBubbleVariants = cva("absolute flex gap-1", {
 });
 
 interface ChatBubbleProps
-  extends React.HTMLAttributes<HTMLDivElement>,
+  extends
+    React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof chatBubbleVariants> {
   text: string;
 }

@@ -7,11 +7,7 @@ import { motion } from "motion/react";
 import { Menu } from "lucide-react";
 import { ThemeModeToggle } from "./theme-mode-toggle";
 import { CcLogo } from "~/ui/cc-logo";
-import {
-  Drawer,
-  DrawerContent,
-  DrawerTrigger,
-} from "~/components/ui/drawer";
+import { Drawer, DrawerContent, DrawerTrigger } from "~/components/ui/drawer";
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -44,7 +40,7 @@ export function Navigation() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="hover:bg-primary-foreground hover:text-primary relative rounded-md px-3 py-2 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                className="hover:bg-primary-foreground hover:text-primary focus-visible:ring-ring relative rounded-md px-3 py-2 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-offset-2"
               >
                 {item.name}
                 {isActive(item.href) && (
@@ -74,7 +70,7 @@ export function Navigation() {
               <DrawerTrigger asChild>
                 <button
                   aria-label="Open navigation menu"
-                  className="flex items-center justify-center rounded-md p-2 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                  className="focus-visible:ring-ring flex items-center justify-center rounded-md p-2 focus-visible:ring-2 focus-visible:ring-offset-2"
                 >
                   <Menu className="h-6 w-6" />
                 </button>
@@ -86,9 +82,9 @@ export function Navigation() {
                       key={item.href}
                       href={item.href}
                       onClick={() => setDrawerOpen(false)}
-                      className={`flex min-h-12 items-center pl-4 text-lg font-medium transition-colors hover:text-primary focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none rounded-md ${
+                      className={`hover:text-primary focus-visible:ring-ring flex min-h-12 items-center rounded-md pl-4 text-lg font-medium transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none ${
                         isActive(item.href)
-                          ? "border-l-2 border-primary text-primary"
+                          ? "border-primary text-primary border-l-2"
                           : "border-l-2 border-transparent"
                       }`}
                     >

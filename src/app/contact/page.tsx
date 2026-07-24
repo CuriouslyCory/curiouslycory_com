@@ -17,7 +17,9 @@ export default function Contact() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log({ name, email, message });
-    toast.success("Transmission received. I'll respond at lightspeed. (Results may vary.)");
+    toast.success(
+      "Transmission received. I'll respond at lightspeed. (Results may vary.)",
+    );
     setName("");
     setEmail("");
     setMessage("");
@@ -69,7 +71,7 @@ export default function Contact() {
 
   return (
     <div className="mx-auto max-w-lg">
-      <h1 className="mb-6 font-oswald text-3xl font-bold">Contact Me</h1>
+      <h1 className="font-oswald mb-6 text-3xl font-bold">Contact Me</h1>
       <div className="mb-8 flex justify-center">
         <ChatBubble
           variant="thought"

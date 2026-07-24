@@ -172,7 +172,14 @@ function ShootingStarSvg({ direction }: { direction: Direction }) {
           <stop offset="100%" stopColor="currentColor" stopOpacity="1" />
         </linearGradient>
       </defs>
-      <rect x="0" y="2" width="56" height="2" rx="1" fill={`url(#${gradientId})`} />
+      <rect
+        x="0"
+        y="2"
+        width="56"
+        height="2"
+        rx="1"
+        fill={`url(#${gradientId})`}
+      />
       <circle cx="57" cy="3" r="3" fill="currentColor" />
     </svg>
   );
@@ -223,7 +230,9 @@ function EntityRenderer({
     >
       {entity.type === "cloud" && <CloudSvg />}
       {entity.type === "bird" && <BirdSvg direction={entity.direction} />}
-      {entity.type === "shootingStar" && <ShootingStarSvg direction={entity.direction} />}
+      {entity.type === "shootingStar" && (
+        <ShootingStarSvg direction={entity.direction} />
+      )}
       {entity.type === "satellite" && <SatelliteSvg />}
     </div>
   );
@@ -319,11 +328,7 @@ export function SkyAmbiance() {
       aria-hidden="true"
     >
       {entities.map((entity) => (
-        <EntityRenderer
-          key={entity.id}
-          entity={entity}
-          onDone={removeEntity}
-        />
+        <EntityRenderer key={entity.id} entity={entity} onDone={removeEntity} />
       ))}
     </div>
   );

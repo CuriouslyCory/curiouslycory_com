@@ -24,7 +24,9 @@ export function DateFilter() {
   const [manualYearItem, setManualYearItem] = useState<string | undefined>(
     undefined,
   );
-  const activeYearItem = selectedYear ? selectedYear.toString() : manualYearItem;
+  const activeYearItem = selectedYear
+    ? selectedYear.toString()
+    : manualYearItem;
   const setActiveYearItem = (value: string | undefined) => {
     setManualYearItem(value);
   };

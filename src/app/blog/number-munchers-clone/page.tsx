@@ -47,7 +47,7 @@ export default function NumberMunchersClone() {
           height={500}
           className="mb-6 rounded-lg shadow-lg"
         />
-        <h1 className="mb-4 text-4xl font-bold font-serif">
+        <h1 className="mb-4 font-serif text-4xl font-bold">
           Reviving{" "}
           <span className="bg-gradient-to-r from-green-500 to-blue-600 bg-clip-text text-transparent">
             Number Munchers

@@ -200,7 +200,9 @@ function TelegramExchange() {
       {exchange.map((line, i) => (
         <div
           key={i}
-          className={line.from === "user" ? "flex justify-end" : "flex justify-start"}
+          className={
+            line.from === "user" ? "flex justify-end" : "flex justify-start"
+          }
         >
           <div
             className={
@@ -266,11 +268,12 @@ export default async function FastifyTelegramBot() {
         </p>
 
         <p>
-          I want to be clear about what this is: it’s a <strong>starting
-          point</strong>, not a product. It’s the boring, load-bearing 80% — the
-          message plumbing, the agent wiring, the memory layer, the tool loading
-          — so you can spend your time on the 20% that’s actually yours. Fork it,
-          swap the prompt, plug in your tools, ship your own thing.
+          I want to be clear about what this is: it’s a{" "}
+          <strong>starting point</strong>, not a product. It’s the boring,
+          load-bearing 80% — the message plumbing, the agent wiring, the memory
+          layer, the tool loading — so you can spend your time on the 20% that’s
+          actually yours. Fork it, swap the prompt, plug in your tools, ship
+          your own thing.
         </p>
 
         <p>
@@ -291,8 +294,8 @@ export default async function FastifyTelegramBot() {
       <div className="prose prose-lg dark:prose-invert max-w-none">
         <h2>What you get out of the box</h2>
         <p>
-          None of this is glamorous, and that’s the point — it’s the wiring you’d
-          otherwise rebuild from scratch every time.
+          None of this is glamorous, and that’s the point — it’s the wiring
+          you’d otherwise rebuild from scratch every time.
         </p>
       </div>
 
@@ -322,8 +325,8 @@ export default async function FastifyTelegramBot() {
           <em>“Processing your request…”</em> the instant a message lands so you
           know it’s alive — and if the agent’s entire reply is just{" "}
           <code>&quot;okay&quot;</code>, the bot stays quiet instead of spamming
-          you. Documents get politely rejected for now: send a PDF and you’ll get
-          “Documents not supported at this time.”
+          you. Documents get politely rejected for now: send a PDF and you’ll
+          get “Documents not supported at this time.”
         </p>
 
         <h2>The agent core</h2>
@@ -354,11 +357,11 @@ const agent = createReactAgent({
         </CodeBlock>
 
         <p>
-          <strong>The model</strong> defaults to{" "}
-          <code>geminiToolsModel</code> — <code>ChatGoogleGenerativeAI</code>{" "}
-          running <code>gemini-2.0-flash-exp</code> at temperature 0. Swapping it
-          means pointing at a different entry in the <code>models</code> map
-          (more on that in “Make it yours”).
+          <strong>The model</strong> defaults to <code>geminiToolsModel</code> —{" "}
+          <code>ChatGoogleGenerativeAI</code> running{" "}
+          <code>gemini-2.0-flash-exp</code> at temperature 0. Swapping it means
+          pointing at a different entry in the <code>models</code> map (more on
+          that in “Make it yours”).
         </p>
         <p>
           <strong>The system prompt</strong> comes from a JSON file, so you can
@@ -367,8 +370,8 @@ const agent = createReactAgent({
         <p>
           <strong>The context injection</strong> is the part I’m quietest-proud
           of. Before each message reaches the agent, I wrap it so the model
-          always knows <em>when</em> it’s operating and <em>who</em> it’s talking
-          to:
+          always knows <em>when</em> it’s operating and <em>who</em> it’s
+          talking to:
         </p>
 
         <CodeBlock language="text">
@@ -416,9 +419,9 @@ export const additionTool = tool(
         </CodeBlock>
 
         <p>
-          Write the function, describe it well (the description is what the model
-          reads to decide when to call it), export it, add it to the tools array.
-          That’s a new capability.
+          Write the function, describe it well (the description is what the
+          model reads to decide when to call it), export it, add it to the tools
+          array. That’s a new capability.
         </p>
         <p>
           <strong>MCP tools</strong> come from external{" "}
@@ -461,8 +464,8 @@ export const additionTool = tool(
             Adding a search engine, a database, a calendar — it’s a config entry
             and a restart.
           </strong>{" "}
-          That’s the whole point of the two-tier design: trivial stuff is a local
-          function, big integrations are somebody else’s MCP server.
+          That’s the whole point of the two-tier design: trivial stuff is a
+          local function, big integrations are somebody else’s MCP server.
         </p>
 
         <h2>Memory</h2>
@@ -545,7 +548,11 @@ pnpm install`}
           </li>
           <li>
             <code>DATABASE_URL</code> — any Postgres.{" "}
-            <a href="https://neon.tech" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://neon.tech"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Neon
             </a>{" "}
             or{" "}
@@ -565,7 +572,11 @@ pnpm install`}
         <p>
           Optional: LangSmith tracing vars, and a <code>SMITHERY_API_KEY</code>{" "}
           from{" "}
-          <a href="https://smithery.ai" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://smithery.ai"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             smithery.ai
           </a>{" "}
           if you want the search / sequential-thinking MCP servers.
@@ -576,9 +587,12 @@ pnpm install`}
             <strong>Heads up on the Smithery key.</strong> There’s a known bug:{" "}
             <code>{"${SMITHERY_API_KEY}"}</code> doesn’t currently get injected
             into the MCP server config from your <code>.env</code>. Until that’s
-            fixed, paste the key <strong>directly into <code>mcp.json</code></strong>{" "}
-            where the <code>--key</code> argument is. If your search tool silently
-            isn’t working, this is why.
+            fixed, paste the key{" "}
+            <strong>
+              directly into <code>mcp.json</code>
+            </strong>{" "}
+            where the <code>--key</code> argument is. If your search tool
+            silently isn’t working, this is why.
           </p>
         </blockquote>
 
@@ -590,9 +604,9 @@ pnpm install`}
 pnpm db:push`}
         </CodeBlock>
         <p>
-          The LangGraph checkpointer also creates its own tables on first run via{" "}
-          <code>setup()</code>, so you don’t need to do anything extra for chat
-          memory.
+          The LangGraph checkpointer also creates its own tables on first run
+          via <code>setup()</code>, so you don’t need to do anything extra for
+          chat memory.
         </p>
 
         <p>
@@ -603,8 +617,8 @@ pnpm db:push`}
           That runs <code>tsx watch src/index.ts</code>. Open Telegram, message
           your bot, and you should get a reply. Other scripts worth knowing:{" "}
           <code>pnpm start</code> (production), <code>pnpm db:studio</code>{" "}
-          (browse the DB), <code>pnpm test</code> (vitest), <code>pnpm lint</code>
-          , <code>pnpm format</code>.
+          (browse the DB), <code>pnpm test</code> (vitest),{" "}
+          <code>pnpm lint</code>, <code>pnpm format</code>.
         </p>
 
         <h2>Make it yours</h2>
@@ -647,9 +661,9 @@ pnpm db:push`}
           model and two local Ollama models (<code>deepseek-r1:14b</code>,{" "}
           <code>openthinker</code>) alongside the default. Point the agent at a
           different one to change engines. If you want to run{" "}
-          <strong>fully local</strong> — no API keys, nothing leaving your machine
-          — switch to an Ollama model and pull it locally. Same agent, same
-          tools, private inference.
+          <strong>fully local</strong> — no API keys, nothing leaving your
+          machine — switch to an Ollama model and pull it locally. Same agent,
+          same tools, private inference.
         </p>
       </div>
 
@@ -668,25 +682,27 @@ pnpm db:push`}
             of it is worth knowing before you build on top.
           </p>
           <p>
-            <strong>Memory resets daily — and it’s a quirk, not a feature.</strong>{" "}
+            <strong>
+              Memory resets daily — and it’s a quirk, not a feature.
+            </strong>{" "}
             The checkpointer’s <code>thread_id</code> is{" "}
             <code>{"${userId}-${YYYYMMDD}"}</code> — user ID plus today’s date.
             That means every day, each user gets a brand-new thread, and
             yesterday’s context is gone. It happened to work out as a natural
             “fresh start each morning,” but let’s be clear: it’s an accident of
             how I built the key, not a deliberate design decision. If you want
-            continuous long-term memory, drop the date from the thread_id. If you{" "}
-            <em>like</em> the daily reset, keep it. Either way, know that it’s a
-            choice you should make on purpose.
+            continuous long-term memory, drop the date from the thread_id. If
+            you <em>like</em> the daily reset, keep it. Either way, know that
+            it’s a choice you should make on purpose.
           </p>
           <p>
             <strong>There’s a vestigial NextAuth scaffold.</strong>{" "}
             <code>prisma/schema.prisma</code> still carries Account / Session /
             User / VerificationToken tables from the T3-style template this
             started as. <strong>None of it stores chat history</strong> — that’s
-            all the LangGraph checkpointer. The Prisma models are just dead weight
-            right now. Leave them if you plan to add web auth later; delete them
-            if you want a leaner repo.
+            all the LangGraph checkpointer. The Prisma models are just dead
+            weight right now. Leave them if you plan to add web auth later;
+            delete them if you want a leaner repo.
           </p>
           <p>
             <strong>The Smithery key injection bug</strong> (covered in setup):{" "}
@@ -699,10 +715,10 @@ pnpm db:push`}
           <p>
             <strong>Long-polling is fine until it isn’t.</strong> For a personal
             bot or a single deployment, <code>bot.launch()</code> polling is
-            simple and works great. If you’re scaling to many bots or high volume,
-            you’d want to move to webhooks — which, notably, is where Fastify
-            would finally earn its keep as an actual HTTP server. Right now it’s
-            just the lifecycle host.
+            simple and works great. If you’re scaling to many bots or high
+            volume, you’d want to move to webhooks — which, notably, is where
+            Fastify would finally earn its keep as an actual HTTP server. Right
+            now it’s just the lifecycle host.
           </p>
         </div>
       </aside>
@@ -712,12 +728,13 @@ pnpm db:push`}
         <p>
           That’s the whole thing: Fastify hosting the process, Telegraf handling
           the chat, a LangGraph ReAct agent doing the thinking, Postgres
-          remembering, and a tool layer you can extend without touching the core.
+          remembering, and a tool layer you can extend without touching the
+          core.
         </p>
         <p>
           I built it to be forked. If you’ve been meaning to make a little agent
-          you can text — a research assistant, a home-automation controller, a bot
-          that watches something and pings you — this gives you every
+          you can text — a research assistant, a home-automation controller, a
+          bot that watches something and pings you — this gives you every
           unglamorous part already wired up. Clone it, swap the prompt, plug in
           your tools, and make it yours.
         </p>

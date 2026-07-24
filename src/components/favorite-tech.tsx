@@ -45,7 +45,7 @@ export const FavoriteTech = (): ReactNode => {
   return (
     <Card className="p-2 md:p-6">
       <CardHeader>
-        <h2 className="font-oswald text-2xl font-semibold tracking-tight text-center md:text-left">
+        <h2 className="font-oswald text-center text-2xl font-semibold tracking-tight md:text-left">
           My Main Toolbox
         </h2>
       </CardHeader>
@@ -54,7 +54,7 @@ export const FavoriteTech = (): ReactNode => {
           {tech.map((item, index) => (
             <motion.div
               key={`fav-tech-${item.title}`}
-              className="flex w-32 flex-col items-center hover:bg-primary/10 rounded-xl p-4 transition-colors duration-200"
+              className="hover:bg-primary/10 flex w-32 flex-col items-center rounded-xl p-4 transition-colors duration-200"
               initial={{ opacity: 0, y: 20, scale: 0.9 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
               whileHover={{ y: -8, scale: 1.05 }}

@@ -43,7 +43,7 @@ async function getDefaultUser(): Promise<string> {
 
   // Otherwise, find or create a default user
   const defaultUser = await getPrisma().user.findFirst({
-    where: { email: 'blog@example.com' },
+    where: { email: "blog@example.com" },
   });
 
   if (defaultUser) return defaultUser.id;
@@ -51,8 +51,8 @@ async function getDefaultUser(): Promise<string> {
   // Create a default user as a last resort
   const newUser = await getPrisma().user.create({
     data: {
-      name: 'Blog Author',
-      email: 'blog@example.com',
+      name: "Blog Author",
+      email: "blog@example.com",
     },
   });
 
@@ -69,7 +69,12 @@ async function getDefaultUser(): Promise<string> {
  * required to run it standalone, e.g. from CI in a future update).
  */
 async function embedPostChunks(
-  post: { id: string; slug: string; content: string | null; contentHash: string | null },
+  post: {
+    id: string;
+    slug: string;
+    content: string | null;
+    contentHash: string | null;
+  },
   forceReembed: boolean,
   apiKey: string | undefined,
   embedCallCounter: { count: number },
@@ -86,13 +91,14 @@ async function embedPostChunks(
     where: { postId },
     select: { contentHash: true },
   });
-  const needsEmbed =
-    forceReembed || existing?.contentHash !== contentHash;
+  const needsEmbed = forceReembed || existing?.contentHash !== contentHash;
 
   if (!needsEmbed) return; // zero OpenAI calls on unchanged re-run
 
   if (!apiKey) {
-    console.warn(`skip embed ${slug}: no OPENAI_API_KEY (leaving stale chunks)`);
+    console.warn(
+      `skip embed ${slug}: no OPENAI_API_KEY (leaving stale chunks)`,
+    );
     return;
   }
 
@@ -109,7 +115,9 @@ async function embedPostChunks(
   );
 
   if (!embeddings) {
-    console.warn(`skip embed ${slug}: embedding failed (leaving old chunks intact)`);
+    console.warn(
+      `skip embed ${slug}: embedding failed (leaving old chunks intact)`,
+    );
     return;
   }
 

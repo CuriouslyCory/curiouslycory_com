@@ -34,7 +34,7 @@ const CursorFollower: React.FC<{ children?: React.ReactNode }> = ({
   return (
     <div
       ref={followerRef}
-      className="pointer-events-none fixed left-0 top-0 h-24 w-24 rounded-full"
+      className="pointer-events-none fixed top-0 left-0 h-24 w-24 rounded-full"
       style={{
         willChange: "transform",
         transition: "transform 0.01s ease-out",

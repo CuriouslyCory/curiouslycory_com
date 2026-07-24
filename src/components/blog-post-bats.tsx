@@ -345,7 +345,8 @@ function BatWings({ children }: { children: React.ReactNode }) {
       <BatWingSvg
         className={cn(
           "relative left-1 -z-10 inline-block h-12 w-12",
-          isSpookyMonth && "text-orange-500 [filter:sepia(1)_hue-rotate(320deg)_saturate(4)]",
+          isSpookyMonth &&
+            "text-orange-500 [filter:sepia(1)_hue-rotate(320deg)_saturate(4)]",
         )}
       />
       {children}
@@ -353,7 +354,8 @@ function BatWings({ children }: { children: React.ReactNode }) {
         direction="right"
         className={cn(
           "relative right-4 -z-10 inline-block h-12 w-12",
-          isSpookyMonth && "text-orange-500 [filter:sepia(1)_hue-rotate(320deg)_saturate(4)]",
+          isSpookyMonth &&
+            "text-orange-500 [filter:sepia(1)_hue-rotate(320deg)_saturate(4)]",
         )}
       />
     </div>

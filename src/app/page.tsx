@@ -39,7 +39,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <section className="relative overflow-x-clip pb-0 pt-12 md:overflow-clip md:pt-28">
+      <section className="relative overflow-x-clip pt-12 pb-0 md:overflow-clip md:pt-28">
         <SkyAmbiance />
         {/* Mobile hero: ChatBubble + centered Astronaut */}
         <div className="flex flex-col items-center md:hidden">
@@ -57,10 +57,9 @@ export default function Home() {
         <div className="mx-auto hidden max-w-6xl items-end justify-between px-4 md:flex md:px-6 lg:px-8">
           <div className="max-w-lg md:pb-8">
             <h1 className="font-oswald text-4xl font-bold tracking-tight">
-              Hi, I&apos;m{" "}
-              <span className="text-primary">CuriouslyCory</span>
+              Hi, I&apos;m <span className="text-primary">CuriouslyCory</span>
             </h1>
-            <p className="mt-4 text-xl text-muted-foreground">
+            <p className="text-muted-foreground mt-4 text-xl">
               I like to build things that people actually want to use.
             </p>
             <div className="mt-8 flex gap-x-4">
@@ -79,7 +78,10 @@ export default function Home() {
       </section>
 
       {/* Horizon gradient — dark band below astronaut, overlaps hero to cover sun glow bleed */}
-      <div className="hero-horizon relative z-20 -mt-1 h-10 md:-mt-3 md:h-24" aria-hidden="true" />
+      <div
+        className="hero-horizon relative z-20 -mt-1 h-10 md:-mt-3 md:h-24"
+        aria-hidden="true"
+      />
 
       <section className="mx-auto max-w-5xl px-4 py-16 md:px-6 md:py-24 lg:px-8">
         <div className="md:grid md:grid-cols-[280px_1fr] md:gap-12">
@@ -135,7 +137,7 @@ export default function Home() {
       <section className="flex flex-col gap-y-24 py-16 md:py-24">
         <MyLinks />
       </section>
-      <div className="w-full bg-surface-elevated py-16 md:py-24">
+      <div className="bg-surface-elevated w-full py-16 md:py-24">
         <section className="mx-auto max-w-4xl px-4 md:px-6 lg:px-8">
           <FavoriteTech />
         </section>

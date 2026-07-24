@@ -81,8 +81,6 @@ describe("chunkText", () => {
   it("assigns sequential zero-indexed indices", () => {
     const text = "x".repeat(500);
     const chunks = chunkText(text, { maxChars: 100, overlap: 10 });
-    expect(chunks.map((c) => c.index)).toEqual(
-      chunks.map((_, i) => i),
-    );
+    expect(chunks.map((c) => c.index)).toEqual(chunks.map((_, i) => i));
   });
 });

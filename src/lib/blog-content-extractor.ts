@@ -70,7 +70,10 @@ function decodeHtmlEntities(input: string): string {
  * `` {`...`} `` template-literal children — no special-casing is needed for
  * either.
  */
-function pushLiteralExpressionText(expr: ts.Expression, chunks: string[]): void {
+function pushLiteralExpressionText(
+  expr: ts.Expression,
+  chunks: string[],
+): void {
   if (ts.isStringLiteral(expr) || ts.isNoSubstitutionTemplateLiteral(expr)) {
     chunks.push(expr.text);
   } else if (ts.isTemplateExpression(expr)) {
@@ -89,7 +92,8 @@ export function extractSearchableText(
   source: string,
   options?: ExtractSearchableTextOptions,
 ): string {
-  const includeAttributes = options?.includeAttributes ?? DEFAULT_INCLUDE_ATTRIBUTES;
+  const includeAttributes =
+    options?.includeAttributes ?? DEFAULT_INCLUDE_ATTRIBUTES;
   const chunks: string[] = [];
 
   let sourceFile: ts.SourceFile;
@@ -119,10 +123,7 @@ export function extractSearchableText(
       // generic `forEachChild` descent still reaches it, so without this guard
       // it would be processed twice: double-counting allowed attributes and
       // leaking excluded ones (className/href/src) past the allowlist.
-      if (
-        node.expression &&
-        !(node.parent && ts.isJsxAttribute(node.parent))
-      ) {
+      if (node.expression && !(node.parent && ts.isJsxAttribute(node.parent))) {
         pushLiteralExpressionText(node.expression, chunks);
       }
     } else if (ts.isJsxAttribute(node)) {
@@ -150,7 +151,5 @@ export function extractSearchableText(
     return "";
   }
 
-  return decodeHtmlEntities(chunks.join(" "))
-    .replace(/\s+/g, " ")
-    .trim();
+  return decodeHtmlEntities(chunks.join(" ")).replace(/\s+/g, " ").trim();
 }

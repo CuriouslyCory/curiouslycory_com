@@ -25,9 +25,7 @@ const queryCache = new LruCache<string, number[]>(QUERY_CACHE_SIZE);
  * "build with no OPENAI_API_KEY" and "importing this module never throws"
  * trivially true regardless of caller.
  */
-function getEmbeddingModel(
-  apiKey: string | undefined,
-): EmbeddingModel | null {
+function getEmbeddingModel(apiKey: string | undefined): EmbeddingModel | null {
   if (!apiKey) return null;
   const openai = createOpenAI({ apiKey });
   return openai.embedding(MODEL_ID);

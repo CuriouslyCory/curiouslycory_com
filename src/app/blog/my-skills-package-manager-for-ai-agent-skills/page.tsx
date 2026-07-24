@@ -83,18 +83,19 @@ export default async function MySkillsPost() {
               If you use AI coding agents, you&apos;ve probably built up a
               collection of skills — markdown files that give your agent
               superpowers for specific tasks like code review, PR creation, or
-              feature development. But managing those skills is a mess. They live
-              in scattered directories, you copy-paste them between projects, and
-              sharing them with your team means committing files to every repo.
+              feature development. But managing those skills is a mess. They
+              live in scattered directories, you copy-paste them between
+              projects, and sharing them with your team means committing files
+              to every repo.
             </p>
 
             <p>
               I built <strong>my-skills</strong> to fix this. It&apos;s a single
               CLI that installs skills from any Git repository using a simple{" "}
-              <code>owner/repo</code> shorthand, keeps them updated via
-              content hashing, and works across 10+ AI coding agents — from
-              Claude Code and Cursor to Copilot and Gemini CLI. Think of it
-              as <code>npm</code> for AI agent skills.
+              <code>owner/repo</code> shorthand, keeps them updated via content
+              hashing, and works across 10+ AI coding agents — from Claude Code
+              and Cursor to Copilot and Gemini CLI. Think of it as{" "}
+              <code>npm</code> for AI agent skills.
             </p>
           </div>
         </FadeUp>
@@ -162,7 +163,8 @@ export default async function MySkillsPost() {
                           • A manifest file that makes skill setups reproducible
                         </li>
                         <li>
-                          • A visual interface for browsing and organizing skills
+                          • A visual interface for browsing and organizing
+                          skills
                         </li>
                       </ul>
                     </CardContent>
@@ -178,9 +180,7 @@ export default async function MySkillsPost() {
         {/* How to Use my-skills */}
         <section className="mb-12">
           <FadeUp>
-            <h2 className="mb-6 text-3xl font-bold">
-              How to Use my-skills
-            </h2>
+            <h2 className="mb-6 text-3xl font-bold">How to Use my-skills</h2>
 
             <p className="mb-8">
               my-skills is designed to meet you where you are. Start with the
@@ -245,8 +245,8 @@ ms check`}
                       <strong>What you get:</strong> Git-based skill
                       installation via <code>owner/repo</code> shorthand,
                       SHA-256 content hashing for integrity, a lockfile-style
-                      manifest, favorite repos for fast discovery, and
-                      automatic agent detection
+                      manifest, favorite repos for fast discovery, and automatic
+                      agent detection
                     </div>
                   </div>
                 </CardContent>
