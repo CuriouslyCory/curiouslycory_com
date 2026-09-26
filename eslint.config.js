@@ -3,7 +3,16 @@ import tseslint from "typescript-eslint";
 
 export default tseslint.config(
   {
-    ignores: [".next", ".vercel"],
+    ignores: [
+      ".next",
+      ".vercel",
+      // design-sync (Claude Design): staged tooling, build output, and previews
+      // compiled against the bundle global rather than the app module graph
+      ".ds-sync",
+      "ds-bundle",
+      ".design-sync/.cache",
+      ".design-sync/previews",
+    ],
   },
   ...nextConfig,
   {

@@ -1,0 +1,147 @@
+{
+  "projectId": "bc2a1620-bd5e-42d2-a1ce-6d497000326b",
+  "shape": "package",
+  "pkg": "curiouslycory.com",
+  "globalName": "CuriouslyCory",
+  "buildCmd": "node .design-sync/build.mjs",
+  "entry": ".design-sync/.cache/pkg/index.ts",
+  "srcDir": "../../../src/components/ui",
+  "tsconfig": "../../../tsconfig.json",
+  "cssEntry": "ds-styles.css",
+  "extraFonts": [
+    "../../fonts/fonts.css"
+  ],
+  "extraEntries": [
+    "../../extra-exports.ts"
+  ],
+  "componentSrcMap": {
+    "Toaster": "../../../src/components/ui/sonner.tsx",
+    "AccordionContent": null,
+    "AccordionItem": null,
+    "AccordionTrigger": null,
+    "AlertDescription": null,
+    "AlertTitle": null,
+    "CardAction": null,
+    "CardContent": null,
+    "CardDescription": null,
+    "CardFooter": null,
+    "CardHeader": null,
+    "CardTitle": null,
+    "CommandDialog": null,
+    "CommandEmpty": null,
+    "CommandGroup": null,
+    "CommandInput": null,
+    "CommandItem": null,
+    "CommandList": null,
+    "CommandSeparator": null,
+    "CommandShortcut": null,
+    "DialogClose": null,
+    "DialogContent": null,
+    "DialogDescription": null,
+    "DialogFooter": null,
+    "DialogHeader": null,
+    "DialogOverlay": null,
+    "DialogPortal": null,
+    "DialogTitle": null,
+    "DialogTrigger": null,
+    "DrawerClose": null,
+    "DrawerContent": null,
+    "DrawerDescription": null,
+    "DrawerFooter": null,
+    "DrawerHeader": null,
+    "DrawerOverlay": null,
+    "DrawerPortal": null,
+    "DrawerTitle": null,
+    "DrawerTrigger": null,
+    "DropdownMenuCheckboxItem": null,
+    "DropdownMenuContent": null,
+    "DropdownMenuGroup": null,
+    "DropdownMenuItem": null,
+    "DropdownMenuLabel": null,
+    "DropdownMenuPortal": null,
+    "DropdownMenuRadioGroup": null,
+    "DropdownMenuRadioItem": null,
+    "DropdownMenuSeparator": null,
+    "DropdownMenuShortcut": null,
+    "DropdownMenuSub": null,
+    "DropdownMenuSubContent": null,
+    "DropdownMenuSubTrigger": null,
+    "DropdownMenuTrigger": null,
+    "FormControl": null,
+    "FormDescription": null,
+    "FormField": null,
+    "FormItem": null,
+    "FormLabel": null,
+    "FormMessage": null,
+    "PaginationContent": null,
+    "PaginationEllipsis": null,
+    "PaginationItem": null,
+    "PaginationLink": null,
+    "PaginationNext": null,
+    "PaginationPrevious": null,
+    "PopoverAnchor": null,
+    "PopoverContent": null,
+    "PopoverTrigger": null,
+    "SelectContent": null,
+    "SelectGroup": null,
+    "SelectItem": null,
+    "SelectLabel": null,
+    "SelectScrollDownButton": null,
+    "SelectScrollUpButton": null,
+    "SelectSeparator": null,
+    "SelectTrigger": null,
+    "SelectValue": null,
+    "TableBody": null,
+    "TableCaption": null,
+    "TableCell": null,
+    "TableFooter": null,
+    "TableHead": null,
+    "TableHeader": null,
+    "TableRow": null,
+    "TabsContent": null,
+    "TabsList": null,
+    "TabsTrigger": null
+  },
+  "overrides": {
+    "Dialog": {
+      "cardMode": "single",
+      "viewport": "900x600",
+      "primaryStory": "Open"
+    },
+    "Drawer": {
+      "cardMode": "single",
+      "viewport": "900x600",
+      "primaryStory": "DebugConsole"
+    },
+    "DropdownMenu": {
+      "cardMode": "single",
+      "viewport": "900x600",
+      "primaryStory": "ThemeToggle"
+    },
+    "Popover": {
+      "cardMode": "single",
+      "viewport": "900x600",
+      "primaryStory": "TagFilter"
+    },
+    "Select": {
+      "cardMode": "single",
+      "viewport": "900x600",
+      "primaryStory": "Open"
+    },
+    "Toaster": {
+      "cardMode": "single",
+      "viewport": "900x600",
+      "primaryStory": "Success"
+    },
+    "Table": {
+      "cardMode": "column"
+    },
+    "Command": {
+      "cardMode": "column"
+    },
+    "Pagination": {
+      "cardMode": "column"
+    }
+  },
+  "readmeHeader": ".design-sync/conventions.md"
+}

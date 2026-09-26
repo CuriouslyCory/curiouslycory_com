@@ -1,0 +1,13 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "incremental": false,
+    "rootDir": "../src",
+    "outDir": "./.cache/pkg/types"
+  },
+  "include": ["../src/components/ui/*.tsx"],
+  "exclude": []
+}
