@@ -135,3 +135,94 @@ export const FeedOptions = () => {
     </DropdownMenu>
   );
 };
+
+// Menu content portals to <body>, outside any wrapper, so dark mode is set on
+// <html> the way the site's next-themes toggle does it. The card template
+// paints its own light background, so each story fills the viewport with the
+// page surface a dark-mode visitor would see. Two default-open menus in one
+// story dismiss each other (each one's focus lands "outside" the other), so
+// the header toggle and the post-actions menu are separate stories.
+const DarkPage = ({ children }: { children: React.ReactNode }) => {
+  React.useEffect(() => {
+    document.documentElement.classList.add("dark");
+    return () => document.documentElement.classList.remove("dark");
+  }, []);
+  return (
+    <div className="bg-background text-foreground min-h-screen p-6">
+      {children}
+    </div>
+  );
+};
+
+export const Dark = () => (
+  <DarkPage>
+    <div className="flex justify-end" style={{ width: 240 }}>
+      <DropdownMenu defaultOpen modal={false}>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" size="icon">
+            <Moon className="h-[1.2rem] w-[1.2rem]" />
+            <span className="sr-only">Toggle theme</span>
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          <DropdownMenuItem>
+            <Sun />
+            Light
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Moon />
+            Dark
+          </DropdownMenuItem>
+          <DropdownMenuItem>System</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
+  </DarkPage>
+);
+
+// Shortcuts, separators, and the destructive item on the dark popover surface.
+export const DarkPostActions = () => (
+  <DarkPage>
+    <DropdownMenu defaultOpen modal={false}>
+      <DropdownMenuTrigger asChild>
+        <Button variant="outline" size="icon" aria-label="Post actions">
+          <MoreHorizontal />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="start" style={{ width: 260 }}>
+        <DropdownMenuLabel>
+          A Fork-and-Go Telegram Bot with LangGraph + MCP
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>
+          <Link2 />
+          Copy link
+          <DropdownMenuShortcut>⌘L</DropdownMenuShortcut>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <Copy />
+          Copy as Markdown
+          <DropdownMenuShortcut>⇧⌘C</DropdownMenuShortcut>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <Printer />
+          Print
+          <DropdownMenuShortcut>⌘P</DropdownMenuShortcut>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <Download />
+          Download PDF
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>
+          <PenLine />
+          Edit draft
+        </DropdownMenuItem>
+        <DropdownMenuItem variant="destructive">
+          <X />
+          Unpublish
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  </DarkPage>
+);

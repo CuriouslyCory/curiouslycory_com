@@ -52,3 +52,18 @@ export const AsLink = () => (
     <a href="#projects">Explore the Projects</a>
   </Button>
 );
+
+export const Dark = () => (
+  <div className="dark bg-background text-foreground flex flex-wrap items-center gap-3 rounded-lg p-6">
+    <Button>Send Transmission</Button>
+    <Button variant="secondary">View Projects</Button>
+    <Button variant="outline">Read the Blog</Button>
+    <Button variant="ghost">Cancel</Button>
+    <Button variant="destructive">Abort Mission</Button>
+    <Button variant="link">Open resume</Button>
+    <Button disabled>
+      <Loader2 className="animate-spin" />
+      Transmitting…
+    </Button>
+  </div>
+);

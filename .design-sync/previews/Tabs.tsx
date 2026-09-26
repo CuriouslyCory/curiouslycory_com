@@ -94,3 +94,41 @@ export const DisabledTab = () => (
     </TabsContent>
   </Tabs>
 );
+
+export const Dark = () => (
+  <div className="dark bg-background text-foreground w-full max-w-sm rounded-lg p-6">
+    <Tabs defaultValue="projects">
+      <TabsList>
+        <TabsTrigger value="projects">
+          <Boxes />
+          Projects
+        </TabsTrigger>
+        <TabsTrigger value="blog">
+          <ScrollText />
+          Blog
+        </TabsTrigger>
+        <TabsTrigger value="resume" disabled>
+          <FileText />
+          Resume
+        </TabsTrigger>
+      </TabsList>
+      <TabsContent value="projects">
+        <Card>
+          <CardHeader>
+            <CardTitle className="font-oswald text-lg tracking-tight">
+              CareerCraft Studio
+            </CardTitle>
+            <CardDescription>
+              AI resume and cover letter tailoring, one job posting at a time.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="flex flex-wrap gap-2">
+            <Badge variant="outline">Next.js</Badge>
+            <Badge variant="outline">LangGraph</Badge>
+            <Badge variant="outline">tRPC</Badge>
+          </CardContent>
+        </Card>
+      </TabsContent>
+    </Tabs>
+  </div>
+);

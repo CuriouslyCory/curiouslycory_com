@@ -70,3 +70,21 @@ export const ThoughtDirections = () => (
     <ChatBubble variant="thought" direction="bottom" text="Daydreaming" />
   </div>
 );
+
+export const Dark = () => (
+  <div className="dark bg-background text-foreground grid grid-cols-2 items-start justify-items-start gap-x-16 gap-y-12 rounded-lg px-10 pt-10 pb-14">
+    <ChatBubble variant="speech" direction="top" text="Oops, gravity module offline." />
+    <ChatBubble
+      variant="whisper"
+      text="No transmissions found on that frequency."
+    />
+    <ChatBubble
+      variant="thought"
+      direction="bottom"
+      text="Want to build something together? I'm all ears. Well, all helmet."
+    />
+    <ChatBubble variant="thought" direction="right" text="Drifting right" />
+    <ChatBubble variant="scream" direction="left" text="Houston, we have a bug!" />
+    <ChatBubble variant="thought" direction="bottomLeft" text="Trailing off below" />
+  </div>
+);

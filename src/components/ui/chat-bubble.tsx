@@ -80,9 +80,9 @@ export function ChatBubble({
 }: ChatBubbleProps) {
   const thoughtBubbles = variant === "thought" && (
     <div className={thoughtBubbleVariants({ direction })}>
-      <div className="h-2 w-2 rounded-full bg-black" />
-      <div className="h-1.5 w-1.5 rounded-full bg-black" />
-      <div className="h-1 w-1 rounded-full bg-black" />
+      <div className="h-2 w-2 rounded-full bg-black dark:bg-white" />
+      <div className="h-1.5 w-1.5 rounded-full bg-black dark:bg-white" />
+      <div className="h-1 w-1 rounded-full bg-black dark:bg-white" />
     </div>
   );
 

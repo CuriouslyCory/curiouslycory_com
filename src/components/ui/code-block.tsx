@@ -28,7 +28,7 @@ export function CodeBlock({ children, language }: CodeBlockProps) {
   }
 
   return (
-    <div className="overflow-hidden rounded-md">
+    <div className="ring-border overflow-hidden rounded-md ring-1">
       {/* Terminal title bar */}
       <div className="flex items-center justify-between rounded-t-md bg-zinc-800 px-4 py-2">
         <div className="flex items-center gap-1.5">
@@ -40,9 +40,7 @@ export function CodeBlock({ children, language }: CodeBlockProps) {
           <div className="h-2.5 w-2.5 rounded-full bg-yellow-500/60" />
           <div className="h-2.5 w-2.5 rounded-full bg-green-500/60" />
         </div>
-        <span className="text-muted-foreground font-mono text-xs">
-          {language}
-        </span>
+        <span className="font-mono text-xs text-zinc-400">{language}</span>
       </div>
 
       {/* Code area with collapse animation */}
@@ -55,7 +53,7 @@ export function CodeBlock({ children, language }: CodeBlockProps) {
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.2 }}
             onClick={() => setCollapsed(false)}
-            className="text-muted-foreground hover:text-foreground w-full bg-zinc-900 px-4 py-2 text-left font-mono text-xs transition-colors"
+            className="w-full bg-zinc-900 px-4 py-2 text-left font-mono text-xs text-zinc-400 transition-colors hover:text-zinc-100"
           >
             {"// collapsed — click to expand"}
           </motion.button>
@@ -70,7 +68,7 @@ export function CodeBlock({ children, language }: CodeBlockProps) {
           >
             <button
               onClick={() => copyToClipboard(codeContent)}
-              className="bg-background/80 text-muted-foreground hover:bg-background absolute top-2 right-2 z-10 rounded-md p-1 text-xs"
+              className="absolute top-2 right-2 z-10 rounded-md bg-zinc-800/80 p-1 text-xs text-zinc-400 transition-colors hover:bg-zinc-700 hover:text-zinc-100"
               aria-label="Copy code"
             >
               {copied ? (

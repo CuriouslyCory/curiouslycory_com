@@ -4,9 +4,9 @@ shadcn/ui ("new-york") components styled with Tailwind v4 utility classes and se
 
 ## Setup
 - No provider is needed. `styles.css` already styles `<body>` with `bg-background text-foreground font-sans antialiased` and loads the brand fonts.
-- **Dark mode:** put `class="dark"` on `<html>` or any ancestor. Every token below swaps automatically, so never hand-pick dark colors.
+- **Dark mode:** put `class="dark"` on `<html>` (a whole dark page, including dialogs, menus, and selects, which render outside your tree) or on a wrapper `<div className="dark bg-background text-foreground">` (a dark region). Every token below swaps automatically, so never hand-pick dark colors.
 - **Exports are flat.** Use `DialogContent`, `CardHeader`, `SelectItem` (never `Dialog.Content`). Always compose sub-parts inside their root: `Card`, `Dialog`, `Drawer`, `Popover`, `DropdownMenu`, `Select`, `Tabs`, `Accordion`, `Table`, `Command`, `Pagination`, `Alert`, and `Form` (driven by `useForm` from the global).
-- **Toasts:** render one `<Toaster position="bottom-right" richColors />` near the page root, then call `toast.success("…", { description })` or `toast.error("…")`.
+- **Toasts:** render one `<Toaster position="bottom-right" richColors />` near the page root, then call `toast.success("…", { description })` or `toast.error("…")`. In a dark design add `theme="dark"`; the Toaster follows the site's theme switcher, which isn't in the bundle, so it ignores the `dark` class.
 - **Icons:** lucide icons are on the global (`Send`, `ArrowRight`, `ExternalLink`, `Download`, `Search`, `Sparkles`, `Moon`, `Sun`, `Menu`, `X`, `Check`, `ChevronDown`, and others). Inside `Button` they auto-size to 16px.
 
 ## Styling idiom: Tailwind utilities with semantic tokens
@@ -30,7 +30,7 @@ Only precompiled classes exist; there is no JIT. Arbitrary values such as `w-[30
 - Each `components/general/<Name>/<Name>.prompt.md` has the component's props and verified examples; `<Name>.d.ts` is its API.
 
 ## Gotchas
-- `CcLogo` has a light, hard-coded fill: put it only on dark surfaces (`bg-foreground`). Its `height`/`width` props take class strings, e.g. `height="h-10"`.
+- `CcLogo` is drawn in the current text color. Place it on the site's bar surface, `bg-foreground text-background`, which works in both themes, or give it a `text-*` class. Its `height`/`width` props take class strings, e.g. `height="h-10"`.
 - `CodeBlock` takes the code as `children` (a string) plus `language`. Keep its lines short.
 
 ## Example

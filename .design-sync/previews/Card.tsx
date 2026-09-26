@@ -79,3 +79,54 @@ export const Bordered = () => (
     </CardFooter>
   </Card>
 );
+
+export const Dark = () => (
+  <div className="dark bg-background text-foreground w-full max-w-md rounded-lg p-6">
+    <Card className="w-full">
+      <CardHeader>
+        <CardTitle className="font-oswald text-xl tracking-tight">
+          CareerCraft Studio
+        </CardTitle>
+        <CardDescription>
+          An AI career assistant that tailors resumes and cover letters to each
+          job posting.
+        </CardDescription>
+        <CardAction>
+          <Badge variant="secondary">Live</Badge>
+        </CardAction>
+      </CardHeader>
+      <CardContent className="flex flex-wrap gap-2">
+        <Badge variant="outline">Next.js</Badge>
+        <Badge variant="outline">LangGraph</Badge>
+        <Badge variant="outline">tRPC</Badge>
+      </CardContent>
+      <CardFooter className="gap-2">
+        <Button size="sm">
+          <ExternalLink />
+          Visit
+        </Button>
+        <Button size="sm" variant="ghost">
+          Read the write-up
+        </Button>
+      </CardFooter>
+    </Card>
+  </div>
+);
+
+export const DarkBordered = () => (
+  <div className="dark bg-background text-foreground w-full max-w-md rounded-lg p-6">
+    <Card className="w-full">
+      <CardHeader className="border-b">
+        <CardTitle>Mission Log</CardTitle>
+        <CardDescription>Last contact 3 days ago</CardDescription>
+      </CardHeader>
+      <CardContent className="text-sm leading-relaxed">
+        Rebuilt the telegram bot on LangGraph and shipped a new blog post about
+        it. Next up: a resume builder that prints cleanly to PDF.
+      </CardContent>
+      <CardFooter className="border-t">
+        <span className="text-muted-foreground text-xs">Posted to the blog</span>
+      </CardFooter>
+    </Card>
+  </div>
+);

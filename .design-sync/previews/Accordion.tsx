@@ -83,3 +83,27 @@ export const Collapsed = () => (
     </AccordionItem>
   </Accordion>
 );
+
+export const Dark = () => (
+  <div className="dark bg-background text-foreground w-full max-w-sm rounded-lg p-6">
+    <Accordion type="single" collapsible defaultValue="stack">
+      <AccordionItem value="stack">
+        <AccordionTrigger>What is this site built with?</AccordionTrigger>
+        <AccordionContent className="text-muted-foreground">
+          Next.js App Router, Tailwind v4 and shadcn/ui, deployed on Vercel.
+          Every blog post is a hand-written React page.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="easter-eggs">
+        <AccordionTrigger>Are there really easter eggs?</AccordionTrigger>
+        <AccordionContent className="text-muted-foreground">
+          A few. Try the constellation in the header, or check your Quest Log.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="retired" disabled>
+        <AccordionTrigger>Retired missions</AccordionTrigger>
+        <AccordionContent>Nothing to see here.</AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  </div>
+);

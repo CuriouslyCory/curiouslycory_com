@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Label, Slider } from "curiouslycory.com";
+import { Card, Label, Slider } from "curiouslycory.com";
 
 export const Default = () => {
   const [value, setValue] = React.useState([65]);
@@ -102,5 +102,54 @@ export const Vertical = () => (
         <span className="text-muted-foreground text-xs">{band.label}</span>
       </div>
     ))}
+  </div>
+);
+
+export const Dark = () => (
+  <div className="dark bg-background text-foreground grid w-full max-w-md gap-6 rounded-lg p-6">
+    <div className="grid gap-3">
+      <div className="flex items-center justify-between">
+        <Label>Thrust</Label>
+        <span className="text-muted-foreground font-mono text-sm">65%</span>
+      </div>
+      <Slider defaultValue={[65]} max={100} step={1} aria-label="Thrust" />
+    </div>
+    <div className="grid gap-3">
+      <div className="flex items-center justify-between">
+        <Label>Years of experience</Label>
+        <span className="text-muted-foreground font-mono text-sm">3–8 yrs</span>
+      </div>
+      <Slider
+        defaultValue={[3, 8]}
+        min={0}
+        max={15}
+        step={1}
+        aria-label="Years of experience"
+      />
+    </div>
+    <Card className="grid gap-3 p-6">
+      <Label>LLM temperature</Label>
+      <Slider
+        defaultValue={[0.7]}
+        min={0}
+        max={1}
+        step={0.1}
+        aria-label="LLM temperature"
+      />
+      <div className="text-muted-foreground flex justify-between text-xs">
+        <span>Precise</span>
+        <span>Creative</span>
+      </div>
+    </Card>
+    <div className="grid gap-3">
+      <div className="flex items-center justify-between">
+        <Label className="opacity-50">Oxygen reserve</Label>
+        <span className="text-muted-foreground font-mono text-sm">42%</span>
+      </div>
+      <Slider defaultValue={[42]} max={100} disabled aria-label="Oxygen reserve" />
+      <p className="text-muted-foreground text-sm">
+        Locked while the airlock is cycling.
+      </p>
+    </div>
   </div>
 );

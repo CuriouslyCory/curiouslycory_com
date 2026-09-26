@@ -40,7 +40,8 @@ export function Navigation() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="hover:bg-primary-foreground hover:text-primary focus-visible:ring-ring relative rounded-md px-3 py-2 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-offset-2"
+                aria-current={isActive(item.href) ? "page" : undefined}
+                className="hover:bg-background/10 focus-visible:ring-ring relative rounded-md px-3 py-2 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-offset-2"
               >
                 {item.name}
                 {isActive(item.href) && (
@@ -81,10 +82,11 @@ export function Navigation() {
                     <Link
                       key={item.href}
                       href={item.href}
+                      aria-current={isActive(item.href) ? "page" : undefined}
                       onClick={() => setDrawerOpen(false)}
-                      className={`hover:text-primary focus-visible:ring-ring flex min-h-12 items-center rounded-md pl-4 text-lg font-medium transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none ${
+                      className={`hover:bg-background/10 focus-visible:ring-ring flex min-h-12 items-center rounded-md pl-4 text-lg font-medium transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none ${
                         isActive(item.href)
-                          ? "border-primary text-primary border-l-2"
+                          ? "border-primary bg-background/10 border-l-2"
                           : "border-l-2 border-transparent"
                       }`}
                     >

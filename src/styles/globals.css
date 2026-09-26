@@ -25,6 +25,7 @@
 }
 
 :root {
+  color-scheme: light;
   --background: hsl(36, 24%, 96%);
   --foreground: hsl(23, 6%, 24%);
   --card: hsl(36, 16%, 99%);
@@ -55,11 +56,12 @@
 }
 
 .dark {
+  color-scheme: dark;
   --background: hsl(240, 10%, 10%);
   --foreground: hsl(36, 24%, 96%);
-  --card: hsl(240, 8%, 7%);
+  --card: hsl(240, 8%, 13%);
   --card-foreground: hsl(36, 18%, 95%);
-  --popover: hsl(240, 8%, 7%);
+  --popover: hsl(240, 8%, 13%);
   --popover-foreground: hsl(36, 18%, 95%);
   --primary: var(--color-orange-500);
   --primary-foreground: var(--color-slate-100);
@@ -67,12 +69,12 @@
   --secondary-foreground: var(--color-slate-100);
   --muted: hsl(240, 6%, 16%);
   --muted-foreground: hsl(36, 10%, 65%);
-  --accent: hsl(240, 6%, 16%);
+  --accent: hsl(240, 6%, 24%);
   --accent-foreground: hsl(36, 18%, 95%);
-  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive: oklch(0.704 0.191 22.216);
   --destructive-foreground: hsl(0, 0%, 98%);
   --border: hsl(240, 6%, 18%);
-  --input: hsl(240, 6%, 18%);
+  --input: hsl(240, 6%, 28%);
   --ring: hsl(0, 0%, 83.1%);
   --surface-elevated: hsl(240, 8%, 13%);
   --surface-sunken: hsl(240, 10%, 7%);
