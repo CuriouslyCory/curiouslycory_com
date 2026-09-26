@@ -94,6 +94,8 @@
   --animate-sky-drift-rtl: sky-drift-rtl 30s linear forwards;
   --animate-shooting-star-ltr: shooting-star-ltr 2s linear forwards;
   --animate-shooting-star-rtl: shooting-star-rtl 2s linear forwards;
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
 
   @keyframes orbit-spin {
     from { transform: rotate(0deg); }
@@ -197,6 +199,22 @@
     }
     100% {
       transform: rotate(0deg) scaleX(-1) translateX(-4rem);
+    }
+  }
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
     }
   }
 

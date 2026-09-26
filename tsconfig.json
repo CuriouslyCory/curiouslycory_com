@@ -59,9 +59,11 @@
     "**/*.cjs",
     "**/*.js",
     ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts"
+    ".next/dev/types/**/*.ts",
+    ".design-sync/extra-exports.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "ds-bundle"
   ]
 }
