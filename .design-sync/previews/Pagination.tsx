@@ -92,3 +92,35 @@ export const LongArchive = () => (
     </PaginationContent>
   </Pagination>
 );
+
+export const Dark = () => (
+  <div className="dark bg-background text-foreground w-full rounded-lg p-6">
+    <Pagination>
+      <PaginationContent>
+        <PaginationItem>
+          <PaginationPrevious href="#blog?page=1" />
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLink href="#blog?page=1">1</PaginationLink>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLink href="#blog?page=2" isActive>
+            2
+          </PaginationLink>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLink href="#blog?page=3">3</PaginationLink>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationEllipsis />
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLink href="#blog?page=12">12</PaginationLink>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationNext href="#blog?page=3" />
+        </PaginationItem>
+      </PaginationContent>
+    </Pagination>
+  </div>
+);

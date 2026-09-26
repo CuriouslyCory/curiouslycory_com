@@ -1,3 +1,4 @@
+import * as React from "react";
 import {
   Button,
   Check,
@@ -147,3 +148,61 @@ export const QuestLogRight = () => (
     </DrawerContent>
   </Drawer>
 );
+
+// Drawer content portals to <body>, outside any wrapper, so dark mode is set
+// on <html> the way the site's next-themes toggle does it.
+export const Dark = () => {
+  React.useEffect(() => {
+    document.documentElement.classList.add("dark");
+    return () => document.documentElement.classList.remove("dark");
+  }, []);
+  return (
+    // The card template paints its own light background, so the story fills
+    // the viewport with the page surface a dark-mode visitor would see.
+    <div className="bg-background text-foreground min-h-screen p-6">
+      <Drawer defaultOpen>
+        <DrawerTrigger asChild>
+          <Button
+            variant="outline"
+            size="icon"
+            className="h-8 w-8 rounded-full"
+          >
+            <ChevronUp className="h-4 w-4" />
+          </Button>
+        </DrawerTrigger>
+        <DrawerContent>
+          <div className="mx-auto w-full max-w-sm">
+            <DrawerHeader>
+              <DrawerTitle>Debug Console</DrawerTitle>
+            </DrawerHeader>
+            <div className="p-4 pb-8">
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <h3 className="text-sm font-medium">Add Item</h3>
+                  <Select>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select item" />
+                    </SelectTrigger>
+                  </Select>
+                </div>
+                <div className="space-y-2">
+                  <h3 className="text-sm font-medium">Start Quest</h3>
+                  <Select>
+                    <SelectTrigger className="w-full">
+                      <SelectValue placeholder="Select quest" />
+                    </SelectTrigger>
+                  </Select>
+                </div>
+                <div className="space-y-2">
+                  <h3 className="text-sm font-medium">Update Quest Progress</h3>
+                  <p className="text-muted-foreground text-sm">Find the Bats</p>
+                  <Input type="number" min={0} max={100} defaultValue={40} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </DrawerContent>
+      </Drawer>
+    </div>
+  );
+};

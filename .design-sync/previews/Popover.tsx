@@ -1,3 +1,4 @@
+import * as React from "react";
 import {
   Button,
   Check,
@@ -141,3 +142,61 @@ export const WithForm = () => (
     </PopoverContent>
   </Popover>
 );
+
+// Popover content portals to <body>, outside any wrapper, so dark mode is set
+// on <html> the way the site's next-themes toggle does it.
+export const Dark = () => {
+  React.useEffect(() => {
+    document.documentElement.classList.add("dark");
+    return () => document.documentElement.classList.remove("dark");
+  }, []);
+  const selected = "LangGraph";
+  return (
+    // The card template paints its own light background, so the story fills
+    // the viewport with the page surface a dark-mode visitor would see.
+    <div className="bg-background text-foreground min-h-screen p-6">
+      <div className="flex items-center gap-2">
+        <span className="text-sm font-medium">Filter by tag:</span>
+        <Popover defaultOpen>
+          <PopoverTrigger asChild>
+            <Button
+              variant="outline"
+              role="combobox"
+              aria-expanded
+              className="w-[200px] justify-between"
+            >
+              {selected}
+              <ChevronsUpDown className="opacity-50" />
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-[200px] p-0" align="start">
+            <Command>
+              <CommandInput placeholder="Search tags..." className="h-9" />
+              <CommandList>
+                <CommandEmpty>No tag found.</CommandEmpty>
+                <CommandGroup>
+                  <CommandItem value="all-projects">
+                    All Projects
+                    <Check className="ml-auto opacity-0" />
+                  </CommandItem>
+                  {tags.map((tag) => (
+                    <CommandItem key={tag} value={tag}>
+                      {tag}
+                      <Check
+                        className={
+                          tag === selected
+                            ? "ml-auto opacity-100"
+                            : "ml-auto opacity-0"
+                        }
+                      />
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+              </CommandList>
+            </Command>
+          </PopoverContent>
+        </Popover>
+      </div>
+    </div>
+  );
+};

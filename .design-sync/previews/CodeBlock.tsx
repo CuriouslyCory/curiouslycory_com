@@ -45,3 +45,17 @@ const uint16_t PixelCount = 13;
     </CodeBlock>
   </div>
 );
+
+export const Dark = () => (
+  <div className="dark bg-background text-foreground w-full max-w-md rounded-lg p-6">
+    <CodeBlock language="typescript">
+      {`type Context = {
+  traceId?: string;
+}
+
+// Can be called like:
+someFunction({})
+someFunction({ traceId: "abc123" })`}
+    </CodeBlock>
+  </div>
+);

@@ -1,3 +1,4 @@
+import * as React from "react";
 import {
   Label,
   Select,
@@ -139,3 +140,43 @@ export const States = () => (
     </div>
   </div>
 );
+
+export const Dark = () => {
+  React.useEffect(() => {
+    document.documentElement.classList.add("dark");
+    return () => document.documentElement.classList.remove("dark");
+  }, []);
+  return (
+    // The card template paints its own light background, so the story fills
+    // the viewport with the page surface a dark-mode visitor would see.
+    <div className="bg-background text-foreground flex min-h-screen flex-col items-start gap-3 p-6">
+      <span className="text-sm">I wear many hats, choose one:</span>
+      <Select defaultOpen defaultValue="ai">
+        <SelectTrigger style={{ width: 280 }} aria-label="Resume">
+          <SelectValue placeholder="Select a resume" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectLabel>Software</SelectLabel>
+            {resumes
+              .filter((resume) => resume.id !== "maker")
+              .map((resume) => (
+                <SelectItem key={resume.id} value={resume.id}>
+                  <span>{resume.icon}</span>
+                  <span>{resume.title}</span>
+                </SelectItem>
+              ))}
+          </SelectGroup>
+          <SelectSeparator />
+          <SelectGroup>
+            <SelectLabel>Hardware</SelectLabel>
+            <SelectItem value="maker">
+              <span>🔧</span>
+              <span>Hardware Tinkerer</span>
+            </SelectItem>
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+    </div>
+  );
+};

@@ -84,3 +84,50 @@ export const Disabled = () => (
     </p>
   </div>
 );
+
+export const Dark = () => (
+  <div className="dark bg-background text-foreground grid w-full max-w-md gap-4 rounded-lg p-6">
+    <div className="grid gap-2">
+      <Label htmlFor="dark-callsign">Callsign</Label>
+      <Input id="dark-callsign" placeholder="Major Tom" />
+    </div>
+    <div className="grid gap-2">
+      <Label htmlFor="dark-blog-search">Search the blog</Label>
+      <div className="relative">
+        <Search className="text-muted-foreground pointer-events-none absolute top-1/2 left-2 size-4 -translate-y-1/2" />
+        <Input
+          id="dark-blog-search"
+          className="pl-8"
+          placeholder="LangGraph, Arduino, TypeScript…"
+        />
+      </div>
+    </div>
+    <div className="grid gap-2">
+      <Label htmlFor="dark-frequency">Frequency</Label>
+      <Input
+        id="dark-frequency"
+        type="email"
+        defaultValue="astronaut@example.com"
+      />
+    </div>
+    <div className="grid gap-2">
+      <Label htmlFor="dark-bad-frequency" className="text-destructive">
+        Return frequency
+      </Label>
+      <Input
+        id="dark-bad-frequency"
+        type="email"
+        defaultValue="major-tom@ground-control"
+        aria-invalid
+        aria-describedby="dark-bad-frequency-msg"
+      />
+      <p id="dark-bad-frequency-msg" className="text-destructive text-sm">
+        That frequency is out of range. Try a full email address.
+      </p>
+    </div>
+    <div className="grid gap-2">
+      <Label htmlFor="dark-station-id">Station ID</Label>
+      <Input id="dark-station-id" defaultValue="ISS-CURIOUSLYCORY-01" disabled />
+    </div>
+  </div>
+);

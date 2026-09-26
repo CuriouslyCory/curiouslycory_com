@@ -1,3 +1,4 @@
+import * as React from "react";
 import {
   Button,
   Dialog,
@@ -69,3 +70,41 @@ export const WithForm = () => (
     </DialogContent>
   </Dialog>
 );
+
+// Dialog content portals to <body>, outside any wrapper, so dark mode is set
+// on <html> the way the site's next-themes toggle does it.
+export const Dark = () => {
+  React.useEffect(() => {
+    document.documentElement.classList.add("dark");
+    return () => document.documentElement.classList.remove("dark");
+  }, []);
+  return (
+    // The card template paints its own light background, so the story fills
+    // the viewport with the page surface a dark-mode visitor would see.
+    <div className="bg-background text-foreground min-h-screen p-6">
+      <Dialog defaultOpen>
+        <DialogTrigger asChild>
+          <Button variant="outline">Open quest log</Button>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Quest Log</DialogTitle>
+            <DialogDescription>
+              Hidden achievements you have unlocked while exploring the site.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-2">
+            <Label htmlFor="dark-callsign">Callsign</Label>
+            <Input id="dark-callsign" placeholder="Major Tom" />
+          </div>
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button variant="outline">Not now</Button>
+            </DialogClose>
+            <Button>Close</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </div>
+  );
+};

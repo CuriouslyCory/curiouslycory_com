@@ -43,3 +43,26 @@ export const ArticleSections = () => (
     </p>
   </div>
 );
+
+export const Dark = () => (
+  <div className="dark bg-background text-foreground w-full max-w-lg rounded-lg p-6">
+    <div className="space-y-1">
+      <h4 className="font-oswald text-lg font-semibold tracking-tight">
+        Rebuilding Blog Search
+      </h4>
+      <p className="text-muted-foreground text-sm">
+        Hybrid ranking with Postgres full-text search and pgvector.
+      </p>
+    </div>
+    <Separator className="my-4" />
+    <div className="flex h-5 items-center gap-4 text-sm">
+      <span>Blog</span>
+      <Separator orientation="vertical" />
+      <span>Projects</span>
+      <Separator orientation="vertical" />
+      <span>Resume</span>
+      <Separator orientation="vertical" />
+      <span>Contact</span>
+    </div>
+  </div>
+);

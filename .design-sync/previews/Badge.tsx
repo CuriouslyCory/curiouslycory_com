@@ -70,3 +70,35 @@ export const LiveStatus = () => (
     </div>
   </div>
 );
+
+export const Dark = () => (
+  <div className="dark bg-background text-foreground flex flex-col gap-3 rounded-lg p-6">
+    <div className="flex flex-wrap items-center gap-2">
+      <Badge>Featured</Badge>
+      <Badge variant="secondary">LangGraph</Badge>
+      <Badge variant="outline">TypeScript</Badge>
+      <Badge variant="destructive">Deprecated</Badge>
+    </div>
+    <div className="flex flex-wrap items-center gap-2">
+      <Badge>
+        <Sparkles />
+        New post
+      </Badge>
+      <Badge variant="secondary">
+        <Check />
+        Shipped
+      </Badge>
+      <Badge variant="outline">
+        <Sparkles />
+        AI Agents
+      </Badge>
+    </div>
+    <div className="flex flex-wrap items-center gap-2">
+      <Badge variant="destructive">LIVE</Badge>
+      <span className="font-medium">Wiring an Arduino weather station</span>
+      <Badge variant="outline" className="text-muted-foreground">
+        Offline
+      </Badge>
+    </div>
+  </div>
+);

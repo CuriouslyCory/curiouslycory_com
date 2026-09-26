@@ -127,3 +127,43 @@ export const NoResults = () => (
     </CommandList>
   </Command>
 );
+
+// Command renders inline, so the `dark` class on a wrapper is enough: the
+// tokens and `dark:` utilities resolve for everything inside it.
+export const Dark = () => (
+  <div className="dark bg-background text-foreground rounded-lg p-6">
+    <Command className="rounded-lg border shadow-md" style={{ width: 380 }}>
+      <CommandInput placeholder="Type a command or search..." />
+      <CommandList>
+        <CommandEmpty>No results found.</CommandEmpty>
+        <CommandGroup heading="Navigate">
+          <CommandItem>
+            <Boxes />
+            Projects
+          </CommandItem>
+          <CommandItem>
+            <ScrollText />
+            Blog
+          </CommandItem>
+          <CommandItem>
+            <FileText />
+            Resume
+          </CommandItem>
+        </CommandGroup>
+        <CommandSeparator />
+        <CommandGroup heading="Quick actions">
+          <CommandItem>
+            <Moon />
+            Toggle dark mode
+            <CommandShortcut>⌘J</CommandShortcut>
+          </CommandItem>
+          <CommandItem>
+            <Copy />
+            Copy email address
+            <CommandShortcut>⌘E</CommandShortcut>
+          </CommandItem>
+        </CommandGroup>
+      </CommandList>
+    </Command>
+  </div>
+);

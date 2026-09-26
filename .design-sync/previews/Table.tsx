@@ -110,3 +110,40 @@ export const SelectedRow = () => (
     </TableBody>
   </Table>
 );
+
+export const Dark = () => (
+  <div className="dark bg-background text-foreground w-full rounded-lg p-6">
+    <Table>
+      <TableCaption>Active missions and their commit counts.</TableCaption>
+      <TableHeader>
+        <TableRow>
+          <TableHead>Project</TableHead>
+          <TableHead>Status</TableHead>
+          <TableHead>Stack</TableHead>
+          <TableHead className="text-right">Commits</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {projects.map((p) => (
+          <TableRow
+            key={p.name}
+            data-state={p.name === "Infinite Docs" ? "selected" : undefined}
+          >
+            <TableCell className="font-medium">{p.name}</TableCell>
+            <TableCell>
+              <Badge variant={p.variant}>{p.status}</Badge>
+            </TableCell>
+            <TableCell className="text-muted-foreground">{p.stack}</TableCell>
+            <TableCell className="text-right">{p.commits}</TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+      <TableFooter>
+        <TableRow>
+          <TableCell colSpan={3}>Total commits</TableCell>
+          <TableCell className="text-right">750</TableCell>
+        </TableRow>
+      </TableFooter>
+    </Table>
+  </div>
+);

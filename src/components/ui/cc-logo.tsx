@@ -24,10 +24,7 @@ const SvgComponent = ({
         id="Layer_1"
         data-name="Layer 1"
         viewBox="0 0 1000.69 704.18"
-        className={cn(
-          svgClassName,
-          "fill-primary-foreground stroke-primary-foreground dark:fill-[#5d5c61] dark:stroke-black",
-        )}
+        className={cn("fill-current stroke-current", svgClassName)}
         {...svgProps}
       >
         <defs>

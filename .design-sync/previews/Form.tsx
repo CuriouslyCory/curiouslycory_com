@@ -1,6 +1,7 @@
 import * as React from "react";
 import {
   Button,
+  Card,
   Form,
   FormControl,
   FormDescription,
@@ -232,5 +233,84 @@ export const WithSelect = () => {
         </div>
       </form>
     </Form>
+  );
+};
+
+export const Dark = () => {
+  const form = useForm<ContactValues>({
+    defaultValues: {
+      name: "Ada Lovelace",
+      email: "major-tom@ground-control",
+      message: "",
+    },
+  });
+  React.useEffect(() => {
+    form.setError("email", {
+      message: "That frequency is out of range. Use a full email address.",
+    });
+    form.setError("message", {
+      message: "Every transmission needs a message.",
+    });
+  }, [form]);
+  return (
+    <div className="dark bg-background text-foreground w-full max-w-lg rounded-lg p-6">
+      <Card className="p-6">
+        <Form {...form}>
+          <form className="grid gap-4">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Callsign</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Frequency</FormLabel>
+                  <FormControl>
+                    <Input type="email" {...field} />
+                  </FormControl>
+                  <FormDescription>
+                    Where I'll send the reply transmission.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="message"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Your Message</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Want to build something together?"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <div>
+              <Button type="button">
+                <Send />
+                Send Transmission
+              </Button>
+            </div>
+          </form>
+        </Form>
+      </Card>
+    </div>
   );
 };

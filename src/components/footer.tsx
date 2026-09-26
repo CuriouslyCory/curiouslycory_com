@@ -36,7 +36,7 @@ function TypingTagline() {
   return (
     <p
       ref={ref}
-      className="text-muted-foreground mt-3 min-h-[1.25rem] text-sm"
+      className="text-background/70 mt-3 min-h-[1.25rem] text-sm"
       aria-label={tagline}
     >
       {displayed}
@@ -77,7 +77,7 @@ export function Footer() {
 
           {/* Column 2: Explore nav links */}
           <div>
-            <h3 className="font-oswald text-muted-foreground text-sm font-semibold tracking-widest uppercase">
+            <h3 className="font-oswald text-background/70 text-sm font-semibold tracking-widest uppercase">
               Explore
             </h3>
             <ul className="mt-4 space-y-2">
@@ -96,7 +96,7 @@ export function Footer() {
 
           {/* Column 3: Find Me social icons */}
           <div>
-            <h3 className="font-oswald text-muted-foreground text-sm font-semibold tracking-widest uppercase">
+            <h3 className="font-oswald text-background/70 text-sm font-semibold tracking-widest uppercase">
               Find Me
             </h3>
             <ul className="mt-4 flex flex-wrap gap-4">

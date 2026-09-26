@@ -23,13 +23,21 @@
 - `[GRID_OVERFLOW]` on Command/Pagination is resolved by `cardMode: "column"`; overlays (Dialog, Drawer, DropdownMenu, Popover, Select, Toaster) are single-mode 900x600 with an explicit `primaryStory` (the site's own composition, or the open state).
 
 ## Preview authoring gotchas (from the first sync's waves)
-- Overlays render open via `defaultOpen` on the Radix/vaul root. DropdownMenu stories use `modal={false}` so several open menus in the full card don't block each other; Popover-with-inputs uses `onOpenAutoFocus={(e) => e.preventDefault()}` to avoid selected-text captures.
+- Overlays render open via `defaultOpen` on the Radix/vaul root. DropdownMenu stories use `modal={false}` so open menus in separate stories don't block each other through body pointer-events/aria-hidden (two open menus in the SAME story still close each other — see Dark-mode stories); Popover-with-inputs uses `onOpenAutoFocus={(e) => e.preventDefault()}` to avoid selected-text captures.
 - Toaster: the card template's single-story root has `transform: translateZ(0)`, which becomes the containing block for sonner's inline `position: fixed` toaster — stories give the wrapper `minHeight: 552`. Each story uses its own `<Toaster id>` + `toast(..., { toasterId, id, duration: Infinity })` so toasts don't pile up across cells. Never name an export `Error` (shadows the global).
 - Form: `useForm` comes from the bundle global; `form.setError` in a `useEffect` shows FormMessage states statically.
 - Command: pass `value` to `CommandInput` to render the `CommandEmpty` state statically.
 - ChatBubble is `inline-block` but still stretches in grid/flex — wrap in `justify-items-start` / `flex`.
 - CodeBlock's real props are `children: string` + `language`; long lines break mid-word (`break-all`), so keep sample lines short.
 - CcLogo is hard-coded to a light fill — only place it on dark surfaces (`bg-foreground`); its `height`/`width` props take Tailwind class strings (`"h-10"`).
+
+## Dark-mode stories (added in the second sync)
+- Every component has a `Dark` export (Card and DropdownMenu have a second one). Inline components wrap the composition in `<div className="dark bg-background text-foreground rounded-lg p-6">` — the `dark` variant is `&:is(.dark *)`, so it applies to descendants. Overlays (Dialog, Drawer, DropdownMenu, Popover, Select, Toaster) portal to `<body>`, so their Dark stories add `dark` to `<html>` in a `useEffect` (with cleanup) like next-themes does, and wrap the story in `bg-background text-foreground min-h-screen p-6` because the card template paints its own light background. Safe only in single-mode cards (one story per page).
+- Changing a preview clears ALL its grades — regrade every cell, not just Dark.
+- Two `defaultOpen` DropdownMenus in one story close each other (the second takes focus → the first closes → focus returns → the second closes), even with `modal={false}`. One open menu per story.
+- Sonner's `<Toaster>` takes its theme from next-themes' `useTheme()`, not the `dark` class. Without a ThemeProvider (Claude Design, previews) it falls back to "system", so dark stories pass `theme="dark"` — the value the site's provider supplies.
+- `.dark` must carry `color-scheme: dark` (next-themes sets it inline on the live site, but nothing else would).
+- ChatBubble grids need `items-start` or bubbles stretch to the row's tallest; leave ~3.5rem below bottom-trailing thought bubbles.
 
 ## Component-source defects surfaced by the sync
 Fixed in the same PR as the first sync (#57): Accordion now renders its chevron and has `accordion-down/up` keyframes in globals.css; Skeleton uses `bg-foreground/10` (was `bg-accent`, invisible on light surfaces); ChatBubble thought dots trail away along each speech tail's axis and anchor, largest first (top/bottom and the bottom corners stack vertically; left/right/rightBottom run horizontally), and the `top` speech tail now points up (it pointed right). `/contact` got `mb-10` (was `mb-8`) so the downward trail clears the form card.
@@ -45,3 +53,5 @@ Fixed in the same PR as the first sync (#57): Accordion now renders its chevron 
 - Vendored fonts are pinned Google Fonts files; if layout.tsx changes families/weights, re-fetch.
 - Toaster previews depend on the card template's `translateZ(0)` behaviour (the `minHeight: 552` workaround); if the converter's card template changes, re-check the Toaster sheet.
 - The `.d.ts` contracts come from `tsc` declarations of src — a tsc upgrade or tsconfig change can alter them.
+- `[RENDER] root empty` can flake when validate runs concurrently with a heavy capture (seen once on Accordion/Card/CcLogo/Form with 46–86 KB screenshots and no errors); re-run validate alone before chasing it.
+- CcLogo is `fill-current stroke-current` since the dark-mode pass: any wrapper must set a text color (`bg-foreground text-background` for the site's bars) or the logo inherits the page text color and can vanish.
