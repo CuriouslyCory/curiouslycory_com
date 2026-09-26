@@ -72,7 +72,7 @@ export default function Contact() {
   return (
     <div className="mx-auto max-w-lg">
       <h1 className="font-oswald mb-6 text-3xl font-bold">Contact Me</h1>
-      <div className="mb-8 flex justify-center">
+      <div className="mb-10 flex justify-center">
         <ChatBubble
           variant="thought"
           direction="bottom"

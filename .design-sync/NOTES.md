@@ -32,7 +32,7 @@
 - CcLogo is hard-coded to a light fill — only place it on dark surfaces (`bg-foreground`); its `height`/`width` props take Tailwind class strings (`"h-10"`).
 
 ## Component-source defects surfaced by the sync
-Fixed in the same PR as the first sync (#57): Accordion now renders its chevron and has `accordion-down/up` keyframes in globals.css; Skeleton uses `bg-foreground/10` (was `bg-accent`, invisible on light surfaces); ChatBubble thought dots sit 6px outside the border for every direction (bottomRight/left/right/top were overlapping or unpositioned).
+Fixed in the same PR as the first sync (#57): Accordion now renders its chevron and has `accordion-down/up` keyframes in globals.css; Skeleton uses `bg-foreground/10` (was `bg-accent`, invisible on light surfaces); ChatBubble thought dots trail away along each speech tail's axis and anchor, largest first (top/bottom and the bottom corners stack vertically; left/right/rightBottom run horizontally), and the `top` speech tail now points up (it pointed right). `/contact` got `mb-10` (was `mb-8`) so the downward trail clears the form card.
 - Still open: sonner toasts use sonner's system font stack, not Raleway (same on the live site). `TwitchLiveStatus.tsx` hand-rolls a `bg-gray-200` pulse that could be `<Skeleton>` (and is wrong in dark mode).
 
 ## Skipped states
