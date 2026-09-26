@@ -1,13 +1,21 @@
-import Link from "next/link";
+import { Suspense } from "react";
 import { type Metadata } from "next";
 
-import { Astronaut } from "~/components/astronaut";
-import { Button } from "~/components/ui/button";
-import { SkyAmbiance } from "~/components/sky-ambiance";
+import { About } from "~/components/home/about";
+import { ContactCta } from "~/components/home/contact-cta";
+import {
+  FeaturedProjects,
+  FeaturedProjectsSkeleton,
+} from "~/components/home/featured-projects";
+import { Hero } from "~/components/home/hero";
+import {
+  LatestPosts,
+  LatestPostsSkeleton,
+} from "~/components/home/latest-posts";
+import { StayInOrbit } from "~/components/home/stay-in-orbit";
 
-import { ChatBubble } from "~/components/ui/chat-bubble";
-import { FavoriteTech } from "~/components/favorite-tech";
-import { MyLinks } from "~/components/my-links";
+// Projects and posts are read from the DB per request (same as /projects)
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "CuriouslyCory | Web Developer",
@@ -39,109 +47,17 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <section className="relative overflow-x-clip pt-12 pb-0 md:overflow-clip md:pt-28">
-        <SkyAmbiance />
-        {/* Mobile hero: ChatBubble + centered Astronaut */}
-        <div className="flex flex-col items-center md:hidden">
-          <ChatBubble
-            text="Hi, I'm CuriouslyCory, and I like to build things."
-            direction="bottom"
-            className="inline-block"
-          />
-          <div className="w-full max-w-72 overflow-hidden">
-            <Astronaut className="translate-y-1" />
-          </div>
-        </div>
-
-        {/* Desktop hero: asymmetric two-column */}
-        <div className="mx-auto hidden max-w-6xl items-end justify-between px-4 md:flex md:px-6 lg:px-8">
-          <div className="max-w-lg md:pb-8">
-            <h1 className="font-oswald text-4xl font-bold tracking-tight">
-              Hi, I&apos;m <span className="text-primary">CuriouslyCory</span>
-            </h1>
-            <p className="text-muted-foreground mt-4 text-xl">
-              I like to build things that people actually want to use.
-            </p>
-            <div className="mt-8 flex gap-x-4">
-              <Button asChild size="lg">
-                <Link href="/cv">View My Resume</Link>
-              </Button>
-              <Button asChild variant="outline" size="lg">
-                <Link href="/blog">Read My Blog</Link>
-              </Button>
-            </div>
-          </div>
-          <div className="relative w-72 flex-shrink-0 [clip-path:inset(0_-50%_0_-50%)]">
-            <Astronaut className="translate-y-1" />
-          </div>
-        </div>
-      </section>
-
-      {/* Horizon gradient — dark band below astronaut, overlaps hero to cover sun glow bleed */}
-      <div
-        className="hero-horizon relative z-20 -mt-1 h-10 md:-mt-3 md:h-24"
-        aria-hidden="true"
-      />
-
-      <section className="mx-auto max-w-5xl px-4 py-16 md:px-6 md:py-24 lg:px-8">
-        <div className="md:grid md:grid-cols-[280px_1fr] md:gap-12">
-          <div>
-            <h2 className="font-oswald text-2xl font-semibold tracking-tight">
-              A little about me
-            </h2>
-            <div className="heading-accent"></div>
-          </div>
-          <div className="mt-6 space-y-4 md:mt-0">
-            <p className="text-lg leading-relaxed">
-              My main goal is to make websites that people actually want to use,
-              not ones that make them want to pull their hair out. Using
-              TypeScript and modern frameworks like Next.js, React, and Angular,
-              I&apos;ll create applications that work the way people want them
-              to, no instructions needed. Currently, I&apos;m leading
-              engineering at{" "}
-              <a href="#" className="text-orange-500 hover:underline">
-                Centauri Health Solutions
-              </a>
-              , and I&apos;ve previously enjoyed roles at{" "}
-              <a href="#" className="text-orange-500 hover:underline">
-                Sudorandom Labs
-              </a>
-              ,{" "}
-              <a href="#" className="text-orange-500 hover:underline">
-                Insight Enterprises
-              </a>
-              , and{" "}
-              <a href="#" className="text-orange-500 hover:underline">
-                Responsive Data
-              </a>
-              .
-            </p>
-            <p className="text-lg leading-relaxed">
-              Beyond the code editor, you&apos;ll find me scaling the peaks of
-              complex UI challenges or exploring innovative backend
-              architectures. When not coding, I&apos;m usually rock climbing,
-              tinkering with generative AI projects, baking bread, or spending
-              time with my son.
-            </p>
-          </div>
-        </div>
-      </section>
-      <section className="flex justify-center gap-x-4 py-16 md:hidden md:py-24">
-        <Button asChild size="lg">
-          <Link href="/cv">View My Resume</Link>
-        </Button>
-        <Button asChild variant="outline" size="lg">
-          <Link href="/blog">Read My Blog</Link>
-        </Button>
-      </section>
-      <section className="flex flex-col gap-y-24 py-16 md:py-24">
-        <MyLinks />
-      </section>
-      <div className="bg-surface-elevated w-full py-16 md:py-24">
-        <section className="mx-auto max-w-4xl px-4 md:px-6 lg:px-8">
-          <FavoriteTech />
-        </section>
-      </div>
+      <Hero />
+      {/* DB-backed sections stream in behind the static hero */}
+      <Suspense fallback={<FeaturedProjectsSkeleton />}>
+        <FeaturedProjects />
+      </Suspense>
+      <Suspense fallback={<LatestPostsSkeleton />}>
+        <LatestPosts />
+      </Suspense>
+      <About />
+      <StayInOrbit />
+      <ContactCta />
     </>
   );
 }

@@ -97,8 +97,9 @@ export const blogRouter = createTRPCRouter({
         }
       }
 
-      // Query builder
-      const query: Prisma.PostFindManyArgs = {
+      // Query builder. `satisfies` (not a type annotation) keeps the
+      // `include` in the inferred type, so callers see `tags` and `author`.
+      const query = {
         where: {
           published: true,
           ...(featured ? { featured: true } : {}),
@@ -129,7 +130,7 @@ export const blogRouter = createTRPCRouter({
         // fetched in full (composed with the other filters above), then
         // reordered by FTS rank and sliced in JS below.
         ...(rankedIds ? {} : { skip, take: perPage }),
-      };
+      } satisfies Prisma.PostFindManyArgs;
 
       const [posts, totalCount] = await Promise.all([
         ctx.db.post.findMany(query),

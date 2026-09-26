@@ -422,8 +422,47 @@
     100% { transform: translate3d(-5%, 40px, 0) rotate(-35deg); opacity: 0; }
   }
 
+  /* Homepage hero sky — a warm dawn wash by day, deep space by night. */
+  .hero-sky {
+    background: linear-gradient(
+      to bottom,
+      var(--background) 0%,
+      color-mix(in oklch, var(--color-orange-100) 55%, var(--background)) 100%
+    );
+  }
+
+  .dark .hero-sky {
+    background: linear-gradient(
+      to bottom,
+      var(--surface-sunken) 0%,
+      var(--background) 85%
+    );
+  }
+
+  /* Night-sky star field. Each star sets its own --twinkle-* timing so the
+     field never pulses in unison. */
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.25; }
+    50%      { opacity: 1; }
+  }
+  .hero-star {
+    animation: twinkle var(--twinkle-duration, 4s) ease-in-out
+      var(--twinkle-delay, 0s) infinite;
+  }
+
+  /* "On air" beacon — a red ring radiating from the Twitch live dot. */
+  @keyframes live-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgb(239 68 68 / 0.55); }
+    70%      { box-shadow: 0 0 0 8px rgb(239 68 68 / 0); }
+  }
+  .live-pulse {
+    animation: live-pulse 1.6s ease-out infinite;
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    .sky-ambiance-entity {
+    .sky-ambiance-entity,
+    .hero-star,
+    .live-pulse {
       animation: none !important;
     }
   }

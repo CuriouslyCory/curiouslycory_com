@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  useSyncExternalStore,
-} from "react";
+import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
 import { useTheme } from "next-themes";
 import { useMounted } from "~/hooks/use-mounted";
 
@@ -20,10 +14,15 @@ type Direction = "ltr" | "rtl";
 interface SkyEntity {
   id: string;
   type: EntityType;
-  /** Percentage from top of the container (5–28) */
+  /** Percentage from top of the container */
   y: number;
   /** Animation duration in seconds */
   duration: number;
+  /**
+   * Animation delay in seconds. Negative for seeded entities so they start
+   * mid-flight instead of all entering from the edge at once.
+   */
+  delay: number;
   direction: Direction;
   /** Visual scale multiplier */
   scale: number;
@@ -37,10 +36,12 @@ interface SkyEntity {
 // Config
 // ---------------------------------------------------------------------------
 
-const SPAWN_INTERVAL_MS = 4_000;
-const SPAWN_PROBABILITY = 0.35;
-const MAX_LIGHT = 3;
-const MAX_DARK = 2;
+const SPAWN_INTERVAL_MS = 3_000;
+const SPAWN_PROBABILITY = 0.45;
+const MAX_LIGHT = 4;
+const MAX_DARK = 3;
+/** Entities already in flight when the sky first renders (or the theme flips) */
+const SEED_COUNT = 2;
 /** Extra seconds past duration before TTL prune kicks in */
 const TTL_BUFFER_S = 5;
 const TTL_CHECK_INTERVAL_MS = 10_000;
@@ -61,56 +62,78 @@ function clampScale(scale: number) {
 // Entity factory
 // ---------------------------------------------------------------------------
 
-function createLightEntity(): SkyEntity {
-  const isBird = Math.random() < 0.4;
+function randomDirection(): Direction {
+  return Math.random() < 0.5 ? "ltr" : "rtl";
+}
+
+/**
+ * Daytime drifter. Seeded entities are always clouds (a bird frozen mid-sky
+ * reads oddly) and start part-way through their drift.
+ */
+function createLightEntity(seeded = false): SkyEntity {
+  const isBird = !seeded && Math.random() < 0.4;
   if (isBird) {
     return {
       id: crypto.randomUUID(),
       type: "bird",
-      y: rand(5, 28),
-      duration: rand(10, 18),
-      direction: Math.random() < 0.5 ? "ltr" : "rtl",
-      scale: clampScale(rand(0.6, 1.0)),
-      opacity: rand(0.45, 0.7),
+      y: rand(10, 70),
+      duration: rand(12, 20),
+      delay: 0,
+      direction: randomDirection(),
+      scale: clampScale(rand(0.7, 1.1)),
+      opacity: rand(0.5, 0.75),
       createdAt: Date.now(),
     };
   }
   return {
     id: crypto.randomUUID(),
     type: "cloud",
-    y: rand(5, 28),
-    duration: rand(25, 40),
-    direction: Math.random() < 0.5 ? "ltr" : "rtl",
-    scale: clampScale(rand(0.6, 1.1)),
-    opacity: rand(0.4, 0.65),
+    y: rand(8, 65),
+    duration: rand(35, 55),
+    delay: seeded ? -rand(8, 25) : 0,
+    direction: randomDirection(),
+    scale: clampScale(rand(0.8, 1.5)),
+    opacity: rand(0.45, 0.7),
     createdAt: Date.now(),
   };
 }
 
-function createDarkEntity(): SkyEntity {
-  const isStar = Math.random() < 0.5;
+/**
+ * Night-time drifter. Seeded entities are always satellites — a shooting
+ * star lasts ~2s, so seeding one mid-streak would just flash and vanish.
+ */
+function createDarkEntity(seeded = false): SkyEntity {
+  const isStar = !seeded && Math.random() < 0.55;
   if (isStar) {
     return {
       id: crypto.randomUUID(),
       type: "shootingStar",
-      y: rand(5, 28),
-      duration: rand(1, 2.5),
-      direction: Math.random() < 0.5 ? "ltr" : "rtl",
-      scale: clampScale(rand(0.7, 1.1)),
-      opacity: rand(0.4, 0.7),
+      y: rand(5, 60),
+      duration: rand(1.2, 2.4),
+      delay: 0,
+      direction: randomDirection(),
+      scale: clampScale(rand(0.8, 1.2)),
+      opacity: rand(0.5, 0.85),
       createdAt: Date.now(),
     };
   }
   return {
     id: crypto.randomUUID(),
     type: "satellite",
-    y: rand(5, 28),
-    duration: rand(15, 25),
-    direction: Math.random() < 0.5 ? "ltr" : "rtl",
-    scale: clampScale(rand(0.5, 0.8)),
-    opacity: rand(0.4, 0.6),
+    y: rand(8, 70),
+    duration: rand(18, 28),
+    delay: seeded ? -rand(3, 12) : 0,
+    direction: randomDirection(),
+    scale: clampScale(rand(0.8, 1.1)),
+    opacity: rand(0.5, 0.75),
     createdAt: Date.now(),
   };
+}
+
+function seedEntities(isDark: boolean): SkyEntity[] {
+  return Array.from({ length: SEED_COUNT }, () =>
+    isDark ? createDarkEntity(true) : createLightEntity(true),
+  );
 }
 
 // ---------------------------------------------------------------------------
@@ -225,7 +248,7 @@ function EntityRenderer({
         // Use the standalone `scale` CSS property so it doesn't conflict
         // with the keyframe animation which drives `transform` (translate3d).
         scale: `${entity.scale}`,
-        animation: `${animationName} ${entity.duration}s linear forwards`,
+        animation: `${animationName} ${entity.duration}s linear ${entity.delay}s forwards`,
       }}
     >
       {entity.type === "cloud" && <CloudSvg />}
@@ -258,40 +281,28 @@ export function SkyAmbiance() {
     () => false, // server snapshot — assume no reduced motion
   );
 
-  // Track theme in refs so the interval callback always reads the fresh value.
-  // prevThemeRef lets us detect theme changes inside the interval without
-  // needing setState-in-effect for clearing.
-  const themeRef = useRef(resolvedTheme);
-  const prevThemeRef = useRef(resolvedTheme);
-  useEffect(() => {
-    themeRef.current = resolvedTheme;
-  }, [resolvedTheme]);
-
   // Remove a single entity by id
   const removeEntity = useCallback((id: string) => {
     setEntities((prev) => prev.filter((e) => e.id !== id));
   }, []);
 
-  // Spawn interval — also handles clearing entities on theme change
+  // (Re)seed the sky and run the spawn loop. Re-runs on theme change, so a
+  // toggle swaps clouds for satellites immediately rather than on the next
+  // tick. The seed is deferred a tick so no state is set synchronously
+  // inside the effect body.
   useEffect(() => {
-    if (!mounted || reducedMotion) return;
+    if (!mounted || reducedMotion || !resolvedTheme) return;
+    const isDark = resolvedTheme === "dark";
+    const max = isDark ? MAX_DARK : MAX_LIGHT;
+
+    const seedId = setTimeout(() => setEntities(seedEntities(isDark)), 0);
 
     const intervalId = setInterval(() => {
       // Skip if tab is hidden
       if (document.visibilityState !== "visible") return;
 
-      // If theme changed since last tick, clear all entities
-      if (themeRef.current !== prevThemeRef.current) {
-        prevThemeRef.current = themeRef.current;
-        setEntities([]);
-        return;
-      }
-
       // Roll the dice
       if (Math.random() > SPAWN_PROBABILITY) return;
-
-      const isDark = themeRef.current === "dark";
-      const max = isDark ? MAX_DARK : MAX_LIGHT;
 
       setEntities((prev) => {
         if (prev.length >= max) return prev;
@@ -300,8 +311,11 @@ export function SkyAmbiance() {
       });
     }, SPAWN_INTERVAL_MS);
 
-    return () => clearInterval(intervalId);
-  }, [mounted, reducedMotion]);
+    return () => {
+      clearTimeout(seedId);
+      clearInterval(intervalId);
+    };
+  }, [mounted, reducedMotion, resolvedTheme]);
 
   // TTL safety-net cleanup
   useEffect(() => {
@@ -311,7 +325,8 @@ export function SkyAmbiance() {
       const now = Date.now();
       setEntities((prev) =>
         prev.filter(
-          (e) => now - e.createdAt < (e.duration + TTL_BUFFER_S) * 1_000,
+          (e) =>
+            now - e.createdAt < (e.duration + e.delay + TTL_BUFFER_S) * 1_000,
         ),
       );
     }, TTL_CHECK_INTERVAL_MS);
@@ -324,7 +339,7 @@ export function SkyAmbiance() {
 
   return (
     <div
-      className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[30%] overflow-hidden"
+      className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[55%] overflow-hidden"
       aria-hidden="true"
     >
       {entities.map((entity) => (

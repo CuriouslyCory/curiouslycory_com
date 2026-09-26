@@ -3,9 +3,17 @@ import { useTheme } from "next-themes";
 import { type SVGProps, memo, useEffect, useRef, useState } from "react";
 import { useMounted } from "~/hooks/use-mounted";
 import { cn } from "~/lib/utils";
-const SvgComponent = (props: SVGProps<SVGSVGElement>) => {
+type AstronautProps = SVGProps<SVGSVGElement> & {
+  /**
+   * Sizes the sun glow / star field behind the astronaut. Defaults to a fixed
+   * 18rem square; pass e.g. "w-full aspect-square" to track a fluid wrapper.
+   */
+  backdropClassName?: string;
+};
+
+const SvgComponent = (props: AstronautProps) => {
   const { resolvedTheme, setTheme } = useTheme();
-  const { className, ...svgProps } = props;
+  const { className, backdropClassName = "h-72 w-72", ...svgProps } = props;
   const isMounted = useMounted();
   const [nearCursor, setNearCursor] = useState(false);
   const [showGlint, setShowGlint] = useState(false);
@@ -53,7 +61,7 @@ const SvgComponent = (props: SVGProps<SVGSVGElement>) => {
   if (resolvedTheme === "dark") {
     return (
       <>
-        <div className="absolute -z-10 h-72 w-72">
+        <div className={cn("absolute -z-10", backdropClassName)}>
           <div className="absolute top-0 h-1/2 w-full">
             <div
               className="absolute top-2 h-1 w-1 animate-pulse rounded-full bg-white"
@@ -321,7 +329,12 @@ const SvgComponent = (props: SVGProps<SVGSVGElement>) => {
   } else {
     return (
       <>
-        <div className="astronaut-sun-bg-parent absolute -z-10 h-72 w-72 scale-x-125">
+        <div
+          className={cn(
+            "astronaut-sun-bg-parent absolute -z-10 scale-x-125",
+            backdropClassName,
+          )}
+        >
           <div className="astronaut-sun-bg absolute bottom-0 h-1/2 w-full"></div>
         </div>
         <svg

@@ -1,3 +1,5 @@
+import { z } from "zod";
+
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
 /**
@@ -26,6 +28,20 @@ export const projectsRouter = createTRPCRouter({
 
     return projects;
   }),
+
+  /**
+   * Get the top published projects in curated order
+   * Powers the homepage "Featured Missions" grid
+   */
+  getShowcase: publicProcedure
+    .input(z.object({ limit: z.number().int().min(1).max(12).default(4) }))
+    .query(async ({ ctx, input }) => {
+      return ctx.db.project.findMany({
+        where: { published: true },
+        orderBy: { order: "asc" },
+        take: input.limit,
+      });
+    }),
 
   /**
    * Get all distinct tags from projects

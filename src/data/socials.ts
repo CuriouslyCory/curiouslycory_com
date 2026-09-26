@@ -8,6 +8,10 @@ import {
 import { FaBluesky } from "react-icons/fa6";
 import { type IconType } from "react-icons/lib";
 
+/** Twitch numeric user id for CuriouslyCory — used to poll live status. */
+export const TWITCH_USER_ID = "512725398";
+export const TWITCH_URL = "https://www.twitch.tv/CuriouslyCory";
+
 type Social = {
   title: string;
   url: string;
@@ -24,16 +28,16 @@ export const SOCIALS: Social[] = [
   },
   {
     title: "Twitch",
-    url: "https://www.twitch.tv/CuriouslyCory",
+    url: TWITCH_URL,
     icon: FaTwitch,
   },
   {
-    title: "Developer YouTube",
+    title: "Dev YouTube",
     url: "https://www.youtube.com/@CuriouslyCory",
     icon: FaYoutube,
   },
   {
-    title: "Rock Climbing YouTube",
+    title: "Climbing YouTube",
     url: "https://www.youtube.com/@CuriouslyCoryClimbs",
     icon: FaYoutube,
   },
@@ -43,7 +47,7 @@ export const SOCIALS: Social[] = [
     icon: FaInstagram,
   },
   {
-    title: "BlueSky",
+    title: "Bluesky",
     url: "https://bsky.app/profile/curiouslycory.com",
     icon: FaBluesky,
   },
