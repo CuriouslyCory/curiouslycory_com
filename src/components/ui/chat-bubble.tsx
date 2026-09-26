@@ -44,15 +44,20 @@ const tailVariants = cva("absolute w-4 h-4 bg-white", {
   },
 });
 
+// Dots sit 6px outside the bubble's 2px border on every side. Offsets are
+// measured from the padding box, so each one is 0.5rem = 2px border + 6px gap
+// (-bottom-4/-top-4 = 1rem because the 8px-tall row extends away from the
+// bubble). Dots align to the edge facing the bubble; for left/right the
+// largest dot is the one next to it.
 const thoughtBubbleVariants = cva("absolute flex gap-1", {
   variants: {
     direction: {
-      left: "-left-4 top-1/2 -translate-y-1/2",
+      left: "right-full top-1/2 mr-2 -translate-y-1/2 flex-row-reverse items-center",
       bottomLeft: "-bottom-4 left-2",
-      right: "-right-4 top-1/2 -translate-y-1/2",
+      right: "left-full top-1/2 ml-2 -translate-y-1/2 items-center",
       rightBottom: "-bottom-4 -right-4",
-      bottomRight: "right-2",
-      top: "top-0 left-1/2 -translate-x-1/2 -translate-y-full",
+      bottomRight: "-bottom-4 right-2",
+      top: "-top-4 left-1/2 -translate-x-1/2 items-end",
       bottom: "-bottom-4 left-1/2 -translate-x-1/2",
     },
   },

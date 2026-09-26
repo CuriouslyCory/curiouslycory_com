@@ -31,8 +31,6 @@ Only precompiled classes exist; there is no JIT. Arbitrary values such as `w-[30
 
 ## Gotchas
 - `CcLogo` has a light, hard-coded fill: put it only on dark surfaces (`bg-foreground`). Its `height`/`width` props take class strings, e.g. `height="h-10"`.
-- `AccordionTrigger` renders no chevron by itself. Pass `<ChevronDown className="size-4 text-muted-foreground" />` after the label; it rotates when open.
-- `Skeleton` is faint in light mode; add `className="bg-foreground/10"`.
 - `CodeBlock` takes the code as `children` (a string) plus `language`. Keep its lines short.
 
 ## Example

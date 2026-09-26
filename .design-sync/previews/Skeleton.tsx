@@ -2,7 +2,7 @@ import { Card, CardContent, CardFooter, CardHeader, Skeleton } from "curiouslyco
 
 export const PostCardLoading = () => (
   <Card className="w-full max-w-sm overflow-hidden pt-0">
-    <Skeleton className="h-48 w-full" style={{ borderRadius: 0 }} />
+    <Skeleton className="h-48 w-full rounded-none" />
     <CardHeader>
       <Skeleton className="h-6 w-3/4" />
     </CardHeader>

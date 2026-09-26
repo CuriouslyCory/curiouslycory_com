@@ -31,11 +31,9 @@
 - CodeBlock's real props are `children: string` + `language`; long lines break mid-word (`break-all`), so keep sample lines short.
 - CcLogo is hard-coded to a light fill — only place it on dark surfaces (`bg-foreground`); its `height`/`width` props take Tailwind class strings (`"h-10"`).
 
-## Component-source defects surfaced by the sync (faithful in previews, not fixed here)
-- Accordion: `AccordionTrigger` imports `ChevronDownIcon` but never renders it (stock shadcn renders it after `{children}`); `animate-accordion-down/up` keyframes are defined nowhere, so open/close doesn't animate.
-- Skeleton: `bg-accent` ≈ `--background`/`--card` in light mode, so skeletons are nearly invisible.
-- ChatBubble: thought variant with `direction="bottomRight"` has no vertical offset for its dots; left/right thought dots overlap the border.
-- Sonner toasts use sonner's system font stack, not Raleway (same on the live site).
+## Component-source defects surfaced by the sync
+Fixed in the same PR as the first sync (#57): Accordion now renders its chevron and has `accordion-down/up` keyframes in globals.css; Skeleton uses `bg-foreground/10` (was `bg-accent`, invisible on light surfaces); ChatBubble thought dots sit 6px outside the border for every direction (bottomRight/left/right/top were overlapping or unpositioned).
+- Still open: sonner toasts use sonner's system font stack, not Raleway (same on the live site). `TwitchLiveStatus.tsx` hand-rolls a `bg-gray-200` pulse that could be `<Skeleton>` (and is wrong in dark mode).
 
 ## Skipped states
 - Interaction-only states (hover, focus rings), Skeleton/Badge pulse animations, Select with a scrolling list (doesn't fit 900x600).

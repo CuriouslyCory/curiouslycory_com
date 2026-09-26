@@ -38,7 +38,7 @@ export const Directions = () => (
 );
 
 export const ThoughtDirections = () => (
-  <div className="grid grid-cols-2 justify-items-start gap-8 p-4">
+  <div className="grid grid-cols-2 justify-items-start gap-x-16 gap-y-10 px-10 py-6">
     <ChatBubble variant="thought" direction="top" text="Pondering upward" />
     <ChatBubble variant="thought" direction="left" text="Drifting left" />
     <ChatBubble variant="thought" direction="right" text="Drifting right" />
@@ -51,6 +51,11 @@ export const ThoughtDirections = () => (
       variant="thought"
       direction="rightBottom"
       text="Off to the lower right"
+    />
+    <ChatBubble
+      variant="thought"
+      direction="bottomRight"
+      text="Drifting down and right"
     />
     <ChatBubble variant="thought" direction="bottom" text="Daydreaming" />
   </div>
