@@ -730,8 +730,7 @@ r_new = Math.cbrt(r ** 3 + growthFactor * growthMultiplier * mass * size ** 3);`
             <li>
               Watch the boss intro and its attack telegraphs. Against the
               Robo-Vac, step out of the charge lane, let it hit a wall, then ram
-              it while stunned. A stun opens a hit; it doesn&apos;t deal one for
-              you.
+              it while stunned. The wall crash stuns it; your ram deals the hit.
             </li>
             <li>
               Once an area&apos;s exit is open, the skip button moves you on
