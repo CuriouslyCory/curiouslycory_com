@@ -134,6 +134,21 @@ const projectSeeds = [
     order: 3,
     publishedAt: new Date("2026-03-27"),
   },
+  {
+    title: "Dust Bunny",
+    description:
+      "A Katamari-style browser roguelike. Roll, absorb debris, and grow from a speck under the couch to a dust bunny big enough to swallow a garbage truck.",
+    longDescription: null,
+    image: "dust-bunny.webp",
+    tags: ["TypeScript", "Three.js", "Vite", "WebGL"],
+    url: "https://dustbunny.curiouslycory.com/",
+    githubUrl: "https://github.com/CuriouslyCory/dust-bunny",
+    category: "games",
+    featured: false,
+    published: true,
+    order: 12,
+    publishedAt: new Date("2026-10-21"),
+  },
 ];
 
 // --- Main seed function ---
