@@ -25,7 +25,7 @@ import {
 /*
 ---bm
 title: "Introducing Dust Bunny: A Katamari-Style Roguelike You Can Play in Your Browser"
-excerpt: Roll across the floor as a 1 cm dust bunny, absorb everything smaller than you, and grow until you can swallow the Roomba, the street sweeper, and finally a garbage truck. Free to play in the browser on desktop and mobile.
+excerpt: Start under the couch and grow through nine areas and 21 tiers, all the way to the universe. A free browser roguelike with character abilities, Keepsakes and saved runs on desktop and mobile.
 coverImage: /images/blog/dust-bunny.webp
 publishedAt: 2026-10-21
 featured: true
@@ -38,7 +38,7 @@ export const metadata = {
   title:
     "Introducing Dust Bunny: A Katamari-Style Roguelike You Can Play in Your Browser",
   description:
-    "Roll across the floor as a 1 cm dust bunny, absorb everything smaller than you, and grow until you can swallow the Roomba, the street sweeper, and finally a garbage truck. Free to play in the browser on desktop and mobile.",
+    "Start under the couch and grow through nine areas and 21 tiers, all the way to the universe. A free browser roguelike with character abilities, Keepsakes and saved runs on desktop and mobile.",
   openGraph: {
     images: [
       {
@@ -50,7 +50,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Introducing Dust Bunny",
     description:
-      "A Katamari-style roguelike in the browser: start as a 1 cm speck under the couch, end by absorbing a garbage truck downtown.",
+      "A Katamari-style browser roguelike: start under the couch, absorb planets and galaxies, and take on the expansion of the universe.",
     images: ["/images/blog/dust-bunny.webp"],
   },
 };
@@ -95,8 +95,8 @@ export default function IntroducingDustBunnyPost() {
           Introducing Dust Bunny
         </h1>
         <p className="text-muted-foreground mb-8 text-xl">
-          A Katamari-style roguelike for the browser. Start as a 1 cm speck
-          under the couch. Finish by absorbing a garbage truck downtown.
+          A Katamari-style roguelike for the browser. Start as a speck under the
+          couch. Grow until galaxies are small enough to absorb.
         </p>
         <div className="mb-8 flex flex-wrap justify-center gap-2">
           <Badge variant="secondary">three.js</Badge>
@@ -132,6 +132,11 @@ export default function IntroducingDustBunnyPost() {
       />
 
       <div className="prose prose-lg dark:prose-invert max-w-none">
+        <p className="text-muted-foreground text-sm">
+          Updated October 27, 2026. Dust Bunny now has nine areas, 21 growth
+          tiers, character abilities, Keepsakes and save-and-resume.
+        </p>
+
         {/* Intro */}
         <div className="mb-12">
           <p className="text-xl leading-relaxed">
@@ -144,15 +149,16 @@ export default function IntroducingDustBunnyPost() {
           </p>
 
           <p>
-            It’s live now at{" "}
+            It&apos;s live now at{" "}
             <Link href={PLAY_URL} target="_blank" rel="noopener noreferrer">
               dustbunny.curiouslycory.com
             </Link>
-            . It runs in the browser on a laptop or a phone, there’s nothing to
-            install, and you don’t need an account to play. The winning runs on
-            the leaderboard so far took between 9 and 19 minutes. Your first few
-            runs probably won’t get that far, because the household appliances
-            fight back.
+            . It runs in the browser on a laptop or a phone, there&apos;s
+            nothing to install, and you don&apos;t need an account to play.
+            Clearing the house is only the first chapter now. The run continues
+            through the city, across the planet and out into space. Save &amp;
+            quit lets you come back to an unfinished run, so you don&apos;t have
+            to do it all in one sitting.
           </p>
         </div>
 
@@ -161,15 +167,15 @@ export default function IntroducingDustBunnyPost() {
         {/* Areas */}
         <section className="mb-12">
           <h2 className="mb-6 text-3xl font-bold">
-            From Under the Couch to Downtown
+            From under the couch to the universe
           </h2>
 
           <p className="mb-6">
-            The game measures everything in real centimetres, and a run covers
-            nearly three orders of magnitude. You start with a radius of 1 cm.
-            By the end your radius is over 6 metres. Along the way you grow
-            through nine Tiers in three areas, and each area ends with a boss
-            that you have to absorb to move on.
+            Lint starts with a radius of 1 cm. A full run now spans 21 Tiers in
+            nine areas, with a boss at the end of each one. The size readout
+            climbs through metres, kilometres, Earth radii, astronomical units
+            and light-years. The Garbage Truck used to be the finish line. Now
+            it opens the highway to the fourth area.
           </p>
 
           <div className="not-prose mb-8 space-y-8">
@@ -220,16 +226,59 @@ export default function IntroducingDustBunnyPost() {
                 at golden hour you eat parking meters, phone booths and hot dog
                 carts, then taxis and food trucks, then buses and fire trucks,
                 while floor scrubbers and pressure washers try to clean you off
-                the pavement.
+                the pavement. Beat the Garbage Truck and the highway on-ramp
+                opens. You are still getting started.
               </p>
             </AreaCard>
           </div>
 
+          <h3>Beyond the city</h3>
           <p>
-            Every run is generated from a seed: the room layout and furniture,
-            the street with its seven houses and park, and the city grid with
-            its avenues, office towers, parking lots and fountain square. A new
-            run means a new floor plan.
+            The next six areas change what counts as Debris, and what the
+            cleaning crew looks like:
+          </p>
+          <ul>
+            <li>
+              The Region, Tiers 10–11. Roll through farmland, highways and towns
+              while freight trains and crop dusters get in the way. The
+              Incinerator guards the motorway west.
+            </li>
+            <li>
+              The Continent, Tiers 12–13. Mountain ranges become Debris. Dodge
+              volcanoes and hurricanes, then take on the Ice Sheet to open the
+              launch corridor.
+            </li>
+            <li>
+              The Globe, Tiers 14–15. The Earth map wraps east to west, so you
+              can roll a lap around the planet. Absorb the Orbital Sweeper to
+              escape orbit.
+            </li>
+            <li>
+              The Solar System, Tiers 16–17. Planets line the orbit lanes and
+              Jupiter blocks the way until Dust Star. The boss is the Sun.
+            </li>
+            <li>
+              The Galaxy, Tiers 18–19. Stars and nebulae are Debris, and black
+              holes are the vacuums. Absorbing Sagittarius A* turns your bunny
+              into a black hole with a lint accretion disc. It keeps its eyes.
+            </li>
+            <li>
+              The Universe, Tiers 20–21. Roll along the cosmic web, absorb
+              galaxies and avoid the nearly empty voids that slow you down. The
+              final boss is the Expansion itself.
+            </li>
+          </ul>
+          <p>
+            A deadpan narrator follows the whole thing, starting with a camera
+            dive under the couch and continuing through chapter cards and boss
+            introductions. You can skip the story or turn its captions off.
+            There is an ending after the Universe, and each win adds to your
+            Universes count.
+          </p>
+          <p>
+            Every run is generated from a seed. The house floor plan, the
+            neighborhood streets and the later maps all change between runs. The
+            three screenshots above show the original areas.
           </p>
         </section>
 
@@ -237,17 +286,17 @@ export default function IntroducingDustBunnyPost() {
 
         {/* Hazards */}
         <section className="mb-12">
-          <h2 className="mb-6 text-3xl font-bold">The Cleaning Crew</h2>
+          <h2 className="mb-6 text-3xl font-bold">The cleaning crew</h2>
 
           <p className="mb-6">
-            The house doesn’t want you there. Roombas wander the floor with a
-            suction ring, lint rollers patrol lanes and peel mass off you, a
+            The house doesn&apos;t want you there. Roombas wander the floor with
+            a suction ring, lint rollers patrol lanes and peel mass off you, a
             broom sweeps a telegraphed arc, a spray bottle fires mist from a
             fixed spot, a mop leaves a slippery trail, and an upright vacuum
-            pulls you into its cone. Outside it’s robotic mowers, push mowers,
-            leaf blowers and sprinklers. In the city it’s ride-on floor
-            scrubbers, pressure washers, litter vacuums and a street flusher
-            truck.
+            pulls you into its cone. Outside it&apos;s robotic mowers, push
+            mowers, leaf blowers and sprinklers. In the city it&apos;s ride-on
+            floor scrubbers, pressure washers, litter vacuums and a street
+            flusher truck.
           </p>
 
           <Image
@@ -259,11 +308,10 @@ export default function IntroducingDustBunnyPost() {
           />
 
           <p className="mb-6">
-            Every Hazard is dangerous until it isn’t. Once you outgrow one, a
-            green ring appears around it and touching it absorbs it instead of
-            hurting you, which is one of the most satisfying moments in the
-            game: the Roomba that chased you around the living room at 2 cm
-            becomes a snack at 25.
+            Once you outgrow an ordinary Hazard, a green ring appears around it.
+            Touching it absorbs it instead of hurting you. The Roomba that
+            chased you around the living room becomes something you can roll
+            straight over.
           </p>
 
           <Image
@@ -275,16 +323,19 @@ export default function IntroducingDustBunnyPost() {
           />
 
           <p>
-            Bosses are bigger than you when they arrive. Above, the{" "}
-            <strong>Robo-Vac 9000</strong> has just lined up a charge: the red
-            lane on the floor is the path it’s about to take, straight through
-            where I’m standing. The HUD says I need a 51.4 cm radius to absorb
-            it, and I’m at 46.8. The way through is to dodge the charge, let it
-            hit a wall, and bump it while it’s stunned. Each bump chips it down
-            and knocks pieces loose for you to eat, so it gets smaller while you
-            get bigger. The Street Sweeper and the Garbage Truck work the same
-            way at street scale, and they summon mini mowers and mini scrubbers
-            to help.
+            The screenshot above is from the original Robo-Vac 9000 fight.
+            Bosses now have hit-based health. Dodge a telegraphed charge, let
+            the boss crash, then ram it while it is stunned. Each stun lets you
+            land one hit and knock loose parts to absorb. Three hits break most
+            bosses regardless of your size, or you can grow large enough to
+            absorb them directly. Hits no longer shrink a boss.
+          </p>
+          <p>
+            Later fights have their own rules. The Ice Sheet crashes into
+            mountain ranges, and Sagittarius A* takes five hits. The Expansion
+            is a tug-of-war rather than a target you ram: keep absorbing Debris
+            to pull its gravity bar up while it pushes everything outward. Fill
+            the bar to finish the run.
           </p>
         </section>
 
@@ -293,12 +344,13 @@ export default function IntroducingDustBunnyPost() {
         {/* Roguelike */}
         <section className="mb-12">
           <h2 className="mb-6 text-3xl font-bold">
-            A Roguelike Under the Fluff
+            A roguelike under the fluff
           </h2>
 
           <p className="mb-6">
-            Every run starts with a choice of three Characters, each a different
-            kind of dust:
+            Every run starts with a choice of three Characters. Each has its own
+            Ability from the first run, alongside its base stats. The hearts and
+            Dash cooldowns below are before Upgrades and Perks:
           </p>
 
           <div className="not-prose mb-8 grid gap-4 md:grid-cols-3">
@@ -310,7 +362,8 @@ export default function IntroducingDustBunnyPost() {
               <CardContent className="space-y-2 text-sm">
                 <div className="font-medium">3 hearts · 3 s Dash cooldown</div>
                 <p className="text-muted-foreground">
-                  Balanced. No weak spots, no special strength. The default.
+                  Balanced. Decoy sheds a lint ball that draws nearby Hazards
+                  away and briefly clogs the ones that touch it.
                 </p>
               </CardContent>
             </Card>
@@ -322,8 +375,9 @@ export default function IntroducingDustBunnyPost() {
               <CardContent className="space-y-2 text-sm">
                 <div className="font-medium">5 hearts · 4 s Dash cooldown</div>
                 <p className="text-muted-foreground">
-                  Starts bigger and shrugs off knockback, but it’s slow and
-                  turns like a shopping cart.
+                  Starts bigger and resists knockback, but rolls slowly. Hold
+                  Amass to pull Debris and smaller Hazards inward. A charging
+                  boss crashes into Tumble while it channels.
                 </p>
               </CardContent>
             </Card>
@@ -335,8 +389,9 @@ export default function IntroducingDustBunnyPost() {
               <CardContent className="space-y-2 text-sm">
                 <div className="font-medium">2 hearts · 2 s Dash cooldown</div>
                 <p className="text-muted-foreground">
-                  Fast, with a built-in magnet pull. Fragile, and vacuums pull
-                  it 1.5× harder.
+                  Fast and fragile, with a built-in magnet. Rolling fast fills
+                  the Static meter. Discharge spends it to destroy a nearby
+                  Hazard or stun a boss. You still have to ram the boss.
                 </p>
               </CardContent>
             </Card>
@@ -347,8 +402,11 @@ export default function IntroducingDustBunnyPost() {
             of three Perks that last for the rest of the run: Thick Fur for an
             extra heart, Glutton for faster growth, Second Wind to revive once,
             Spiky Dash to stun Hazards by dashing into them, and eight more.
-            Most of them stack, so a run that keeps picking Aerodynamic ends up
-            very fast and very hard to steer.
+            Each Character also has five exclusive Perks mixed into its drafts.
+            Lint can leave a clogging trail, Tumble can grow a rechargeable fur
+            shield, and Zap can turn a full Static meter into protection from a
+            hit. Stat caps keep their strengths distinct, and the draft stops
+            offering Perks whose stats are already capped.
           </p>
 
           <Image
@@ -360,10 +418,33 @@ export default function IntroducingDustBunnyPost() {
           />
 
           <p className="mb-6">
-            On the floor you’ll find glowing Pickups that last a few seconds:
-            Static Charge pulls nearby debris toward you, Sugar Rush makes you
-            faster, Bubble Wrap blocks a hit, Glue Dab doubles your growth,
-            Crumb Cake heals, and Dust Cloud makes Hazards ignore you.
+            On the floor you&apos;ll find glowing Pickups that last a few
+            seconds: Static Charge pulls nearby debris toward you, Sugar Rush
+            makes you faster, Bubble Wrap blocks a hit, Glue Dab doubles your
+            growth, Crumb Cake heals, and Dust Cloud makes Hazards ignore you.
+          </p>
+
+          <h3>Keepsakes and Under the Couch</h3>
+          <p>
+            Bosses leave Keepsakes tangled in your Character&apos;s fur. Each
+            Character has five types that modify its Ability, in rarities from
+            Common through Rare, Epic, Legendary and Mythic. Later bosses are
+            more likely to leave stronger ones. The first time a Character beats
+            a boss, you choose one of three offered types.
+          </p>
+          <p>
+            Tuck up to two into your Loadout before a run. If a slot is still
+            empty, you can tuck in a fresh boss drop during the run and use it
+            immediately. The Keepsakes you earn stay in that Character&apos;s
+            Hoard even if you die afterward. Hardcore drops an extra one per
+            boss.
+          </p>
+          <p>
+            Under the Couch is the hub for managing your Hoard. Felting combines
+            three Keepsakes of the same type and rarity into one of the next
+            rarity, for Fluff, within the limit set by the best boss that
+            Character has beaten. Shedding trades a spare for Fluff. The picker
+            has filters and sorting to help find what you want to tuck in.
           </p>
 
           <div className="not-prose mb-8 grid gap-6 md:grid-cols-2">
@@ -390,8 +471,9 @@ export default function IntroducingDustBunnyPost() {
                 <p>
                   Casual is the default balance. Arcade makes Hazards faster and
                   more frequent. Hardcore goes further, takes away a heart, cuts
-                  Pickups and skips the heal between areas. Harder runs pay
-                  1.25× or 1.6× the Fluff and leaderboard score.
+                  Pickups and skips the heal between areas. Arcade pays 2× the
+                  Fluff and 1.25× the score. Hardcore pays 5× the Fluff and 1.6×
+                  the score.
                 </p>
               </CardContent>
             </Card>
@@ -400,26 +482,33 @@ export default function IntroducingDustBunnyPost() {
 
         <Separator className="my-8" />
 
-        {/* Leaderboard */}
+        {/* Saving and leaderboards */}
         <section className="mb-12">
           <h2 className="mb-6 flex items-center gap-3 text-3xl font-bold">
             <Trophy className="text-primary h-8 w-8" />
-            The Leaderboard
+            Save a run, then chase a score
           </h2>
 
           <p className="mb-6">
-            At the end of each run you can post your score to a global
-            leaderboard. You can post anonymously, or sign in with Google or
-            Discord to get a ✓ next to your name and a cloud save, so your Fluff
-            and Upgrades follow you from your laptop to your phone. Signing in
-            is optional; everything else works without it.
+            Save &amp; quit in the pause menu keeps an unfinished run on your
+            device. Resume returns to the area you left, with your Character,
+            Difficulty, Loadout, Perks, timed Pickups, size, health and
+            position. Hazards and a boss fight restart for that area. Starting a
+            new run abandons the saved one, so choose Resume when you want to
+            carry on.
           </p>
-
+          <p className="mb-6">
+            Sign in with Google or Discord and your Fluff, Upgrades, Keepsakes,
+            remembered Loadouts and saved run follow you between devices. There
+            is one saved run per Account. You can leave a run on your laptop and
+            resume it on your phone. Sign-in is optional.
+          </p>
           <p>
-            As I write this, the top score is mine: 110,815, from a 9-minute Zap
-            run on Casual. Nobody has posted an Arcade or Hardcore run yet, and
-            those pay 1.25× and 1.6× the score. It shouldn’t be hard to take
-            first place from me.
+            The leaderboard now has a full-Run board and a separate board for
+            every area you clear. Signed-in players&apos; entries post
+            automatically and carry a check mark. Anonymous players can choose
+            to submit on the results screen. You don&apos;t have to reach the
+            ending to put a House or Neighborhood clear on the board.
           </p>
         </section>
 
@@ -427,7 +516,7 @@ export default function IntroducingDustBunnyPost() {
 
         {/* Under the hood */}
         <section className="mb-12">
-          <h2 className="mb-6 text-3xl font-bold">Under the Hood</h2>
+          <h2 className="mb-6 text-3xl font-bold">Under the hood</h2>
 
           <p className="mb-6">
             Dust Bunny is TypeScript, Vite and three.js with no game engine and
@@ -456,11 +545,11 @@ export default function IntroducingDustBunnyPost() {
               </CardHeader>
               <CardContent className="text-muted-foreground space-y-3">
                 <p>
-                  Each of the 98 debris types is one <code>InstancedMesh</code>,
-                  and lookups go through a spatial hash grid. The target is 60
-                  fps with about 5,000 pieces of debris on a mid-range laptop. A
-                  spawner keeps topping up absorbable debris just off screen so
-                  there’s always something to eat at your size.
+                  Debris rendering uses <code>InstancedMesh</code> batches, and
+                  lookups go through a spatial hash grid. The target is 60 fps
+                  with about 5,000 pieces of debris on a mid-range laptop. A
+                  spawner tops up absorbable debris off screen until the area
+                  goes quiet near its growth limit, leaving the boss to finish.
                 </p>
               </CardContent>
             </Card>
@@ -470,11 +559,10 @@ export default function IntroducingDustBunnyPost() {
               </CardHeader>
               <CardContent className="text-muted-foreground space-y-3">
                 <p>
-                  All 60 models, from the sock to the 95-metre glass skyscraper,
-                  are generated by Python scripts running in headless Blender
-                  and exported as glTF: about 75,000 triangles and 3 MB in
-                  total. Every one also has a procedural three.js fallback, so
-                  the game still runs if a model fails to load.
+                  Python scripts running in headless Blender generate the models
+                  and export them as glTF. The catalog now includes household
+                  objects, weather systems and cosmic Hazards. The renderer also
+                  has procedural three.js fallbacks if a model fails to load.
                 </p>
               </CardContent>
             </Card>
@@ -485,16 +573,23 @@ export default function IntroducingDustBunnyPost() {
               <CardContent className="text-muted-foreground space-y-3">
                 <p>
                   The sound effects and the lo-fi music loop are synthesized
-                  with the Web Audio API at runtime. The music’s intensity
+                  with the Web Audio API at runtime. The music&apos;s intensity
                   follows your Tier and picks up when a boss arrives.
                 </p>
               </CardContent>
             </Card>
           </div>
 
+          <p>
+            Each later area uses its own world unit, so the simulation can work
+            with small numbers even when the HUD reads light-years. Chapter
+            transitions cover size leaps between those scales. Planets and stars
+            are drawn at sizes that make them playable.
+          </p>
+
           <CodeBlock language="typescript">
             {`// What absorbing a piece of debris does to your radius
-// (src/systems/absorb.ts). size is the debris radius in cm.
+// (src/systems/absorb.ts). Radii use the current area's unit.
 canAbsorb = size <= radius * absorbRatio; // absorbRatio defaults to 0.7
 
 r_new = Math.cbrt(r ** 3 + growthFactor * growthMultiplier * mass * size ** 3);`}
@@ -522,8 +617,9 @@ r_new = Math.cbrt(r ** 3 + growthFactor * growthMultiplier * mass * size ** 3);`
             </Link>
             ) and the cloud save. The server recomputes every score from the
             submitted run stats rather than trusting the number the client
-            sends. If the API is down, the game falls back to a local
-            leaderboard and keeps going.
+            sends. A server ledger credits signed-in runs once, so resuming on
+            another device doesn&apos;t double the Fluff. If the API is down,
+            the game falls back to a local leaderboard and keeps going.
           </p>
         </section>
 
@@ -531,13 +627,18 @@ r_new = Math.cbrt(r ** 3 + growthFactor * growthMultiplier * mass * size ** 3);`
 
         {/* How it was built */}
         <section className="mb-12">
-          <h2 className="mb-6 text-3xl font-bold">Built in About a Day</h2>
+          <h2 className="mb-6 text-3xl font-bold">
+            The first version took about a day
+          </h2>
 
           <p className="mb-6">
             The first commit landed on the evening of October 20th. The
             neighborhood, the city, the three Difficulties, the mobile HUD and
             accounts with a cloud save were all in by the next afternoon: 79
-            commits in about 23 hours, 71 of them co-authored with Claude.
+            commits in about 23 hours, 71 of them co-authored with Claude. That
+            was the three-area version this post originally announced. The six
+            later areas, the story and the progression systems arrived
+            afterward.
           </p>
 
           <p>
@@ -546,9 +647,9 @@ r_new = Math.cbrt(r ** 3 + growthFactor * growthMultiplier * mass * size ** 3);`
             pins down words like Debris, Hazard, Tier and Absorb so they mean
             one thing everywhere. An architecture doc maps every module, the
             game loop, the event bus and the step-by-step recipes for adding a
-            Hazard, a Perk or a whole new area. The headless sim, plus 34 test
-            files, checked the work at each step. If you want to see how that’s
-            set up, the{" "}
+            Hazard, a Perk or a whole new area. The headless sim and automated
+            tests check the mechanics and progression. If you want to see how
+            that&apos;s set up, the{" "}
             <Link href={REPO_URL} target="_blank" rel="noopener noreferrer">
               repo is MIT-licensed
             </Link>
@@ -562,7 +663,7 @@ r_new = Math.cbrt(r ** 3 + growthFactor * growthMultiplier * mass * size ** 3);`
         <section className="mb-12">
           <h2 className="mb-6 flex items-center gap-3 text-3xl font-bold">
             <Keyboard className="text-primary h-8 w-8" />
-            Controls and a Few Tips
+            Controls and a few tips
           </h2>
 
           <div className="not-prose mb-8 grid gap-6 md:grid-cols-2">
@@ -578,6 +679,10 @@ r_new = Math.cbrt(r ** 3 + growthFactor * growthMultiplier * mass * size ** 3);`
                 <div>
                   <strong className="text-foreground">Dash:</strong> Space or
                   Shift
+                </div>
+                <div>
+                  <strong className="text-foreground">Ability:</strong> E or
+                  right mouse button. Tap for Lint or Zap, hold for Tumble
                 </div>
                 <div>
                   <strong className="text-foreground">Pause:</strong> Esc or P
@@ -601,6 +706,10 @@ r_new = Math.cbrt(r ** 3 + growthFactor * growthMultiplier * mass * size ** 3);`
                   right half, or the Dash button
                 </div>
                 <div>
+                  <strong className="text-foreground">Ability:</strong> the
+                  Ability button. Hold it to channel Amass with Tumble
+                </div>
+                <div>
                   <strong className="text-foreground">Fullscreen:</strong> the
                   button in the HUD on phones
                 </div>
@@ -610,23 +719,24 @@ r_new = Math.cbrt(r ** 3 + growthFactor * growthMultiplier * mass * size ** 3);`
 
           <ul>
             <li>
-              Hazards can’t follow you under furniture they don’t fit beneath.
-              The gap under the couch is the safest place in the house while
-              you’re small.
+              Hazards can&apos;t follow you under furniture they don&apos;t fit
+              beneath. The gap under the couch is the safest place in the house
+              while you&apos;re small.
             </li>
             <li>
-              A green ring around a Hazard means you’re big enough to absorb it,
-              which is worth far more than any sock.
+              A green ring around a Hazard means you&apos;re big enough to
+              absorb it, which is worth far more than any sock.
             </li>
             <li>
-              Bosses telegraph their charges with a red lane on the floor. Step
-              aside, let them hit a wall, then touch them while they’re stunned
-              to chip them down to an absorbable size.
+              Watch the boss intro and its attack telegraphs. Against the
+              Robo-Vac, step out of the charge lane, let it hit a wall, then ram
+              it while stunned. A stun opens a hit; it doesn&apos;t deal one for
+              you.
             </li>
             <li>
-              Once an area’s exit is open, the skip button (or Enter) moves you
-              on from wherever you are. You never have to roll back across the
-              map.
+              Once an area&apos;s exit is open, the skip button moves you on
+              from wherever you are. Enter dismisses a banner first, then leaves
+              a cleared area. You never have to roll back across the map.
             </li>
           </ul>
         </section>
@@ -642,9 +752,10 @@ r_new = Math.cbrt(r ** 3 + growthFactor * growthMultiplier * mass * size ** 3);`
             <CardContent>
               <p className="text-muted-foreground leading-relaxed">
                 Pick a Character, roll out from under the couch, and see how far
-                you get before the Roomba finds you. If you reach the Garbage
-                Truck, post the score. If you find a bug or have an idea for a
-                Hazard, open an issue on GitHub.
+                you get before the Roomba finds you. Clear the house, try a new
+                Keepsake, or keep going until the universe has a dust problem.
+                If you find a bug or have an idea for a Hazard, open an issue on
+                GitHub.
               </p>
             </CardContent>
           </Card>
