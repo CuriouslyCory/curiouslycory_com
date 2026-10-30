@@ -1,6 +1,13 @@
 "use client";
 
-import { createContext, use, useEffect, useState, type ReactNode } from "react";
+import {
+  createContext,
+  use,
+  useEffect,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
 import { InventoryItemDialog } from "./inventory/inventory-item-dialog";
 import PlayerMenu from "./player-menu";
 import { DebugConsole } from "./debug-console";
@@ -39,13 +46,11 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
     new Map(),
   );
   const [quests, setQuests] = useState<Map<string, Quest>>(new Map());
+  // Mirrors `quests` so handlers can read the latest progress and run quest
+  // steps immediately, even when several updates land in the same tick.
+  const questsRef = useRef(quests);
   const [events, setEvents] = useState<PlayerEvent[]>([]);
   const [newItem, setNewItem] = useState<InventoryItem | null>(null);
-  const [pendingQuestUpdate, setPendingQuestUpdate] = useState<{
-    questId: QuestId;
-    prevProgress: number;
-    newProgress: number;
-  } | null>(null);
 
   const addInventoryItem = (item: InventoryItemId, quantity: number) => {
     setInventory((prev) => {
@@ -102,10 +107,15 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
     });
   };
 
+  const commitQuests = (next: Map<string, Quest>) => {
+    questsRef.current = next;
+    setQuests(next);
+  };
+
   const startQuest = (questId: QuestId) => {
     const questData = QUESTS.get(questId);
     if (questData) {
-      setQuests((prev) => new Map([...prev, [questData.id, questData]]));
+      commitQuests(new Map(questsRef.current).set(questData.id, questData));
       executeQuestSteps(questId, -1, 0);
     }
   };
@@ -130,29 +140,14 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
   };
 
   const updateQuestProgress = (questId: QuestId, progress: number) => {
-    setQuests((prev) => {
-      // if the quest has not started or is already at the desired progress, do nothing
-      if (!prev.has(questId) || prev.get(questId)?.progress === progress)
-        return prev;
+    const existingQuest = questsRef.current.get(questId);
+    // if the quest has not started or is already at the desired progress, do nothing
+    if (!existingQuest || existingQuest.progress === progress) return;
 
-      const existingQuest = prev.get(questId);
-      if (!existingQuest) return prev;
-
-      // Queue the step execution
-      setPendingQuestUpdate({
-        questId,
-        prevProgress: existingQuest.progress,
-        newProgress: progress,
-      });
-
-      const newMap = new Map(prev);
-      newMap.set(questId, {
-        ...existingQuest,
-        progress,
-      });
-
-      return newMap;
-    });
+    commitQuests(
+      new Map(questsRef.current).set(questId, { ...existingQuest, progress }),
+    );
+    executeQuestSteps(questId, existingQuest.progress, progress);
   };
 
   const addEvent = (event: PlayerEvent) => {
@@ -162,15 +157,6 @@ export function PlayerProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     console.log(quests);
   }, [quests]);
-
-  useEffect(() => {
-    if (pendingQuestUpdate) {
-      const { questId, prevProgress, newProgress } = pendingQuestUpdate;
-      executeQuestSteps(questId, prevProgress, newProgress);
-      setPendingQuestUpdate(null);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pendingQuestUpdate]);
 
   return (
     <PlayerContext.Provider

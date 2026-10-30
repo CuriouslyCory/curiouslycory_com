@@ -24,7 +24,6 @@ function TypingTagline() {
   useEffect(() => {
     if (!isInView) return;
     let i = 0;
-    setDisplayed("");
     const interval = setInterval(() => {
       i++;
       setDisplayed(tagline.slice(0, i));

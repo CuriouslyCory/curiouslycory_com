@@ -135,7 +135,9 @@ export default function BlogPostBats() {
     amount: 1,
   });
   const [isPaused, setIsPaused] = useState(true);
-  const [endCount, setEndCount] = useState(0);
+  // Only read inside the animation callback, so a ref avoids re-rendering
+  // the bats every time one flies off screen.
+  const endCountRef = useRef(0);
   const [positions, setPositions] = useState<Record<number, string | number>>({
     1: 0,
     2: 0,
@@ -195,25 +197,26 @@ export default function BlogPostBats() {
     );
   }, [startBatQuest]);
 
-  useEffect(() => {
-    if (endCount >= 3) {
-      setEndCount(0);
-      toast.error(
-        "Erm... This is awkward but... Did you see where the bat posts went?",
-        {
-          action: {
-            label: "Maybe?",
-            onClick: promptBatQuest,
-          },
-          cancel: {
-            label: "Bat what now?",
-            onClick: promptBatQuest,
-          },
-          duration: Infinity,
+  const handleBatExit = useCallback(() => {
+    endCountRef.current += 1;
+    if (endCountRef.current < 3) return;
+
+    endCountRef.current = 0;
+    toast.error(
+      "Erm... This is awkward but... Did you see where the bat posts went?",
+      {
+        action: {
+          label: "Maybe?",
+          onClick: promptBatQuest,
         },
-      );
-    }
-  }, [endCount, promptBatQuest]);
+        cancel: {
+          label: "Bat what now?",
+          onClick: promptBatQuest,
+        },
+        duration: Infinity,
+      },
+    );
+  }, [promptBatQuest]);
 
   const caughtBat = useCallback((batId: string) => {
     // remove bat from wildBats
@@ -278,7 +281,7 @@ export default function BlogPostBats() {
                       [key]: latest.x ?? 0, // Save the current position when animation is running
                     }));
                     if (latest.x === "100vw") {
-                      setEndCount((prev) => prev + 1);
+                      handleBatExit();
                     }
                   }
                 }}
